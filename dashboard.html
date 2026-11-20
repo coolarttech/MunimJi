@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MunimJi — Digital Billing & Khata</title>
+  <title>MunimJi — Digital Billing, Parchi & Khata</title>
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -17,8 +19,7 @@
             appleInk: "#1D1D1F",
             appleMuted: "#6E6E73",
             appleBlue: "#0071E3",
-            appleGreen: "#079D76",
-            appleGold: "#B45309"
+            appleGreen: "#079D76"
           }
         }
       }
@@ -35,14 +36,12 @@
       padding-bottom: 68px;
     }
 
-    /* Apple Glass Surface */
     .apple-glass {
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.84);
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
     }
 
-    /* Apple Card */
     .apple-card {
       background: #FFFFFF;
       border: 1px solid rgba(0, 0, 0, 0.06);
@@ -74,6 +73,112 @@
       background: #FEF2F2;
       color: #B91C1C;
       border: 1px solid #FECACA;
+    }
+
+    /* Modern Parchi Sheet */
+    .mj-parchi-sheet {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(15, 41, 74, 0.08);
+      overflow: hidden;
+      color: #1E293B;
+    }
+    .mj-parchi-top {
+      background: linear-gradient(135deg, #071B36 0%, #0F2E54 100%);
+      color: #FFFFFF;
+      padding: 15px 18px;
+    }
+    .mj-parchi-zigzag {
+      height: 8px;
+      background-image: linear-gradient(135deg, #0F2E54 50%, transparent 50%), linear-gradient(225deg, #0F2E54 50%, transparent 50%);
+      background-position: top left, top left;
+      background-size: 14px 8px;
+      background-repeat: repeat-x;
+    }
+
+    /* Natural Parchi Bottom Footer */
+    .mj-parchi-footer {
+      background: #F8FAFC;
+      border-top: 1px dashed #CBD5E1;
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      color: #64748B;
+      text-align: center;
+    }
+    .mj-parchi-footer img {
+      height: 15px;
+      width: auto;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .mj-parchi-footer strong {
+      color: #0F294A;
+      font-weight: 800;
+    }
+
+    /* Authentic Hindi Ruled Notebook Page */
+    .hindi-copy-page {
+      background-color: #FFFDF7;
+      border: 1px solid #E5DEC9;
+      border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(120, 95, 50, 0.1);
+      position: relative;
+      overflow: hidden;
+      color: #1E293B;
+    }
+    .hindi-copy-header {
+      padding: 13px 16px 11px 60px;
+      border-bottom: 2px solid #DC2626;
+      background: #FFFBF0;
+      position: relative;
+    }
+    .hindi-copy-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 46px;
+      width: 3px;
+      border-left: 1px solid #EF4444;
+      border-right: 1px solid #EF4444;
+    }
+    .hindi-copy-lines {
+      position: relative;
+      padding: 4px 16px 14px 60px;
+      min-height: 220px;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 33px,
+        #BFDBFE 34px
+      );
+      line-height: 34px;
+    }
+    .hindi-copy-lines::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 46px;
+      width: 3px;
+      border-left: 1px solid #EF4444;
+      border-right: 1px solid #EF4444;
+    }
+    .hindi-copy-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 34px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1E293B;
     }
 
     /* Fixed Bottom Footer */
@@ -172,7 +277,7 @@
         <div class="flex items-center gap-2 bg-black/[0.04] pl-1.5 pr-3 py-1 rounded-full min-w-0">
           <img id="headerAvatarImg" src="favicon.png" alt="Profile" class="w-7 h-7 rounded-full object-cover bg-white hidden flex-shrink-0" />
           <div id="headerAvatarInitial" class="w-7 h-7 rounded-full bg-[#1D1D1F] text-white text-xs font-bold flex items-center justify-center flex-shrink-0">M</div>
-          <span id="headerUserName" class="text-xs font-semibold text-[#1D1D1F] truncate max-w-[120px] sm:max-w-[180px]">मेरा खाता</span>
+          <span id="headerUserName" class="text-xs font-semibold text-[#1D1D1F] truncate max-w-[115px] sm:max-w-[180px]">मेरा खाता</span>
           <span id="headerTierBadge" class="tier-badge text-[10px] font-extrabold px-2 py-0.5 rounded-full tracking-wide flex-shrink-0">TRIAL</span>
         </div>
       </div>
@@ -191,7 +296,7 @@
   <!-- Main Workspace -->
   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-7 flex-grow w-full space-y-6">
 
-    <!-- Blocked Notice Banner (Only visible if blocked by Admin) -->
+    <!-- Blocked Notice Banner -->
     <div id="blockedBanner" class="hidden apple-card border-red-200 bg-red-50/90 p-4 flex flex-wrap items-center justify-between gap-3">
       <div class="text-xs sm:text-sm font-semibold text-red-800">
         ⚠️ आपका खाता फिलहाल <strong>BLOCKED</strong> स्थिति में है। कृपया सहायता के लिए संपर्क करें: <strong>+91 9458614610</strong>
@@ -214,13 +319,13 @@
             <span id="heroTierBadge" class="tier-badge text-[11px] font-extrabold px-2.5 py-0.5 rounded-full tracking-wider">TRIAL</span>
           </div>
           <p id="cardUserMeta" class="text-xs sm:text-sm text-[#6E6E73] mt-1">खाता विवरण लोड हो रहा है...</p>
-          <p id="tierPerksText" class="text-xs font-medium text-[#079D76] mt-1">7-दिन ट्रायल में सभी फीचर्स पूरे खुले हैं।</p>
+          <p id="tierPerksText" class="text-xs font-medium text-[#079D76] mt-1">7-दिन TRIAL में सभी फीचर्स पूरे खुले हैं।</p>
         </div>
       </div>
 
       <div class="flex flex-wrap items-center gap-2.5">
         <button type="button" id="editProfileSecondaryBtn" class="px-4 py-2.5 rounded-full text-xs font-semibold bg-white text-[#1D1D1F] border border-black/[0.1] hover:bg-black/[0.03] transition">
-          प्रोफाइल एडिट करें
+          प्रोफाइल / UPI सेट करें
         </button>
         <button type="button" id="openBillingBtn" class="px-5 py-2.5 rounded-full text-xs font-semibold bg-[#0071E3] text-white hover:bg-[#0062C4] shadow-sm transition">
           + नया बिल बनाएं
@@ -232,7 +337,7 @@
     <section class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
       <button type="button" id="openBillingCardBtn" class="apple-card p-4 text-left flex items-center justify-between group">
         <div>
-          <div class="text-xs font-medium text-[#6E6E73]">बिलिंग व रसीद</div>
+          <div class="text-xs font-medium text-[#6E6E73]">बिलिंग व मॉडर्न पर्ची</div>
           <div class="text-base font-bold text-[#1D1D1F] mt-0.5">नया बिल बनाएं</div>
         </div>
         <span class="w-10 h-10 rounded-2xl bg-blue-50 text-[#0071E3] flex items-center justify-center text-lg group-hover:scale-105 transition">🧾</span>
@@ -248,7 +353,7 @@
 
       <button type="button" id="openKhataBtn" class="apple-card p-4 text-left flex items-center justify-between group">
         <div>
-          <div class="text-xs font-medium text-[#6E6E73]">बकाया व रिमाइंडर</div>
+          <div class="text-xs font-medium text-[#6E6E73]">बकाया व रिमाइंडर पर्ची</div>
           <div class="text-base font-bold text-[#1D1D1F] mt-0.5">उधार खाता देखें</div>
         </div>
         <span class="w-10 h-10 rounded-2xl bg-slate-100 text-[#1D1D1F] flex items-center justify-center text-lg group-hover:scale-105 transition">📒</span>
@@ -280,42 +385,53 @@
 
       <div class="apple-card p-6">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold uppercase tracking-wider text-[#6E6E73]">अर्जेंट शॉर्टेज पर्ची</span>
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#6E6E73]">हिंदी कॉपी शॉर्टेज लिस्ट</span>
           <span class="text-xs font-bold text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full">वेंडर</span>
         </div>
         <div id="topShortagePreview" class="text-sm font-medium text-[#6E6E73] mt-3 min-h-[36px]">कोई शॉर्टेज सामान नहीं है।</div>
         <button type="button" id="openStockBtn" class="text-xs font-semibold text-[#0071E3] hover:underline mt-2 inline-block">
-          थर्मल पर्ची बनाएं व भेजें →
+          हिंदी कॉपी लिस्ट बनाएं व भेजें →
         </button>
       </div>
     </section>
   </main>
 
-  <!-- MODAL: Profile Edit -->
+  <!-- MODAL: Profile Edit (with UPI ID & Parchi Header) -->
   <div id="profileModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4 pb-3 border-b border-black/[0.06]">
-        <h3 class="text-lg font-bold text-[#1D1D1F]">प्रोफाइल और खाता विवरण</h3>
+        <h3 class="text-lg font-bold text-[#1D1D1F]">प्रोफाइल, UPI और पर्ची विवरण</h3>
         <button type="button" class="close-modal text-[#6E6E73] hover:text-[#1D1D1F] text-2xl leading-none">&times;</button>
       </div>
-      <div class="space-y-4">
-        <div class="flex items-center gap-3 bg-[#F5F5F7] p-3.5 rounded-2xl">
-          <img id="modalAvatarPreview" src="favicon.png" alt="Preview" class="w-12 h-12 rounded-full object-cover bg-white border border-black/[0.08] hidden" />
-          <div id="modalAvatarInitial" class="w-12 h-12 rounded-full bg-[#1D1D1F] text-white font-bold flex items-center justify-center text-base">M</div>
+      <div class="space-y-3.5">
+        <div class="flex items-center gap-3 bg-[#F5F5F7] p-3 rounded-2xl">
+          <img id="modalAvatarPreview" src="favicon.png" alt="Preview" class="w-11 h-11 rounded-full object-cover bg-white border border-black/[0.08] hidden" />
+          <div id="modalAvatarInitial" class="w-11 h-11 rounded-full bg-[#1D1D1F] text-white font-bold flex items-center justify-center text-sm">M</div>
           <div class="text-xs min-w-0">
             <div id="modalEmailText" class="font-bold text-[#1D1D1F] truncate"></div>
-            <div class="text-[#6E6E73] mt-0.5">यहाँ से अपना नाम या व्यापार/घर का नाम सेट करें</div>
+            <div class="text-[#6E6E73] mt-0.5">अपना नाम/व्यापार, मोबाइल व UPI ID सेव करें</div>
           </div>
         </div>
 
         <div>
           <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">आपका नाम / व्यापार या घर का नाम</label>
-          <input type="text" id="profileNameInput" placeholder="जैसे: शर्मा किराना / घरेलू बजट" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm focus:outline-none focus:border-[#0071E3]" />
+          <input type="text" id="profileNameInput" placeholder="जैसे: जय महाकाल ट्रेडर्स / शर्मा किराना" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm focus:outline-none focus:border-[#0071E3]" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मोबाइल नंबर (पर्ची के लिए)</label>
+            <input type="tel" id="profilePhoneInput" maxlength="15" placeholder="9458614610" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm focus:outline-none focus:border-[#0071E3]" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">UPI ID (QR कोड के लिए)</label>
+            <input type="text" id="profileUpiInput" placeholder="shop@upi" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm focus:outline-none focus:border-[#0071E3]" />
+          </div>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मोबाइल नंबर</label>
-          <input type="tel" id="profilePhoneInput" maxlength="15" placeholder="9458614610" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm focus:outline-none focus:border-[#0071E3]" />
+          <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">पर्ची शीर्ष / पता (वैकल्पिक)</label>
+          <input type="text" id="profileTaglineInput" placeholder="जैसे: जय महाकाल · मेन बाजार, अतरौली" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm focus:outline-none focus:border-[#0071E3]" />
         </div>
 
         <div>
@@ -341,50 +457,138 @@
     </div>
   </div>
 
-  <!-- MODAL 1: Billing -->
-  <div id="billingModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-xl rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
+  <!-- MODAL 1: Billing + Live Modern Parchi Preview + UPI QR -->
+  <div id="billingModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[92vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4 pb-3 border-b border-black/[0.06]">
-        <h3 class="text-lg font-bold text-[#1D1D1F]">नया बिल बनाएं</h3>
+        <h3 class="text-lg font-bold text-[#1D1D1F]">नया बिल व लाइव मॉडर्न पर्ची</h3>
         <button type="button" class="close-modal text-[#6E6E73] hover:text-[#1D1D1F] text-2xl leading-none">&times;</button>
       </div>
-      <div class="space-y-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">ग्राहक का नाम</label>
-            <input type="text" id="billCustomerName" placeholder="जैसे: राम कुमार" class="w-full px-3.5 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Left: Bill Builder Form -->
+        <div class="lg:col-span-6 space-y-3.5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">ग्राहक का नाम</label>
+              <input type="text" id="billCustomerName" placeholder="जैसे: राम कुमार" class="w-full px-3.5 py-2 rounded-xl border border-black/[0.12] text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मोबाइल नंबर</label>
+              <input type="tel" id="billCustomerMobile" maxlength="15" placeholder="9458600000" class="w-full px-3.5 py-2 rounded-xl border border-black/[0.12] text-sm" />
+            </div>
           </div>
-          <div>
-            <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मोबाइल नंबर</label>
-            <input type="tel" id="billCustomerMobile" maxlength="15" placeholder="9458600000" class="w-full px-3.5 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
+
+          <div class="grid grid-cols-12 gap-2">
+            <div class="col-span-6">
+              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">सामान का नाम</label>
+              <input type="text" id="itemName" placeholder="जैसे: चाय" class="w-full px-3 py-2 rounded-xl border border-black/[0.12] text-sm" />
+            </div>
+            <div class="col-span-3">
+              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मात्रा</label>
+              <input type="text" id="itemQty" placeholder="1 kg" class="w-full px-2.5 py-2 rounded-xl border border-black/[0.12] text-sm" />
+            </div>
+            <div class="col-span-3">
+              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">राशि (₹)</label>
+              <input type="number" id="itemPrice" min="0" step="any" placeholder="180" class="w-full px-2.5 py-2 rounded-xl border border-black/[0.12] text-sm" />
+            </div>
+          </div>
+
+          <button type="button" id="addBillLineBtn" class="w-full bg-[#079D76] text-white font-semibold py-2.5 rounded-full hover:bg-[#068664] transition text-sm">
+            + आइटम पर्ची में जोड़ें
+          </button>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">अतिरिक्त चार्ज (+ ₹)</label>
+              <input type="number" id="billExtraCharges" min="0" step="any" value="0" class="w-full px-3 py-2 rounded-xl border border-black/[0.12] text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">बिल नंबर</label>
+              <input type="text" id="billNumberInput" value="Nov'26/001" class="w-full px-3 py-2 rounded-xl border border-black/[0.12] text-sm bg-[#F5F5F7]" />
+            </div>
+          </div>
+
+          <label class="flex items-center gap-2.5 bg-amber-50/80 border border-amber-200/80 p-3 rounded-2xl text-xs font-semibold text-[#1D1D1F] cursor-pointer">
+            <input type="checkbox" id="addBillToKhataCheck" class="w-4 h-4 accent-[#0071E3] rounded" />
+            <span>यह बिल ग्राहक के <strong>उधार खाते (Khata)</strong> में भी जोड़ें</span>
+          </label>
+
+          <div class="flex flex-wrap gap-2.5 pt-1">
+            <button type="button" id="shareBillImageBtn" class="flex-1 min-w-[140px] bg-[#0071E3] text-white font-semibold py-2.5 px-4 rounded-full text-xs hover:bg-[#0062C4] transition">
+              🖼️ पर्ची इमेज भेजें / डाउनलोड
+            </button>
+            <button type="button" id="sendWaBillBtn" class="flex-1 min-w-[140px] bg-[#1D1D1F] text-white font-semibold py-2.5 px-4 rounded-full text-xs hover:bg-black transition">
+              💬 WhatsApp टेक्स्ट भेजें
+            </button>
           </div>
         </div>
-        <div class="grid grid-cols-3 gap-2">
-          <div class="col-span-2">
-            <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">सामान का नाम</label>
-            <input type="text" id="itemName" placeholder="जैसे: चीनी / रिफाइंड तेल" class="w-full px-3.5 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
+
+        <!-- Right: Live Modern Parchi Preview -->
+        <div class="lg:col-span-6">
+          <div id="liveBillParchiCapture" class="mj-parchi-sheet">
+            <div class="mj-parchi-top flex justify-between items-start gap-3">
+              <div>
+                <div class="text-[10px] uppercase tracking-widest text-emerald-300 font-bold">MUNIMJI PARCHI</div>
+                <div id="parchiShopTitle" class="text-base font-extrabold leading-snug mt-0.5">मेरा व्यापार</div>
+                <div id="parchiShopSub" class="text-[11px] text-slate-300 mt-0.5">Phone: +91 9458614610</div>
+              </div>
+              <div class="text-right text-[11px]">
+                <div class="font-bold text-emerald-300">Bill No: <span id="parchiBillNo">Nov'26/001</span></div>
+                <div id="parchiDateTime" class="text-slate-200 mt-0.5"></div>
+                <div id="parchiCustomerBadge" class="mt-1 inline-block bg-white/15 px-2 py-0.5 rounded-full text-[10px] font-semibold">ग्राहक: सामान्य</div>
+              </div>
+            </div>
+            <div class="mj-parchi-zigzag"></div>
+
+            <div class="p-4 space-y-3">
+              <div class="flex justify-between text-[11px] font-bold text-[#6E6E73] border-b border-slate-200 pb-1.5">
+                <span>Item Details</span>
+                <span>Amount</span>
+              </div>
+
+              <div id="parchiItemsBody" class="space-y-2 min-h-[90px] text-xs">
+                <div class="text-[#6E6E73] italic text-center py-6">कोई सामान नहीं जोड़ा गया है</div>
+              </div>
+
+              <div class="border-t border-dashed border-slate-300 pt-2.5 space-y-1 text-xs">
+                <div class="flex justify-between text-slate-600">
+                  <span>Items Total</span>
+                  <span id="parchiItemsTotal" class="font-semibold">₹0</span>
+                </div>
+                <div class="flex justify-between text-slate-600">
+                  <span>Charges</span>
+                  <span id="parchiChargesVal" class="font-semibold">+ 0</span>
+                </div>
+                <div class="flex justify-between text-base font-extrabold text-[#071B36] pt-1.5 border-t border-slate-200">
+                  <span>TOTAL</span>
+                  <span id="parchiGrandTotal" class="text-[#079D76]">₹0</span>
+                </div>
+              </div>
+
+              <!-- Dynamic UPI QR Block (shown when UPI ID is saved in profile) -->
+              <div id="parchiQrBox" class="hidden pt-2 border-t border-dashed border-slate-200 flex items-center justify-between gap-3 bg-[#F8FAFC] p-2.5 rounded-xl">
+                <div class="text-[11px] leading-snug">
+                  <div class="font-bold text-[#071B36]">स्कैन करके UPI भुगतान करें</div>
+                  <div id="parchiUpiIdLabel" class="text-[#6E6E73] font-mono text-[10px] mt-0.5 break-all"></div>
+                  <div class="text-[10px] text-[#079D76] font-semibold mt-0.5">GPay · PhonePe · Paytm</div>
+                </div>
+                <div id="parchiQrCanvas" class="bg-white p-1.5 rounded-lg border border-slate-200 flex-shrink-0"></div>
+              </div>
+
+              <div class="text-center pt-1 text-[11px] text-[#6E6E73]">
+                <div class="font-semibold text-[#1D1D1F]">Thank You!</div>
+                <div>कृपया बिल संभाल कर रखें।</div>
+              </div>
+            </div>
+
+            <!-- Parchi Natural Bottom Footer -->
+            <div class="mj-parchi-footer">
+              <span>Powered by</span>
+              <img src="logo.png" alt="MunimJi" />
+              <span>• Developed by <strong>Cool Art®</strong></span>
+            </div>
           </div>
-          <div>
-            <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">रेट (₹)</label>
-            <input type="number" id="itemPrice" min="0" step="any" placeholder="0" class="w-full px-3.5 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
-          </div>
-        </div>
-        <button type="button" id="addBillLineBtn" class="w-full bg-[#079D76] text-white font-semibold py-2.5 rounded-full hover:bg-[#068664] transition text-sm">
-          + लाइन जोड़ें
-        </button>
-        <div class="bg-[#F5F5F7] p-4 rounded-2xl">
-          <h4 class="font-bold text-[#1D1D1F] mb-2 text-xs uppercase tracking-wider">बिल सारांश</h4>
-          <div id="billItemsList" class="space-y-1.5 text-sm text-[#6E6E73] mb-3 min-h-[68px]">
-            <p class="text-[#6E6E73] text-xs italic">कोई लाइन नहीं जुड़ी है।</p>
-          </div>
-          <div class="border-t border-black/[0.08] pt-2.5 flex justify-between font-bold text-[#1D1D1F] text-base">
-            <span>कुल योग:</span>
-            <span id="billTotal" class="text-[#079D76]">₹0.00</span>
-          </div>
-        </div>
-        <div class="flex gap-3">
-          <button type="button" class="close-modal w-1/2 bg-[#F5F5F7] text-[#1D1D1F] font-semibold py-2.5 rounded-full text-sm">बंद करें</button>
-          <button type="button" id="sendWaBillBtn" class="w-1/2 bg-[#1D1D1F] text-white font-semibold py-2.5 rounded-full text-sm">WhatsApp पर्ची भेजें</button>
         </div>
       </div>
     </div>
@@ -403,7 +607,7 @@
           <input type="text" id="modalCustomerName" placeholder="जैसे: राम कुमार" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
         </div>
         <div>
-          <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मोबाइल नंबर (10 अंक)</label>
+          <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मोबाइल नंबर</label>
           <input type="tel" id="modalCustomerMobile" maxlength="15" placeholder="9458600000" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
           <div id="duplicateMobileWarning" class="hidden mt-2 p-2.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 text-xs font-semibold"></div>
         </div>
@@ -419,7 +623,7 @@
     </div>
   </div>
 
-  <!-- MODAL 3: Khata List -->
+  <!-- MODAL 3: Khata List + Reminder Parchi Modal -->
   <div id="khataModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4 pb-3 border-b border-black/[0.06]">
@@ -433,13 +637,80 @@
               <th class="p-3 rounded-l-xl">ग्राहक</th>
               <th class="p-3">मोबाइल</th>
               <th class="p-3">बकाया</th>
-              <th class="p-3 rounded-r-xl text-right">रिमाइंडर</th>
+              <th class="p-3 rounded-r-xl text-right">पर्ची / रिमाइंडर</th>
             </tr>
           </thead>
           <tbody id="customerTableBody" class="text-sm divide-y divide-black/[0.06]">
             <tr><td colspan="4" class="p-5 text-center text-[#6E6E73] italic">अभी कोई ग्राहक नहीं जोड़ा गया है।</td></tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Reminder Parchi Preview & Share -->
+  <div id="reminderParchiModal" class="fixed inset-0 bg-black/40 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-5 max-h-[92vh] overflow-y-auto space-y-4">
+      <div class="flex justify-between items-center pb-2 border-b border-black/[0.06]">
+        <h3 class="text-base font-bold text-[#1D1D1F]">उधार रिमाइंडर पर्ची</h3>
+        <button type="button" id="closeReminderParchiBtn" class="text-[#6E6E73] hover:text-[#1D1D1F] text-2xl leading-none">&times;</button>
+      </div>
+
+      <div id="reminderParchiCapture" class="mj-parchi-sheet">
+        <div class="mj-parchi-top flex justify-between items-start gap-2">
+          <div>
+            <div class="text-[10px] uppercase tracking-widest text-amber-300 font-bold">PAYMENT REMINDER</div>
+            <div id="remShopName" class="text-base font-extrabold mt-0.5">मेरा व्यापार</div>
+            <div id="remShopPhone" class="text-[11px] text-slate-300"></div>
+          </div>
+          <div class="text-right text-[11px]">
+            <div id="remDateLabel" class="text-slate-200 font-semibold"></div>
+            <div class="text-amber-300 font-bold mt-0.5">उधार विवरण</div>
+          </div>
+        </div>
+        <div class="mj-parchi-zigzag"></div>
+
+        <div class="p-4 space-y-3 text-xs">
+          <div class="flex justify-between py-1 border-b border-slate-100">
+            <span class="text-[#6E6E73]">ग्राहक का नाम:</span>
+            <strong id="remCustName" class="text-[#1D1D1F]">-</strong>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-100">
+            <span class="text-[#6E6E73]">मोबाइल:</span>
+            <span id="remCustMobile" class="font-semibold">-</span>
+          </div>
+          <div class="flex justify-between items-center py-2 px-3 rounded-xl bg-red-50 border border-red-100">
+            <span class="font-bold text-red-800">कुल बकाया राशि:</span>
+            <strong id="remBalanceAmount" class="text-lg font-extrabold text-red-700">₹0.00</strong>
+          </div>
+
+          <div id="remQrBox" class="hidden pt-2 border-t border-dashed border-slate-200 flex items-center justify-between gap-3 bg-[#F8FAFC] p-2.5 rounded-xl">
+            <div class="text-[11px] leading-snug">
+              <div class="font-bold text-[#071B36]">स्कैन करके भुगतान करें</div>
+              <div id="remUpiLabel" class="text-[#6E6E73] font-mono text-[10px] mt-0.5 break-all"></div>
+            </div>
+            <div id="remQrCanvas" class="bg-white p-1.5 rounded-lg border border-slate-200 flex-shrink-0"></div>
+          </div>
+
+          <div class="text-center text-[11px] text-[#6E6E73]">
+            कृपया समय पर भुगतान करें। धन्यवाद!
+          </div>
+        </div>
+
+        <div class="mj-parchi-footer">
+          <span>Powered by</span>
+          <img src="logo.png" alt="MunimJi" />
+          <span>• Developed by <strong>Cool Art®</strong></span>
+        </div>
+      </div>
+
+      <div class="flex gap-2.5">
+        <button type="button" id="shareReminderImgBtn" class="flex-1 bg-[#0071E3] text-white font-semibold py-2.5 rounded-full text-xs">
+          🖼️ पर्ची इमेज भेजें
+        </button>
+        <a id="shareReminderWaLink" href="#" target="_blank" rel="noopener" class="flex-1 bg-[#079D76] text-white font-semibold py-2.5 rounded-full text-xs text-center">
+          💬 WhatsApp रिमाइंडर
+        </a>
       </div>
     </div>
   </div>
@@ -490,38 +761,61 @@
     </div>
   </div>
 
-  <!-- MODAL 5: Shortage & Thermal Receipt -->
-  <div id="stockModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
+  <!-- MODAL 5: Shortage List (Authentic Hindi Ruled Copy Look) -->
+  <div id="stockModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[92vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4 pb-3 border-b border-black/[0.06]">
-        <h3 class="text-lg font-bold text-[#1D1D1F]">शॉर्टेज लिस्ट & थर्मल पर्ची</h3>
+        <h3 class="text-lg font-bold text-[#1D1D1F]">हिंदी कॉपी शॉर्टेज / सामान लिस्ट</h3>
         <button type="button" class="close-modal text-[#6E6E73] hover:text-[#1D1D1F] text-2xl leading-none">&times;</button>
       </div>
-      <div class="space-y-4">
-        <div class="grid grid-cols-2 gap-2">
-          <input type="text" id="shortageItem" placeholder="सामान का नाम" class="px-3.5 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
-          <input type="text" id="shortageQty" placeholder="मात्रा (जैसे: 2 कार्टन)" class="px-3.5 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
-        </div>
-        <button type="button" id="addShortageBtn" class="w-full bg-[#1D1D1F] text-white font-semibold py-2.5 rounded-full hover:bg-black transition text-sm">
-          + शॉर्टेज लिस्ट में जोड़ें
-        </button>
-        <div class="bg-[#F5F5F7] border border-dashed border-black/[0.2] p-4 rounded-2xl font-mono text-xs">
-          <div class="text-center font-bold border-b border-dashed border-black/[0.15] pb-2 mb-2 text-[#1D1D1F]">
-            *** अर्जेंट शॉर्टेज आर्डर पर्ची ***<br>
-            <span class="text-[10px] text-[#6E6E73]">MunimJi by Cool Art®</span>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
+        <div class="md:col-span-5 space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">सामान का नाम</label>
+            <input type="text" id="shortageItem" placeholder="जैसे: सरसों तेल / चाय पत्ती" class="w-full px-3.5 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
           </div>
-          <div id="thermalReceiptList" class="space-y-1 min-h-[55px] text-[#1D1D1F]">
-            <p class="text-[#6E6E73] italic text-center">कोई सामान नहीं जोड़ा गया है।</p>
+          <div>
+            <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मात्रा / विवरण</label>
+            <input type="text" id="shortageQty" placeholder="जैसे: 2 टिन / 5 kg" class="w-full px-3.5 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
+          </div>
+          <button type="button" id="addShortageBtn" class="w-full bg-[#1D1D1F] text-white font-semibold py-2.5 rounded-full hover:bg-black transition text-sm">
+            + कॉपी की लाइन में जोड़ें
+          </button>
+          <button type="button" id="shareThermalBtn" class="w-full bg-[#079D76] text-white font-semibold py-2.5 rounded-full hover:bg-[#068664] transition text-sm">
+            🖼️ हिंदी कॉपी इमेज भेजें / डाउनलोड
+          </button>
+        </div>
+
+        <div class="md:col-span-7">
+          <div id="hindiCopyCapture" class="hindi-copy-page">
+            <div class="hindi-copy-header flex justify-between items-center text-xs">
+              <div>
+                <div class="font-extrabold text-[#1E293B] text-sm">सामान की सूची (शॉर्टेज लिस्ट)</div>
+                <div id="hindiCopyShopLabel" class="text-[11px] text-[#64748B]">MunimJi खाता</div>
+              </div>
+              <div id="hindiCopyDate" class="font-bold text-red-700 text-[11px]"></div>
+            </div>
+
+            <div id="hindiCopyLinesBox" class="hindi-copy-lines">
+              <div class="hindi-copy-row text-[#64748B] italic text-xs">
+                <span>1. यहाँ सामान की लिस्ट दिखेगी...</span>
+                <span>मात्रा</span>
+              </div>
+            </div>
+
+            <div class="mj-parchi-footer">
+              <span>Powered by</span>
+              <img src="logo.png" alt="MunimJi" />
+              <span>• Developed by <strong>Cool Art®</strong></span>
+            </div>
           </div>
         </div>
-        <button type="button" id="shareThermalBtn" class="w-full bg-[#079D76] text-white font-semibold py-2.5 rounded-full hover:bg-[#068664] transition text-sm">
-          WhatsApp पर वेंडर को भेजें
-        </button>
       </div>
     </div>
   </div>
 
-  <!-- Fixed Footer -->
+  <!-- Fixed Bottom App Footer -->
   <footer class="mj-fixed-footer" role="contentinfo">
     <div class="mj-ff-inner">
       <div class="mj-ff-left">
@@ -560,7 +854,6 @@
     let existingCustomers = [];
     let duplicateConfirmedFor = "";
     let currentBillItems = [];
-    let billGrandTotal = 0;
     let shortageList = [];
 
     const categoryLabels = {
@@ -576,6 +869,75 @@
       document.querySelectorAll('[id$="Modal"]').forEach((m) => m.classList.add("hidden"));
     };
 
+    function formatNowLabel() {
+      const d = new Date();
+      return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }) +
+        " · " +
+        d.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
+    }
+
+    function buildUpiString(upiId, payeeName, amount) {
+      const cleanUpi = (upiId || "").trim();
+      const cleanName = encodeURIComponent((payeeName || "MunimJi").trim());
+      const amtPart = Number(amount) > 0 ? `&am=${Number(amount).toFixed(2)}&cu=INR` : "&cu=INR";
+      return `upi://pay?pa=${encodeURIComponent(cleanUpi)}&pn=${cleanName}${amtPart}`;
+    }
+
+    function renderQrInto(containerId, boxId, labelId, upiId, payeeName, amount) {
+      const box = document.getElementById(boxId);
+      const container = document.getElementById(containerId);
+      const label = document.getElementById(labelId);
+      const cleanUpi = (upiId || "").trim();
+
+      if (!cleanUpi || typeof QRCode === "undefined") {
+        box.classList.add("hidden");
+        container.innerHTML = "";
+        return;
+      }
+
+      box.classList.remove("hidden");
+      label.textContent = cleanUpi;
+      container.innerHTML = "";
+      new QRCode(container, {
+        text: buildUpiString(cleanUpi, payeeName, amount),
+        width: 74,
+        height: 74,
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    }
+
+    async function shareOrDownloadElementAsImage(elementId, filenameBase) {
+      const target = document.getElementById(elementId);
+      if (!target || typeof html2canvas === "undefined") return;
+      const canvas = await html2canvas(target, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#FFFFFF"
+      });
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+        const file = new File([blob], `${filenameBase}.png`, { type: "image/png" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              files: [file],
+              title: "MunimJi Parchi",
+              text: "MunimJi डिजिटल पर्ची"
+            });
+            return;
+          } catch (_) {}
+        }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${filenameBase}.png`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
+      }, "image/png");
+    }
+
     function isBlockedUser() {
       return (currentProfile?.planStatus || "").toLowerCase() === "blocked";
     }
@@ -590,8 +952,19 @@
     }
 
     document.querySelectorAll(".close-modal").forEach((btn) => btn.addEventListener("click", closeAllModals));
-    document.getElementById("openBillingBtn").addEventListener("click", () => { if (!guardBlockedAction()) openModal("billingModal"); });
-    document.getElementById("openBillingCardBtn").addEventListener("click", () => { if (!guardBlockedAction()) openModal("billingModal"); });
+    document.getElementById("closeReminderParchiBtn").addEventListener("click", () => {
+      document.getElementById("reminderParchiModal").classList.add("hidden");
+    });
+
+    function openBillingWithRefresh() {
+      if (guardBlockedAction()) return;
+      renderLiveBillParchi();
+      openModal("billingModal");
+    }
+
+    document.getElementById("openBillingBtn").addEventListener("click", openBillingWithRefresh);
+    document.getElementById("openBillingCardBtn").addEventListener("click", openBillingWithRefresh);
+
     document.getElementById("openCustomerBtn").addEventListener("click", () => {
       if (!guardBlockedAction()) {
         duplicateConfirmedFor = "";
@@ -601,7 +974,12 @@
     });
     document.getElementById("openKhataBtn").addEventListener("click", () => openModal("khataModal"));
     document.getElementById("openCashbookBtn").addEventListener("click", () => { if (!guardBlockedAction()) openModal("cashbookModal"); });
-    document.getElementById("openStockBtn").addEventListener("click", () => { if (!guardBlockedAction()) openModal("stockModal"); });
+    document.getElementById("openStockBtn").addEventListener("click", () => {
+      if (!guardBlockedAction()) {
+        renderHindiCopy();
+        openModal("stockModal");
+      }
+    });
 
     function openProfileEditor() {
       if (!currentUser) return;
@@ -609,6 +987,8 @@
       document.getElementById("modalEmailText").textContent = currentUser.email || "";
       document.getElementById("profileNameInput").value = p.displayName || currentUser.displayName || "";
       document.getElementById("profilePhoneInput").value = p.phone || "";
+      document.getElementById("profileUpiInput").value = p.upiId || "";
+      document.getElementById("profileTaglineInput").value = p.tagline || "";
       document.getElementById("profileCategoryInput").value = p.businessType || "shop";
       document.getElementById("profilePhotoInput").value = p.photoURL || currentUser.photoURL || "";
       openModal("profileModal");
@@ -621,6 +1001,8 @@
       if (!currentUser) return;
       const displayName = document.getElementById("profileNameInput").value.trim() || "MunimJi User";
       const phone = document.getElementById("profilePhoneInput").value.trim();
+      const upiId = document.getElementById("profileUpiInput").value.trim();
+      const tagline = document.getElementById("profileTaglineInput").value.trim();
       const businessType = document.getElementById("profileCategoryInput").value;
       const photoURL = document.getElementById("profilePhotoInput").value.trim();
       const saveBtn = document.getElementById("saveProfileBtn");
@@ -631,12 +1013,16 @@
         await updateDoc(doc(db, "users", currentUser.uid), {
           displayName,
           phone,
+          upiId,
+          tagline,
           businessType,
           photoURL,
           updatedAt: serverTimestamp()
         });
-        currentProfile = { ...(currentProfile || {}), displayName, phone, businessType, photoURL };
+        currentProfile = { ...(currentProfile || {}), displayName, phone, upiId, tagline, businessType, photoURL };
         renderUserIdentity(currentUser, currentProfile);
+        renderLiveBillParchi();
+        renderHindiCopy();
         closeAllModals();
       } catch (err) {
         alert("प्रोफाइल सेव करने में त्रुटि: " + err.message);
@@ -712,7 +1098,7 @@
       window.location.replace("login.html");
     });
 
-    // Duplicate mobile check for current shopkeeper's customers
+    // Duplicate mobile check
     function checkDuplicateMobile() {
       const rawMob = document.getElementById("modalCustomerMobile").value.replace(/\D/g, "");
       const warnBox = document.getElementById("duplicateMobileWarning");
@@ -771,48 +1157,164 @@
       closeAllModals();
     });
 
-    // Billing lines
-    document.getElementById("addBillLineBtn").addEventListener("click", () => {
-      const name = document.getElementById("itemName").value.trim();
-      const price = parseFloat(document.getElementById("itemPrice").value);
-      if (!name || isNaN(price) || price <= 0) {
-        alert("कृपया सामान का नाम और सही रेट भरें।");
-        return;
-      }
-      currentBillItems.push({ name, price });
-      billGrandTotal += price;
-      renderBillLines();
-      document.getElementById("itemName").value = "";
-      document.getElementById("itemPrice").value = "";
-    });
-
-    function renderBillLines() {
-      const box = document.getElementById("billItemsList");
-      if (!currentBillItems.length) {
-        box.innerHTML = '<p class="text-[#6E6E73] text-xs italic">कोई लाइन नहीं जुड़ी है।</p>';
-      } else {
-        box.innerHTML = currentBillItems
-          .map((i) => `<div class="flex justify-between border-b border-black/[0.06] pb-1"><span>${i.name}</span><strong>₹${i.price.toFixed(2)}</strong></div>`)
-          .join("");
-      }
-      document.getElementById("billTotal").textContent = `₹${billGrandTotal.toFixed(2)}`;
+    // Live Modern Parchi Builder
+    function getBillTotals() {
+      const itemsSum = currentBillItems.reduce((acc, item) => acc + item.price, 0);
+      const extra = Math.max(0, parseFloat(document.getElementById("billExtraCharges").value) || 0);
+      return { itemsSum, extra, grandTotal: itemsSum + extra };
     }
 
-    document.getElementById("sendWaBillBtn").addEventListener("click", () => {
+    function renderLiveBillParchi() {
+      const shopName = currentProfile?.displayName || currentUser?.displayName || "MunimJi Shop";
+      const phone = currentProfile?.phone || "9458614610";
+      const tagline = currentProfile?.tagline || "";
+      const custName = document.getElementById("billCustomerName").value.trim() || "सामान्य";
+      const billNo = document.getElementById("billNumberInput").value.trim() || "Nov'26/001";
+      const { itemsSum, extra, grandTotal } = getBillTotals();
+
+      document.getElementById("parchiShopTitle").textContent = shopName;
+      document.getElementById("parchiShopSub").textContent = tagline ? `${tagline} · Ph: ${phone}` : `Phone: ${phone}`;
+      document.getElementById("parchiBillNo").textContent = billNo;
+      document.getElementById("parchiDateTime").textContent = formatNowLabel();
+      document.getElementById("parchiCustomerBadge").textContent = `ग्राहक: ${custName}`;
+
+      const itemsBox = document.getElementById("parchiItemsBody");
       if (!currentBillItems.length) {
-        alert("कृपया कम से कम एक लाइन जोड़ें।");
+        itemsBox.innerHTML = '<div class="text-[#6E6E73] italic text-center py-6">कोई सामान नहीं जोड़ा गया है</div>';
+      } else {
+        itemsBox.innerHTML = currentBillItems
+          .map(
+            (i, idx) => `
+            <div class="flex justify-between items-start gap-2 border-b border-slate-100 pb-1.5">
+              <div>
+                <div class="font-bold text-[#1E293B]">${idx + 1}. ${i.name}</div>
+                ${i.qty ? `<div class="text-[11px] text-[#64748B]">${i.qty}</div>` : ""}
+              </div>
+              <div class="font-bold text-[#1E293B]">₹${i.price}</div>
+            </div>
+          `
+          )
+          .join("");
+      }
+
+      document.getElementById("parchiItemsTotal").textContent = `₹${itemsSum}`;
+      document.getElementById("parchiChargesVal").textContent = `+ ${extra}`;
+      document.getElementById("parchiGrandTotal").textContent = `₹${grandTotal}`;
+
+      renderQrInto(
+        "parchiQrCanvas",
+        "parchiQrBox",
+        "parchiUpiIdLabel",
+        currentProfile?.upiId || "",
+        shopName,
+        grandTotal
+      );
+    }
+
+    document.getElementById("addBillLineBtn").addEventListener("click", () => {
+      const name = document.getElementById("itemName").value.trim();
+      const qty = document.getElementById("itemQty").value.trim();
+      const price = parseFloat(document.getElementById("itemPrice").value);
+      if (!name || isNaN(price) || price <= 0) {
+        alert("कृपया सामान का नाम और सही राशि भरें।");
         return;
       }
+      currentBillItems.push({ name, qty, price });
+      document.getElementById("itemName").value = "";
+      document.getElementById("itemQty").value = "";
+      document.getElementById("itemPrice").value = "";
+      renderLiveBillParchi();
+    });
+
+    ["billCustomerName", "billExtraCharges", "billNumberInput"].forEach((id) => {
+      document.getElementById(id).addEventListener("input", renderLiveBillParchi);
+    });
+
+    async function maybeSyncBillToKhata(grandTotal) {
+      const addToKhata = document.getElementById("addBillToKhataCheck").checked;
+      if (!addToKhata || !currentUser || grandTotal <= 0) return;
+      const custName = document.getElementById("billCustomerName").value.trim();
+      const custMobile = document.getElementById("billCustomerMobile").value.replace(/\D/g, "");
+      if (!custName || custMobile.length < 10) {
+        alert("उधार खाते में जोड़ने के लिए ग्राहक का नाम और 10 अंकों का मोबाइल नंबर ज़रूरी है।");
+        return;
+      }
+      await addDoc(collection(db, "customers"), {
+        ownerUid: currentUser.uid,
+        name: custName,
+        mobile: custMobile,
+        balance: grandTotal,
+        createdAt: serverTimestamp()
+      });
+    }
+
+    document.getElementById("shareBillImageBtn").addEventListener("click", async () => {
+      if (!currentBillItems.length) {
+        alert("कृपया कम से कम एक आइटम जोड़ें।");
+        return;
+      }
+      const { grandTotal } = getBillTotals();
+      await maybeSyncBillToKhata(grandTotal);
+      renderLiveBillParchi();
+      const billNo = (document.getElementById("billNumberInput").value.trim() || "parchi").replace(/[^a-zA-Z0-9_-]/g, "_");
+      await shareOrDownloadElementAsImage("liveBillParchiCapture", `MunimJi_${billNo}`);
+    });
+
+    document.getElementById("sendWaBillBtn").addEventListener("click", async () => {
+      if (!currentBillItems.length) {
+        alert("कृपया कम से कम एक आइटम जोड़ें।");
+        return;
+      }
+      const { itemsSum, extra, grandTotal } = getBillTotals();
+      await maybeSyncBillToKhata(grandTotal);
+
       const shopName = currentProfile?.displayName || "MunimJi";
       const custName = document.getElementById("billCustomerName").value.trim() || "ग्राहक";
       const custMobile = document.getElementById("billCustomerMobile").value.replace(/\D/g, "");
-      let msg = `*${shopName} — डिजिटल बिल*\nग्राहक: ${custName}\n------------------\n`;
-      currentBillItems.forEach((i) => { msg += `${i.name} : ₹${i.price.toFixed(2)}\n`; });
-      msg += `------------------\n*कुल योग: ₹${billGrandTotal.toFixed(2)}*\nधन्यवाद!`;
+      const billNo = document.getElementById("billNumberInput").value.trim() || "Nov'26/001";
+      const upiLine = currentProfile?.upiId ? `\nUPI: ${currentProfile.upiId}` : "";
+
+      let msg = `*${shopName}*\nBill No: ${billNo}\nग्राहक: ${custName}\n------------------\n`;
+      currentBillItems.forEach((i, idx) => {
+        msg += `${idx + 1}. ${i.name}${i.qty ? ` (${i.qty})` : ""} : ₹${i.price}\n`;
+      });
+      msg += `------------------\nItems Total: ₹${itemsSum}\nCharges: + ₹${extra}\n*TOTAL: ₹${grandTotal}*${upiLine}\nThank You! कृपया बिल संभाल कर रखें।\n_Powered by MunimJi • Developed by Cool Art®_`;
+
       const url = custMobile.length >= 10
         ? `https://wa.me/91${custMobile}?text=${encodeURIComponent(msg)}`
         : `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
       window.open(url, "_blank");
+    });
+
+    // Reminder Parchi Handler
+    window.openReminderParchi = function (name, mobile, balance) {
+      const shopName = currentProfile?.displayName || "MunimJi Shop";
+      const phone = currentProfile?.phone || "9458614610";
+      const numBal = Number(balance || 0);
+
+      document.getElementById("remShopName").textContent = shopName;
+      document.getElementById("remShopPhone").textContent = `Phone: ${phone}`;
+      document.getElementById("remDateLabel").textContent = new Date().toLocaleDateString("en-IN");
+      document.getElementById("remCustName").textContent = name;
+      document.getElementById("remCustMobile").textContent = mobile;
+      document.getElementById("remBalanceAmount").textContent = `₹${numBal.toFixed(2)}`;
+
+      renderQrInto("remQrCanvas", "remQrBox", "remUpiLabel", currentProfile?.upiId || "", shopName, numBal);
+
+      const waText = `*${shopName} — बकाया उधार रिमाइंडर*\nनमस्ते ${name} जी,\nआपका कुल बकाया *₹${numBal.toFixed(2)}* है।${
+        currentProfile?.upiId ? `\nUPI ID: ${currentProfile.upiId}` : ""
+      }\nकृपया भुगतान करें। धन्यवाद!\n_Powered by MunimJi • Developed by Cool Art®_`;
+      const cleanMob = String(mobile || "").replace(/\D/g, "");
+      document.getElementById("shareReminderWaLink").href = cleanMob.length >= 10
+        ? `https://wa.me/91${cleanMob}?text=${encodeURIComponent(waText)}`
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}`;
+
+      document.getElementById("reminderParchiModal").classList.remove("hidden");
+    };
+
+    document.getElementById("shareReminderImgBtn").addEventListener("click", async () => {
+      const cust = (document.getElementById("remCustName").textContent || "reminder").replace(/[^a-zA-Z0-9_-]/g, "_");
+      await shareOrDownloadElementAsImage("reminderParchiCapture", `Reminder_${cust}`);
     });
 
     // Cashbook
@@ -836,7 +1338,7 @@
       document.getElementById("entryDesc").value = "";
     });
 
-    // Shortage & Thermal Receipt
+    // Hindi Ruled Copy Shortage List
     document.getElementById("addShortageBtn").addEventListener("click", () => {
       if (guardBlockedAction()) return;
       const item = document.getElementById("shortageItem").value.trim();
@@ -846,36 +1348,41 @@
         return;
       }
       shortageList.push({ item, qty });
-      renderShortage();
       document.getElementById("shortageItem").value = "";
       document.getElementById("shortageQty").value = "";
+      renderHindiCopy();
     });
 
-    function renderShortage() {
-      const receiptEl = document.getElementById("thermalReceiptList");
+    function renderHindiCopy() {
+      const linesBox = document.getElementById("hindiCopyLinesBox");
       const previewEl = document.getElementById("topShortagePreview");
+      const shopLabel = document.getElementById("hindiCopyShopLabel");
+      const dateLabel = document.getElementById("hindiCopyDate");
+
+      shopLabel.textContent = currentProfile?.displayName || "MunimJi खाता";
+      dateLabel.textContent = new Date().toLocaleDateString("hi-IN");
+
       if (!shortageList.length) {
-        receiptEl.innerHTML = '<p class="text-[#6E6E73] italic text-center">कोई सामान नहीं जोड़ा गया है।</p>';
+        linesBox.innerHTML = '<div class="hindi-copy-row text-[#64748B] italic text-xs"><span>1. यहाँ सामान की लिस्ट दिखेगी...</span><span>मात्रा</span></div>';
         previewEl.innerHTML = "कोई शॉर्टेज सामान नहीं है।";
         return;
       }
-      receiptEl.innerHTML = shortageList
-        .map((s, idx) => `<div class="flex justify-between"><span>${idx + 1}. ${s.item}</span><strong>${s.qty}</strong></div>`)
+
+      linesBox.innerHTML = shortageList
+        .map((s, idx) => `<div class="hindi-copy-row"><span>${idx + 1}. ${s.item}</span><span>${s.qty}</span></div>`)
         .join("");
+
       const last = shortageList[shortageList.length - 1];
       previewEl.innerHTML = `• <strong class="text-[#1D1D1F]">${last.item}</strong> (${last.qty})`;
     }
 
-    document.getElementById("shareThermalBtn").addEventListener("click", () => {
+    document.getElementById("shareThermalBtn").addEventListener("click", async () => {
       if (!shortageList.length) {
-        alert("पहले शॉर्टेज लिस्ट में सामान जोड़ें।");
+        alert("पहले कॉपी की लाइन में सामान जोड़ें।");
         return;
       }
-      const shopName = currentProfile?.displayName || "MunimJi by Cool Art®";
-      let txt = `*--- अर्जेंट शॉर्टेज आर्डर पर्ची ---*\n*${shopName}*\n----------------------------------\n`;
-      shortageList.forEach((s, idx) => { txt += `${idx + 1}. ${s.item} - ${s.qty}\n`; });
-      txt += `----------------------------------\nकृपया यह सामान जल्द भेजें।`;
-      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(txt)}`, "_blank");
+      renderHindiCopy();
+      await shareOrDownloadElementAsImage("hindiCopyCapture", "MunimJi_Hindi_List");
     });
 
     function subscribeUserData(uid) {
@@ -890,14 +1397,15 @@
           totalUdhar += bal;
           const safeName = String(data.name || "").replace(/'/g, "");
           const safeMobile = String(data.mobile || "").replace(/\D/g, "");
-          const shopName = currentProfile?.displayName || "हमारा खाता";
           rows.push(`
             <tr>
               <td class="p-3 font-semibold text-[#1D1D1F]">${data.name}</td>
               <td class="p-3 text-[#6E6E73]">${data.mobile}</td>
               <td class="p-3 font-bold text-red-600">₹${bal.toFixed(2)}</td>
               <td class="p-3 text-right">
-                <a target="_blank" rel="noopener" href="https://wa.me/91${safeMobile}?text=${encodeURIComponent(`नमस्ते ${safeName} जी, ${shopName} में आपका बकाया ₹${bal.toFixed(2)} है।`)}" class="bg-emerald-50 text-[#079D76] border border-emerald-200 px-3 py-1 rounded-full text-xs font-bold">रिमाइंडर</a>
+                <button type="button" onclick="window.openReminderParchi('${safeName}', '${safeMobile}', ${bal})" class="bg-emerald-50 text-[#079D76] border border-emerald-200 px-3 py-1 rounded-full text-xs font-bold hover:bg-emerald-100">
+                  पर्ची / रिमाइंडर
+                </button>
               </td>
             </tr>
           `);
@@ -935,18 +1443,23 @@
       }
       currentUser = user;
       renderUserIdentity(user, { displayName: user.displayName, photoURL: user.photoURL, planStatus: "trial" });
+      renderLiveBillParchi();
+      renderHindiCopy();
       subscribeUserData(user.uid);
 
       try {
         currentProfile = await ensureUserProfile(user);
         renderUserIdentity(user, currentProfile);
+        renderLiveBillParchi();
+        renderHindiCopy();
       } catch (_) {}
 
-      // Live profile listener so Admin tier changes (PRO / TRIAL / BLOCKED) reflect immediately
       onSnapshot(doc(db, "users", user.uid), (snap) => {
         if (snap.exists()) {
           currentProfile = snap.data();
           renderUserIdentity(user, currentProfile);
+          renderLiveBillParchi();
+          renderHindiCopy();
         }
       });
     });
