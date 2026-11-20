@@ -16,80 +16,85 @@
     :root {
       --bg-app: #F3F5F8;
       --bg-surface: #FFFFFF;
-      --bg-surface-soft: #F8FAFC;
       --text-main: #0F172A;
-      --text-muted: #64748B;
       --border-subtle: rgba(15, 23, 42, 0.08);
       --brand-primary: #071B36;
       --brand-accent: #079D76;
       --icon-bg: rgba(7, 157, 118, 0.11);
       --icon-color: #079D76;
-      --personal-zone-bg: #EEF2F7;
+      --personal-zone-bg: #E9EEF5;
       --personal-zone-border: rgba(15, 23, 42, 0.12);
+      --ticker-bg: #E2E8F0;
+      --ticker-text: #1E293B;
+      --ticker-border: rgba(15, 23, 42, 0.08);
     }
 
-    /* Theme 2: Cream, Wine & Golden */
+    /* Theme 2: Cream, Wine & Golden (PRO Theme) */
     body[data-theme="cream-wine"] {
       --bg-app: #FAF5EE;
       --bg-surface: #FFFDF9;
-      --bg-surface-soft: #F5EDE2;
       --text-main: #2A121B;
-      --text-muted: #6E5660;
       --border-subtle: rgba(91, 24, 48, 0.12);
       --brand-primary: #5B1830;
       --brand-accent: #7A2040;
       --icon-bg: rgba(122, 32, 64, 0.1);
       --icon-color: #7A2040;
-      --personal-zone-bg: #F2E8DC;
+      --personal-zone-bg: #F1E5D8;
       --personal-zone-border: rgba(91, 24, 48, 0.18);
+      --ticker-bg: #F3E6D8;
+      --ticker-text: #4A1125;
+      --ticker-border: rgba(91, 24, 48, 0.14);
     }
 
-    /* Theme 3: Dark 60-30-10 */
+    /* Theme 3: Dark 60-30-10 (PRO Theme) */
     body[data-theme="dark-603010"] {
       --bg-app: #14141F;
       --bg-surface: #1F1F2E;
-      --bg-surface-soft: #29283D;
       --text-main: #F8FAFC;
-      --text-muted: #A5A4C4;
       --border-subtle: rgba(167, 139, 250, 0.22);
       --brand-primary: #7C3AED;
       --brand-accent: #34D399;
       --icon-bg: rgba(167, 139, 250, 0.15);
       --icon-color: #A78BFA;
-      --personal-zone-bg: #1B1A29;
+      --personal-zone-bg: #1A1928;
       --personal-zone-border: rgba(52, 211, 153, 0.28);
+      --ticker-bg: #262538;
+      --ticker-text: #E2E8F0;
+      --ticker-border: rgba(167, 139, 250, 0.22);
     }
 
-    /* Theme 4: Light Minimal */
+    /* Theme 4: Light Minimal (PRO Theme) */
     body[data-theme="light-minimal"] {
       --bg-app: #F8F9FB;
       --bg-surface: #FFFFFF;
-      --bg-surface-soft: #F3F4F8;
       --text-main: #18181B;
-      --text-muted: #71717A;
       --border-subtle: rgba(24, 24, 27, 0.08);
       --brand-primary: #5B4FE9;
       --brand-accent: #5B4FE9;
       --icon-bg: rgba(91, 79, 233, 0.1);
       --icon-color: #5B4FE9;
-      --personal-zone-bg: #EFEFF6;
+      --personal-zone-bg: #ECEBF5;
       --personal-zone-border: rgba(91, 79, 233, 0.18);
+      --ticker-bg: #E6E5F4;
+      --ticker-text: #27245E;
+      --ticker-border: rgba(91, 79, 233, 0.14);
     }
 
-    /* Theme 5: Warm Cream & Emerald */
+    /* Theme 5: Warm Cream & Emerald (PRO Theme) */
     body[data-theme="warm-emerald"] {
       --bg-app: #F6F3EA;
       --bg-surface: #FFFDF8;
-      --bg-surface-soft: #EFECE1;
       --text-main: #16241D;
-      --text-muted: #586960;
       --border-subtle: rgba(5, 150, 105, 0.15);
       --brand-primary: #065F46;
       --brand-accent: #059669;
       --icon-bg: rgba(5, 150, 105, 0.11);
       --icon-color: #059669;
-      --personal-zone-bg: #EAE6D8;
+      --personal-zone-bg: #E8E3D3;
       --personal-zone-border: rgba(6, 95, 70, 0.2);
+      --ticker-bg: #E3EDE7;
+      --ticker-text: #064E3B;
+      --ticker-border: rgba(5, 150, 105, 0.16);
     }
 
     * {
@@ -118,11 +123,10 @@
       color: var(--text-main);
       font-family: "Noto Sans Devanagari", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 108px;
+      padding-bottom: 102px;
       transition: background 0.25s ease, color 0.25s ease;
     }
 
-    /* Fixed Brand Header */
     .fixed-brand-header {
       background: #071B36;
       color: #FFFFFF;
@@ -132,26 +136,21 @@
     .clean-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: 18px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
       transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.25s ease;
-    }
-    .clean-card:hover {
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.055);
     }
     .clean-card:active {
       transform: scale(0.985);
     }
 
-    /* Symmetrical Raised Vector Icon Box */
     .vector-icon-box {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
       background: var(--icon-bg);
       color: var(--icon-color);
       border: 1px solid var(--border-subtle);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -176,12 +175,12 @@
     .nature-hero-full {
       position: relative;
       width: 100%;
-      border-radius: 18px;
+      border-radius: 16px;
       overflow: hidden;
-      min-height: 104px;
+      min-height: 96px;
       background: linear-gradient(135deg, #064E3B 0%, #0F766E 52%, #071B36 100%);
       border: 1px solid var(--border-subtle);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+      box-shadow: 0 5px 16px rgba(0, 0, 0, 0.06);
     }
     .nature-banner-img {
       position: absolute;
@@ -197,13 +196,13 @@
       display: flex;
       align-items: stretch;
       justify-content: space-between;
-      min-height: 104px;
+      min-height: 96px;
       background: linear-gradient(90deg, rgba(7, 27, 54, 0.76) 0%, rgba(7, 27, 54, 0.42) 64%, rgba(7, 27, 54, 0.68) 100%);
       color: #FFFFFF;
     }
     .nature-left-info {
       flex: 1;
-      padding: 12px 14px;
+      padding: 10px 12px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -211,13 +210,13 @@
     }
     .nature-right-clock {
       width: 31%;
-      max-width: 155px;
-      min-width: 104px;
+      max-width: 150px;
+      min-width: 100px;
       background: rgba(7, 27, 54, 0.58);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-left: 1px solid rgba(255, 255, 255, 0.18);
-      padding: 10px 8px;
+      padding: 8px 6px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -230,22 +229,22 @@
     .personal-separate-zone {
       background: var(--personal-zone-bg);
       border: 1px solid var(--personal-zone-border);
-      border-radius: 20px;
-      padding: 12px;
+      border-radius: 18px;
+      padding: 10px;
     }
 
-    /* Always-Visible Theme Button & Palette Drawer */
+    /* Theme Button & Drawer (PRO gets full palette, TRIAL gets standard/upgrade note) */
     .theme-fab-btn {
       position: fixed;
       right: 12px;
-      bottom: 108px;
+      bottom: 102px;
       z-index: 65;
       background: var(--brand-primary);
       color: #FFFFFF;
       border: 1.5px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
       border-radius: 9999px;
-      padding: 7px 12px;
+      padding: 6px 11px;
       font-size: 11px;
       font-weight: 800;
       display: inline-flex;
@@ -256,9 +255,9 @@
     .theme-drawer-panel {
       position: fixed;
       right: 12px;
-      bottom: 148px;
+      bottom: 138px;
       z-index: 66;
-      width: 240px;
+      width: 242px;
       background: var(--bg-surface);
       color: var(--text-main);
       border: 1px solid var(--border-subtle);
@@ -267,27 +266,28 @@
       padding: 12px;
     }
 
-    /* Bottom Scrolling Customization Ticker */
+    /* Soft Theme-Adaptive Scrolling Customization Strip (No "low fee" mention) */
     .mj-scroll-ticker {
       position: fixed;
       left: 0;
       right: 0;
-      bottom: 62px;
+      bottom: 58px;
       z-index: 68;
-      background: #0F294A;
-      color: #F8FAFC;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      height: 30px;
+      background: var(--ticker-bg);
+      color: var(--ticker-text);
+      border-top: 1px solid var(--ticker-border);
+      height: 28px;
       display: flex;
       align-items: center;
       overflow: hidden;
       text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease;
     }
     .mj-ticker-track {
       display: inline-flex;
       white-space: nowrap;
       animation: mjMarquee 26s linear infinite;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
       padding-left: 100%;
     }
@@ -448,7 +448,7 @@
       padding: 6px 14px;
     }
 
-    /* Parchi Bottom Footer: White Powered Bar + Bottom Tiny Black Strip */
+    /* Parchi Bottom Footer */
     .mj-parchi-footer-wrap {
       border-top: 1px dashed #CBD5E1;
       background: #FFFFFF;
@@ -494,10 +494,10 @@
       z-index: 70;
       background: rgba(255, 255, 255, 0.97);
       border-top: 1px solid rgba(0, 0, 0, 0.08);
-      padding: 6px 18px 4px;
+      padding: 5px 18px 4px;
       color: #334155;
       font-size: 11px;
-      height: 62px;
+      height: 58px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -517,8 +517,8 @@
       gap: 10px;
       flex-wrap: wrap;
     }
-    .mj-ff-coolart-img { height: 15px; width: auto; object-fit: contain; display: block; }
-    .mj-ff-mj-img { height: 16px; width: auto; object-fit: contain; display: inline-block; }
+    .mj-ff-coolart-img { height: 14px; width: auto; object-fit: contain; display: block; }
+    .mj-ff-mj-img { height: 15px; width: auto; object-fit: contain; display: inline-block; }
     .mj-ff-sep { color: #CBD5E1; }
     .mj-ff-phone {
       color: #0F294A;
@@ -540,9 +540,9 @@
     .mj-build-version {
       max-width: 1240px;
       width: 100%;
-      margin: 2px auto 0;
+      margin: 1px auto 0;
       text-align: center;
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 500;
       color: #9CA3AF;
     }
@@ -563,17 +563,17 @@
         justify-content: center;
         gap: 4px;
       }
-      .mj-ff-mj-img { height: 14px; }
-      .mj-build-version { font-size: 8.5px; margin-top: 1px; }
+      .mj-ff-mj-img { height: 13px; }
+      .mj-build-version { font-size: 8.5px; }
     }
   </style>
 </head>
 <body data-theme="munimji" class="tier-trial min-h-screen flex flex-col">
 
-  <!-- Fixed Brand Header with Larger MunimJi Logo -->
+  <!-- Fixed Brand Header with Person Profile Icon -->
   <header class="fixed-brand-header sticky top-0 z-40">
-    <div class="max-w-6xl mx-auto px-3.5 sm:px-6 h-14 flex items-center justify-between gap-2">
-      <div class="flex items-center gap-2.5 min-w-0">
+    <div class="max-w-6xl mx-auto px-3.5 sm:px-6 h-13 py-2 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 min-w-0">
         <a href="index.html" class="flex-shrink-0 bg-white px-2.5 py-1 rounded-xl shadow-sm">
           <img src="logo.png" alt="MunimJi Logo" class="h-7 sm:h-8 w-auto object-contain" />
         </a>
@@ -581,8 +581,8 @@
       </div>
 
       <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-        <button type="button" id="openProfileBtn" class="text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white transition">
-          प्रोफ़ाइल
+        <button type="button" id="openProfileBtn" aria-label="प्रोफ़ाइल" title="प्रोफ़ाइल" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </button>
         <button type="button" id="logoutBtn" class="text-[11px] sm:text-xs font-bold bg-red-500/20 hover:bg-red-500/30 text-red-200 border border-red-400/30 px-2.5 sm:px-3 py-1.5 rounded-full transition">
           लॉग आउट
@@ -592,7 +592,7 @@
   </header>
 
   <!-- Main Workspace -->
-  <main class="max-w-6xl mx-auto px-3.5 sm:px-6 pt-2.5 pb-4 flex-grow w-full space-y-3 sm:space-y-4">
+  <main class="max-w-6xl mx-auto px-3.5 sm:px-6 pt-2 pb-3 flex-grow w-full space-y-2.5 sm:space-y-3.5">
 
     <!-- Voice Status Toast -->
     <div id="voiceStatusToast" class="hidden clean-card border-red-300 bg-red-50 px-3.5 py-2 flex items-center justify-between gap-2 text-xs font-bold text-red-800">
@@ -613,196 +613,173 @@
       </a>
     </div>
 
-    <!-- 1. Compact User / Shop Identity Strip (Small Avatar + Name + Category + Shop Name) -->
-    <section class="clean-card px-3 py-2 sm:px-4 sm:py-2.5 flex items-center justify-between gap-2.5">
-      <div class="flex items-center gap-2.5 min-w-0">
-        <img id="cardAvatarImg" src="favicon.png" alt="Avatar" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-black/10 bg-white hidden flex-shrink-0" />
-        <div id="cardAvatarInitial" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full text-white text-xs font-extrabold flex items-center justify-center flex-shrink-0" style="background: var(--brand-primary);">M</div>
+    <!-- 1. Compact User / Shop Identity Strip -->
+    <section class="clean-card px-3 py-2 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 min-w-0">
+        <img id="cardAvatarImg" src="favicon.png" alt="Avatar" class="w-8 h-8 rounded-full object-cover border border-black/10 bg-white hidden flex-shrink-0" />
+        <div id="cardAvatarInitial" class="w-8 h-8 rounded-full text-white text-xs font-extrabold flex items-center justify-center flex-shrink-0" style="background: var(--brand-primary);">M</div>
         <div class="min-w-0">
           <div class="flex items-center gap-1.5 flex-wrap">
             <span id="cardUserName" class="text-xs sm:text-sm font-extrabold truncate">मेरा खाता</span>
             <span id="cardCategoryBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-black/[0.06]">दुकानदार</span>
           </div>
-          <div id="cardShopSubline" class="text-[10.5px] sm:text-xs opacity-75 truncate">दुकान का नाम सेट करने के लिए प्रोफ़ाइल खोलें</div>
+          <div id="cardShopSubline" class="text-[10.5px] opacity-75 truncate">दुकान का नाम जोड़ने के लिए प्रोफ़ाइल खोलें</div>
         </div>
       </div>
-
-      <span class="text-[10.5px] font-bold text-emerald-600 flex-shrink-0">● सक्रिय</span>
+      <span class="text-[10px] font-bold text-emerald-600 flex-shrink-0">● सक्रिय</span>
     </section>
 
-    <!-- 2. Full-Width Nature Hero Banner with Embedded Right-Side Digital Clock (No Change Buttons) -->
+    <!-- 2. Full-Width Nature Hero Banner with Embedded Right-Side Digital Clock -->
     <section class="nature-hero-full">
       <img id="natureBannerImg" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80" alt="Nature Scenery" class="nature-banner-img" />
       <div class="nature-hero-content">
         <div class="nature-left-info">
-          <div id="heroGreetingTitle" class="text-sm sm:text-lg font-extrabold leading-snug drop-shadow">
+          <div id="heroGreetingTitle" class="text-sm sm:text-base font-extrabold leading-snug drop-shadow">
             शुभ दिन, मित्र
           </div>
-          <p id="natureQuoteText" class="text-[11px] sm:text-xs text-white/90 mt-1 line-clamp-2">
+          <p id="natureQuoteText" class="text-[11px] text-white/90 mt-0.5 line-clamp-2">
             साफ़ हिसाब, सुकून भरा व्यापार। हर बिल और उधार खाता एक क्लिक में।
           </p>
         </div>
 
         <div class="nature-right-clock">
-          <div id="liveClockDay" class="text-[10px] sm:text-xs font-bold text-amber-300">शुक्रवार</div>
+          <div id="liveClockDay" class="text-[10px] font-bold text-amber-300">शुक्रवार</div>
           <div class="flex items-baseline justify-center gap-1 mt-0.5">
-            <span id="liveClockTime" class="text-base sm:text-2xl font-extrabold text-white">10:22</span>
-            <span id="liveClockAmPm" class="text-[9.5px] sm:text-[11px] font-bold text-amber-200">PM</span>
+            <span id="liveClockTime" class="text-base sm:text-xl font-extrabold text-white">11:04</span>
+            <span id="liveClockAmPm" class="text-[9px] font-bold text-amber-200">PM</span>
           </div>
-          <div id="liveClockDate" class="text-[9.5px] sm:text-xs text-white/85 mt-1 pt-1 border-t border-white/20 w-full">20/11/2026</div>
+          <div id="liveClockDate" class="text-[9.5px] text-white/85 mt-0.5 pt-0.5 border-t border-white/20 w-full">20/11/2026</div>
         </div>
       </div>
     </section>
 
-    <!-- 3. Symmetrical Vector Icon Action Grid (Shop / Daily Work) -->
-    <div class="flex items-center justify-between pt-0.5">
-      <span class="text-[11.5px] font-extrabold opacity-75">दुकान व दैनिक हिसाब</span>
-      <span class="text-[10.5px] opacity-60">एक क्लिक में खोलें</span>
-    </div>
-
-    <section class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
-      <!-- Card 1: New Bill -->
-      <button type="button" id="openBillingCardBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
-        <div class="flex items-center justify-between w-full">
-          <span class="vector-icon-box">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16l3-2 3 2 3-2 3 2 3-2V8z"/><path d="M14 2v6h6"/><path d="M8 12h8"/><path d="M8 16h5"/></svg>
-          </span>
-          <span class="text-[10px] font-bold opacity-60">पर्ची</span>
-        </div>
-        <div class="mt-2.5">
-          <div class="text-sm font-extrabold leading-tight">नया बिल बनाएं</div>
-          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">डिजिटल पर्ची व शेयर</div>
+    <!-- 3. Compact 4-Card Action Row (Bill, Customer, Khata, UPI QR) -->
+    <section class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+      <button type="button" id="openBillingCardBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center gap-2.5">
+        <span class="vector-icon-box">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16l3-2 3 2 3-2 3 2 3-2V8z"/><path d="M14 2v6h6"/><path d="M8 12h8"/><path d="M8 16h5"/></svg>
+        </span>
+        <div class="min-w-0">
+          <div class="text-xs sm:text-sm font-extrabold truncate">नया बिल बनाएं</div>
+          <div class="text-[10px] opacity-65 truncate">पर्ची व शेयर</div>
         </div>
       </button>
 
-      <!-- Card 2: Add Customer -->
-      <button type="button" id="openCustomerBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
-        <div class="flex items-center justify-between w-full">
-          <span class="vector-icon-box">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
-          </span>
-          <span class="text-[10px] font-bold opacity-60">ग्राहक</span>
-        </div>
-        <div class="mt-2.5">
-          <div class="text-sm font-extrabold leading-tight">नया ग्राहक जोड़ें</div>
-          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">नाम, मोबाइल व बकाया</div>
+      <button type="button" id="openCustomerBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center gap-2.5">
+        <span class="vector-icon-box">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        </span>
+        <div class="min-w-0">
+          <div class="text-xs sm:text-sm font-extrabold truncate">नया ग्राहक जोड़ें</div>
+          <div class="text-[10px] opacity-65 truncate">नाम व मोबाइल</div>
         </div>
       </button>
 
-      <!-- Card 3: Khata Ledger -->
-      <button type="button" id="openKhataBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
-        <div class="flex items-center justify-between w-full">
-          <span class="vector-icon-box">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="16" y2="7"/><line x1="9" y1="11" x2="14" y2="11"/></svg>
-          </span>
-          <span class="text-[10px] font-bold opacity-60">खाता</span>
-        </div>
-        <div class="mt-2.5">
-          <div class="text-sm font-extrabold leading-tight">उधार खाता देखें</div>
-          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">रिमाइंडर पर्ची भेजें</div>
+      <button type="button" id="openKhataBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center gap-2.5">
+        <span class="vector-icon-box">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="16" y2="7"/></svg>
+        </span>
+        <div class="min-w-0">
+          <div class="text-xs sm:text-sm font-extrabold truncate">उधार खाता देखें</div>
+          <div class="text-[10px] opacity-65 truncate">रिमाइंडर पर्ची</div>
         </div>
       </button>
 
-      <!-- Card 4: UPI Payment QR Card -->
-      <button type="button" id="upiSetupCardBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
-        <div class="flex items-center justify-between w-full">
-          <span class="vector-icon-box font-extrabold text-base">₹</span>
-          <span id="upiStatusPill" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-700">UPI सेट करें</span>
-        </div>
-        <div class="mt-2.5">
-          <div class="text-sm font-extrabold leading-tight">UPI पेमेंट QR</div>
-          <div id="upiCardSubtext" class="text-[10.5px] opacity-65 mt-0.5 truncate">जल्दी पेमेंट हेतु UPI जोड़ें</div>
+      <button type="button" id="upiSetupCardBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center gap-2.5">
+        <span class="vector-icon-box font-extrabold text-sm">₹</span>
+        <div class="min-w-0">
+          <div class="flex items-center gap-1">
+            <span class="text-xs sm:text-sm font-extrabold truncate">UPI QR</span>
+            <span id="upiStatusPill" class="text-[9px] font-extrabold px-1.5 py-0.2 rounded-full bg-amber-500/15 text-amber-700">सेट करें</span>
+          </div>
+          <div id="upiCardSubtext" class="text-[10px] opacity-65 truncate">पेमेंट हेतु UPI जोड़ें</div>
         </div>
       </button>
     </section>
 
-    <!-- 4. Live Udhar, Galla (Absence/Staff Tracking) & Always-Visible Vendor Stock Shortage Card -->
-    <section class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3.5">
-      <!-- Total Udhar -->
-      <button type="button" id="udharMetricCardBtn" class="clean-card p-3.5 text-left flex items-center justify-between sm:block">
+    <!-- 4. Compact Udhar Card + Galla Report Card (with Inline Cash / UPI / Expense) + Vendor Stock Card -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+      <!-- Compact Total Udhar Card -->
+      <button type="button" id="udharMetricCardBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center justify-between sm:flex-col sm:items-start sm:justify-between">
         <div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-xs font-bold opacity-75">बाकी कुल उधार</span>
-          </div>
-          <div id="totalUdharDisplay" class="text-lg sm:text-xl font-extrabold text-rose-600 mt-1">₹0.00</div>
-          <div class="text-[10.5px] opacity-65 mt-0.5">ग्राहकों पर कुल बकाया</div>
+          <div class="text-[11px] font-bold opacity-70">बाकी कुल उधार</div>
+          <div id="totalUdharDisplay" class="text-sm sm:text-lg font-extrabold text-rose-600 mt-0.5">₹0.00</div>
         </div>
-        <span class="sm:hidden text-xs font-bold opacity-60">देखें →</span>
+        <div class="text-[10px] opacity-60 sm:mt-1">ग्राहक बकाया →</div>
       </button>
 
-      <!-- Galla Report (Cash, UPI & Expense for Owner/Staff Clarity) -->
-      <button type="button" id="openCashbookBtn" class="clean-card p-3.5 text-left flex items-center justify-between sm:block">
-        <div class="min-w-0">
-          <div class="flex items-center justify-between gap-1">
-            <span class="text-xs font-bold opacity-75">गल्ला रिपोर्ट (कैश · UPI · खर्च)</span>
-          </div>
-          <div id="totalSalesDisplay" class="text-lg sm:text-xl font-extrabold mt-1">₹0.00</div>
-          <div id="gallaBreakdownLine" class="text-[10.5px] opacity-75 mt-0.5 truncate">कैश ₹0 · UPI ₹0 · खर्च ₹0</div>
+      <!-- Galla Report Card with Inline Cash, UPI & Expense Breakdown -->
+      <button type="button" id="openCashbookBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex flex-col justify-between">
+        <div class="flex items-center justify-between gap-1">
+          <span class="text-[11px] font-bold opacity-75">गल्ला रिपोर्ट</span>
+          <span id="totalSalesDisplay" class="text-xs sm:text-sm font-extrabold">₹0.00</span>
         </div>
-        <span class="sm:hidden text-xs font-bold opacity-60">लिखें →</span>
+        <div class="grid grid-cols-3 gap-1 mt-1.5 pt-1.5 border-t border-current/10 text-[10px]">
+          <div>
+            <span class="opacity-60 block">कैश</span>
+            <strong id="inlineCashVal" class="text-emerald-600">₹0</strong>
+          </div>
+          <div>
+            <span class="opacity-60 block">UPI</span>
+            <strong id="inlineUpiVal" class="text-blue-600">₹0</strong>
+          </div>
+          <div>
+            <span class="opacity-60 block">खर्च</span>
+            <strong id="inlineExpenseVal" class="text-amber-700">₹0</strong>
+          </div>
+        </div>
       </button>
 
-      <!-- Vendor Stock Shortage Card (Always shows low/pending stock items on every open) -->
-      <button type="button" id="openStockBtn" class="clean-card p-3.5 text-left flex items-center justify-between sm:block border-amber-400/40">
-        <div class="min-w-0">
-          <div class="flex items-center justify-between gap-1.5">
-            <span id="needListCardTag" class="text-xs font-extrabold text-amber-700 truncate">स्टॉक भरें / वेंडर सूची</span>
-            <span id="shortageItemsCountBadge" class="text-[10px] font-extrabold bg-amber-500/15 text-amber-800 px-2 py-0.5 rounded-full flex-shrink-0">0 सामान बाकी</span>
-          </div>
-          <div id="topShortagePreview" class="text-xs font-bold mt-1.5 truncate">अभी सभी स्टॉक पूरा है · लिस्ट खोलें</div>
-          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">खत्म सामान लिखें और वेंडर को भेजें</div>
+      <!-- Always-Visible Vendor Stock / Low Stock Shortage Card -->
+      <button type="button" id="openStockBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex flex-col justify-between">
+        <div class="flex items-center justify-between gap-1">
+          <span id="needListCardTag" class="text-[11px] font-extrabold text-amber-700 truncate">स्टॉक भरें / वेंडर सूची</span>
+          <span id="shortageItemsCountBadge" class="text-[9.5px] font-extrabold bg-amber-500/15 text-amber-800 px-1.5 py-0.5 rounded-full flex-shrink-0">0 बाकी</span>
         </div>
+        <div id="topShortagePreview" class="text-[11px] font-bold mt-1 truncate">खत्म सामान लिखें व वेंडर को भेजें</div>
       </button>
     </section>
 
     <!-- 5. Distinct Tinted Zone: Personal / Private "Lena Hai / Dena Hai" Ledger -->
-    <section class="personal-separate-zone space-y-2.5">
-      <div class="flex flex-wrap items-center justify-between gap-2">
-        <div class="text-[11px] sm:text-xs font-bold leading-snug">
-          🔒 <strong>यह आपका पर्सनल (निजी) हिसाब है</strong> — इसका ऊपर के दुकान के हिसाब से कोई संबंध नहीं है।
-        </div>
+    <section class="personal-separate-zone space-y-2">
+      <div class="text-[11px] font-bold leading-snug">
+        🔒 <strong>यह आपका पर्सनल (निजी) हिसाब है</strong> — इसका ऊपर के दुकान के हिसाब से कोई संबंध नहीं है।
       </div>
 
-      <div class="grid grid-cols-2 gap-2.5 sm:gap-3.5">
-        <!-- Card A: Lene Hain (Opens directly in 'receive' mode) -->
-        <button type="button" id="openReceiveLedgerBtn" class="clean-card p-3.5 text-left flex flex-col justify-between">
-          <div class="flex items-center justify-between w-full">
-            <span class="vector-icon-box">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
-            </span>
-            <span id="receivePeopleCountBadge" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700">0 लोग</span>
+      <div class="grid grid-cols-2 gap-2 sm:gap-3">
+        <!-- Card A: Lene Hain -->
+        <button type="button" id="openReceiveLedgerBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center justify-between gap-2">
+          <div class="min-w-0">
+            <div class="text-xs font-extrabold">रुपये लेने हैं</div>
+            <div id="personalReceiveTotalDisplay" class="text-sm sm:text-lg font-extrabold text-emerald-600 mt-0.5">₹0.00</div>
+            <div id="receivePeopleCountBadge" class="text-[10px] opacity-65">0 लोग · पर्ची देखें</div>
           </div>
-          <div class="mt-2">
-            <div class="text-xs sm:text-sm font-extrabold">रुपये लेने हैं</div>
-            <div id="personalReceiveTotalDisplay" class="text-base sm:text-xl font-extrabold text-emerald-600 mt-0.5">₹0.00</div>
-            <div class="text-[10px] opacity-65 mt-0.5">लिखें व पर्ची देखें →</div>
-          </div>
+          <span class="vector-icon-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          </span>
         </button>
 
-        <!-- Card B: Dene Hain (Opens directly in 'pay' mode) -->
-        <button type="button" id="openPayLedgerBtn" class="clean-card p-3.5 text-left flex flex-col justify-between">
-          <div class="flex items-center justify-between w-full">
-            <span class="vector-icon-box">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
-            </span>
-            <span id="payPeopleCountBadge" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-700">0 लोग</span>
+        <!-- Card B: Dene Hain -->
+        <button type="button" id="openPayLedgerBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center justify-between gap-2">
+          <div class="min-w-0">
+            <div class="text-xs font-extrabold">रुपये देने हैं</div>
+            <div id="personalPayTotalDisplay" class="text-sm sm:text-lg font-extrabold text-rose-600 mt-0.5">₹0.00</div>
+            <div id="payPeopleCountBadge" class="text-[10px] opacity-65">0 लोग · पर्ची देखें</div>
           </div>
-          <div class="mt-2">
-            <div class="text-xs sm:text-sm font-extrabold">रुपये देने हैं</div>
-            <div id="personalPayTotalDisplay" class="text-base sm:text-xl font-extrabold text-rose-600 mt-0.5">₹0.00</div>
-            <div class="text-[10px] opacity-65 mt-0.5">लिखें व पर्ची देखें →</div>
-          </div>
+          <span class="vector-icon-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+          </span>
         </button>
       </div>
 
-      <!-- Smart Net Calculation Insight Line -->
-      <div class="clean-card px-3.5 py-2.5 text-xs font-semibold leading-relaxed">
+      <!-- Smart Net Calculation Line Below Lena / Dena Cards -->
+      <div class="clean-card px-3 py-2 text-[11px] font-semibold leading-snug">
         <span id="personalNetInsightText">आज की तारीख में अपना निजी लेने-देने का हिसाब जोड़ें, यहाँ अपने आप बचत या ज़रूरत का हिसाब दिखेगा।</span>
       </div>
     </section>
   </main>
 
-  <!-- Always-Visible Small Theme Button & Instant Palette Drawer -->
+  <!-- Theme Button & Drawer (PRO gets all palettes, TRIAL sees PRO upgrade note) -->
   <button type="button" id="toggleThemeDrawerBtn" class="theme-fab-btn" title="रंग / थीम बदलें">
     <span>🎨</span>
     <span>थीम</span>
@@ -810,49 +787,56 @@
 
   <div id="themeDrawerPanel" class="theme-drawer-panel hidden">
     <div class="flex items-center justify-between pb-2 mb-2 border-b border-current/10">
-      <span class="text-xs font-extrabold">पसंदीदा थीम चुनें</span>
+      <span class="text-xs font-extrabold">थीम पैलेट</span>
       <button type="button" id="closeThemeDrawerBtn" class="text-base font-bold opacity-60 hover:opacity-100">&times;</button>
+    </div>
+    <div id="proThemeNotice" class="hidden mb-2 p-2 rounded-xl bg-amber-50 border border-amber-200 text-[10.5px] text-amber-900 font-semibold">
+      नए थीम पैलेट और भविष्य के अपडेट <strong>PRO</strong> खाते के लिए उपलब्ध हैं।
     </div>
     <div class="space-y-1.5 text-xs">
       <button type="button" data-select-theme="munimji" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
         <span class="flex items-center gap-2">
           <span class="w-4 h-4 rounded-full inline-block border border-white shadow" style="background: linear-gradient(135deg,#071B36,#079D76);"></span>
-          <span>MunimJi ब्रांड थीम</span>
+          <span>MunimJi ब्रांड</span>
         </span>
         <span class="text-[10px] opacity-60">डिफ़ॉल्ट</span>
       </button>
 
-      <button type="button" data-select-theme="cream-wine" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
+      <button type="button" data-select-theme="cream-wine" data-pro-only="true" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
         <span class="flex items-center gap-2">
           <span class="w-4 h-4 rounded-full inline-block border border-white shadow" style="background: linear-gradient(135deg,#FAF5EE,#7A2040,#D97706);"></span>
           <span>क्रीम, वाइन व गोल्डन</span>
         </span>
+        <span class="pro-tag text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">PRO</span>
       </button>
 
-      <button type="button" data-select-theme="dark-603010" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
+      <button type="button" data-select-theme="dark-603010" data-pro-only="true" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
         <span class="flex items-center gap-2">
           <span class="w-4 h-4 rounded-full inline-block border border-white shadow" style="background: linear-gradient(135deg,#1F1F2E,#A78BFA,#34D399);"></span>
-          <span>डार्क 60-30-10 मोड</span>
+          <span>डार्क 60-30-10</span>
         </span>
+        <span class="pro-tag text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">PRO</span>
       </button>
 
-      <button type="button" data-select-theme="light-minimal" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
+      <button type="button" data-select-theme="light-minimal" data-pro-only="true" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
         <span class="flex items-center gap-2">
           <span class="w-4 h-4 rounded-full inline-block border border-slate-300 shadow" style="background: linear-gradient(135deg,#FFFFFF,#5B4FE9);"></span>
           <span>लाइट मिनिमल</span>
         </span>
+        <span class="pro-tag text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">PRO</span>
       </button>
 
-      <button type="button" data-select-theme="warm-emerald" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
+      <button type="button" data-select-theme="warm-emerald" data-pro-only="true" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
         <span class="flex items-center gap-2">
           <span class="w-4 h-4 rounded-full inline-block border border-white shadow" style="background: linear-gradient(135deg,#F6F3EA,#059669,#F59E0B);"></span>
           <span>वार्म क्रीम व हरा</span>
         </span>
+        <span class="pro-tag text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800">PRO</span>
       </button>
     </div>
   </div>
 
-  <!-- Clean Bottom Scrolling Customization Strip with Direct Pre-Filled WhatsApp Link -->
+  <!-- Soft Theme-Adaptive Scrolling Customization Strip with Direct WhatsApp Link -->
   <a
     href="https://wa.me/919458614610?text=Namaste%20Cool%20Art%20Team%2C%20mujhe%20MunimJi%20software%20apne%20hisab%20se%20customize%20karwana%20hai%20aur%20ismein%20kuch%20naye%20features%20badhwane%20hain.%20Kripya%20jaldi%20sampark%20karen."
     target="_blank"
@@ -861,7 +845,7 @@
     title="WhatsApp पर कस्टम सॉफ्टवेयर के लिए बात करें"
   >
     <div class="mj-ticker-track">
-      ✨ यदि यह सॉफ्टवेयर आपके अनुकूल है और आप इसमें कोई नया फीचर बढ़वाना या अपने हिसाब से कस्टमाइज़ करवाना चाहते हैं, तो बहुत ही कम / ना के बराबर शुल्क में बनवा सकते हैं — संपर्क करें Helpline: +91 9458614610 (सीधा WhatsApp करने के लिए यहाँ क्लिक करें) &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+      ✨ यदि यह सॉफ्टवेयर आपके अनुकूल है और आप इसमें कोई नया फीचर बढ़वाना या अपने हिसाब से कस्टमाइज़ करवाना चाहते हैं, तो संपर्क करें Helpline: +91 9458614610 (सीधा WhatsApp करने के लिए यहाँ क्लिक करें) &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
     </div>
   </a>
 
@@ -877,7 +861,6 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-        <!-- Left: Add Entry (Locked to Selected Card Category) -->
         <div class="lg:col-span-5 bg-slate-50 p-4 rounded-2xl space-y-3 border border-slate-200">
           <div class="flex items-center justify-between">
             <span id="personalFormBadge" class="text-xs font-extrabold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">श्रेणी: रुपये लेने हैं</span>
@@ -920,7 +903,6 @@
           </button>
         </div>
 
-        <!-- Right: Filtered Records for this Category -->
         <div class="lg:col-span-7 space-y-3">
           <div class="flex items-center justify-between">
             <span id="personalRecordsListTitle" class="text-xs font-extrabold text-slate-700">जिनसे रुपये लेने हैं उनकी सूची</span>
@@ -1009,7 +991,7 @@
     </div>
   </div>
 
-  <!-- MODAL: Profile Edit (Category + Shop Name + UPI ID) -->
+  <!-- MODAL: Profile Edit -->
   <div id="profileModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white text-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
@@ -1352,7 +1334,7 @@
     </div>
   </div>
 
-  <!-- MODAL 4: Galla Entry (Absence & Staff Sales/Expense Tracking) -->
+  <!-- MODAL 4: Galla Entry -->
   <div id="cashbookModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white text-slate-900 w-full max-w-xl rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-3 pb-3 border-b border-slate-200">
@@ -1451,7 +1433,7 @@
               <span id="needItemCountText" class="text-[11px] font-semibold text-slate-500">0 आइटम</span>
             </div>
             <div id="editableNeedItemsList" class="space-y-1.5 max-h-36 overflow-y-auto text-xs">
-              <p class="text-slate-400 italic">अभी कोई सामान नहीं जुड़ा है।</p>
+              <p class="text-slate-400 italic">अभी कोई आइटम नहीं जुड़ा है।</p>
             </div>
           </div>
 
@@ -1485,7 +1467,7 @@
               <div class="ruled-date-card">
                 <div id="hindiCopyDayLabel" class="text-[11px] font-bold text-[#0F294A]">शुक्रवार</div>
                 <div id="hindiCopyDate" class="text-xs font-extrabold text-[#DC2626]">20/11/2026</div>
-                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">10:22 PM</div>
+                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">11:04 PM</div>
               </div>
             </div>
 
@@ -1530,7 +1512,7 @@
         <span>• Developed by <strong>Cool Art®</strong></span>
       </div>
     </div>
-    <div class="mj-build-version">Build v1.7 · Updated 20 Nov 2026</div>
+    <div class="mj-build-version">Build v1.8 · Updated 20 Nov 2026</div>
   </footer>
 
   <script type="module">
@@ -1586,6 +1568,10 @@
       general: "सामान्य खाता"
     };
 
+    function isProAccount() {
+      return (currentProfile?.planStatus || "").toLowerCase() === "active";
+    }
+
     function getPositiveListTitles() {
       const cat = currentProfile?.businessType || "shop";
       if (cat === "household") {
@@ -1631,7 +1617,7 @@
     updateDigitalClock();
     setInterval(updateDigitalClock, 15000);
 
-    // Auto-Rotating Nature Hero Banner (with safe gradient fallback, no user edit buttons)
+    // Auto-Rotating Nature Hero Banner
     const natureSlides = [
       {
         url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80",
@@ -1666,10 +1652,29 @@
       natureQuoteEl.textContent = item.quote;
     }, 10000);
 
-    // Theme Switcher
+    // Theme Switcher (PRO gets full palette, TRIAL stays on MunimJi default)
+    function syncThemeAvailabilityForTier() {
+      const pro = isProAccount();
+      document.getElementById("proThemeNotice").classList.toggle("hidden", pro);
+      document.querySelectorAll(".theme-choice-btn[data-pro-only='true']").forEach((btn) => {
+        btn.style.opacity = pro ? "1" : "0.65";
+        const tag = btn.querySelector(".pro-tag");
+        if (tag) tag.classList.toggle("hidden", pro);
+      });
+      if (!pro) {
+        document.body.setAttribute("data-theme", "munimji");
+      }
+    }
+
     function applyTheme(themeKey, persistToCloud = false) {
       const validThemes = ["munimji", "cream-wine", "dark-603010", "light-minimal", "warm-emerald"];
-      const chosen = validThemes.includes(themeKey) ? themeKey : "munimji";
+      let chosen = validThemes.includes(themeKey) ? themeKey : "munimji";
+
+      if (chosen !== "munimji" && !isProAccount()) {
+        alert("यह थीम पैलेट केवल PRO सदस्यों के लिए उपलब्ध है। PRO एक्टिवेट करने के लिए +91 9458614610 पर संपर्क करें।");
+        chosen = "munimji";
+      }
+
       document.body.setAttribute("data-theme", chosen);
       try { localStorage.setItem("mj_theme", chosen); } catch (_) {}
 
@@ -1678,7 +1683,7 @@
         btn.style.outline = isSelected ? "2px solid var(--brand-accent)" : "none";
       });
 
-      if (persistToCloud && currentUser) {
+      if (persistToCloud && currentUser && isProAccount()) {
         updateDoc(doc(db, "users", currentUser.uid), {
           uiTheme: chosen,
           updatedAt: serverTimestamp()
@@ -1693,6 +1698,7 @@
 
     const themeDrawer = document.getElementById("themeDrawerPanel");
     document.getElementById("toggleThemeDrawerBtn").addEventListener("click", () => {
+      syncThemeAvailabilityForTier();
       themeDrawer.classList.toggle("hidden");
     });
     document.getElementById("closeThemeDrawerBtn").addEventListener("click", () => {
@@ -2003,6 +2009,7 @@
         headerBadge.textContent = "TRIAL";
         blockedBanner.classList.add("hidden");
       }
+      syncThemeAvailabilityForTier();
     }
 
     function getEffectiveBusinessTitle() {
@@ -2040,18 +2047,20 @@
       const upiSub = document.getElementById("upiCardSubtext");
       if (profile?.upiId) {
         upiPill.textContent = "सक्रिय ✓";
-        upiPill.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700";
+        upiPill.className = "text-[9px] font-extrabold px-1.5 py-0.2 rounded-full bg-emerald-500/15 text-emerald-700";
         upiSub.textContent = profile.upiId;
       } else {
-        upiPill.textContent = "UPI सेट करें";
-        upiPill.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-700";
-        upiSub.textContent = "जल्दी पेमेंट हेतु UPI जोड़ें";
+        upiPill.textContent = "सेट करें";
+        upiPill.className = "text-[9px] font-extrabold px-1.5 py-0.2 rounded-full bg-amber-500/15 text-amber-700";
+        upiSub.textContent = "पेमेंट हेतु UPI जोड़ें";
       }
 
       setAvatar(document.getElementById("cardAvatarImg"), document.getElementById("cardAvatarInitial"), photo, fullName);
       setAvatar(document.getElementById("modalAvatarPreview"), document.getElementById("modalAvatarInitial"), photo, fullName);
       applyTierStyle(profile?.planStatus || "trial");
-      if (profile?.uiTheme) applyTheme(profile.uiTheme, false);
+      if (profile?.uiTheme && (profile?.planStatus || "").toLowerCase() === "active") {
+        applyTheme(profile.uiTheme, false);
+      }
     }
 
     document.getElementById("logoutBtn").addEventListener("click", async () => {
@@ -2059,7 +2068,7 @@
       window.location.replace("login.html");
     });
 
-    // Personal (Private) Lena Hai / Dena Hai Ledger (Strictly separated per card)
+    // Personal (Private) Lena Hai / Dena Hai Ledger
     document.getElementById("personalDateInput").value = new Date().toISOString().split("T")[0];
 
     function openPersonalLedgerForMode(mode) {
@@ -2167,16 +2176,16 @@
 
       document.getElementById("personalReceiveTotalDisplay").textContent = `₹${recTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
       document.getElementById("personalPayTotalDisplay").textContent = `₹${payTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
-      document.getElementById("receivePeopleCountBadge").textContent = `${recCount} लोग`;
-      document.getElementById("payPeopleCountBadge").textContent = `${payCount} लोग`;
+      document.getElementById("receivePeopleCountBadge").textContent = `${recCount} लोग · पर्ची देखें`;
+      document.getElementById("payPeopleCountBadge").textContent = `${payCount} लोग · पर्ची देखें`;
 
       const todayStr = new Date().toLocaleDateString("en-GB");
       const insightEl = document.getElementById("personalNetInsightText");
       if (recTotal === 0 && payTotal === 0) {
-        insightEl.innerHTML = `💡 आज की तारीख (<strong>${todayStr}</strong>) में अपना निजी लेने-देने का हिसाब जोड़ें, यहाँ अपने आप बचत या ज़रूरत का हिसाब दिखेगा।`;
+        insightEl.innerHTML = `💡 आज (<strong>${todayStr}</strong>) अपना निजी लेने-देने का हिसाब जोड़ें, यहाँ अपने आप बचत या ज़रूरत का हिसाब दिखेगा।`;
       } else if (payTotal > recTotal) {
         const needed = payTotal - recTotal;
-        insightEl.innerHTML = `💡 आज (<strong>${todayStr}</strong>) यदि आप <strong>₹${recTotal.toFixed(0)}</strong> ले लेते हैं, तो <strong>₹${payTotal.toFixed(0)}</strong> देने के लिए आपको केवल <strong class="text-rose-600">₹${needed.toFixed(0)}</strong> और जुटाने की ज़रूरत होगी।`;
+        insightEl.innerHTML = `💡 आज (<strong>${todayStr}</strong>) यदि आप <strong>₹${recTotal.toFixed(0)}</strong> ले लेते हैं, तो <strong>₹${payTotal.toFixed(0)}</strong> देने के लिए आपको केवल <strong class="text-rose-600">₹${needed.toFixed(0)}</strong> और जुटाने होंगे।`;
       } else {
         const leftOver = recTotal - payTotal;
         insightEl.innerHTML = `💡 आज (<strong>${todayStr}</strong>) यदि आप <strong>₹${recTotal.toFixed(0)}</strong> ले लेते हैं, तो <strong>₹${payTotal.toFixed(0)}</strong> देने के बाद भी आपके पास <strong class="text-emerald-600">₹${leftOver.toFixed(0)}</strong> बचेंगे।`;
@@ -2460,7 +2469,7 @@
       document.getElementById("entryDesc").value = "";
     });
 
-    // Persistent Editable Vendor Stock / Need List + Always-Visible Shortage Preview
+    // Persistent Editable Vendor Stock / Need List
     async function persistCurrentNeedList() {
       if (!currentUser) return;
       const now = new Date();
@@ -2612,11 +2621,11 @@
       linesBox.innerHTML = rowsHtml.join("");
 
       countText.textContent = `${needItemsList.length} आइटम`;
-      shortageBadge.textContent = `${needItemsList.length} सामान बाकी`;
+      shortageBadge.textContent = `${needItemsList.length} बाकी`;
 
       if (!needItemsList.length) {
         editableBox.innerHTML = '<p class="text-slate-400 italic">अभी कोई सामान नहीं जुड़ा है।</p>';
-        previewEl.textContent = "अभी सभी स्टॉक पूरा है · लिस्ट खोलें";
+        previewEl.textContent = "खत्म सामान लिखें व वेंडर को भेजें";
       } else {
         editableBox.innerHTML = needItemsList
           .map(
@@ -2631,8 +2640,7 @@
           `
           )
           .join("");
-        const summaryNames = needItemsList.slice(0, 3).map((x) => `${x.item} (${x.qty})`).join(", ");
-        previewEl.textContent = summaryNames;
+        previewEl.textContent = needItemsList.slice(0, 3).map((x) => `${x.item} (${x.qty})`).join(", ");
       }
     }
 
@@ -2746,7 +2754,9 @@
         const totalSales = cash + upi;
         const netDrawer = cash + upi - expense;
         document.getElementById("totalSalesDisplay").textContent = `₹${totalSales.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
-        document.getElementById("gallaBreakdownLine").textContent = `कैश ₹${cash.toFixed(0)} · UPI ₹${upi.toFixed(0)} · खर्च ₹${expense.toFixed(0)}`;
+        document.getElementById("inlineCashVal").textContent = `₹${cash.toFixed(0)}`;
+        document.getElementById("inlineUpiVal").textContent = `₹${upi.toFixed(0)}`;
+        document.getElementById("inlineExpenseVal").textContent = `₹${expense.toFixed(0)}`;
         document.getElementById("modalCashVal").textContent = `₹${cash.toFixed(2)}`;
         document.getElementById("modalUpiVal").textContent = `₹${upi.toFixed(2)}`;
         document.getElementById("modalExpenseVal").textContent = `₹${expense.toFixed(2)}`;
