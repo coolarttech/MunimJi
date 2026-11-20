@@ -12,60 +12,123 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            appleBg: "#F5F5F7",
-            appleCard: "#FFFFFF",
-            appleInk: "#1D1D1F",
-            appleMuted: "#6E6E73",
-            appleBlue: "#0071E3",
-            appleGreen: "#079D76"
-          }
-        }
-      }
-    };
-  </script>
   <style>
+    :root {
+      --bg-app: #F4F6F9;
+      --bg-surface: #FFFFFF;
+      --bg-surface-soft: #F8FAFC;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border-subtle: rgba(15, 23, 42, 0.08);
+      --brand-primary: #071B36;
+      --brand-accent: #079D76;
+      --brand-highlight: #F59E0B;
+      --hero-grad: linear-gradient(135deg, #071B36 0%, #0F2E54 58%, #067A5C 100%);
+      --clock-bg: linear-gradient(145deg, #0B2240 0%, #163A63 100%);
+      --clock-text: #FFFFFF;
+      --clock-accent: #FCD34D;
+    }
+
+    /* Theme 2: Cream, Wine & Golden */
+    body[data-theme="cream-wine"] {
+      --bg-app: #FAF5EE;
+      --bg-surface: #FFFDF9;
+      --bg-surface-soft: #F5EDE2;
+      --text-main: #2A121B;
+      --text-muted: #6E5660;
+      --border-subtle: rgba(91, 24, 48, 0.12);
+      --brand-primary: #5B1830;
+      --brand-accent: #7A2040;
+      --brand-highlight: #D97706;
+      --hero-grad: linear-gradient(135deg, #4A1125 0%, #7A2040 60%, #B45309 100%);
+      --clock-bg: linear-gradient(145deg, #3D0E1F 0%, #6B1B38 100%);
+      --clock-text: #FFFDF9;
+      --clock-accent: #FBBF24;
+    }
+
+    /* Theme 3: Dark 60-30-10 (60% Deep Charcoal, 30% Soft Lavender, 10% Mint) */
+    body[data-theme="dark-603010"] {
+      --bg-app: #14141F;
+      --bg-surface: #1F1F2E;
+      --bg-surface-soft: #2A293E;
+      --text-main: #F8FAFC;
+      --text-muted: #A5A4C4;
+      --border-subtle: rgba(167, 139, 250, 0.22);
+      --brand-primary: #7C3AED;
+      --brand-accent: #34D399;
+      --brand-highlight: #A78BFA;
+      --hero-grad: linear-gradient(135deg, #252238 0%, #4C3D8F 65%, #10B981 100%);
+      --clock-bg: linear-gradient(145deg, #2A2640 0%, #3E356B 100%);
+      --clock-text: #F8FAFC;
+      --clock-accent: #34D399;
+    }
+
+    /* Theme 4: Light Minimal (Chatify Clean Style) */
+    body[data-theme="light-minimal"] {
+      --bg-app: #F8F9FB;
+      --bg-surface: #FFFFFF;
+      --bg-surface-soft: #F3F4F8;
+      --text-main: #18181B;
+      --text-muted: #71717A;
+      --border-subtle: rgba(24, 24, 27, 0.07);
+      --brand-primary: #5B4FE9;
+      --brand-accent: #5B4FE9;
+      --brand-highlight: #818CF8;
+      --hero-grad: linear-gradient(135deg, #4F46E5 0%, #6D5DF6 100%);
+      --clock-bg: linear-gradient(145deg, #EEF2FF 0%, #E0E7FF 100%);
+      --clock-text: #1E1B4B;
+      --clock-accent: #4F46E5;
+    }
+
+    /* Theme 5: Warm Cream & Emerald */
+    body[data-theme="warm-emerald"] {
+      --bg-app: #F6F3EA;
+      --bg-surface: #FFFDF8;
+      --bg-surface-soft: #EFECE1;
+      --text-main: #16241D;
+      --text-muted: #586960;
+      --border-subtle: rgba(5, 150, 105, 0.14);
+      --brand-primary: #065F46;
+      --brand-accent: #059669;
+      --brand-highlight: #F59E0B;
+      --hero-grad: linear-gradient(135deg, #064E3B 0%, #059669 65%, #D97706 100%);
+      --clock-bg: linear-gradient(145deg, #064E3B 0%, #047857 100%);
+      --clock-text: #FFFFFF;
+      --clock-accent: #FCD34D;
+    }
+
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: #F5F5F7;
-      color: #1D1D1F;
+      background: var(--bg-app);
+      color: var(--text-main);
       font-family: "Plus Jakarta Sans", "Noto Sans Devanagari", -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 68px;
+      padding-bottom: 66px;
+      transition: background 0.25s ease, color 0.25s ease;
     }
 
-    .apple-glass {
-      background: rgba(255, 255, 255, 0.86);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
+    .themed-header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    .apple-card {
-      background: #FFFFFF;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 22px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.035);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    .themed-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.25s ease;
     }
-    .apple-card:hover {
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.055);
+    .themed-card:active {
+      transform: scale(0.985);
     }
 
     /* PRO vs TRIAL Visual Distinction */
-    body.tier-pro .apple-shell-accent {
-      background: linear-gradient(135deg, #FFFBEB 0%, #FFFFFF 55%, #ECFDF5 100%);
-      border-color: rgba(217, 119, 6, 0.28);
-      box-shadow: 0 12px 32px rgba(180, 83, 9, 0.08);
-    }
     body.tier-pro .tier-badge {
-      background: linear-gradient(135deg, #111827 0%, #1F2937 100%);
+      background: #111827;
       color: #FCD34D;
-      border: 1px solid rgba(252, 211, 77, 0.45);
+      border: 1px solid rgba(252, 211, 77, 0.5);
     }
     body.tier-trial .tier-badge {
       background: #ECFDF5;
@@ -78,6 +141,67 @@
       border: 1px solid #FECACA;
     }
 
+    /* Hero Banner (70%) + Digital Clock (30%) */
+    .hero-promo-box {
+      background: var(--hero-grad);
+      border-radius: 20px;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(7, 27, 54, 0.14);
+    }
+    .hero-promo-box::after {
+      content: "";
+      position: absolute;
+      right: -28px;
+      bottom: -28px;
+      width: 110px;
+      height: 110px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+    }
+    .digital-clock-card {
+      background: var(--clock-bg);
+      color: var(--clock-text);
+      border-radius: 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 8px 22px rgba(7, 27, 54, 0.12);
+    }
+
+    /* Floating Always-Visible Theme Drawer Trigger */
+    .theme-fab-btn {
+      position: fixed;
+      right: 12px;
+      bottom: 74px;
+      z-index: 65;
+      background: var(--brand-primary);
+      color: #FFFFFF;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+      border-radius: 9999px;
+      padding: 8px 13px;
+      font-size: 11.5px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .theme-drawer-panel {
+      position: fixed;
+      right: 12px;
+      bottom: 118px;
+      z-index: 66;
+      width: 245px;
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+      padding: 12px;
+    }
+
     /* Voice Mic & Wave Animation */
     .voice-wrap {
       position: relative;
@@ -85,15 +209,15 @@
       align-items: center;
     }
     .voice-wrap input {
-      padding-right: 38px;
+      padding-right: 36px;
     }
     .mic-btn {
       position: absolute;
-      right: 8px;
+      right: 7px;
       top: 50%;
       transform: translateY(-50%);
-      width: 26px;
-      height: 26px;
+      width: 25px;
+      height: 25px;
       border-radius: 9999px;
       border: none;
       background: #F1F5F9;
@@ -102,11 +226,6 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .mic-btn:hover {
-      background: #E2E8F0;
-      color: #071B36;
     }
     .mic-btn.recording {
       background: #FEE2E2;
@@ -135,7 +254,7 @@
       50% { height: 12px; }
     }
 
-    /* Modern Parchi Sheet */
+    /* Modern Parchi Sheet (Always crisp white receipt for printing/sharing) */
     .mj-parchi-sheet {
       background: #FFFFFF;
       border: 1px solid #CBD5E1;
@@ -158,7 +277,7 @@
       background-repeat: repeat-x;
     }
 
-    /* Ruled Notebook Page (Authentic Hindi Copy Look with Clear Headings & Aligned Date/Time) */
+    /* Ruled Notebook Page */
     .ruled-list-page {
       background-color: #FFFDF7;
       border: 1.5px solid #E2D9C2;
@@ -186,9 +305,7 @@
       flex-shrink: 0;
       line-height: 1.35;
     }
-    .ruled-rows-wrap {
-      background: #FFFDF7;
-    }
+    .ruled-rows-wrap { background: #FFFDF7; }
     .ruled-col-head {
       display: flex;
       align-items: stretch;
@@ -204,9 +321,7 @@
       min-height: 42px;
       border-bottom: 1px solid #93C5FD;
     }
-    .ruled-line-item:last-child {
-      border-bottom: none;
-    }
+    .ruled-line-item:last-child { border-bottom: none; }
     .ruled-margin-col {
       width: 50px;
       flex-shrink: 0;
@@ -238,7 +353,7 @@
       padding: 6px 14px;
     }
 
-    /* Parchi Bottom Footer: White Powered Bar + Bottom Tiny Black Promo Strip */
+    /* Parchi Bottom Footer: White Powered Bar + Bottom Tiny Black Strip */
     .mj-parchi-footer-wrap {
       border-top: 1px dashed #CBD5E1;
       background: #FFFFFF;
@@ -283,7 +398,7 @@
       left: 0;
       right: 0;
       z-index: 70;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: saturate(180%) blur(18px);
       -webkit-backdrop-filter: saturate(180%) blur(18px);
       border-top: 1px solid rgba(0, 0, 0, 0.08);
@@ -306,18 +421,8 @@
       gap: 10px;
       flex-wrap: wrap;
     }
-    .mj-ff-coolart-img {
-      height: 16px;
-      width: auto;
-      object-fit: contain;
-      display: block;
-    }
-    .mj-ff-mj-img {
-      height: 18px;
-      width: auto;
-      object-fit: contain;
-      display: inline-block;
-    }
+    .mj-ff-coolart-img { height: 16px; width: auto; object-fit: contain; display: block; }
+    .mj-ff-mj-img { height: 18px; width: auto; object-fit: contain; display: inline-block; }
     .mj-ff-sep { color: #CBD5E1; }
     .mj-ff-phone {
       color: #0F294A;
@@ -327,7 +432,6 @@
       align-items: center;
       gap: 4px;
     }
-    .mj-ff-phone:hover { color: #079D76; }
     .mj-ff-right {
       display: inline-flex;
       align-items: center;
@@ -339,224 +443,290 @@
     .mj-ff-right strong { color: #0F294A; font-weight: 800; }
 
     @media (max-width: 768px) {
-      body { padding-bottom: 72px; }
-      .mj-fixed-footer { padding: 8px 12px; }
+      body { padding-bottom: 70px; }
+      .mj-fixed-footer { padding: 7px 10px; }
       .mj-ff-inner {
         flex-direction: column;
         justify-content: center;
-        gap: 3px;
+        gap: 2px;
         text-align: center;
       }
       .mj-ff-left { justify-content: center; gap: 0; }
       .mj-ff-coolart-img, .mj-ff-sep, .mj-ff-phone { display: none; }
-      .mj-ff-copy { font-size: 11px; color: #475569; }
+      .mj-ff-copy { font-size: 10.5px; color: #475569; }
       .mj-ff-right {
-        font-size: 11px;
+        font-size: 10.5px;
         flex-wrap: wrap;
         justify-content: center;
         gap: 4px;
       }
-      .mj-ff-mj-img { height: 16px; }
+      .mj-ff-mj-img { height: 15px; }
     }
   </style>
 </head>
-<body class="tier-trial min-h-screen flex flex-col">
+<body data-theme="munimji" class="tier-trial min-h-screen flex flex-col">
 
-  <!-- Top Dismissible Advertisement & Help Banner -->
-  <div id="topPromoBanner" class="bg-gradient-to-r from-[#071B36] via-[#0F2E54] to-[#067A5C] text-white text-xs py-2 px-4">
-    <div class="max-w-6xl mx-auto flex items-center justify-between gap-3">
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="bg-emerald-400/20 text-emerald-200 border border-emerald-300/30 text-[10px] font-extrabold px-2 py-0.5 rounded-full">MunimJi by Cool Art®</span>
-        <span class="font-medium">हर तरह के सॉफ्टवेयर, वेबसाइट व डिजिटल बिलिंग समाधान बनवाने के लिए संपर्क करें: <strong>+91 9458614610</strong></span>
-      </div>
-      <div class="flex items-center gap-2 flex-shrink-0">
-        <a href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20MunimJi%20ya%20software%2Fwebsite%20banwane%20ke%20baare%20mein%20baat%20karni%20hai" target="_blank" rel="noopener" class="bg-white text-[#071B36] font-bold px-2.5 py-1 rounded-full text-[11px] hover:bg-emerald-50 transition">
-          WhatsApp
+  <!-- Top Header -->
+  <header class="themed-header sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-3.5 sm:px-6 h-14 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 min-w-0">
+        <a href="index.html" class="flex-shrink-0 bg-white px-2 py-1 rounded-xl border border-black/[0.06]">
+          <img src="logo.png" alt="MunimJi Logo" class="h-6 sm:h-7 w-auto object-contain" />
         </a>
-        <button type="button" id="closePromoBannerBtn" aria-label="बैनर बंद करें" class="text-white/75 hover:text-white text-base font-bold px-1">&times;</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Top Apple Glass Navigation -->
-  <header class="apple-glass sticky top-0 z-40 border-b border-black/[0.06]">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
-      <div class="flex items-center gap-3 min-w-0">
-        <a href="index.html" class="flex-shrink-0">
-          <img src="logo.png" alt="MunimJi Logo" class="h-8 sm:h-9 w-auto object-contain" />
-        </a>
-        <div class="flex items-center gap-2 bg-black/[0.04] pl-1.5 pr-3 py-1 rounded-full min-w-0">
-          <img id="headerAvatarImg" src="favicon.png" alt="Profile" class="w-7 h-7 rounded-full object-cover bg-white hidden flex-shrink-0" />
-          <div id="headerAvatarInitial" class="w-7 h-7 rounded-full bg-[#1D1D1F] text-white text-xs font-bold flex items-center justify-center flex-shrink-0">M</div>
-          <span id="headerUserName" class="text-xs font-semibold text-[#1D1D1F] truncate max-w-[115px] sm:max-w-[180px]">मेरा खाता</span>
-          <span id="headerTierBadge" class="tier-badge text-[10px] font-extrabold px-2 py-0.5 rounded-full tracking-wide flex-shrink-0">TRIAL</span>
-        </div>
+        <span id="headerTierBadge" class="tier-badge text-[10px] font-extrabold px-2 py-0.5 rounded-full tracking-wide">TRIAL</span>
       </div>
 
-      <div class="flex items-center gap-2 flex-shrink-0">
-        <button type="button" id="openProfileBtn" class="text-xs font-semibold text-[#1D1D1F] bg-white hover:bg-black/[0.03] border border-black/[0.08] px-3 py-1.5 rounded-full transition">
-          प्रोफाइल
+      <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+        <button type="button" id="openProfileBtn" class="text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-full border border-current/15 bg-black/[0.04] hover:bg-black/[0.08] transition">
+          प्रोफाइल / UPI
         </button>
-        <button type="button" id="logoutBtn" class="text-xs font-semibold text-[#DC2626] bg-[#FEF2F2] hover:bg-[#FEE2E2] border border-[#FECACA] px-3 py-1.5 rounded-full transition">
+        <button type="button" id="logoutBtn" class="text-[11px] sm:text-xs font-bold text-red-600 bg-red-500/10 border border-red-500/20 px-2.5 sm:px-3 py-1.5 rounded-full transition">
           लॉग आउट
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Main Workspace -->
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-7 flex-grow w-full space-y-6">
+  <!-- Main Single-Screen Mobile App Grid + Clean Desktop Layout -->
+  <main class="max-w-6xl mx-auto px-3.5 sm:px-6 py-3 sm:py-5 flex-grow w-full space-y-3 sm:space-y-4">
 
     <!-- Voice Status Toast -->
-    <div id="voiceStatusToast" class="hidden apple-card border-red-200 bg-red-50/95 px-4 py-2.5 flex items-center justify-between gap-3 text-xs font-bold text-red-800">
-      <div class="flex items-center gap-2.5">
+    <div id="voiceStatusToast" class="hidden themed-card border-red-300 bg-red-50 px-3.5 py-2 flex items-center justify-between gap-2 text-xs font-bold text-red-800">
+      <div class="flex items-center gap-2">
         <span class="wave-bars"><span></span><span></span><span></span><span></span></span>
-        <span id="voiceStatusText">माइक चालू है... आराम से बोलें (रोकने के लिए माइक बटन दोबारा दबाएं)</span>
+        <span>माइक चालू है... आराम से बोलें</span>
       </div>
-      <button type="button" id="stopVoiceToastBtn" class="bg-red-600 text-white px-3 py-1 rounded-full text-[11px]">रोकें</button>
+      <button type="button" id="stopVoiceToastBtn" class="bg-red-600 text-white px-2.5 py-0.5 rounded-full text-[11px]">रोकें</button>
     </div>
 
     <!-- Blocked Notice Banner -->
-    <div id="blockedBanner" class="hidden apple-card border-red-200 bg-red-50/90 p-4 flex flex-wrap items-center justify-between gap-3">
-      <div class="text-xs sm:text-sm font-semibold text-red-800">
-        ⚠️ आपका खाता फिलहाल <strong>BLOCKED</strong> स्थिति में है। कृपया सहायता के लिए संपर्क करें: <strong>+91 9458614610</strong>
+    <div id="blockedBanner" class="hidden themed-card border-red-300 bg-red-50 p-3 flex flex-wrap items-center justify-between gap-2 text-red-900">
+      <div class="text-xs font-bold">
+        ⚠️ आपका खाता फिलहाल <strong>BLOCKED</strong> है। सहायता: <strong>+91 9458614610</strong>
       </div>
-      <a href="https://wa.me/919458614610?text=Namaste%2C%20mera%20MunimJi%20account%20plan%20activate%20karna%20hai" target="_blank" rel="noopener" class="text-xs font-bold bg-red-600 text-white px-3.5 py-2 rounded-full">
-        WhatsApp पर संपर्क करें
+      <a href="https://wa.me/919458614610?text=Namaste%2C%20mera%20MunimJi%20account%20plan%20activate%20karna%20hai" target="_blank" rel="noopener" class="text-[11px] font-bold bg-red-600 text-white px-3 py-1 rounded-full">
+        WhatsApp करें
       </a>
     </div>
 
-    <!-- Hero Profile & Tier Summary Card -->
-    <section class="apple-card apple-shell-accent p-5 sm:p-7 flex flex-col md:flex-row md:items-center justify-between gap-5">
-      <div class="flex items-center gap-4">
-        <div class="relative flex-shrink-0">
-          <img id="cardAvatarImg" src="favicon.png" alt="Avatar" class="w-16 h-16 rounded-2xl object-cover border border-black/[0.08] bg-white hidden" />
-          <div id="cardAvatarInitial" class="w-16 h-16 rounded-2xl bg-[#1D1D1F] text-white text-2xl font-bold flex items-center justify-center">M</div>
-        </div>
-        <div>
-          <div class="flex items-center gap-2.5 flex-wrap">
-            <h1 id="cardUserName" class="text-xl sm:text-2xl font-bold tracking-tight text-[#1D1D1F]">नमस्ते, MunimJi</h1>
-            <span id="heroTierBadge" class="tier-badge text-[11px] font-extrabold px-2.5 py-0.5 rounded-full tracking-wider">TRIAL</span>
+    <!-- 1. User Identity Header Card (User's Big Name + Photo just like before) -->
+    <section class="themed-card p-3.5 sm:p-5 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <img id="cardAvatarImg" src="favicon.png" alt="Avatar" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl object-cover border border-black/10 bg-white hidden flex-shrink-0" />
+        <div id="cardAvatarInitial" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl text-white text-xl font-extrabold flex items-center justify-center flex-shrink-0" style="background: var(--brand-primary);">M</div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 id="cardUserName" class="text-lg sm:text-2xl font-extrabold tracking-tight truncate">नमस्ते, MunimJi</h1>
+            <span id="heroTierBadge" class="tier-badge text-[10px] font-extrabold px-2 py-0.5 rounded-full">TRIAL</span>
           </div>
-          <p id="cardUserMeta" class="text-xs sm:text-sm text-[#6E6E73] mt-1">खाता विवरण लोड हो रहा है...</p>
-          <p id="tierPerksText" class="text-xs font-medium text-[#079D76] mt-1">7-दिन TRIAL में सभी फीचर्स पूरे खुले हैं।</p>
+          <p id="cardUserMeta" class="text-[11px] sm:text-xs opacity-75 truncate mt-0.5">UPI सेट करने पर हर पर्ची में QR कोड बनेगा</p>
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center gap-2.5">
-        <button type="button" id="editProfileSecondaryBtn" class="px-4 py-2.5 rounded-full text-xs font-semibold bg-white text-[#1D1D1F] border border-black/[0.1] hover:bg-black/[0.03] transition">
-          प्रोफाइल / UPI सेट करें
-        </button>
-        <button type="button" id="openBillingBtn" class="px-5 py-2.5 rounded-full text-xs font-semibold bg-[#0071E3] text-white hover:bg-[#0062C4] shadow-sm transition">
-          + नया बिल बनाएं
-        </button>
-      </div>
-    </section>
-
-    <!-- Quick Action Pills -->
-    <section class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-      <button type="button" id="openBillingCardBtn" class="apple-card p-4 text-left flex items-center justify-between group">
-        <div>
-          <div class="text-xs font-medium text-[#6E6E73]">बिलिंग व मॉडर्न पर्ची</div>
-          <div class="text-base font-bold text-[#1D1D1F] mt-0.5">नया बिल बनाएं</div>
-        </div>
-        <span class="w-10 h-10 rounded-2xl bg-blue-50 text-[#0071E3] flex items-center justify-center text-lg group-hover:scale-105 transition">🧾</span>
-      </button>
-
-      <button type="button" id="openCustomerBtn" class="apple-card p-4 text-left flex items-center justify-between group">
-        <div>
-          <div class="text-xs font-medium text-[#6E6E73]">ग्राहक रजिस्टर</div>
-          <div class="text-base font-bold text-[#1D1D1F] mt-0.5">नया ग्राहक जोड़ें</div>
-        </div>
-        <span class="w-10 h-10 rounded-2xl bg-emerald-50 text-[#079D76] flex items-center justify-center text-lg group-hover:scale-105 transition">➕</span>
-      </button>
-
-      <button type="button" id="openKhataBtn" class="apple-card p-4 text-left flex items-center justify-between group">
-        <div>
-          <div class="text-xs font-medium text-[#6E6E73]">बकाया व रिमाइंडर पर्ची</div>
-          <div class="text-base font-bold text-[#1D1D1F] mt-0.5">उधार खाता देखें</div>
-        </div>
-        <span class="w-10 h-10 rounded-2xl bg-slate-100 text-[#1D1D1F] flex items-center justify-center text-lg group-hover:scale-105 transition">📒</span>
+      <button type="button" id="editProfileSecondaryBtn" class="flex-shrink-0 text-[11px] sm:text-xs font-bold px-3 py-2 rounded-full border border-current/15 bg-black/[0.04] hover:bg-black/[0.08] transition">
+        UPI सेट करें
       </button>
     </section>
 
-    <!-- 3 Summary Metrics -->
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="apple-card p-6">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold uppercase tracking-wider text-[#6E6E73]">बाकी कुल उधार</span>
-          <span class="text-xs font-bold text-red-600 bg-red-50 px-2.5 py-0.5 rounded-full">उधार</span>
+    <!-- 2. Horizontal Row: ~70% Fixed Cool Art® Hero Ad Banner + ~30% Live Digital Clock -->
+    <section class="grid grid-cols-12 gap-2.5 sm:gap-4 items-stretch">
+      <!-- 70% (8 of 12 cols on mobile, 9 of 12 on desktop): Fixed Cool Art® Promotional Banner -->
+      <div class="col-span-8 sm:col-span-9 hero-promo-box p-3 sm:p-5 flex flex-col justify-between">
+        <div>
+          <div class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] font-extrabold tracking-wide">
+            <span>✨ Cool Art® Digital</span>
+          </div>
+          <h2 class="text-xs sm:text-lg font-extrabold leading-snug mt-1.5">
+            अपनी दुकान, स्कूल या व्यापार के लिए सॉफ्टवेयर व वेबसाइट बनवाएं
+          </h2>
+          <p class="hidden sm:block text-xs text-white/85 mt-1">
+            MunimJi — आसान डिजिटल बिल बुक, उधार खाता और WhatsApp पर्ची समाधान।
+          </p>
         </div>
-        <div id="totalUdharDisplay" class="text-3xl font-bold tracking-tight text-[#1D1D1F] mt-3">₹0.00</div>
-        <p class="text-xs text-[#6E6E73] mt-2">सभी ग्राहकों के बकाया का कुल हिसाब</p>
+        <div class="mt-2 flex items-center justify-between gap-2">
+          <span class="text-[10.5px] sm:text-xs font-bold text-amber-300">📞 +91 9458614610</span>
+          <a href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20software%20ya%20website%20banwane%20ke%20baare%20mein%20baat%20karni%20hai" target="_blank" rel="noopener" class="bg-amber-400 text-[#111827] font-extrabold text-[10px] sm:text-xs px-2.5 py-1 rounded-full shadow-sm hover:bg-amber-300 transition">
+            संपर्क करें
+          </a>
+        </div>
       </div>
 
-      <div class="apple-card p-6">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold uppercase tracking-wider text-[#6E6E73]">गल्ला एंट्री & रिपोर्ट</span>
-          <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full">गल्ला</span>
-        </div>
-        <div id="totalSalesDisplay" class="text-3xl font-bold tracking-tight text-[#1D1D1F] mt-3">₹0.00</div>
-        <p class="text-xs text-[#6E6E73] mt-2">
-          शुद्ध गल्ला: <strong id="drawerCashDisplay" class="text-[#079D76]">₹0.00</strong>
-          <button type="button" id="openCashbookBtn" class="ml-2 text-[#0071E3] font-semibold hover:underline">एंट्री जोड़ें →</button>
-        </p>
+      <!-- 30% (4 of 12 cols on mobile, 3 of 12 on desktop): Live Digital Clock Widget -->
+      <div class="col-span-4 sm:col-span-3 digital-clock-card p-2.5 sm:p-4 flex flex-col items-center justify-center text-center">
+        <div id="liveClockDay" class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider opacity-85">शुक्रवार</div>
+        <div id="liveClockTime" class="text-base sm:text-2xl font-extrabold tracking-tight mt-0.5" style="color: var(--clock-accent);">09:11</div>
+        <div id="liveClockAmPm" class="text-[9.5px] sm:text-[11px] font-bold opacity-80">PM</div>
+        <div id="liveClockDate" class="text-[9.5px] sm:text-xs font-semibold opacity-80 mt-1 pt-1 border-t border-current/15 w-full">20/11/2026</div>
       </div>
+    </section>
 
-      <div class="apple-card p-6">
-        <div class="flex items-center justify-between">
-          <span id="needListCardTag" class="text-xs font-semibold uppercase tracking-wider text-[#6E6E73]">दुकान की ज़रूरत लिस्ट</span>
-          <span id="savedParchiCountBadge" class="text-xs font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">0 पर्ची</span>
+    <!-- 3. iPhone-Style Compact All-in-One App Cards Grid (Fits on Single Screen without Scrolling) -->
+    <section class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4">
+      <!-- App Card 1: New Bill -->
+      <button type="button" id="openBillingCardBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-emerald-500">
+        <div class="flex items-center justify-between w-full">
+          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center text-lg sm:text-xl shadow-sm group-hover:scale-105 transition">🧾</span>
+          <span class="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">पर्ची</span>
         </div>
-        <div id="topShortagePreview" class="text-sm font-medium text-[#6E6E73] mt-3 min-h-[36px]">अभी सूची में कोई सामान नहीं है।</div>
-        <button type="button" id="openStockBtn" class="text-xs font-semibold text-[#0071E3] hover:underline mt-2 inline-block">
-          ज़रूरी सामान की सूची खोलें / एडिट करें →
-        </button>
-      </div>
+        <div class="mt-2.5">
+          <div class="text-sm sm:text-base font-extrabold leading-tight">नया बिल बनाएं</div>
+          <div class="text-[10.5px] sm:text-xs opacity-70 mt-0.5 truncate">मॉडर्न पर्ची व UPI QR</div>
+        </div>
+      </button>
+
+      <!-- App Card 2: Add Customer -->
+      <button type="button" id="openCustomerBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-amber-500">
+        <div class="flex items-center justify-between w-full">
+          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-amber-400 text-[#111827] flex items-center justify-center text-lg sm:text-xl font-extrabold shadow-sm group-hover:scale-105 transition">➕</span>
+          <span class="text-[10px] font-extrabold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">ग्राहक</span>
+        </div>
+        <div class="mt-2.5">
+          <div class="text-sm sm:text-base font-extrabold leading-tight">नया ग्राहक जोड़ें</div>
+          <div class="text-[10.5px] sm:text-xs opacity-70 mt-0.5 truncate">नाम, मोबाइल व बकाया</div>
+        </div>
+      </button>
+
+      <!-- App Card 3: Khata Ledger -->
+      <button type="button" id="openKhataBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-blue-600">
+        <div class="flex items-center justify-between w-full">
+          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-lg sm:text-xl shadow-sm group-hover:scale-105 transition">📒</span>
+          <span class="text-[10px] font-extrabold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">खाता</span>
+        </div>
+        <div class="mt-2.5">
+          <div class="text-sm sm:text-base font-extrabold leading-tight">उधार खाता देखें</div>
+          <div class="text-[10.5px] sm:text-xs opacity-70 mt-0.5 truncate">WhatsApp रिमाइंडर पर्ची</div>
+        </div>
+      </button>
+
+      <!-- App Card 4: Total Udhar Metric -->
+      <button type="button" id="udharMetricCardBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-rose-500">
+        <div class="flex items-center justify-between w-full">
+          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-rose-500 text-white flex items-center justify-center text-lg sm:text-xl shadow-sm group-hover:scale-105 transition">💰</span>
+          <span class="text-[10px] font-extrabold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full">बाकी उधार</span>
+        </div>
+        <div class="mt-2.5">
+          <div id="totalUdharDisplay" class="text-base sm:text-xl font-extrabold text-rose-600 leading-tight">₹0.00</div>
+          <div class="text-[10.5px] sm:text-xs opacity-70 mt-0.5 truncate">कुल बकाया हिसाब</div>
+        </div>
+      </button>
+
+      <!-- App Card 5: Galla Entry & Report -->
+      <button type="button" id="openCashbookBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-purple-600">
+        <div class="flex items-center justify-between w-full">
+          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center text-lg sm:text-xl shadow-sm group-hover:scale-105 transition">📊</span>
+          <span class="text-[10px] font-extrabold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full">गल्ला</span>
+        </div>
+        <div class="mt-2.5">
+          <div id="totalSalesDisplay" class="text-base sm:text-xl font-extrabold leading-tight">₹0.00</div>
+          <div class="text-[10.5px] sm:text-xs opacity-75 mt-0.5 truncate">गल्ला: <strong id="drawerCashDisplay" class="text-emerald-600">₹0.00</strong></div>
+        </div>
+      </button>
+
+      <!-- App Card 6: Need List (Ruled Hindi Copy) -->
+      <button type="button" id="openStockBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-teal-600">
+        <div class="flex items-center justify-between w-full">
+          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center text-lg sm:text-xl shadow-sm group-hover:scale-105 transition">📝</span>
+          <span id="savedParchiCountBadge" class="text-[10px] font-extrabold text-teal-800 bg-teal-50 px-2 py-0.5 rounded-full">0 पर्ची</span>
+        </div>
+        <div class="mt-2.5">
+          <div id="needListCardTag" class="text-sm sm:text-base font-extrabold leading-tight truncate">ज़रूरी सामान सूची</div>
+          <div id="topShortagePreview" class="text-[10.5px] sm:text-xs opacity-70 mt-0.5 truncate">कॉपी जैसी पर्ची बनाएं</div>
+        </div>
+      </button>
     </section>
   </main>
 
-  <!-- MODAL: Profile Edit -->
-  <div id="profileModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-4 pb-3 border-b border-black/[0.06]">
-        <h3 class="text-lg font-bold text-[#1D1D1F]">प्रोफाइल, UPI और पर्ची विवरण</h3>
-        <button type="button" class="close-modal text-[#6E6E73] hover:text-[#1D1D1F] text-2xl leading-none">&times;</button>
+  <!-- Always-Visible Small Theme Button & Instant Palette Drawer -->
+  <button type="button" id="toggleThemeDrawerBtn" class="theme-fab-btn" title="रंग / थीम बदलें">
+    <span>🎨</span>
+    <span>थीम</span>
+  </button>
+
+  <div id="themeDrawerPanel" class="theme-drawer-panel hidden">
+    <div class="flex items-center justify-between pb-2 mb-2 border-b border-current/10">
+      <span class="text-xs font-extrabold">पसंदीदा थीम चुनें</span>
+      <button type="button" id="closeThemeDrawerBtn" class="text-base font-bold opacity-60 hover:opacity-100">&times;</button>
+    </div>
+    <div class="space-y-1.5 text-xs">
+      <button type="button" data-select-theme="munimji" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
+        <span class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full inline-block border border-white shadow" style="background: linear-gradient(135deg,#071B36,#079D76);"></span>
+          <span>MunimJi ब्रांड थीम</span>
+        </span>
+        <span class="text-[10px] opacity-60">डिफ़ॉल्ट</span>
+      </button>
+
+      <button type="button" data-select-theme="cream-wine" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
+        <span class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full inline-block border border-white shadow" style="background: linear-gradient(135deg,#FAF5EE,#7A2040,#D97706);"></span>
+          <span>क्रीम, वाइन व गोल्डन</span>
+        </span>
+      </button>
+
+      <button type="button" data-select-theme="dark-603010" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
+        <span class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full inline-block border border-white shadow" style="background: linear-gradient(135deg,#1F1F2E,#A78BFA,#34D399);"></span>
+          <span>डार्क 60-30-10 मोड</span>
+        </span>
+      </button>
+
+      <button type="button" data-select-theme="light-minimal" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
+        <span class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full inline-block border border-slate-300 shadow" style="background: linear-gradient(135deg,#FFFFFF,#5B4FE9);"></span>
+          <span>लाइट मिनिमल</span>
+        </span>
+      </button>
+
+      <button type="button" data-select-theme="warm-emerald" class="theme-choice-btn w-full flex items-center justify-between px-2.5 py-2 rounded-xl border border-current/10 hover:bg-black/5 font-bold">
+        <span class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded-full inline-block border border-white shadow" style="background: linear-gradient(135deg,#F6F3EA,#059669,#F59E0B);"></span>
+          <span>वार्म क्रीम व हरा</span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: Profile Edit (with UPI ID & Parchi Header) -->
+  <div id="profileModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white text-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+        <h3 class="text-lg font-bold">प्रोफाइल, UPI और पर्ची विवरण</h3>
+        <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
       </div>
       <div class="space-y-3.5">
-        <div class="flex items-center gap-3 bg-[#F5F5F7] p-3 rounded-2xl">
-          <img id="modalAvatarPreview" src="favicon.png" alt="Preview" class="w-11 h-11 rounded-full object-cover bg-white border border-black/[0.08] hidden" />
-          <div id="modalAvatarInitial" class="w-11 h-11 rounded-full bg-[#1D1D1F] text-white font-bold flex items-center justify-center text-sm">M</div>
+        <div class="flex items-center gap-3 bg-amber-50 border border-amber-200 p-3 rounded-2xl">
+          <img id="modalAvatarPreview" src="favicon.png" alt="Preview" class="w-11 h-11 rounded-full object-cover bg-white border border-amber-300 hidden" />
+          <div id="modalAvatarInitial" class="w-11 h-11 rounded-full bg-[#071B36] text-amber-300 font-bold flex items-center justify-center text-sm">M</div>
           <div class="text-xs min-w-0">
-            <div id="modalEmailText" class="font-bold text-[#1D1D1F] truncate"></div>
-            <div class="text-[#6E6E73] mt-0.5">अपना नाम/व्यापार, मोबाइल व UPI ID सेव करें</div>
+            <div id="modalEmailText" class="font-bold truncate"></div>
+            <div class="text-amber-900 font-semibold mt-0.5">UPI सेट करने पर पर्ची में QR कोड बनेगा ताकि ग्राहक सीधे पेमेंट भेज सकें।</div>
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">आपका नाम / व्यापार या घर का नाम</label>
-          <input type="text" id="profileNameInput" placeholder="जैसे: जय महाकाल ट्रेडर्स / शर्मा किराना" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm focus:outline-none focus:border-[#0071E3]" />
+          <label class="block text-xs font-semibold mb-1">आपका नाम / व्यापार या घर का नाम</label>
+          <input type="text" id="profileNameInput" placeholder="जैसे: जय महाकाल ट्रेडर्स / शर्मा किराना" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मोबाइल नंबर (पर्ची के लिए)</label>
-            <input type="tel" id="profilePhoneInput" maxlength="15" placeholder="9458614610" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm focus:outline-none focus:border-[#0071E3]" />
+            <label class="block text-xs font-semibold mb-1">मोबाइल नंबर (पर्ची के लिए)</label>
+            <input type="tel" id="profilePhoneInput" maxlength="15" placeholder="9458614610" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">UPI ID (QR कोड के लिए)</label>
-            <input type="text" id="profileUpiInput" placeholder="shop@upi" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm focus:outline-none focus:border-[#0071E3]" />
+            <label class="block text-xs font-semibold mb-1">UPI ID (पेमेंट QR के लिए)</label>
+            <input type="text" id="profileUpiInput" placeholder="shop@upi" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">पर्ची शीर्ष / पता (वैकल्पिक)</label>
-          <input type="text" id="profileTaglineInput" placeholder="जैसे: जय महाकाल · मेन बाजार, अतरौली" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm focus:outline-none focus:border-[#0071E3]" />
+          <label class="block text-xs font-semibold mb-1">पर्ची शीर्ष / पता (वैकल्पिक)</label>
+          <input type="text" id="profileTaglineInput" placeholder="जैसे: जय महाकाल · मेन बाजार, अतरौली" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">उपयोग श्रेणी</label>
-          <select id="profileCategoryInput" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm bg-white focus:outline-none focus:border-[#0071E3]">
+          <label class="block text-xs font-semibold mb-1">उपयोग श्रेणी</label>
+          <select id="profileCategoryInput" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm bg-white">
             <option value="shop">दुकानदार / किराना / रिटेल</option>
             <option value="mandi">मंडी, बीज व थोक व्यापार</option>
             <option value="school">स्कूल, कोचिंग व टीचर</option>
@@ -565,91 +735,90 @@
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">प्रोफाइल फोटो लिंक (वैकल्पिक)</label>
-          <input type="url" id="profilePhotoInput" placeholder="https://..." class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm focus:outline-none focus:border-[#0071E3]" />
+          <label class="block text-xs font-semibold mb-1">प्रोफाइल फोटो लिंक (वैकल्पिक)</label>
+          <input type="url" id="profilePhotoInput" placeholder="https://..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
         </div>
 
         <div class="flex gap-3 pt-2">
-          <button type="button" class="close-modal w-1/2 bg-[#F5F5F7] text-[#1D1D1F] font-semibold py-2.5 rounded-full text-sm">बंद करें</button>
-          <button type="button" id="saveProfileBtn" class="w-1/2 bg-[#0071E3] text-white font-semibold py-2.5 rounded-full text-sm">सेव करें</button>
+          <button type="button" class="close-modal w-1/2 bg-slate-100 text-slate-800 font-semibold py-2.5 rounded-full text-sm">बंद करें</button>
+          <button type="button" id="saveProfileBtn" class="w-1/2 bg-[#079D76] text-white font-semibold py-2.5 rounded-full text-sm">सेव करें</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 1: Billing + Live Modern Parchi Preview + Direct WhatsApp & Image Share -->
-  <div id="billingModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
-    <div class="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[92vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-4 pb-3 border-b border-black/[0.06]">
-        <h3 class="text-lg font-bold text-[#1D1D1F]">नया बिल व लाइव मॉडर्न पर्ची</h3>
-        <button type="button" class="close-modal text-[#6E6E73] hover:text-[#1D1D1F] text-2xl leading-none">&times;</button>
+  <!-- MODAL 1: Billing + Live Modern Parchi Preview -->
+  <div id="billingModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white text-slate-900 w-full max-w-4xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[92vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+        <h3 class="text-lg font-bold">नया बिल व लाइव मॉडर्न पर्ची</h3>
+        <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         <div class="lg:col-span-6 space-y-3.5">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">ग्राहक का नाम</label>
+              <label class="block text-xs font-semibold mb-1">ग्राहक का नाम</label>
               <div class="voice-wrap">
-                <input type="text" id="billCustomerName" placeholder="जैसे: राम कुमार" class="w-full px-3.5 py-2 rounded-xl border border-black/[0.12] text-sm" />
+                <input type="text" id="billCustomerName" placeholder="जैसे: राम कुमार" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm" />
                 <button type="button" data-voice-target="billCustomerName" class="mic-btn" title="बोलकर लिखें">🎤</button>
               </div>
             </div>
             <div>
-              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मोबाइल नंबर (WhatsApp के लिए)</label>
-              <input type="tel" id="billCustomerMobile" maxlength="15" placeholder="9458600000" class="w-full px-3.5 py-2 rounded-xl border border-black/[0.12] text-sm" />
+              <label class="block text-xs font-semibold mb-1">मोबाइल नंबर (WhatsApp के लिए)</label>
+              <input type="tel" id="billCustomerMobile" maxlength="15" placeholder="9458600000" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm" />
             </div>
           </div>
 
           <div class="grid grid-cols-12 gap-2">
             <div class="col-span-6">
-              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">सामान का नाम</label>
+              <label class="block text-xs font-semibold mb-1">सामान का नाम</label>
               <div class="voice-wrap">
-                <input type="text" id="itemName" placeholder="जैसे: चाय" class="w-full px-3 py-2 rounded-xl border border-black/[0.12] text-sm" />
+                <input type="text" id="itemName" placeholder="जैसे: चाय" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
                 <button type="button" data-voice-target="itemName" class="mic-btn" title="बोलकर लिखें">🎤</button>
               </div>
             </div>
             <div class="col-span-3">
-              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मात्रा</label>
-              <input type="text" id="itemQty" placeholder="1 kg" class="w-full px-2.5 py-2 rounded-xl border border-black/[0.12] text-sm" />
+              <label class="block text-xs font-semibold mb-1">मात्रा</label>
+              <input type="text" id="itemQty" placeholder="1 kg" class="w-full px-2.5 py-2 rounded-xl border border-slate-300 text-sm" />
             </div>
             <div class="col-span-3">
-              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">राशि (₹)</label>
-              <input type="number" id="itemPrice" min="0" step="any" placeholder="180" class="w-full px-2.5 py-2 rounded-xl border border-black/[0.12] text-sm" />
+              <label class="block text-xs font-semibold mb-1">राशि (₹)</label>
+              <input type="number" id="itemPrice" min="0" step="any" placeholder="180" class="w-full px-2.5 py-2 rounded-xl border border-slate-300 text-sm" />
             </div>
           </div>
 
-          <button type="button" id="addBillLineBtn" class="w-full bg-[#079D76] text-white font-semibold py-2.5 rounded-full hover:bg-[#068664] transition text-sm">
+          <button type="button" id="addBillLineBtn" class="w-full bg-[#079D76] text-white font-bold py-2.5 rounded-full hover:bg-[#068664] transition text-sm">
             + आइटम पर्ची में जोड़ें
           </button>
 
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">अतिरिक्त चार्ज (+ ₹)</label>
-              <input type="number" id="billExtraCharges" min="0" step="any" value="0" class="w-full px-3 py-2 rounded-xl border border-black/[0.12] text-sm" />
+              <label class="block text-xs font-semibold mb-1">अतिरिक्त चार्ज (+ ₹)</label>
+              <input type="number" id="billExtraCharges" min="0" step="any" value="0" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm" />
             </div>
             <div>
-              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">बिल नंबर</label>
-              <input type="text" id="billNumberInput" value="Nov'26/001" class="w-full px-3 py-2 rounded-xl border border-black/[0.12] text-sm bg-[#F5F5F7]" />
+              <label class="block text-xs font-semibold mb-1">बिल नंबर</label>
+              <input type="text" id="billNumberInput" value="Nov'26/001" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-slate-50" />
             </div>
           </div>
 
-          <label class="flex items-center gap-2.5 bg-amber-50/80 border border-amber-200/80 p-3 rounded-2xl text-xs font-semibold text-[#1D1D1F] cursor-pointer">
-            <input type="checkbox" id="addBillToKhataCheck" class="w-4 h-4 accent-[#0071E3] rounded" />
+          <label class="flex items-center gap-2.5 bg-amber-50 border border-amber-200 p-3 rounded-2xl text-xs font-semibold cursor-pointer">
+            <input type="checkbox" id="addBillToKhataCheck" class="w-4 h-4 accent-[#079D76] rounded" />
             <span>यह बिल ग्राहक के <strong>उधार खाते (Khata)</strong> में भी जोड़ें</span>
           </label>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
-            <button type="button" id="sendWaBillBtn" class="bg-[#079D76] text-white font-semibold py-2.5 px-4 rounded-full text-xs hover:bg-[#068664] transition">
+            <button type="button" id="sendWaBillBtn" class="bg-[#079D76] text-white font-bold py-2.5 px-4 rounded-full text-xs hover:bg-[#068664] transition">
               💬 सीधा WhatsApp पर भेजें
             </button>
-            <button type="button" id="shareBillImageBtn" class="bg-[#0071E3] text-white font-semibold py-2.5 px-4 rounded-full text-xs hover:bg-[#0062C4] transition">
+            <button type="button" id="shareBillImageBtn" class="bg-[#071B36] text-amber-300 font-bold py-2.5 px-4 rounded-full text-xs hover:bg-slate-900 transition">
               🖼️ पर्ची इमेज भेजें / डाउनलोड
             </button>
           </div>
         </div>
 
-        <!-- Right: Live Modern Parchi Preview -->
         <div class="lg:col-span-6">
           <div id="liveBillParchiCapture" class="mj-parchi-sheet">
             <div class="mj-parchi-top flex justify-between items-start gap-3">
@@ -661,7 +830,7 @@
                 <div id="parchiShopSub" class="text-[11px] text-slate-300 mt-0.5">Phone: +91 9458614610</div>
               </div>
               <div class="text-right text-[11px]">
-                <div class="font-bold text-emerald-300">Bill No: <span id="parchiBillNo">Nov'26/001</span></div>
+                <div class="font-bold text-amber-300">Bill No: <span id="parchiBillNo">Nov'26/001</span></div>
                 <div id="parchiDateTime" class="text-slate-200 mt-0.5"></div>
                 <div id="parchiCustomerBadge" class="mt-1 inline-block bg-white/15 px-2 py-0.5 rounded-full text-[10px] font-semibold">ग्राहक: सामान्य</div>
               </div>
@@ -669,13 +838,13 @@
             <div class="mj-parchi-zigzag"></div>
 
             <div class="p-4 space-y-3">
-              <div class="flex justify-between text-[11px] font-bold text-[#6E6E73] border-b border-slate-200 pb-1.5">
+              <div class="flex justify-between text-[11px] font-bold text-slate-500 border-b border-slate-200 pb-1.5">
                 <span>क्र. · सामान का नाम व मात्रा</span>
                 <span>राशि (₹)</span>
               </div>
 
               <div id="parchiItemsBody" class="space-y-2 min-h-[90px] text-xs">
-                <div class="text-[#6E6E73] italic text-center py-6">कोई सामान नहीं जोड़ा गया है</div>
+                <div class="text-slate-400 italic text-center py-6">कोई सामान नहीं जोड़ा गया है</div>
               </div>
 
               <div class="border-t border-dashed border-slate-300 pt-2.5 space-y-1 text-xs">
@@ -693,23 +862,21 @@
                 </div>
               </div>
 
-              <!-- Dynamic UPI QR Block -->
-              <div id="parchiQrBox" class="hidden pt-2 border-t border-dashed border-slate-200 flex items-center justify-between gap-3 bg-[#F8FAFC] p-2.5 rounded-xl">
+              <div id="parchiQrBox" class="hidden pt-2 border-t border-dashed border-slate-200 flex items-center justify-between gap-3 bg-amber-50 p-2.5 rounded-xl border border-amber-200">
                 <div class="text-[11px] leading-snug">
                   <div class="font-bold text-[#071B36]">स्कैन करके UPI भुगतान करें</div>
-                  <div id="parchiUpiIdLabel" class="text-[#6E6E73] font-mono text-[10px] mt-0.5 break-all"></div>
+                  <div id="parchiUpiIdLabel" class="text-slate-600 font-mono text-[10px] mt-0.5 break-all"></div>
                   <div class="text-[10px] text-[#079D76] font-semibold mt-0.5">GPay · PhonePe · Paytm</div>
                 </div>
-                <div id="parchiQrCanvas" class="bg-white p-1.5 rounded-lg border border-slate-200 flex-shrink-0"></div>
+                <div id="parchiQrCanvas" class="bg-white p-1.5 rounded-lg border border-amber-200 flex-shrink-0"></div>
               </div>
 
-              <div class="text-center pt-1 text-[11px] text-[#6E6E73]">
-                <div class="font-semibold text-[#1D1D1F]">धन्यवाद! (Thank You)</div>
+              <div class="text-center pt-1 text-[11px] text-slate-500">
+                <div class="font-semibold text-slate-900">धन्यवाद! (Thank You)</div>
                 <div>कृपया पर्ची संभाल कर रखें।</div>
               </div>
             </div>
 
-            <!-- White Powered Bar + Bottom Tiny Black Strip -->
             <div class="mj-parchi-footer-wrap">
               <div class="mj-parchi-powered">
                 <span>Powered by</span>
@@ -727,31 +894,31 @@
   </div>
 
   <!-- MODAL 2: Add Customer -->
-  <div id="customerModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-6">
-      <div class="flex justify-between items-center mb-4 pb-3 border-b border-black/[0.06]">
-        <h3 class="text-lg font-bold text-[#1D1D1F]">नया ग्राहक जोड़ें</h3>
-        <button type="button" class="close-modal text-[#6E6E73] hover:text-[#1D1D1F] text-2xl leading-none">&times;</button>
+  <div id="customerModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white text-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-6">
+      <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+        <h3 class="text-lg font-bold">नया ग्राहक जोड़ें</h3>
+        <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
       </div>
       <div class="space-y-4">
         <div>
-          <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">ग्राहक का नाम</label>
+          <label class="block text-xs font-semibold mb-1">ग्राहक का नाम</label>
           <div class="voice-wrap">
-            <input type="text" id="modalCustomerName" placeholder="जैसे: राम कुमार" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
+            <input type="text" id="modalCustomerName" placeholder="जैसे: राम कुमार" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
             <button type="button" data-voice-target="modalCustomerName" class="mic-btn" title="बोलकर लिखें">🎤</button>
           </div>
         </div>
         <div>
-          <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मोबाइल नंबर</label>
-          <input type="tel" id="modalCustomerMobile" maxlength="15" placeholder="9458600000" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
+          <label class="block text-xs font-semibold mb-1">मोबाइल नंबर</label>
+          <input type="tel" id="modalCustomerMobile" maxlength="15" placeholder="9458600000" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
           <div id="duplicateMobileWarning" class="hidden mt-2 p-2.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 text-xs font-semibold"></div>
         </div>
         <div>
-          <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">बकाया उधार (₹)</label>
-          <input type="number" id="modalCustomerAmount" min="0" step="any" placeholder="0" class="w-full px-4 py-2.5 rounded-xl border border-black/[0.12] text-sm" />
+          <label class="block text-xs font-semibold mb-1">बकाया उधार (₹)</label>
+          <input type="number" id="modalCustomerAmount" min="0" step="any" placeholder="0" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
         </div>
         <div class="flex gap-3 pt-2">
-          <button type="button" class="close-modal w-1/2 bg-[#F5F5F7] text-[#1D1D1F] font-semibold py-2.5 rounded-full text-sm">रद्द करें</button>
+          <button type="button" class="close-modal w-1/2 bg-slate-100 text-slate-800 font-semibold py-2.5 rounded-full text-sm">रद्द करें</button>
           <button type="button" id="saveCustomerBtn" class="w-1/2 bg-[#079D76] text-white font-semibold py-2.5 rounded-full text-sm">सुरक्षित करें</button>
         </div>
       </div>
@@ -759,24 +926,24 @@
   </div>
 
   <!-- MODAL 3: Khata List -->
-  <div id="khataModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-4 pb-3 border-b border-black/[0.06]">
-        <h3 class="text-lg font-bold text-[#1D1D1F]">डिजिटल उधार खाता</h3>
-        <button type="button" class="close-modal text-[#6E6E73] hover:text-[#1D1D1F] text-2xl leading-none">&times;</button>
+  <div id="khataModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white text-slate-900 w-full max-w-2xl rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+        <h3 class="text-lg font-bold">डिजिटल उधार खाता</h3>
+        <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
       </div>
       <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
           <thead>
-            <tr class="bg-[#F5F5F7] text-[#1D1D1F] text-xs uppercase">
+            <tr class="bg-slate-100 text-slate-800 text-xs uppercase">
               <th class="p-3 rounded-l-xl">ग्राहक</th>
               <th class="p-3">मोबाइल</th>
               <th class="p-3">बकाया</th>
               <th class="p-3 rounded-r-xl text-right">पर्ची / रिमाइंडर</th>
             </tr>
           </thead>
-          <tbody id="customerTableBody" class="text-sm divide-y divide-black/[0.06]">
-            <tr><td colspan="4" class="p-5 text-center text-[#6E6E73] italic">अभी कोई ग्राहक नहीं जोड़ा गया है।</td></tr>
+          <tbody id="customerTableBody" class="text-sm divide-y divide-slate-200">
+            <tr><td colspan="4" class="p-5 text-center text-slate-400 italic">अभी कोई ग्राहक नहीं जोड़ा गया है।</td></tr>
           </tbody>
         </table>
       </div>
@@ -784,11 +951,11 @@
   </div>
 
   <!-- MODAL: Reminder Parchi Preview & Share -->
-  <div id="reminderParchiModal" class="fixed inset-0 bg-black/40 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-5 max-h-[92vh] overflow-y-auto space-y-4">
-      <div class="flex justify-between items-center pb-2 border-b border-black/[0.06]">
-        <h3 class="text-base font-bold text-[#1D1D1F]">उधार रिमाइंडर पर्ची</h3>
-        <button type="button" id="closeReminderParchiBtn" class="text-[#6E6E73] hover:text-[#1D1D1F] text-2xl leading-none">&times;</button>
+  <div id="reminderParchiModal" class="fixed inset-0 bg-black/50 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white text-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-5 max-h-[92vh] overflow-y-auto space-y-4">
+      <div class="flex justify-between items-center pb-2 border-b border-slate-200">
+        <h3 class="text-base font-bold">उधार रिमाइंडर पर्ची</h3>
+        <button type="button" id="closeReminderParchiBtn" class="text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
       </div>
 
       <div id="reminderParchiCapture" class="mj-parchi-sheet">
@@ -809,11 +976,11 @@
 
         <div class="p-4 space-y-3 text-xs">
           <div class="flex justify-between py-1 border-b border-slate-100">
-            <span class="text-[#6E6E73]">ग्राहक का नाम:</span>
-            <strong id="remCustName" class="text-[#1D1D1F]">-</strong>
+            <span class="text-slate-500">ग्राहक का नाम:</span>
+            <strong id="remCustName">-</strong>
           </div>
           <div class="flex justify-between py-1 border-b border-slate-100">
-            <span class="text-[#6E6E73]">मोबाइल:</span>
+            <span class="text-slate-500">मोबाइल:</span>
             <span id="remCustMobile" class="font-semibold">-</span>
           </div>
           <div class="flex justify-between items-center py-2 px-3 rounded-xl bg-red-50 border border-red-100">
@@ -821,15 +988,15 @@
             <strong id="remBalanceAmount" class="text-lg font-extrabold text-red-700">₹0.00</strong>
           </div>
 
-          <div id="remQrBox" class="hidden pt-2 border-t border-dashed border-slate-200 flex items-center justify-between gap-3 bg-[#F8FAFC] p-2.5 rounded-xl">
+          <div id="remQrBox" class="hidden pt-2 border-t border-dashed border-slate-200 flex items-center justify-between gap-3 bg-amber-50 p-2.5 rounded-xl border border-amber-200">
             <div class="text-[11px] leading-snug">
               <div class="font-bold text-[#071B36]">स्कैन करके भुगतान करें</div>
-              <div id="remUpiLabel" class="text-[#6E6E73] font-mono text-[10px] mt-0.5 break-all"></div>
+              <div id="remUpiLabel" class="text-slate-600 font-mono text-[10px] mt-0.5 break-all"></div>
             </div>
-            <div id="remQrCanvas" class="bg-white p-1.5 rounded-lg border border-slate-200 flex-shrink-0"></div>
+            <div id="remQrCanvas" class="bg-white p-1.5 rounded-lg border border-amber-200 flex-shrink-0"></div>
           </div>
 
-          <div class="text-center text-[11px] text-[#6E6E73]">
+          <div class="text-center text-[11px] text-slate-500">
             कृपया समय पर भुगतान करें। धन्यवाद!
           </div>
         </div>
@@ -850,7 +1017,7 @@
         <a id="shareReminderWaLink" href="#" target="_blank" rel="noopener" class="flex-1 bg-[#079D76] text-white font-semibold py-2.5 rounded-full text-xs text-center">
           💬 सीधा WhatsApp भेजें
         </a>
-        <button type="button" id="shareReminderImgBtn" class="flex-1 bg-[#0071E3] text-white font-semibold py-2.5 rounded-full text-xs">
+        <button type="button" id="shareReminderImgBtn" class="flex-1 bg-[#071B36] text-amber-300 font-semibold py-2.5 rounded-full text-xs">
           🖼️ पर्ची इमेज भेजें
         </button>
       </div>
@@ -858,127 +1025,122 @@
   </div>
 
   <!-- MODAL 4: Galla Entry -->
-  <div id="cashbookModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-xl rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-4 pb-3 border-b border-black/[0.06]">
-        <h3 class="text-lg font-bold text-[#1D1D1F]">गल्ला एंट्री और रिपोर्ट</h3>
-        <button type="button" class="close-modal text-[#6E6E73] hover:text-[#1D1D1F] text-2xl leading-none">&times;</button>
+  <div id="cashbookModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white text-slate-900 w-full max-w-xl rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+        <h3 class="text-lg font-bold">गल्ला एंट्री और रिपोर्ट</h3>
+        <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
       </div>
       <div class="space-y-4">
         <div class="grid grid-cols-3 gap-3 text-center">
-          <div class="bg-emerald-50/80 p-3 rounded-2xl border border-emerald-200/70">
+          <div class="bg-emerald-50 p-3 rounded-2xl border border-emerald-200">
             <span class="text-[10px] text-emerald-700 font-bold uppercase">नकद बिक्री</span>
             <h4 id="modalCashVal" class="text-base font-bold text-emerald-950 mt-0.5">₹0.00</h4>
           </div>
-          <div class="bg-blue-50/80 p-3 rounded-2xl border border-blue-200/70">
+          <div class="bg-blue-50 p-3 rounded-2xl border border-blue-200">
             <span class="text-[10px] text-blue-700 font-bold uppercase">UPI बिक्री</span>
             <h4 id="modalUpiVal" class="text-base font-bold text-blue-950 mt-0.5">₹0.00</h4>
           </div>
-          <div class="bg-amber-50/80 p-3 rounded-2xl border border-amber-200/70">
-            <span class="text-[10px] text-amber-700 font-bold uppercase">खर्च</span>
+          <div class="bg-amber-50 p-3 rounded-2xl border border-amber-200">
+            <span class="text-[10px] text-amber-800 font-bold uppercase">खर्च</span>
             <h4 id="modalExpenseVal" class="text-base font-bold text-amber-950 mt-0.5">₹0.00</h4>
           </div>
         </div>
 
-        <div class="bg-[#F5F5F7] p-4 rounded-2xl space-y-3">
+        <div class="bg-slate-50 p-4 rounded-2xl space-y-3">
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <select id="entryType" class="px-3 py-2 rounded-xl border border-black/[0.12] text-xs bg-white">
+            <select id="entryType" class="px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white">
               <option value="cash">नकद बिक्री (Cash)</option>
               <option value="upi">ऑनलाइन / UPI</option>
               <option value="expense">दुकान / घर का खर्च</option>
             </select>
-            <input type="number" id="entryAmount" min="0.01" step="any" placeholder="रुपये (₹)" class="px-3 py-2 rounded-xl border border-black/[0.12] text-xs bg-white" />
+            <input type="number" id="entryAmount" min="0.01" step="any" placeholder="रुपये (₹)" class="px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white" />
             <div class="voice-wrap">
-              <input type="text" id="entryDesc" placeholder="विवरण" class="w-full px-3 py-2 rounded-xl border border-black/[0.12] text-xs bg-white" />
+              <input type="text" id="entryDesc" placeholder="विवरण" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white" />
               <button type="button" data-voice-target="entryDesc" class="mic-btn" title="बोलकर लिखें">🎤</button>
             </div>
           </div>
-          <button type="button" id="saveEntryBtn" class="w-full bg-[#1D1D1F] text-white font-semibold py-2.5 rounded-full hover:bg-black transition text-xs">
+          <button type="button" id="saveEntryBtn" class="w-full bg-[#071B36] text-white font-semibold py-2.5 rounded-full hover:bg-black transition text-xs">
             एंट्री सुरक्षित करें
           </button>
         </div>
 
-        <div class="bg-[#1D1D1F] text-white p-3.5 rounded-2xl flex justify-between items-center text-sm">
+        <div class="bg-[#071B36] text-white p-3.5 rounded-2xl flex justify-between items-center text-sm">
           <span>शुद्ध गल्ला:</span>
-          <strong id="modalDrawerVal" class="text-emerald-300 text-base">₹0.00</strong>
+          <strong id="modalDrawerVal" class="text-amber-300 text-base">₹0.00</strong>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 5: Persistent Editable Need List + Day-by-Day Saved Parchis + Direct WhatsApp -->
-  <div id="stockModal" class="fixed inset-0 bg-black/35 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
-    <div class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[93vh] overflow-y-auto">
-      <div class="flex flex-wrap justify-between items-center gap-2 mb-4 pb-3 border-b border-black/[0.06]">
+  <!-- MODAL 5: Persistent Editable Need List + Day-by-Day Saved Parchis -->
+  <div id="stockModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white text-slate-900 w-full max-w-5xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[93vh] overflow-y-auto">
+      <div class="flex flex-wrap justify-between items-center gap-2 mb-4 pb-3 border-b border-slate-200">
         <div>
-          <h3 id="needListModalHeading" class="text-lg font-bold text-[#1D1D1F]">दुकान के लिए ज़रूरी सामान की सूची</h3>
+          <h3 id="needListModalHeading" class="text-lg font-bold">दुकान के लिए ज़रूरी सामान की सूची</h3>
           <p id="activeParchiStatusLabel" class="text-xs text-[#079D76] font-semibold">नई या वर्तमान पर्ची (क्लाउड पर सुरक्षित)</p>
         </div>
         <div class="flex items-center gap-2">
-          <button type="button" id="newBlankNeedParchiBtn" class="bg-[#F5F5F7] hover:bg-slate-200 text-[#1D1D1F] text-xs font-bold px-3.5 py-1.5 rounded-full transition">
+          <button type="button" id="newBlankNeedParchiBtn" class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold px-3.5 py-1.5 rounded-full transition">
             + नई पर्ची शुरू करें
           </button>
-          <button type="button" class="close-modal text-[#6E6E73] hover:text-[#1D1D1F] text-2xl leading-none px-1">&times;</button>
+          <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none px-1">&times;</button>
         </div>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-        <!-- Left Controls: Add/Edit Items, Vendor WhatsApp, Save & Day-by-Day History -->
         <div class="lg:col-span-5 space-y-3.5">
-          <div class="bg-[#F5F5F7] p-3.5 rounded-2xl space-y-2.5">
+          <div class="bg-slate-50 p-3.5 rounded-2xl space-y-2.5">
             <div>
-              <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">सामान का नाम</label>
+              <label class="block text-xs font-semibold mb-1">सामान का नाम</label>
               <div class="voice-wrap">
-                <input type="text" id="shortageItem" placeholder="जैसे: सरसों तेल / चाय पत्ती" class="w-full px-3.5 py-2.5 rounded-xl border border-black/[0.12] text-sm bg-white" />
+                <input type="text" id="shortageItem" placeholder="जैसे: सरसों तेल / चाय पत्ती" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white" />
                 <button type="button" data-voice-target="shortageItem" class="mic-btn" title="बोलकर लिखें">🎤</button>
               </div>
             </div>
             <div class="grid grid-cols-2 gap-2">
               <div>
-                <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">मात्रा / संख्या</label>
-                <input type="text" id="shortageQty" placeholder="जैसे: 5 टिन / 10 kg" class="w-full px-3 py-2 rounded-xl border border-black/[0.12] text-sm bg-white" />
+                <label class="block text-xs font-semibold mb-1">मात्रा / संख्या</label>
+                <input type="text" id="shortageQty" placeholder="जैसे: 5 टिन / 10 kg" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
               </div>
               <div>
-                <label class="block text-xs font-semibold text-[#1D1D1F] mb-1">वेंडर मोबाइल (वैकल्पिक)</label>
-                <input type="tel" id="vendorWhatsappInput" maxlength="15" placeholder="9458600000" class="w-full px-3 py-2 rounded-xl border border-black/[0.12] text-sm bg-white" />
+                <label class="block text-xs font-semibold mb-1">वेंडर मोबाइल (वैकल्पिक)</label>
+                <input type="tel" id="vendorWhatsappInput" maxlength="15" placeholder="9458600000" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
               </div>
             </div>
-            <button type="button" id="addShortageBtn" class="w-full bg-[#1D1D1F] text-white font-semibold py-2.5 rounded-full hover:bg-black transition text-sm">
+            <button type="button" id="addShortageBtn" class="w-full bg-[#079D76] text-white font-semibold py-2.5 rounded-full hover:bg-[#068664] transition text-sm">
               + सूची में जोड़ें और सेव करें
             </button>
           </div>
 
-          <!-- Editable Items Quick Manager -->
-          <div class="border border-black/[0.08] rounded-2xl p-3">
+          <div class="border border-slate-200 rounded-2xl p-3">
             <div class="flex justify-between items-center mb-2">
-              <span class="text-xs font-bold text-[#1D1D1F]">इस पर्ची के आइटम (एडिट या हटाएं)</span>
-              <span id="needItemCountText" class="text-[11px] font-semibold text-[#6E6E73]">0 आइटम</span>
+              <span class="text-xs font-bold">इस पर्ची के आइटम (एडिट या हटाएं)</span>
+              <span id="needItemCountText" class="text-[11px] font-semibold text-slate-500">0 आइटम</span>
             </div>
             <div id="editableNeedItemsList" class="space-y-1.5 max-h-36 overflow-y-auto text-xs">
-              <p class="text-[#6E6E73] italic">अभी कोई आइटम नहीं जुड़ा है।</p>
+              <p class="text-slate-400 italic">अभी कोई आइटम नहीं जुड़ा है।</p>
             </div>
           </div>
 
-          <!-- Direct WhatsApp & Image Share Buttons -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <button type="button" id="sendNeedListWhatsappBtn" class="bg-[#079D76] text-white font-semibold py-2.5 px-3 rounded-full hover:bg-[#068664] transition text-xs">
               💬 सीधा WhatsApp भेजें
             </button>
-            <button type="button" id="shareThermalBtn" class="bg-[#0071E3] text-white font-semibold py-2.5 px-3 rounded-full hover:bg-[#0062C4] transition text-xs">
+            <button type="button" id="shareThermalBtn" class="bg-[#071B36] text-amber-300 font-semibold py-2.5 px-3 rounded-full hover:bg-slate-900 transition text-xs">
               🖼️ पर्ची इमेज भेजें / डाउनलोड
             </button>
           </div>
 
-          <!-- Day-by-Day Saved Parchis History -->
-          <div class="border border-black/[0.08] rounded-2xl p-3 bg-[#FAFAFA]">
-            <div class="text-xs font-bold text-[#1D1D1F] mb-2">📅 तारीख-वार सेव की गई पर्चियाँ (क्लिक करके खोलें/एडिट करें)</div>
+          <div class="border border-slate-200 rounded-2xl p-3 bg-slate-50">
+            <div class="text-xs font-bold mb-2">📅 तारीख-वार सेव की गई पर्चियाँ (क्लिक करके खोलें/एडिट करें)</div>
             <div id="savedNeedParchisHistory" class="space-y-1.5 max-h-40 overflow-y-auto text-xs">
-              <p class="text-[#6E6E73] italic">सेव की गई पर्चियाँ लोड हो रही हैं...</p>
+              <p class="text-slate-400 italic">सेव की गई पर्चियाँ लोड हो रही हैं...</p>
             </div>
           </div>
         </div>
 
-        <!-- Right: Hindi Ruled Notebook Page Preview -->
         <div class="lg:col-span-7">
           <div id="hindiCopyCapture" class="ruled-list-page">
             <div class="ruled-page-top">
@@ -992,11 +1154,10 @@
               <div class="ruled-date-card">
                 <div id="hindiCopyDayLabel" class="text-[11px] font-bold text-[#0F294A]">शुक्रवार</div>
                 <div id="hindiCopyDate" class="text-xs font-extrabold text-[#DC2626]">20/11/2026</div>
-                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">08:35 PM</div>
+                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">09:11 PM</div>
               </div>
             </div>
 
-            <!-- Table Column Header on Copy -->
             <div class="ruled-col-head">
               <div class="ruled-margin-col" style="font-size:11.5px;color:#78350F;">क्र.</div>
               <div class="ruled-text-col">
@@ -1005,11 +1166,8 @@
               </div>
             </div>
 
-            <div id="hindiCopyLinesBox" class="ruled-rows-wrap">
-              <!-- Real lined rows rendered dynamically -->
-            </div>
+            <div id="hindiCopyLinesBox" class="ruled-rows-wrap"></div>
 
-            <!-- White Powered Bar + Bottom Tiny Black Promo Strip -->
             <div class="mj-parchi-footer-wrap">
               <div class="mj-parchi-powered">
                 <span>Powered by</span>
@@ -1066,7 +1224,6 @@
     let duplicateConfirmedFor = "";
     let currentBillItems = [];
 
-    // Persistent Need List State
     let needItemsList = [];
     let activeNeedParchiId = null;
     let savedNeedParchis = [];
@@ -1084,18 +1241,18 @@
       const cat = currentProfile?.businessType || "shop";
       if (cat === "household") {
         return {
-          cardTag: "घर व रसोई की ज़रूरत लिस्ट",
+          cardTag: "घर-रसोई ज़रूरत सूची",
           sheetTitle: "घर व रसोई के लिए ज़रूरी सामान की सूची"
         };
       }
       if (cat === "school" || cat === "general") {
         return {
-          cardTag: "ज़रूरी सामान की लिस्ट",
+          cardTag: "ज़रूरी सामान सूची",
           sheetTitle: "ज़रूरी सामान की सूची"
         };
       }
       return {
-        cardTag: "दुकान की ज़रूरत लिस्ट",
+        cardTag: "ज़रूरी सामान सूची",
         sheetTitle: "दुकान के लिए ज़रूरी सामान की सूची"
       };
     }
@@ -1108,9 +1265,59 @@
       return { dayName, dateStr, timeStr };
     }
 
-    // Dismissible Top Promo Banner
-    document.getElementById("closePromoBannerBtn").addEventListener("click", () => {
-      document.getElementById("topPromoBanner").classList.add("hidden");
+    // Live Digital Clock Updater
+    function updateDigitalClock() {
+      const now = new Date();
+      const { dayName, dateStr } = getHindiDayDateTime(now);
+      let hours = now.getHours();
+      const ampm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
+      const mins = String(now.getMinutes()).padStart(2, "0");
+
+      document.getElementById("liveClockDay").textContent = dayName;
+      document.getElementById("liveClockTime").textContent = `${String(hours).padStart(2, "0")}:${mins}`;
+      document.getElementById("liveClockAmPm").textContent = ampm;
+      document.getElementById("liveClockDate").textContent = dateStr;
+    }
+    updateDigitalClock();
+    setInterval(updateDigitalClock, 15000);
+
+    // Theme Switcher (MunimJi Brand Theme default + 4 instant palettes)
+    function applyTheme(themeKey, persistToCloud = false) {
+      const validThemes = ["munimji", "cream-wine", "dark-603010", "light-minimal", "warm-emerald"];
+      const chosen = validThemes.includes(themeKey) ? themeKey : "munimji";
+      document.body.setAttribute("data-theme", chosen);
+      try { localStorage.setItem("mj_theme", chosen); } catch (_) {}
+
+      document.querySelectorAll(".theme-choice-btn").forEach((btn) => {
+        const isSelected = btn.getAttribute("data-select-theme") === chosen;
+        btn.style.outline = isSelected ? "2px solid var(--brand-accent)" : "none";
+      });
+
+      if (persistToCloud && currentUser) {
+        updateDoc(doc(db, "users", currentUser.uid), {
+          uiTheme: chosen,
+          updatedAt: serverTimestamp()
+        }).catch(() => {});
+      }
+    }
+
+    try {
+      const cachedTheme = localStorage.getItem("mj_theme");
+      if (cachedTheme) applyTheme(cachedTheme, false);
+    } catch (_) {}
+
+    const themeDrawer = document.getElementById("themeDrawerPanel");
+    document.getElementById("toggleThemeDrawerBtn").addEventListener("click", () => {
+      themeDrawer.classList.toggle("hidden");
+    });
+    document.getElementById("closeThemeDrawerBtn").addEventListener("click", () => {
+      themeDrawer.classList.add("hidden");
+    });
+    document.querySelectorAll(".theme-choice-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        applyTheme(btn.getAttribute("data-select-theme"), true);
+      });
     });
 
     // Continuous Voice Input with Wave Animation
@@ -1288,9 +1495,7 @@
       openModal("billingModal");
     }
 
-    document.getElementById("openBillingBtn").addEventListener("click", openBillingWithRefresh);
     document.getElementById("openBillingCardBtn").addEventListener("click", openBillingWithRefresh);
-
     document.getElementById("openCustomerBtn").addEventListener("click", () => {
       if (!guardBlockedAction()) {
         duplicateConfirmedFor = "";
@@ -1299,6 +1504,7 @@
       }
     });
     document.getElementById("openKhataBtn").addEventListener("click", () => openModal("khataModal"));
+    document.getElementById("udharMetricCardBtn").addEventListener("click", () => openModal("khataModal"));
     document.getElementById("openCashbookBtn").addEventListener("click", () => { if (!guardBlockedAction()) openModal("cashbookModal"); });
     document.getElementById("openStockBtn").addEventListener("click", () => {
       if (!guardBlockedAction()) {
@@ -1380,26 +1586,22 @@
       document.body.classList.remove("tier-pro", "tier-trial", "tier-blocked");
       const headerBadge = document.getElementById("headerTierBadge");
       const heroBadge = document.getElementById("heroTierBadge");
-      const perksText = document.getElementById("tierPerksText");
       const blockedBanner = document.getElementById("blockedBanner");
 
       if (status === "active") {
         document.body.classList.add("tier-pro");
         headerBadge.textContent = "PRO";
         heroBadge.textContent = "PRO";
-        perksText.textContent = "PRO खाता सक्रिय — सभी प्रीमियम सुविधाएँ उपलब्ध हैं।";
         blockedBanner.classList.add("hidden");
       } else if (status === "blocked") {
         document.body.classList.add("tier-blocked");
         headerBadge.textContent = "BLOCKED";
         heroBadge.textContent = "BLOCKED";
-        perksText.textContent = "खाता फिलहाल ब्लॉक है।";
         blockedBanner.classList.remove("hidden");
       } else {
         document.body.classList.add("tier-trial");
         headerBadge.textContent = "TRIAL";
         heroBadge.textContent = "TRIAL";
-        perksText.textContent = "7-दिन TRIAL में सभी फीचर्स पूरे खुले हैं।";
         blockedBanner.classList.add("hidden");
       }
     }
@@ -1409,18 +1611,18 @@
       const photo = profile?.photoURL || user.photoURL || "";
       const catText = categoryLabels[profile?.businessType || "general"] || categoryLabels.general;
       const listTitles = getPositiveListTitles();
+      const upiInfo = profile?.upiId ? `UPI: ${profile.upiId}` : "UPI सेट करें → पर्ची पर QR बनेगा";
 
-      document.getElementById("headerUserName").textContent = name;
       document.getElementById("cardUserName").textContent = name;
-      document.getElementById("cardUserMeta").textContent = `${catText} · ${user.email || ""}`;
+      document.getElementById("cardUserMeta").textContent = `${catText} · ${upiInfo}`;
       document.getElementById("needListCardTag").textContent = listTitles.cardTag;
       document.getElementById("needListModalHeading").textContent = listTitles.sheetTitle;
       document.getElementById("needListSheetTitle").textContent = listTitles.sheetTitle;
 
-      setAvatar(document.getElementById("headerAvatarImg"), document.getElementById("headerAvatarInitial"), photo, name);
       setAvatar(document.getElementById("cardAvatarImg"), document.getElementById("cardAvatarInitial"), photo, name);
       setAvatar(document.getElementById("modalAvatarPreview"), document.getElementById("modalAvatarInitial"), photo, name);
       applyTierStyle(profile?.planStatus || "trial");
+      if (profile?.uiTheme) applyTheme(profile.uiTheme, false);
     }
 
     document.getElementById("logoutBtn").addEventListener("click", async () => {
@@ -1510,7 +1712,7 @@
 
       const itemsBox = document.getElementById("parchiItemsBody");
       if (!currentBillItems.length) {
-        itemsBox.innerHTML = '<div class="text-[#6E6E73] italic text-center py-6">कोई सामान नहीं जोड़ा गया है</div>';
+        itemsBox.innerHTML = '<div class="text-slate-400 italic text-center py-6">कोई सामान नहीं जोड़ा गया है</div>';
       } else {
         itemsBox.innerHTML = currentBillItems
           .map(
@@ -1821,16 +2023,16 @@
 
       countText.textContent = `${needItemsList.length} आइटम`;
       if (!needItemsList.length) {
-        editableBox.innerHTML = '<p class="text-[#6E6E73] italic">अभी कोई आइटम नहीं जुड़ा है।</p>';
-        previewEl.innerHTML = "अभी सूची में कोई सामान नहीं है।";
+        editableBox.innerHTML = '<p class="text-slate-400 italic">अभी कोई आइटम नहीं जुड़ा है।</p>';
+        previewEl.textContent = "कॉपी जैसी पर्ची बनाएं";
       } else {
         editableBox.innerHTML = needItemsList
           .map(
             (entry, idx) => `
-            <div class="flex items-center justify-between gap-2 bg-[#F8FAFC] px-2.5 py-1.5 rounded-xl border border-slate-200/80">
-              <span class="font-semibold text-[#1D1D1F] truncate">${idx + 1}. ${entry.item} <strong class="text-[#0F294A]">(${entry.qty})</strong></span>
+            <div class="flex items-center justify-between gap-2 bg-slate-50 px-2.5 py-1.5 rounded-xl border border-slate-200">
+              <span class="font-semibold truncate">${idx + 1}. ${entry.item} <strong class="text-[#0F294A]">(${entry.qty})</strong></span>
               <div class="flex items-center gap-1.5 flex-shrink-0">
-                <button type="button" onclick="window.editNeedItemAt(${idx})" class="text-[11px] font-bold text-[#0071E3] hover:underline">एडिट</button>
+                <button type="button" onclick="window.editNeedItemAt(${idx})" class="text-[11px] font-bold text-blue-600 hover:underline">एडिट</button>
                 <button type="button" onclick="window.deleteNeedItemAt(${idx})" class="text-[11px] font-bold text-red-600 hover:underline">हटाएं</button>
               </div>
             </div>
@@ -1838,7 +2040,7 @@
           )
           .join("");
         const last = needItemsList[needItemsList.length - 1];
-        previewEl.innerHTML = `• <strong class="text-[#1D1D1F]">${last.item}</strong> (${last.qty})`;
+        previewEl.textContent = `${last.item} (${last.qty})`;
       }
     }
 
@@ -1848,7 +2050,7 @@
       badge.textContent = `${savedNeedParchis.length} पर्ची`;
 
       if (!savedNeedParchis.length) {
-        box.innerHTML = '<p class="text-[#6E6E73] italic">अभी कोई पुरानी पर्ची सेव नहीं है।</p>';
+        box.innerHTML = '<p class="text-slate-400 italic">अभी कोई पुरानी पर्ची सेव नहीं है।</p>';
         return;
       }
 
@@ -1858,20 +2060,19 @@
           const count = Array.isArray(p.items) ? p.items.length : 0;
           return `
             <button type="button" onclick="window.loadSavedNeedParchi('${p.id}')" class="w-full text-left px-3 py-2 rounded-xl border transition flex items-center justify-between gap-2 ${
-              isCurrent ? "bg-emerald-50 border-emerald-300 text-[#067A5C]" : "bg-white border-slate-200 hover:bg-slate-50 text-[#1D1D1F]"
+              isCurrent ? "bg-emerald-50 border-emerald-300 text-emerald-900" : "bg-white border-slate-200 hover:bg-slate-50 text-slate-900"
             }">
               <div>
                 <div class="font-bold">${p.dayName || ""} · ${p.dateStr || ""}</div>
-                <div class="text-[11px] text-[#6E6E73]">समय: ${p.timeStr || "-"} · ${count} सामान</div>
+                <div class="text-[11px] text-slate-500">समय: ${p.timeStr || "-"} · ${count} सामान</div>
               </div>
-              <span class="text-[11px] font-bold text-[#0071E3]">खोलें / एडिट →</span>
+              <span class="text-[11px] font-bold text-blue-600">खोलें / एडिट →</span>
             </button>
           `;
         })
         .join("");
     }
 
-    // Direct WhatsApp Share for Need List (with fresh timestamp)
     document.getElementById("sendNeedListWhatsappBtn").addEventListener("click", async () => {
       if (!needItemsList.length) {
         alert("पहले सूची में सामान जोड़ें।");
@@ -1900,7 +2101,6 @@
       window.open(url, "_blank");
     });
 
-    // Image Share / Download for Need List (updates exact send timestamp first)
     document.getElementById("shareThermalBtn").addEventListener("click", async () => {
       if (!needItemsList.length) {
         alert("पहले सूची में सामान जोड़ें।");
@@ -1928,8 +2128,8 @@
           const safeMobile = String(data.mobile || "").replace(/\D/g, "");
           rows.push(`
             <tr>
-              <td class="p-3 font-semibold text-[#1D1D1F]">${data.name}</td>
-              <td class="p-3 text-[#6E6E73]">${data.mobile}</td>
+              <td class="p-3 font-semibold">${data.name}</td>
+              <td class="p-3 text-slate-500">${data.mobile}</td>
               <td class="p-3 font-bold text-red-600">₹${bal.toFixed(2)}</td>
               <td class="p-3 text-right">
                 <button type="button" onclick="window.openReminderParchi('${safeName}', '${safeMobile}', ${bal})" class="bg-emerald-50 text-[#079D76] border border-emerald-200 px-3 py-1 rounded-full text-xs font-bold hover:bg-emerald-100">
@@ -1942,7 +2142,7 @@
         document.getElementById("totalUdharDisplay").textContent = `₹${totalUdhar.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
         document.getElementById("customerTableBody").innerHTML = rows.length
           ? rows.join("")
-          : '<tr><td colspan="4" class="p-5 text-center text-[#6E6E73] italic">अभी कोई ग्राहक नहीं जोड़ा गया है।</td></tr>';
+          : '<tr><td colspan="4" class="p-5 text-center text-slate-400 italic">अभी कोई ग्राहक नहीं जोड़ा गया है।</td></tr>';
       });
 
       onSnapshot(query(collection(db, "cashbook"), where("ownerUid", "==", uid)), (snap) => {
@@ -1964,7 +2164,6 @@
         document.getElementById("modalDrawerVal").textContent = `₹${netDrawer.toFixed(2)}`;
       });
 
-      // Live listener for saved Day-by-Day Need Lists
       onSnapshot(query(collection(db, "need_lists"), where("ownerUid", "==", uid)), (snap) => {
         const list = [];
         snap.forEach((d) => list.push({ id: d.id, ...d.data() }));
