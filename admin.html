@@ -7,110 +7,26 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      padding-bottom: 64px;
-    }
-    .mj-fixed-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 70;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid #e2e8f0;
-      box-shadow: 0 -6px 24px rgba(7, 27, 54, 0.06);
-      padding: 8px 20px;
-      color: #334155;
-      font-size: 12px;
-    }
-    .mj-ff-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .mj-ff-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .mj-ff-coolart-img {
-      height: 16px;
-      width: auto;
-      object-fit: contain;
-      display: block;
-    }
-    .mj-ff-mj-img {
-      height: 18px;
-      width: auto;
-      object-fit: contain;
-      display: inline-block;
-    }
-    .mj-ff-sep {
-      color: #cbd5e1;
-    }
-    .mj-ff-phone {
-      color: #0f294a;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .mj-ff-phone:hover {
-      color: #079d76;
-    }
-    .mj-ff-right {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #64748b;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-    .mj-ff-right strong {
-      color: #0f294a;
-      font-weight: 800;
-    }
+    body { padding-bottom: 64px; }
+    .mj-fixed-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 70; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px); border-top: 1px solid #e2e8f0; box-shadow: 0 -6px 24px rgba(7, 27, 54, 0.06); padding: 8px 20px; color: #334155; font-size: 12px; }
+    .mj-ff-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .mj-ff-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .mj-ff-coolart-img { height: 16px; width: auto; object-fit: contain; display: block; }
+    .mj-ff-mj-img { height: 18px; width: auto; object-fit: contain; display: inline-block; }
+    .mj-ff-sep { color: #cbd5e1; }
+    .mj-ff-phone { color: #0f294a; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+    .mj-ff-phone:hover { color: #079d76; }
+    .mj-ff-right { display: inline-flex; align-items: center; gap: 6px; color: #64748b; font-size: 12px; white-space: nowrap; }
+    .mj-ff-right strong { color: #0f294a; font-weight: 800; }
     @media (max-width: 768px) {
-      body {
-        padding-bottom: 70px;
-      }
-      .mj-fixed-footer {
-        padding: 8px 12px;
-      }
-      .mj-ff-inner {
-        flex-direction: column;
-        justify-content: center;
-        gap: 3px;
-        text-align: center;
-      }
-      .mj-ff-left {
-        justify-content: center;
-        gap: 0;
-      }
-      .mj-ff-coolart-img,
-      .mj-ff-sep,
-      .mj-ff-phone {
-        display: none;
-      }
-      .mj-ff-copy {
-        font-size: 11px;
-        color: #475569;
-      }
-      .mj-ff-right {
-        font-size: 11px;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 4px;
-      }
-      .mj-ff-mj-img {
-        height: 16px;
-      }
+      body { padding-bottom: 70px; }
+      .mj-fixed-footer { padding: 8px 12px; }
+      .mj-ff-inner { flex-direction: column; justify-content: center; gap: 3px; text-align: center; }
+      .mj-ff-left { justify-content: center; gap: 0; }
+      .mj-ff-coolart-img, .mj-ff-sep, .mj-ff-phone { display: none; }
+      .mj-ff-copy { font-size: 11px; color: #475569; }
+      .mj-ff-right { font-size: 11px; flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .mj-ff-mj-img { height: 16px; }
     }
   </style>
 </head>
@@ -160,7 +76,6 @@
     </div>
   </main>
 
-  <!-- Fixed Footer -->
   <footer class="mj-fixed-footer" role="contentinfo">
     <div class="mj-ff-inner">
       <div class="mj-ff-left">
@@ -196,48 +111,54 @@
     });
 
     function loadAllUsers() {
-      onSnapshot(collection(db, "users"), (snap) => {
-        const tbody = document.getElementById("adminUsersBody");
-        document.getElementById("totalUsersBadge").textContent = `कुल यूज़र्स: ${snap.size}`;
-        const rows = [];
-        snap.forEach((d) => {
-          const u = d.data();
-          rows.push(`
-            <tr>
-              <td class="p-3 font-bold">${u.displayName || "-"}</td>
-              <td class="p-3 text-slate-600">${u.email || "-"}</td>
-              <td class="p-3 text-xs uppercase font-bold text-slate-500">${u.businessType || "general"}</td>
-              <td class="p-3">
-                <span class="px-2.5 py-1 rounded-full text-xs font-extrabold ${
-                  u.planStatus === "active"
-                    ? "bg-emerald-100 text-emerald-800"
-                    : u.planStatus === "blocked"
-                    ? "bg-red-100 text-red-800"
-                    : "bg-amber-100 text-amber-800"
-                }">${u.planStatus || "trial"}</span>
-              </td>
-              <td class="p-3 text-right space-x-1">
-                <button data-uid="${d.id}" data-status="active" class="status-btn bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg">Active</button>
-                <button data-uid="${d.id}" data-status="trial" class="status-btn bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg">Demo</button>
-                <button data-uid="${d.id}" data-status="blocked" class="status-btn bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg">Block</button>
-              </td>
-            </tr>
-          `);
-        });
-        tbody.innerHTML = rows.length ? rows.join("") : '<tr><td colspan="5" class="p-6 text-center text-slate-400">कोई यूज़र नहीं मिला।</td></tr>';
+      const tbody = document.getElementById("adminUsersBody");
+      onSnapshot(
+        collection(db, "users"),
+        (snap) => {
+          document.getElementById("totalUsersBadge").textContent = `कुल यूज़र्स: ${snap.size}`;
+          const rows = [];
+          snap.forEach((d) => {
+            const u = d.data();
+            rows.push(`
+              <tr>
+                <td class="p-3 font-bold">${u.displayName || "-"}</td>
+                <td class="p-3 text-slate-600">${u.email || "-"}</td>
+                <td class="p-3 text-xs uppercase font-bold text-slate-500">${u.businessType || "general"}</td>
+                <td class="p-3">
+                  <span class="px-2.5 py-1 rounded-full text-xs font-extrabold ${
+                    u.planStatus === "active"
+                      ? "bg-emerald-100 text-emerald-800"
+                      : u.planStatus === "blocked"
+                      ? "bg-red-100 text-red-800"
+                      : "bg-amber-100 text-amber-800"
+                  }">${u.planStatus || "trial"}</span>
+                </td>
+                <td class="p-3 text-right space-x-1">
+                  <button data-uid="${d.id}" data-status="active" class="status-btn bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg">Active</button>
+                  <button data-uid="${d.id}" data-status="trial" class="status-btn bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg">Demo</button>
+                  <button data-uid="${d.id}" data-status="blocked" class="status-btn bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-lg">Block</button>
+                </td>
+              </tr>
+            `);
+          });
+          tbody.innerHTML = rows.length ? rows.join("") : '<tr><td colspan="5" class="p-6 text-center text-slate-400">कोई यूज़र नहीं मिला।</td></tr>';
 
-        document.querySelectorAll(".status-btn").forEach((b) => {
-          b.addEventListener("click", async () => {
-            const targetUid = b.getAttribute("data-uid");
-            const nextStatus = b.getAttribute("data-status");
-            const nextPlanName = nextStatus === "active" ? "Annual / Custom Plan" : nextStatus === "blocked" ? "Blocked" : "7-Day Free Demo";
-            await updateDoc(doc(db, "users", targetUid), {
-              planStatus: nextStatus,
-              planName: nextPlanName
+          document.querySelectorAll(".status-btn").forEach((b) => {
+            b.addEventListener("click", async () => {
+              const targetUid = b.getAttribute("data-uid");
+              const nextStatus = b.getAttribute("data-status");
+              const nextPlanName = nextStatus === "active" ? "Annual / Custom Plan" : nextStatus === "blocked" ? "Blocked" : "7-Day Free Demo";
+              await updateDoc(doc(db, "users", targetUid), {
+                planStatus: nextStatus,
+                planName: nextPlanName
+              });
             });
           });
-        });
-      });
+        },
+        (err) => {
+          tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-red-600 font-bold">डेटा लोड त्रुटि: ${err?.message || "Firestore Rules जांचें"}</td></tr>`;
+        }
+      );
     }
 
     onAuthStateChanged(auth, (user) => {
