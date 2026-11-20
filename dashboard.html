@@ -29,7 +29,7 @@
       --ticker-border: rgba(15, 23, 42, 0.08);
     }
 
-    /* Theme 2: Cream, Wine & Golden (PRO Theme) */
+    /* Theme 2: Cream, Wine & Golden (PRO) */
     body[data-theme="cream-wine"] {
       --bg-app: #FAF5EE;
       --bg-surface: #FFFDF9;
@@ -46,7 +46,7 @@
       --ticker-border: rgba(91, 24, 48, 0.14);
     }
 
-    /* Theme 3: Dark 60-30-10 (PRO Theme) */
+    /* Theme 3: Dark 60-30-10 (PRO) */
     body[data-theme="dark-603010"] {
       --bg-app: #14141F;
       --bg-surface: #1F1F2E;
@@ -63,7 +63,7 @@
       --ticker-border: rgba(167, 139, 250, 0.22);
     }
 
-    /* Theme 4: Light Minimal (PRO Theme) */
+    /* Theme 4: Light Minimal (PRO) */
     body[data-theme="light-minimal"] {
       --bg-app: #F8F9FB;
       --bg-surface: #FFFFFF;
@@ -80,7 +80,7 @@
       --ticker-border: rgba(91, 79, 233, 0.14);
     }
 
-    /* Theme 5: Warm Cream & Emerald (PRO Theme) */
+    /* Theme 5: Warm Cream & Emerald (PRO) */
     body[data-theme="warm-emerald"] {
       --bg-app: #F6F3EA;
       --bg-surface: #FFFDF8;
@@ -157,7 +157,7 @@
       flex-shrink: 0;
     }
 
-    /* PRO vs TRIAL Visual Distinction */
+    /* Trial vs PRO styling */
     body.tier-pro .tier-badge {
       background: #FCD34D;
       color: #111827;
@@ -169,6 +169,12 @@
     body.tier-blocked .tier-badge {
       background: #EF4444;
       color: #FFFFFF;
+    }
+
+    /* Black & White preview for PRO-only cards when on TRIAL */
+    body.tier-trial .pro-bw-card {
+      filter: grayscale(100%);
+      opacity: 0.78;
     }
 
     /* Full-Width Nature Hero Banner with Embedded Right-Side Digital Clock */
@@ -233,7 +239,7 @@
       padding: 10px;
     }
 
-    /* Theme Button & Drawer (PRO gets full palette, TRIAL gets standard/upgrade note) */
+    /* Theme Button & Drawer */
     .theme-fab-btn {
       position: fixed;
       right: 12px;
@@ -266,7 +272,7 @@
       padding: 12px;
     }
 
-    /* Soft Theme-Adaptive Scrolling Customization Strip (No "low fee" mention) */
+    /* Soft Theme-Adaptive Scrolling Customization Strip */
     .mj-scroll-ticker {
       position: fixed;
       left: 0;
@@ -575,7 +581,7 @@
     <div class="max-w-6xl mx-auto px-3.5 sm:px-6 h-13 py-2 flex items-center justify-between gap-2">
       <div class="flex items-center gap-2 min-w-0">
         <a href="index.html" class="flex-shrink-0 bg-white px-2.5 py-1 rounded-xl shadow-sm">
-          <img src="logo.png" alt="MunimJi Logo" class="h-7 sm:h-8 w-auto object-contain" />
+          <img src="logo.png" crossorigin="anonymous" alt="MunimJi Logo" class="h-7 sm:h-8 w-auto object-contain" />
         </a>
         <span id="headerTierBadge" class="tier-badge text-[10px] font-extrabold px-2 py-0.5 rounded-full">TRIAL</span>
       </div>
@@ -616,14 +622,14 @@
     <!-- 1. Compact User / Shop Identity Strip -->
     <section class="clean-card px-3 py-2 flex items-center justify-between gap-2">
       <div class="flex items-center gap-2 min-w-0">
-        <img id="cardAvatarImg" src="favicon.png" alt="Avatar" class="w-8 h-8 rounded-full object-cover border border-black/10 bg-white hidden flex-shrink-0" />
+        <img id="cardAvatarImg" src="favicon.png" crossorigin="anonymous" alt="Avatar" class="w-8 h-8 rounded-full object-cover border border-black/10 bg-white hidden flex-shrink-0" />
         <div id="cardAvatarInitial" class="w-8 h-8 rounded-full text-white text-xs font-extrabold flex items-center justify-center flex-shrink-0" style="background: var(--brand-primary);">M</div>
         <div class="min-w-0">
           <div class="flex items-center gap-1.5 flex-wrap">
             <span id="cardUserName" class="text-xs sm:text-sm font-extrabold truncate">मेरा खाता</span>
             <span id="cardCategoryBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-black/[0.06]">दुकानदार</span>
           </div>
-          <div id="cardShopSubline" class="text-[10.5px] opacity-75 truncate">दुकान का नाम जोड़ने के लिए प्रोफ़ाइल खोलें</div>
+          <div id="cardShopSubline" class="text-[10.5px] opacity-75 truncate">सामान्य खाता · विवरण हेतु प्रोफ़ाइल खोलें</div>
         </div>
       </div>
       <span class="text-[10px] font-bold text-emerald-600 flex-shrink-0">● सक्रिय</span>
@@ -631,7 +637,7 @@
 
     <!-- 2. Full-Width Nature Hero Banner with Embedded Right-Side Digital Clock -->
     <section class="nature-hero-full">
-      <img id="natureBannerImg" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80" alt="Nature Scenery" class="nature-banner-img" />
+      <img id="natureBannerImg" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80" crossorigin="anonymous" alt="Nature Scenery" class="nature-banner-img" />
       <div class="nature-hero-content">
         <div class="nature-left-info">
           <div id="heroGreetingTitle" class="text-sm sm:text-base font-extrabold leading-snug drop-shadow">
@@ -645,7 +651,7 @@
         <div class="nature-right-clock">
           <div id="liveClockDay" class="text-[10px] font-bold text-amber-300">शुक्रवार</div>
           <div class="flex items-baseline justify-center gap-1 mt-0.5">
-            <span id="liveClockTime" class="text-base sm:text-xl font-extrabold text-white">11:04</span>
+            <span id="liveClockTime" class="text-base sm:text-xl font-extrabold text-white">11:51</span>
             <span id="liveClockAmPm" class="text-[9px] font-bold text-amber-200">PM</span>
           </div>
           <div id="liveClockDate" class="text-[9.5px] text-white/85 mt-0.5 pt-0.5 border-t border-white/20 w-full">20/11/2026</div>
@@ -685,21 +691,20 @@
         </div>
       </button>
 
-      <button type="button" id="upiSetupCardBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center gap-2.5">
+      <button type="button" id="upiSetupCardBtn" class="clean-card pro-bw-card p-2.5 sm:p-3.5 text-left flex items-center gap-2.5">
         <span class="vector-icon-box font-extrabold text-sm">₹</span>
         <div class="min-w-0">
           <div class="flex items-center gap-1">
             <span class="text-xs sm:text-sm font-extrabold truncate">UPI QR</span>
-            <span id="upiStatusPill" class="text-[9px] font-extrabold px-1.5 py-0.2 rounded-full bg-amber-500/15 text-amber-700">सेट करें</span>
+            <span id="upiStatusPill" class="text-[9px] font-extrabold px-1.5 py-0.2 rounded-full bg-amber-500/15 text-amber-700">PRO</span>
           </div>
-          <div id="upiCardSubtext" class="text-[10px] opacity-65 truncate">पेमेंट हेतु UPI जोड़ें</div>
+          <div id="upiCardSubtext" class="text-[10px] opacity-65 truncate">QR पेमेंट (PRO)</div>
         </div>
       </button>
     </section>
 
     <!-- 4. Compact Udhar Card + Galla Report Card (with Inline Cash / UPI / Expense) + Vendor Stock Card -->
     <section class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
-      <!-- Compact Total Udhar Card -->
       <button type="button" id="udharMetricCardBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center justify-between sm:flex-col sm:items-start sm:justify-between">
         <div>
           <div class="text-[11px] font-bold opacity-70">बाकी कुल उधार</div>
@@ -708,7 +713,6 @@
         <div class="text-[10px] opacity-60 sm:mt-1">ग्राहक बकाया →</div>
       </button>
 
-      <!-- Galla Report Card with Inline Cash, UPI & Expense Breakdown -->
       <button type="button" id="openCashbookBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex flex-col justify-between">
         <div class="flex items-center justify-between gap-1">
           <span class="text-[11px] font-bold opacity-75">गल्ला रिपोर्ट</span>
@@ -730,7 +734,6 @@
         </div>
       </button>
 
-      <!-- Always-Visible Vendor Stock / Low Stock Shortage Card -->
       <button type="button" id="openStockBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex flex-col justify-between">
         <div class="flex items-center justify-between gap-1">
           <span id="needListCardTag" class="text-[11px] font-extrabold text-amber-700 truncate">स्टॉक भरें / वेंडर सूची</span>
@@ -742,13 +745,16 @@
 
     <!-- 5. Distinct Tinted Zone: Personal / Private "Lena Hai / Dena Hai" Ledger -->
     <section class="personal-separate-zone space-y-2">
-      <div class="text-[11px] font-bold leading-snug">
-        🔒 <strong>यह आपका पर्सनल (निजी) हिसाब है</strong> — इसका ऊपर के दुकान के हिसाब से कोई संबंध नहीं है।
+      <div class="flex items-center justify-between gap-2">
+        <div class="text-[11px] font-bold leading-snug">
+          🔒 <strong>यह आपका पर्सनल (निजी) हिसाब है</strong> — इसका ऊपर के दुकान के हिसाब से कोई संबंध नहीं है।
+        </div>
+        <span class="text-[9.5px] font-extrabold px-2 py-0.5 rounded-full bg-black/10 flex-shrink-0">PRO फीचर</span>
       </div>
 
       <div class="grid grid-cols-2 gap-2 sm:gap-3">
-        <!-- Card A: Lene Hain -->
-        <button type="button" id="openReceiveLedgerBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center justify-between gap-2">
+        <!-- Card A: Lene Hain (B&W in TRIAL, Colored & Active in PRO) -->
+        <button type="button" id="openReceiveLedgerBtn" class="clean-card pro-bw-card p-2.5 sm:p-3.5 text-left flex items-center justify-between gap-2">
           <div class="min-w-0">
             <div class="text-xs font-extrabold">रुपये लेने हैं</div>
             <div id="personalReceiveTotalDisplay" class="text-sm sm:text-lg font-extrabold text-emerald-600 mt-0.5">₹0.00</div>
@@ -759,8 +765,8 @@
           </span>
         </button>
 
-        <!-- Card B: Dene Hain -->
-        <button type="button" id="openPayLedgerBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center justify-between gap-2">
+        <!-- Card B: Dene Hain (B&W in TRIAL, Colored & Active in PRO) -->
+        <button type="button" id="openPayLedgerBtn" class="clean-card pro-bw-card p-2.5 sm:p-3.5 text-left flex items-center justify-between gap-2">
           <div class="min-w-0">
             <div class="text-xs font-extrabold">रुपये देने हैं</div>
             <div id="personalPayTotalDisplay" class="text-sm sm:text-lg font-extrabold text-rose-600 mt-0.5">₹0.00</div>
@@ -777,9 +783,20 @@
         <span id="personalNetInsightText">आज की तारीख में अपना निजी लेने-देने का हिसाब जोड़ें, यहाँ अपने आप बचत या ज़रूरत का हिसाब दिखेगा।</span>
       </div>
     </section>
+
+    <!-- 6. Compact FAQ, Terms & Conditions, License Agreement & Helpline Bar -->
+    <section class="clean-card px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
+      <div class="font-bold opacity-80">सहायता व नियम (FAQ · Terms · License · Helpline)</div>
+      <div class="flex items-center gap-1.5 flex-wrap">
+        <button type="button" data-info-tab="faq" class="open-info-modal-btn px-2.5 py-1 rounded-full bg-black/[0.05] hover:bg-black/[0.1] text-[11px] font-bold">FAQ</button>
+        <button type="button" data-info-tab="terms" class="open-info-modal-btn px-2.5 py-1 rounded-full bg-black/[0.05] hover:bg-black/[0.1] text-[11px] font-bold">नियम व शर्तें</button>
+        <button type="button" data-info-tab="license" class="open-info-modal-btn px-2.5 py-1 rounded-full bg-black/[0.05] hover:bg-black/[0.1] text-[11px] font-bold">लाइसेंस</button>
+        <button type="button" data-info-tab="helpline" class="open-info-modal-btn px-2.5 py-1 rounded-full text-[11px] font-bold text-white" style="background: var(--brand-primary);">हेल्पलाइन</button>
+      </div>
+    </section>
   </main>
 
-  <!-- Theme Button & Drawer (PRO gets all palettes, TRIAL sees PRO upgrade note) -->
+  <!-- Theme Button & Drawer -->
   <button type="button" id="toggleThemeDrawerBtn" class="theme-fab-btn" title="रंग / थीम बदलें">
     <span>🎨</span>
     <span>थीम</span>
@@ -845,11 +862,67 @@
     title="WhatsApp पर कस्टम सॉफ्टवेयर के लिए बात करें"
   >
     <div class="mj-ticker-track">
-      ✨ यदि यह सॉफ्टवेयर आपके अनुकूल है और आप इसमें कोई नया फीचर बढ़वाना या अपने हिसाब से कस्टमाइज़ करवाना चाहते हैं, तो संपर्क करें Helpline: +91 9458614610 (सीधा WhatsApp करने के लिए यहाँ क्लिक करें) &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+      ✨ यदि यह सॉफ्टवेयर आपके अनुकूल है और आप इसमें कोई नया फीचर बढ़वाना, घटवाना या अपने हिसाब से कस्टमाइज़ करवाना चाहते हैं, तो संपर्क करें Helpline: +91 9458614610 (सीधा WhatsApp करने के लिए यहाँ क्लिक करें) &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
     </div>
   </a>
 
-  <!-- MODAL: Personal Lena / Dena Ledger (Fixed Direction per Card) -->
+  <!-- MODAL: FAQ, Terms & Conditions, License Agreement & Helpline -->
+  <div id="infoLegalModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white text-slate-900 w-full max-w-2xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[90vh] overflow-y-auto space-y-4">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+        <h3 id="infoModalTitle" class="text-lg font-bold">सहायता, FAQ व नियम</h3>
+        <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
+      </div>
+
+      <div class="flex gap-1.5 flex-wrap text-xs">
+        <button type="button" data-switch-info="faq" class="info-tab-btn px-3 py-1.5 rounded-full font-bold bg-[#071B36] text-white">FAQ</button>
+        <button type="button" data-switch-info="terms" class="info-tab-btn px-3 py-1.5 rounded-full font-bold bg-slate-100 text-slate-800">Terms & Conditions</button>
+        <button type="button" data-switch-info="license" class="info-tab-btn px-3 py-1.5 rounded-full font-bold bg-slate-100 text-slate-800">License Agreement</button>
+        <button type="button" data-switch-info="helpline" class="info-tab-btn px-3 py-1.5 rounded-full font-bold bg-slate-100 text-slate-800">Helpline</button>
+      </div>
+
+      <div id="infoContentFaq" class="info-panel space-y-3 text-xs leading-relaxed">
+        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="font-extrabold text-sm text-[#071B36]">1. क्या मैं इस ऐप में अपने हिसाब से कुछ फीचर जुड़वा या घटवा सकता हूँ?</div>
+          <p class="mt-1 text-slate-700">हाँ, आप अपनी दुकान या व्यापार की ज़रूरत के अनुसार इसमें कस्टम बदलाव, नए फ़ील्ड या फीचर जुड़वा/घटवा सकते हैं। इसके लिए Cool Art® हेल्पलाइन (+91 9458614610) पर संपर्क करें।</p>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="font-extrabold text-sm text-[#071B36]">2. TRIAL (सामान्य) और PRO खाते में क्या अंतर है?</div>
+          <p class="mt-1 text-slate-700">TRIAL खाते में बुनियादी बिलिंग, उधार खाता, गल्ला और वेंडर सूची मिलती है। PRO खाते में दुकान का नाम व पूरा पता, पर्ची पर नाम/तारीख व UPI QR, निजी "लेने हैं / देने हैं" हिसाब, प्रीमियम थीम और नए अपडेट मिलते हैं।</p>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="font-extrabold text-sm text-[#071B36]">3. क्या दुकान के खाते और निजी "लेने हैं / देने हैं" हिसाब का आपस में कोई मेल है?</div>
+          <p class="mt-1 text-slate-700">नहीं, निजी "लेने हैं / देने हैं" का हिसाब दुकान के खाते से बिल्कुल अलग रखा गया है ताकि दोनों का गणित स्पष्ट रहे।</p>
+        </div>
+      </div>
+
+      <div id="infoContentTerms" class="info-panel hidden space-y-2.5 text-xs leading-relaxed text-slate-700">
+        <p><strong>1. उपयोग की शर्तें:</strong> MunimJi एप्लिकेशन Cool Art® द्वारा व्यापारिक व दैनिक हिसाब-किताब की सुविधा के लिए प्रदान किया जाता है।</p>
+        <p><strong>2. डेटा की ज़िम्मेदारी:</strong> खाते में दर्ज की गई बिल राशि, बकाया उधार, गल्ला एंट्री और निजी लेन-देन की शुद्धता के लिए संबंधित यूज़र स्वयं उत्तरदायी होगा।</p>
+        <p><strong>3. सेवा व प्लान:</strong> सेवा में सुधार या सुरक्षा के कारण समय-समय पर बदलाव किए जा सकते हैं। PRO सदस्यता या कस्टम कार्य के लिए +91 9458614610 पर संपर्क मान्य होगा।</p>
+      </div>
+
+      <div id="infoContentLicense" class="info-panel hidden space-y-2.5 text-xs leading-relaxed text-slate-700">
+        <p><strong>1. स्वामित्व (Intellectual Property):</strong> MunimJi नाम, लोगो, डिज़ाइन और स्रोत कोड का सर्वाधिकार <strong>Cool Art®</strong> के पास सुरक्षित है।</p>
+        <p><strong>2. अनुमत उपयोग:</strong> यूज़र को केवल अपने वैध व्यावसायिक या व्यक्तिगत उपयोग के लिए इस सेवा का उपयोग करने का अधिकार है।</p>
+        <p><strong>3. प्रतिबंध:</strong> बिना Cool Art® की लिखित अनुमति के कोड की नकल करना, रिवर्स-इंजीनियरिंग करना, पुनः बेचना या अनधिकृत उपयोग करना सख्त वर्जित है।</p>
+      </div>
+
+      <div id="infoContentHelpline" class="info-panel hidden space-y-3 text-xs">
+        <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2">
+          <div class="font-extrabold text-sm text-emerald-950">Cool Art® आधिकारिक हेल्पलाइन</div>
+          <div class="text-slate-700">सपोर्ट, PRO अपग्रेड या कस्टम सॉफ्टवेयर बनवाने के लिए सीधा संपर्क करें:</div>
+          <div class="font-extrabold text-base text-[#071B36]">📞 +91 9458614610</div>
+          <div class="flex gap-2 pt-1">
+            <a href="tel:+919458614610" class="bg-[#071B36] text-white font-bold px-4 py-2 rounded-full">अभी कॉल करें</a>
+            <a href="https://wa.me/919458614610?text=Namaste%20Cool%20Art%2C%20mujhe%20MunimJi%20ke%20liye%20sahayata%20chahiye." target="_blank" rel="noopener" class="bg-[#079D76] text-white font-bold px-4 py-2 rounded-full">WhatsApp करें</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Personal Lena / Dena Ledger (PRO) -->
   <div id="personalLedgerModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
     <div class="bg-white text-slate-900 w-full max-w-4xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[92vh] overflow-y-auto space-y-4">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200">
@@ -929,7 +1002,7 @@
         <div class="mj-parchi-top flex justify-between items-start gap-2">
           <div>
             <div class="inline-flex items-center gap-1.5 bg-white px-2 py-0.5 rounded-md mb-1.5">
-              <img src="logo.png" alt="MunimJi" class="h-4 w-auto object-contain" />
+              <img src="logo.png" crossorigin="anonymous" alt="MunimJi" class="h-4 w-auto object-contain" />
             </div>
             <div id="ppOwnerName" class="text-base font-extrabold">मेरा खाता</div>
             <div class="text-[11px] text-slate-300">निजी लेन-देन विवरण पर्ची</div>
@@ -971,7 +1044,7 @@
         <div class="mj-parchi-footer-wrap">
           <div class="mj-parchi-powered">
             <span>Powered by</span>
-            <img src="logo.png" alt="MunimJi" />
+            <img src="logo.png" crossorigin="anonymous" alt="MunimJi" />
             <span>• Developed by <strong>Cool Art®</strong></span>
           </div>
           <div class="mj-parchi-black-strip">
@@ -991,25 +1064,25 @@
     </div>
   </div>
 
-  <!-- MODAL: Profile Edit -->
+  <!-- MODAL: Profile Edit (Shop Name & Full Address PRO-only) -->
   <div id="profileModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white text-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
-        <h3 class="text-lg font-bold">प्रोफाइल, दुकान का नाम और UPI</h3>
+        <h3 class="text-lg font-bold">प्रोफाइल, ब्रांडिंग व UPI</h3>
         <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
       </div>
       <div class="space-y-3.5">
         <div class="flex items-center gap-3 bg-amber-50 border border-amber-200 p-3 rounded-2xl">
-          <img id="modalAvatarPreview" src="favicon.png" alt="Preview" class="w-11 h-11 rounded-full object-cover bg-white border border-amber-300 hidden" />
+          <img id="modalAvatarPreview" src="favicon.png" crossorigin="anonymous" alt="Preview" class="w-11 h-11 rounded-full object-cover bg-white border border-amber-300 hidden" />
           <div id="modalAvatarInitial" class="w-11 h-11 rounded-full bg-[#071B36] text-amber-300 font-bold flex items-center justify-center text-sm">M</div>
           <div class="text-xs min-w-0">
             <div id="modalEmailText" class="font-bold truncate"></div>
-            <div class="text-amber-900 font-semibold mt-0.5">UPI सेट करने पर पर्ची में QR कोड बनेगा ताकि ग्राहक सीधे पेमेंट भेज सकें।</div>
+            <div class="text-amber-900 font-semibold mt-0.5">दुकान का नाम, पूरा पता और UPI QR सुविधा PRO में सक्रिय रहती है।</div>
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold mb-1">आपका पूरा नाम</label>
+          <label class="block text-xs font-semibold mb-1">आपका नाम</label>
           <input type="text" id="profileNameInput" placeholder="जैसे: कृष्णकांत भारद्वाज" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
         </div>
 
@@ -1023,9 +1096,19 @@
           </select>
         </div>
 
-        <div id="shopNameFieldGroup">
-          <label class="block text-xs font-semibold mb-1">दुकान / व्यापार का नाम (पर्ची पर छपेगा)</label>
-          <input type="text" id="profileShopNameInput" placeholder="जैसे: जय महाकाल ट्रेडर्स / शर्मा किराना स्टोर" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
+        <div id="proBrandingFields" class="space-y-3 p-3 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-extrabold text-[#071B36]">दुकान ब्रांडिंग (केवल PRO)</span>
+            <span id="proBrandingLockTag" class="text-[9.5px] font-extrabold px-2 py-0.5 rounded bg-amber-100 text-amber-800">PRO में उपलब्ध</span>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold mb-1">दुकान / व्यापार का नाम</label>
+            <input type="text" id="profileShopNameInput" placeholder="जैसे: जय महाकाल ट्रेडर्स" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold mb-1">दुकान का पूरा पता (बिलिंग पर्ची पर जाएगा)</label>
+            <input type="text" id="profileAddressInput" placeholder="जैसे: मेन बाजार, अतरौली, अलीगढ़ (उ.प्र.)" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
+          </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1034,14 +1117,9 @@
             <input type="tel" id="profilePhoneInput" maxlength="15" placeholder="9458614610" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
           </div>
           <div>
-            <label class="block text-xs font-semibold mb-1">UPI ID (QR के लिए)</label>
+            <label class="block text-xs font-semibold mb-1">UPI ID (PRO QR के लिए)</label>
             <input type="text" id="profileUpiInput" placeholder="shop@upi" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
           </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold mb-1">पता / पट्टी (वैकल्पिक)</label>
-          <input type="text" id="profileTaglineInput" placeholder="जैसे: मेन बाजार, अतरौली" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
         </div>
 
         <div>
@@ -1061,7 +1139,7 @@
   <div id="billingModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
     <div class="bg-white text-slate-900 w-full max-w-4xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[92vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
-        <h3 class="text-lg font-bold">नया बिल व लाइव मॉडर्न पर्ची</h3>
+        <h3 class="text-lg font-bold">नया बिल व पर्ची</h3>
         <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
       </div>
 
@@ -1069,7 +1147,7 @@
         <div class="lg:col-span-6 space-y-3.5">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-semibold mb-1">ग्राहक का नाम</label>
+              <label class="block text-xs font-semibold mb-1">ग्राहक का नाम (PRO पर्ची में दिखेगा)</label>
               <div class="voice-wrap">
                 <input type="text" id="billCustomerName" placeholder="जैसे: राम कुमार" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm" />
                 <button type="button" data-voice-target="billCustomerName" class="mic-btn" title="बोलकर लिखें">🎤</button>
@@ -1134,12 +1212,12 @@
             <div class="mj-parchi-top flex justify-between items-start gap-3">
               <div>
                 <div class="inline-flex items-center gap-1.5 bg-white px-2 py-0.5 rounded-md mb-1.5">
-                  <img src="logo.png" alt="MunimJi" class="h-4 w-auto object-contain" />
+                  <img src="logo.png" crossorigin="anonymous" alt="MunimJi" class="h-4 w-auto object-contain" />
                 </div>
-                <div id="parchiShopTitle" class="text-base font-extrabold leading-snug">मेरा व्यापार</div>
-                <div id="parchiShopSub" class="text-[11px] text-slate-300 mt-0.5">Phone: +91 9458614610</div>
+                <div id="parchiShopTitle" class="text-base font-extrabold leading-snug">MunimJi खाता</div>
+                <div id="parchiShopSub" class="text-[11px] text-slate-300 mt-0.5"></div>
               </div>
-              <div class="text-right text-[11px]">
+              <div id="parchiRightMeta" class="text-right text-[11px]">
                 <div class="font-bold text-amber-300">Bill No: <span id="parchiBillNo">Nov'26/001</span></div>
                 <div id="parchiDateTime" class="text-slate-200 mt-0.5"></div>
                 <div id="parchiCustomerBadge" class="mt-1 inline-block bg-white/15 px-2 py-0.5 rounded-full text-[10px] font-semibold">ग्राहक: सामान्य</div>
@@ -1190,7 +1268,7 @@
             <div class="mj-parchi-footer-wrap">
               <div class="mj-parchi-powered">
                 <span>Powered by</span>
-                <img src="logo.png" alt="MunimJi" />
+                <img src="logo.png" crossorigin="anonymous" alt="MunimJi" />
                 <span>• Developed by <strong>Cool Art®</strong></span>
               </div>
               <div class="mj-parchi-black-strip">
@@ -1272,9 +1350,9 @@
         <div class="mj-parchi-top flex justify-between items-start gap-2">
           <div>
             <div class="inline-flex items-center gap-1.5 bg-white px-2 py-0.5 rounded-md mb-1.5">
-              <img src="logo.png" alt="MunimJi" class="h-4 w-auto object-contain" />
+              <img src="logo.png" crossorigin="anonymous" alt="MunimJi" class="h-4 w-auto object-contain" />
             </div>
-            <div id="remShopName" class="text-base font-extrabold">मेरा व्यापार</div>
+            <div id="remShopName" class="text-base font-extrabold">MunimJi खाता</div>
             <div id="remShopPhone" class="text-[11px] text-slate-300"></div>
           </div>
           <div class="text-right text-[11px]">
@@ -1285,7 +1363,7 @@
         <div class="mj-parchi-zigzag"></div>
 
         <div class="p-4 space-y-3 text-xs">
-          <div class="flex justify-between py-1 border-b border-slate-100">
+          <div id="remCustRow" class="flex justify-between py-1 border-b border-slate-100">
             <span class="text-slate-500">ग्राहक का नाम:</span>
             <strong id="remCustName">-</strong>
           </div>
@@ -1314,7 +1392,7 @@
         <div class="mj-parchi-footer-wrap">
           <div class="mj-parchi-powered">
             <span>Powered by</span>
-            <img src="logo.png" alt="MunimJi" />
+            <img src="logo.png" crossorigin="anonymous" alt="MunimJi" />
             <span>• Developed by <strong>Cool Art®</strong></span>
           </div>
           <div class="mj-parchi-black-strip">
@@ -1433,7 +1511,7 @@
               <span id="needItemCountText" class="text-[11px] font-semibold text-slate-500">0 आइटम</span>
             </div>
             <div id="editableNeedItemsList" class="space-y-1.5 max-h-36 overflow-y-auto text-xs">
-              <p class="text-slate-400 italic">अभी कोई आइटम नहीं जुड़ा है।</p>
+              <p class="text-slate-400 italic">अभी कोई सामान नहीं जुड़ा है।</p>
             </div>
           </div>
 
@@ -1459,15 +1537,15 @@
             <div class="ruled-page-top">
               <div>
                 <div class="flex items-center gap-2 mb-1.5">
-                  <img src="logo.png" alt="MunimJi" class="h-5 w-auto object-contain" />
+                  <img src="logo.png" crossorigin="anonymous" alt="MunimJi" class="h-5 w-auto object-contain" />
                 </div>
                 <div id="needListSheetTitle" class="font-extrabold text-[#071B36] text-lg leading-snug">स्टॉक भरने / वेंडर से मंगाने वाले सामान की सूची</div>
                 <div id="hindiCopyShopLabel" class="text-xs font-semibold text-[#475569] mt-0.5">MunimJi खाता</div>
               </div>
-              <div class="ruled-date-card">
+              <div id="ruledDateMetaBox" class="ruled-date-card">
                 <div id="hindiCopyDayLabel" class="text-[11px] font-bold text-[#0F294A]">शुक्रवार</div>
                 <div id="hindiCopyDate" class="text-xs font-extrabold text-[#DC2626]">20/11/2026</div>
-                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">11:04 PM</div>
+                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">11:51 PM</div>
               </div>
             </div>
 
@@ -1484,7 +1562,7 @@
             <div class="mj-parchi-footer-wrap">
               <div class="mj-parchi-powered">
                 <span>Powered by</span>
-                <img src="logo.png" alt="MunimJi" />
+                <img src="logo.png" crossorigin="anonymous" alt="MunimJi" />
                 <span>• Developed by <strong>Cool Art®</strong></span>
               </div>
               <div class="mj-parchi-black-strip">
@@ -1501,18 +1579,18 @@
   <footer class="mj-fixed-footer" role="contentinfo">
     <div class="mj-ff-inner">
       <div class="mj-ff-left">
-        <img src="cool art logo.png" alt="Cool Art" class="mj-ff-coolart-img" />
+        <img src="cool art logo.png" crossorigin="anonymous" alt="Cool Art" class="mj-ff-coolart-img" />
         <span class="mj-ff-copy">© 2026 <strong>Cool Art®</strong>. All Rights Reserved.</span>
         <span class="mj-ff-sep">|</span>
         <a href="tel:+919458614610" class="mj-ff-phone">📞 Helpline: +91 9458614610</a>
       </div>
       <div class="mj-ff-right">
         <span>Powered by</span>
-        <img src="logo.png" alt="MunimJi by Cool Art®" class="mj-ff-mj-img" />
+        <img src="logo.png" crossorigin="anonymous" alt="MunimJi by Cool Art®" class="mj-ff-mj-img" />
         <span>• Developed by <strong>Cool Art®</strong></span>
       </div>
     </div>
-    <div class="mj-build-version">Build v1.8 · Updated 20 Nov 2026</div>
+    <div class="mj-build-version">Build v1.9 · Updated 20 Nov 2026</div>
   </footer>
 
   <script type="module">
@@ -1810,7 +1888,7 @@
       const box = document.getElementById(boxId);
       const container = document.getElementById(containerId);
       const label = document.getElementById(labelId);
-      const cleanUpi = (upiId || "").trim();
+      const cleanUpi = isProAccount() ? (upiId || "").trim() : "";
 
       if (!cleanUpi || typeof QRCode === "undefined") {
         box.classList.add("hidden");
@@ -1829,12 +1907,30 @@
       });
     }
 
+    // Ensure images in captured element are loaded before html2canvas renders
+    async function waitForImagesLoaded(containerEl) {
+      const imgs = Array.from(containerEl.querySelectorAll("img"));
+      await Promise.all(
+        imgs.map((img) => {
+          if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+          return new Promise((resolve) => {
+            img.addEventListener("load", resolve, { once: true });
+            img.addEventListener("error", resolve, { once: true });
+            setTimeout(resolve, 1200);
+          });
+        })
+      );
+    }
+
     async function shareOrDownloadElementAsImage(elementId, filenameBase) {
       const target = document.getElementById(elementId);
       if (!target || typeof html2canvas === "undefined") return;
+      await waitForImagesLoaded(target);
+
       const canvas = await html2canvas(target, {
         scale: 2,
         useCORS: true,
+        allowTaint: false,
         backgroundColor: "#FFFFFF"
       });
       canvas.toBlob(async (blob) => {
@@ -1874,12 +1970,49 @@
       return false;
     }
 
+    function requireProFeature(msgText) {
+      if (isProAccount()) return true;
+      alert(`${msgText}\nयह सुविधा PRO खाते में उपलब्ध है। PRO के लिए +91 9458614610 पर संपर्क करें।`);
+      return false;
+    }
+
     document.querySelectorAll(".close-modal").forEach((btn) => btn.addEventListener("click", closeAllModals));
     document.getElementById("closeReminderParchiBtn").addEventListener("click", () => {
       document.getElementById("reminderParchiModal").classList.add("hidden");
     });
     document.getElementById("closePersonalParchiBtn").addEventListener("click", () => {
       document.getElementById("personalParchiPreviewModal").classList.add("hidden");
+    });
+
+    // Info Modal Tabs (FAQ, Terms, License, Helpline)
+    function switchInfoTab(tabKey) {
+      const titles = {
+        faq: "अक्सर पूछे जाने वाले सवाल (FAQ)",
+        terms: "नियम व शर्तें (Terms & Conditions)",
+        license: "यूज़र लाइसेंस एग्रीमेंट (License Agreement)",
+        helpline: "सहायता व हेल्पलाइन (Helpline)"
+      };
+      document.getElementById("infoModalTitle").textContent = titles[tabKey] || titles.faq;
+      document.querySelectorAll(".info-panel").forEach((p) => p.classList.add("hidden"));
+      const targetPanel = document.getElementById(`infoContent${tabKey.charAt(0).toUpperCase() + tabKey.slice(1)}`);
+      if (targetPanel) targetPanel.classList.remove("hidden");
+
+      document.querySelectorAll(".info-tab-btn").forEach((btn) => {
+        const active = btn.getAttribute("data-switch-info") === tabKey;
+        btn.className = active
+          ? "info-tab-btn px-3 py-1.5 rounded-full font-bold bg-[#071B36] text-white"
+          : "info-tab-btn px-3 py-1.5 rounded-full font-bold bg-slate-100 text-slate-800";
+      });
+    }
+
+    document.querySelectorAll(".open-info-modal-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        switchInfoTab(btn.getAttribute("data-info-tab") || "faq");
+        openModal("infoLegalModal");
+      });
+    });
+    document.querySelectorAll(".info-tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => switchInfoTab(btn.getAttribute("data-switch-info")));
     });
 
     function openBillingWithRefresh() {
@@ -1906,44 +2039,43 @@
       }
     });
 
-    function toggleShopNameInputVisibility() {
-      const cat = document.getElementById("profileCategoryInput").value;
-      const shopGroup = document.getElementById("shopNameFieldGroup");
-      if (cat === "household") {
-        shopGroup.classList.add("hidden");
-      } else {
-        shopGroup.classList.remove("hidden");
-      }
-    }
-    document.getElementById("profileCategoryInput").addEventListener("change", toggleShopNameInputVisibility);
-
     function openProfileEditor(focusUpi = false) {
       if (!currentUser) return;
       const p = currentProfile || {};
+      const pro = isProAccount();
       document.getElementById("modalEmailText").textContent = currentUser.email || "";
       document.getElementById("profileNameInput").value = p.displayName || currentUser.displayName || "";
       document.getElementById("profileCategoryInput").value = p.businessType || "shop";
-      document.getElementById("profileShopNameInput").value = p.shopName || "";
+      document.getElementById("profileShopNameInput").value = pro ? (p.shopName || "") : "";
+      document.getElementById("profileAddressInput").value = pro ? (p.shopAddress || "") : "";
       document.getElementById("profilePhoneInput").value = p.phone || "";
-      document.getElementById("profileUpiInput").value = p.upiId || "";
-      document.getElementById("profileTaglineInput").value = p.tagline || "";
+      document.getElementById("profileUpiInput").value = pro ? (p.upiId || "") : "";
       document.getElementById("profilePhotoInput").value = p.photoURL || currentUser.photoURL || "";
-      toggleShopNameInputVisibility();
+
+      document.getElementById("profileShopNameInput").disabled = !pro;
+      document.getElementById("profileAddressInput").disabled = !pro;
+      document.getElementById("profileUpiInput").disabled = !pro;
+      document.getElementById("proBrandingLockTag").textContent = pro ? "PRO सक्रिय" : "केवल PRO में";
+
       openModal("profileModal");
       if (focusUpi) setTimeout(() => document.getElementById("profileUpiInput").focus(), 120);
     }
 
     document.getElementById("openProfileBtn").addEventListener("click", () => openProfileEditor(false));
-    document.getElementById("upiSetupCardBtn").addEventListener("click", () => openProfileEditor(true));
+    document.getElementById("upiSetupCardBtn").addEventListener("click", () => {
+      if (!requireProFeature("UPI QR कोड सेटिंग")) return;
+      openProfileEditor(true);
+    });
 
     document.getElementById("saveProfileBtn").addEventListener("click", async () => {
       if (!currentUser) return;
+      const pro = isProAccount();
       const displayName = document.getElementById("profileNameInput").value.trim() || "MunimJi User";
       const businessType = document.getElementById("profileCategoryInput").value;
-      const shopName = document.getElementById("profileShopNameInput").value.trim();
+      const shopName = pro ? document.getElementById("profileShopNameInput").value.trim() : "";
+      const shopAddress = pro ? document.getElementById("profileAddressInput").value.trim() : "";
       const phone = document.getElementById("profilePhoneInput").value.trim();
-      const upiId = document.getElementById("profileUpiInput").value.trim();
-      const tagline = document.getElementById("profileTaglineInput").value.trim();
+      const upiId = pro ? document.getElementById("profileUpiInput").value.trim() : "";
       const photoURL = document.getElementById("profilePhotoInput").value.trim();
       const saveBtn = document.getElementById("saveProfileBtn");
       saveBtn.disabled = true;
@@ -1954,13 +2086,13 @@
           displayName,
           businessType,
           shopName,
+          shopAddress,
           phone,
           upiId,
-          tagline,
           photoURL,
           updatedAt: serverTimestamp()
         });
-        currentProfile = { ...(currentProfile || {}), displayName, businessType, shopName, phone, upiId, tagline, photoURL };
+        currentProfile = { ...(currentProfile || {}), displayName, businessType, shopName, shopAddress, phone, upiId, photoURL };
         renderUserIdentity(currentUser, currentProfile);
         renderLiveBillParchi();
         renderRuledNeedList();
@@ -2012,13 +2144,6 @@
       syncThemeAvailabilityForTier();
     }
 
-    function getEffectiveBusinessTitle() {
-      if (currentProfile?.shopName && currentProfile.shopName.trim()) {
-        return currentProfile.shopName.trim();
-      }
-      return currentProfile?.displayName || currentUser?.displayName || "MunimJi खाता";
-    }
-
     function renderUserIdentity(user, profile) {
       const fullName = profile?.displayName || user.displayName || (user.email ? user.email.split("@")[0] : "मेरा खाता");
       const firstName = fullName.split(" ")[0] || fullName;
@@ -2026,17 +2151,16 @@
       const catKey = profile?.businessType || "shop";
       const catShort = categoryShortLabels[catKey] || categoryShortLabels.general;
       const listTitles = getPositiveListTitles();
+      const pro = (profile?.planStatus || "").toLowerCase() === "active";
 
       document.getElementById("cardUserName").textContent = fullName;
       document.getElementById("cardCategoryBadge").textContent = catShort;
       document.getElementById("heroGreetingTitle").textContent = `शुभ दिन, ${firstName}`;
 
-      if (catKey !== "household") {
-        document.getElementById("cardShopSubline").textContent = profile?.shopName
-          ? `दुकान: ${profile.shopName}`
-          : "दुकान का नाम जोड़ने के लिए प्रोफ़ाइल खोलें";
+      if (pro && (profile?.shopName || profile?.shopAddress)) {
+        document.getElementById("cardShopSubline").textContent = `${profile.shopName || ""}${profile.shopAddress ? ` · ${profile.shopAddress}` : ""}`;
       } else {
-        document.getElementById("cardShopSubline").textContent = profile?.phone ? `मोबाइल: ${profile.phone}` : "घर व व्यक्तिगत डिजिटल खाता";
+        document.getElementById("cardShopSubline").textContent = `${catShort} खाता${profile?.phone ? ` · ${profile.phone}` : ""}`;
       }
 
       document.getElementById("needListCardTag").textContent = listTitles.cardTag;
@@ -2045,20 +2169,24 @@
 
       const upiPill = document.getElementById("upiStatusPill");
       const upiSub = document.getElementById("upiCardSubtext");
-      if (profile?.upiId) {
+      if (pro && profile?.upiId) {
         upiPill.textContent = "सक्रिय ✓";
         upiPill.className = "text-[9px] font-extrabold px-1.5 py-0.2 rounded-full bg-emerald-500/15 text-emerald-700";
         upiSub.textContent = profile.upiId;
-      } else {
+      } else if (pro) {
         upiPill.textContent = "सेट करें";
         upiPill.className = "text-[9px] font-extrabold px-1.5 py-0.2 rounded-full bg-amber-500/15 text-amber-700";
-        upiSub.textContent = "पेमेंट हेतु UPI जोड़ें";
+        upiSub.textContent = "UPI जोड़ें";
+      } else {
+        upiPill.textContent = "PRO";
+        upiPill.className = "text-[9px] font-extrabold px-1.5 py-0.2 rounded-full bg-black/10 text-slate-700";
+        upiSub.textContent = "QR पेमेंट (PRO)";
       }
 
       setAvatar(document.getElementById("cardAvatarImg"), document.getElementById("cardAvatarInitial"), photo, fullName);
       setAvatar(document.getElementById("modalAvatarPreview"), document.getElementById("modalAvatarInitial"), photo, fullName);
       applyTierStyle(profile?.planStatus || "trial");
-      if (profile?.uiTheme && (profile?.planStatus || "").toLowerCase() === "active") {
+      if (profile?.uiTheme && pro) {
         applyTheme(profile.uiTheme, false);
       }
     }
@@ -2068,11 +2196,12 @@
       window.location.replace("login.html");
     });
 
-    // Personal (Private) Lena Hai / Dena Hai Ledger
+    // Personal (Private) Lena Hai / Dena Hai Ledger (PRO feature)
     document.getElementById("personalDateInput").value = new Date().toISOString().split("T")[0];
 
     function openPersonalLedgerForMode(mode) {
       if (guardBlockedAction()) return;
+      if (!requireProFeature("निजी 'रुपये लेने हैं / देने हैं' खाता")) return;
       const isRec = mode === "receive";
       document.getElementById("personalDirectionInput").value = mode;
       document.getElementById("personalModalMainHeading").textContent = isRec ? "निजी हिसाब — रुपये लेने हैं" : "निजी हिसाब — रुपये देने हैं";
@@ -2181,7 +2310,9 @@
 
       const todayStr = new Date().toLocaleDateString("en-GB");
       const insightEl = document.getElementById("personalNetInsightText");
-      if (recTotal === 0 && payTotal === 0) {
+      if (!isProAccount()) {
+        insightEl.innerHTML = `💡 निजी "रुपये लेने हैं / देने हैं" और बचत-ज़रूरत गणित <strong>PRO</strong> खाते में उपलब्ध है।`;
+      } else if (recTotal === 0 && payTotal === 0) {
         insightEl.innerHTML = `💡 आज (<strong>${todayStr}</strong>) अपना निजी लेने-देने का हिसाब जोड़ें, यहाँ अपने आप बचत या ज़रूरत का हिसाब दिखेगा।`;
       } else if (payTotal > recTotal) {
         const needed = payTotal - recTotal;
@@ -2287,7 +2418,7 @@
       closeAllModals();
     });
 
-    // Live Modern Bill Parchi Builder
+    // Live Modern Bill Parchi Builder (PRO shows shop name + full address + customer name + date; TRIAL hides shop branding, customer name & date)
     function getBillTotals() {
       const itemsSum = currentBillItems.reduce((acc, item) => acc + item.price, 0);
       const extra = Math.max(0, parseFloat(document.getElementById("billExtraCharges").value) || 0);
@@ -2295,18 +2426,33 @@
     }
 
     function renderLiveBillParchi() {
-      const businessTitle = getEffectiveBusinessTitle();
+      const pro = isProAccount();
+      const shopTitle = pro && currentProfile?.shopName ? currentProfile.shopName.trim() : "MunimJi पर्ची";
+      const addressText = pro && currentProfile?.shopAddress ? currentProfile.shopAddress.trim() : "";
       const phone = currentProfile?.phone || "9458614610";
-      const tagline = currentProfile?.tagline || "";
       const custName = document.getElementById("billCustomerName").value.trim() || "सामान्य";
       const billNo = document.getElementById("billNumberInput").value.trim() || "Nov'26/001";
       const { itemsSum, extra, grandTotal } = getBillTotals();
 
-      document.getElementById("parchiShopTitle").textContent = businessTitle;
-      document.getElementById("parchiShopSub").textContent = tagline ? `${tagline} · Ph: ${phone}` : `Phone: ${phone}`;
-      document.getElementById("parchiBillNo").textContent = billNo;
-      document.getElementById("parchiDateTime").textContent = formatNowLabel();
-      document.getElementById("parchiCustomerBadge").textContent = `ग्राहक: ${custName}`;
+      document.getElementById("parchiShopTitle").textContent = shopTitle;
+      document.getElementById("parchiShopSub").textContent = addressText ? `${addressText} · Ph: ${phone}` : `Ph: ${phone}`;
+
+      const dateTimeEl = document.getElementById("parchiDateTime");
+      const custBadgeEl = document.getElementById("parchiCustomerBadge");
+      const billNoEl = document.getElementById("parchiBillNo");
+
+      if (pro) {
+        billNoEl.parentElement.classList.remove("hidden");
+        billNoEl.textContent = billNo;
+        dateTimeEl.classList.remove("hidden");
+        dateTimeEl.textContent = formatNowLabel();
+        custBadgeEl.classList.remove("hidden");
+        custBadgeEl.textContent = `ग्राहक: ${custName}`;
+      } else {
+        billNoEl.parentElement.classList.add("hidden");
+        dateTimeEl.classList.add("hidden");
+        custBadgeEl.classList.add("hidden");
+      }
 
       const itemsBox = document.getElementById("parchiItemsBody");
       if (!currentBillItems.length) {
@@ -2335,8 +2481,8 @@
         "parchiQrCanvas",
         "parchiQrBox",
         "parchiUpiIdLabel",
-        currentProfile?.upiId || "",
-        businessTitle,
+        pro ? (currentProfile?.upiId || "") : "",
+        shopTitle,
         grandTotal
       );
     }
@@ -2395,21 +2541,26 @@
         alert("कृपया कम से कम एक आइटम जोड़ें।");
         return;
       }
+      const pro = isProAccount();
       const { itemsSum, extra, grandTotal } = getBillTotals();
       await maybeSyncBillToKhata(grandTotal);
 
-      const businessTitle = getEffectiveBusinessTitle();
+      const shopTitle = pro && currentProfile?.shopName ? currentProfile.shopName.trim() : "MunimJi पर्ची";
+      const addrLine = pro && currentProfile?.shopAddress ? `\nपता: ${currentProfile.shopAddress.trim()}` : "";
       const custName = document.getElementById("billCustomerName").value.trim() || "ग्राहक";
       const custMobile = document.getElementById("billCustomerMobile").value.replace(/\D/g, "");
       const billNo = document.getElementById("billNumberInput").value.trim() || "Nov'26/001";
-      const upiLine = currentProfile?.upiId ? `\nUPI: ${currentProfile.upiId}` : "";
-      const nowStamp = formatNowLabel();
+      const upiLine = pro && currentProfile?.upiId ? `\nUPI: ${currentProfile.upiId}` : "";
 
-      let msg = `*${businessTitle}*\nBill No: ${billNo} (${nowStamp})\nग्राहक: ${custName}\n------------------\n`;
+      let msg = `*${shopTitle}*${addrLine}\n`;
+      if (pro) {
+        msg += `Bill No: ${billNo} (${formatNowLabel()})\nग्राहक: ${custName}\n`;
+      }
+      msg += `------------------\n`;
       currentBillItems.forEach((i, idx) => {
         msg += `${idx + 1}. ${i.name}${i.qty ? ` (${i.qty})` : ""} : ₹${i.price}\n`;
       });
-      msg += `------------------\nसामान योग: ₹${itemsSum}\nअतिरिक्त चार्ज: + ₹${extra}\n*कुल योग: ₹${grandTotal}*${upiLine}\nधन्यवाद! कृपया पर्ची संभाल कर रखें।\n_Powered by MunimJi • Developed by Cool Art®_`;
+      msg += `------------------\nसामान योग: ₹${itemsSum}\nअतिरिक्त चार्ज: + ₹${extra}\n*कुल योग: ₹${grandTotal}*${upiLine}\n_Powered by MunimJi • Developed by Cool Art®_`;
 
       const url = custMobile.length >= 10
         ? `https://wa.me/91${custMobile}?text=${encodeURIComponent(msg)}`
@@ -2419,22 +2570,37 @@
 
     // Reminder Parchi Handler
     window.openReminderParchi = function (name, mobile, balance) {
-      const businessTitle = getEffectiveBusinessTitle();
+      const pro = isProAccount();
+      const shopTitle = pro && currentProfile?.shopName ? currentProfile.shopName.trim() : "MunimJi खाता";
+      const addrPart = pro && currentProfile?.shopAddress ? ` · ${currentProfile.shopAddress.trim()}` : "";
       const phone = currentProfile?.phone || "9458614610";
       const numBal = Number(balance || 0);
 
-      document.getElementById("remShopName").textContent = businessTitle;
-      document.getElementById("remShopPhone").textContent = `Phone: ${phone}`;
-      document.getElementById("remDateLabel").textContent = formatNowLabel();
-      document.getElementById("remCustName").textContent = name;
+      document.getElementById("remShopName").textContent = shopTitle;
+      document.getElementById("remShopPhone").textContent = `Ph: ${phone}${addrPart}`;
+
+      const remDateEl = document.getElementById("remDateLabel");
+      const remCustRow = document.getElementById("remCustRow");
+      if (pro) {
+        remDateEl.classList.remove("hidden");
+        remDateEl.textContent = formatNowLabel();
+        remCustRow.classList.remove("hidden");
+        document.getElementById("remCustName").textContent = name;
+      } else {
+        remDateEl.classList.add("hidden");
+        remCustRow.classList.add("hidden");
+      }
+
       document.getElementById("remCustMobile").textContent = mobile;
       document.getElementById("remBalanceAmount").textContent = `₹${numBal.toFixed(2)}`;
 
-      renderQrInto("remQrCanvas", "remQrBox", "remUpiLabel", currentProfile?.upiId || "", businessTitle, numBal);
+      renderQrInto("remQrCanvas", "remQrBox", "remUpiLabel", pro ? (currentProfile?.upiId || "") : "", shopTitle, numBal);
 
-      const waText = `*${businessTitle} — बकाया उधार रिमाइंडर*\nनमस्ते ${name} जी,\nआपका कुल बकाया *₹${numBal.toFixed(2)}* है।${
-        currentProfile?.upiId ? `\nUPI ID: ${currentProfile.upiId}` : ""
-      }\nकृपया भुगतान करें। धन्यवाद!\n_Powered by MunimJi • Developed by Cool Art®_`;
+      let waText = `*${shopTitle} — बकाया उधार विवरण*\n`;
+      if (pro) waText += `नाम: ${name}\n`;
+      waText += `कुल बकाया: *₹${numBal.toFixed(2)}*${
+        pro && currentProfile?.upiId ? `\nUPI ID: ${currentProfile.upiId}` : ""
+      }\n_Powered by MunimJi • Developed by Cool Art®_`;
       const cleanMob = String(mobile || "").replace(/\D/g, "");
       document.getElementById("shareReminderWaLink").href = cleanMob.length >= 10
         ? `https://wa.me/91${cleanMob}?text=${encodeURIComponent(waText)}`
@@ -2569,10 +2735,12 @@
     });
 
     function renderRuledNeedList(metaOverride = null) {
+      const pro = isProAccount();
       const linesBox = document.getElementById("hindiCopyLinesBox");
       const previewEl = document.getElementById("topShortagePreview");
       const shortageBadge = document.getElementById("shortageItemsCountBadge");
       const shopLabel = document.getElementById("hindiCopyShopLabel");
+      const ruledDateMetaBox = document.getElementById("ruledDateMetaBox");
       const dayLabel = document.getElementById("hindiCopyDayLabel");
       const dateLabel = document.getElementById("hindiCopyDate");
       const timeLabel = document.getElementById("hindiCopyTimeLabel");
@@ -2585,12 +2753,18 @@
       document.getElementById("needListSheetTitle").textContent = listTitles.sheetTitle;
 
       const phonePart = currentProfile?.phone ? ` · Ph: ${currentProfile.phone}` : "";
-      shopLabel.textContent = `${getEffectiveBusinessTitle()}${phonePart}`;
+      const titlePart = pro && currentProfile?.shopName ? currentProfile.shopName.trim() : "MunimJi सूची";
+      shopLabel.textContent = `${titlePart}${phonePart}`;
 
-      const nowInfo = getHindiDayDateTime(new Date());
-      dayLabel.textContent = metaOverride?.dayName || nowInfo.dayName;
-      dateLabel.textContent = metaOverride?.dateStr || nowInfo.dateStr;
-      timeLabel.textContent = metaOverride?.timeStr || nowInfo.timeStr;
+      if (pro) {
+        ruledDateMetaBox.classList.remove("hidden");
+        const nowInfo = getHindiDayDateTime(new Date());
+        dayLabel.textContent = metaOverride?.dayName || nowInfo.dayName;
+        dateLabel.textContent = metaOverride?.dateStr || nowInfo.dateStr;
+        timeLabel.textContent = metaOverride?.timeStr || nowInfo.timeStr;
+      } else {
+        ruledDateMetaBox.classList.add("hidden");
+      }
 
       const minRows = Math.max(6, needItemsList.length);
       const rowsHtml = [];
@@ -2677,16 +2851,17 @@
       }
       await persistCurrentNeedList();
 
+      const pro = isProAccount();
       const nowInfo = getHindiDayDateTime(new Date());
-      document.getElementById("hindiCopyDayLabel").textContent = nowInfo.dayName;
-      document.getElementById("hindiCopyDate").textContent = nowInfo.dateStr;
-      document.getElementById("hindiCopyTimeLabel").textContent = nowInfo.timeStr;
-
-      const businessTitle = getEffectiveBusinessTitle();
+      const titlePart = pro && currentProfile?.shopName ? currentProfile.shopName.trim() : "MunimJi सूची";
       const listTitles = getPositiveListTitles();
       const vendorPhone = document.getElementById("vendorWhatsappInput").value.replace(/\D/g, "");
 
-      let msg = `*${listTitles.sheetTitle}*\n*${businessTitle}*\nदिन व तारीख: ${nowInfo.dayName}, ${nowInfo.dateStr} (${nowInfo.timeStr})\n------------------\n`;
+      let msg = `*${listTitles.sheetTitle}*\n*${titlePart}*\n`;
+      if (pro) {
+        msg += `दिन व तारीख: ${nowInfo.dayName}, ${nowInfo.dateStr} (${nowInfo.timeStr})\n`;
+      }
+      msg += `------------------\n`;
       needItemsList.forEach((s, idx) => {
         msg += `${idx + 1}. ${s.item} — *${s.qty}*\n`;
       });
@@ -2704,10 +2879,7 @@
         return;
       }
       await persistCurrentNeedList();
-      const nowInfo = getHindiDayDateTime(new Date());
-      document.getElementById("hindiCopyDayLabel").textContent = nowInfo.dayName;
-      document.getElementById("hindiCopyDate").textContent = nowInfo.dateStr;
-      document.getElementById("hindiCopyTimeLabel").textContent = nowInfo.timeStr;
+      renderRuledNeedList();
       await shareOrDownloadElementAsImage("hindiCopyCapture", "MunimJi_Vendor_Stock_List");
     });
 
