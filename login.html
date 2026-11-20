@@ -49,7 +49,6 @@
     .google-gsi-btn:active:not(:disabled) { background: #eef3fe; }
     .google-gsi-btn:disabled { opacity: 0.65; cursor: not-allowed; }
 
-    /* Fixed Footer */
     .mj-fixed-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 70; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px); border-top: 1px solid #e2e8f0; box-shadow: 0 -6px 24px rgba(7, 27, 54, 0.06); padding: 8px 20px; color: #334155; font-size: 12px; }
     .mj-ff-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .mj-ff-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -215,18 +214,17 @@
       msgBox.classList.remove("hidden");
     }
 
-    async function fastRedirectByRole(user, extraData = {}) {
+    async function completeLoginAndRedirect(user, extraData = {}) {
       if (isRedirecting) return;
       isRedirecting = true;
       const target = (user.email || "").toLowerCase() === SUPER_ADMIN_EMAIL.toLowerCase()
         ? "admin.html"
         : "dashboard.html";
       try {
-        await Promise.race([
-          ensureUserProfile(user, extraData),
-          new Promise((resolve) => setTimeout(resolve, 1200))
-        ]);
-      } catch (_) {}
+        await ensureUserProfile(user, extraData);
+      } catch (err) {
+        showMessage("प्रोफाइल सेव करने में समस्या: " + (err?.message || err), true);
+      }
       window.location.replace(target);
     }
 
@@ -268,7 +266,7 @@
     getRedirectResult(auth)
       .then(async (result) => {
         if (result?.user) {
-          await fastRedirectByRole(result.user);
+          await completeLoginAndRedirect(result.user);
         }
       })
       .catch((err) => {
@@ -284,8 +282,8 @@
 
       try {
         const result = await signInWithPopup(auth, googleProvider);
-        showMessage("लॉगिन सफल! डैशबोर्ड खुल रहा है...", false);
-        await fastRedirectByRole(result.user);
+        showMessage("लॉगिन सफल! प्रोफाइल व डैशबोर्ड तैयार हो रहा है...", false);
+        await completeLoginAndRedirect(result.user);
       } catch (err) {
         if (err?.code === "auth/popup-blocked") {
           showMessage("पॉपअप ब्लॉक है, रीडायरेक्ट से खोला जा रहा है...", false);
@@ -319,11 +317,11 @@
           const businessType = document.getElementById("businessTypeInput").value;
           showMessage("खाता बनाया जा रहा है...", false);
           const cred = await createUserWithEmailAndPassword(auth, email, password);
-          await fastRedirectByRole(cred.user, { displayName, phone, businessType });
+          await completeLoginAndRedirect(cred.user, { displayName, phone, businessType });
         } else {
           showMessage("लॉगिन हो रहा है...", false);
           const cred = await signInWithEmailAndPassword(auth, email, password);
-          await fastRedirectByRole(cred.user);
+          await completeLoginAndRedirect(cred.user);
         }
       } catch (err) {
         submitBtn.disabled = false;
@@ -333,7 +331,7 @@
 
     onAuthStateChanged(auth, async (user) => {
       if (user && !isRedirecting && !googleBtn.disabled) {
-        await fastRedirectByRole(user);
+        await completeLoginAndRedirect(user);
       }
     });
   </script>
