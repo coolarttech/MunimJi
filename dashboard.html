@@ -14,20 +14,18 @@
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
     :root {
-      --bg-app: #F3F5F9;
+      --bg-app: #F3F5F8;
       --bg-surface: #FFFFFF;
       --bg-surface-soft: #F8FAFC;
       --text-main: #0F172A;
       --text-muted: #64748B;
-      --border-subtle: rgba(15, 23, 42, 0.09);
+      --border-subtle: rgba(15, 23, 42, 0.08);
       --brand-primary: #071B36;
       --brand-accent: #079D76;
-      --brand-highlight: #F59E0B;
-      --profile-card-bg: linear-gradient(135deg, #FFFDF5 0%, #FFFBEB 60%, #ECFDF5 100%);
-      --profile-card-border: rgba(245, 158, 11, 0.35);
-      --clock-bg: linear-gradient(145deg, #071B36 0%, #102D54 100%);
-      --clock-text: #FFFFFF;
-      --clock-accent: #FCD34D;
+      --icon-bg: rgba(7, 157, 118, 0.11);
+      --icon-color: #079D76;
+      --personal-zone-bg: #EEF2F7;
+      --personal-zone-border: rgba(15, 23, 42, 0.12);
     }
 
     /* Theme 2: Cream, Wine & Golden */
@@ -37,15 +35,13 @@
       --bg-surface-soft: #F5EDE2;
       --text-main: #2A121B;
       --text-muted: #6E5660;
-      --border-subtle: rgba(91, 24, 48, 0.13);
+      --border-subtle: rgba(91, 24, 48, 0.12);
       --brand-primary: #5B1830;
       --brand-accent: #7A2040;
-      --brand-highlight: #D97706;
-      --profile-card-bg: linear-gradient(135deg, #FFFDF9 0%, #F9EFE6 100%);
-      --profile-card-border: rgba(122, 32, 64, 0.28);
-      --clock-bg: linear-gradient(145deg, #420F21 0%, #6E1C39 100%);
-      --clock-text: #FFFDF9;
-      --clock-accent: #FBBF24;
+      --icon-bg: rgba(122, 32, 64, 0.1);
+      --icon-color: #7A2040;
+      --personal-zone-bg: #F2E8DC;
+      --personal-zone-border: rgba(91, 24, 48, 0.18);
     }
 
     /* Theme 3: Dark 60-30-10 */
@@ -55,15 +51,13 @@
       --bg-surface-soft: #29283D;
       --text-main: #F8FAFC;
       --text-muted: #A5A4C4;
-      --border-subtle: rgba(167, 139, 250, 0.24);
+      --border-subtle: rgba(167, 139, 250, 0.22);
       --brand-primary: #7C3AED;
       --brand-accent: #34D399;
-      --brand-highlight: #A78BFA;
-      --profile-card-bg: linear-gradient(135deg, #252438 0%, #312B4F 100%);
-      --profile-card-border: rgba(167, 139, 250, 0.38);
-      --clock-bg: linear-gradient(145deg, #28243E 0%, #3B3266 100%);
-      --clock-text: #F8FAFC;
-      --clock-accent: #34D399;
+      --icon-bg: rgba(167, 139, 250, 0.15);
+      --icon-color: #A78BFA;
+      --personal-zone-bg: #1B1A29;
+      --personal-zone-border: rgba(52, 211, 153, 0.28);
     }
 
     /* Theme 4: Light Minimal */
@@ -76,12 +70,10 @@
       --border-subtle: rgba(24, 24, 27, 0.08);
       --brand-primary: #5B4FE9;
       --brand-accent: #5B4FE9;
-      --brand-highlight: #818CF8;
-      --profile-card-bg: linear-gradient(135deg, #FFFFFF 0%, #F4F3FF 100%);
-      --profile-card-border: rgba(91, 79, 233, 0.22);
-      --clock-bg: linear-gradient(145deg, #EEF2FF 0%, #E0E7FF 100%);
-      --clock-text: #1E1B4B;
-      --clock-accent: #4F46E5;
+      --icon-bg: rgba(91, 79, 233, 0.1);
+      --icon-color: #5B4FE9;
+      --personal-zone-bg: #EFEFF6;
+      --personal-zone-border: rgba(91, 79, 233, 0.18);
     }
 
     /* Theme 5: Warm Cream & Emerald */
@@ -91,19 +83,19 @@
       --bg-surface-soft: #EFECE1;
       --text-main: #16241D;
       --text-muted: #586960;
-      --border-subtle: rgba(5, 150, 105, 0.16);
+      --border-subtle: rgba(5, 150, 105, 0.15);
       --brand-primary: #065F46;
       --brand-accent: #059669;
-      --brand-highlight: #F59E0B;
-      --profile-card-bg: linear-gradient(135deg, #FFFDF8 0%, #ECFDF5 100%);
-      --profile-card-border: rgba(5, 150, 105, 0.28);
-      --clock-bg: linear-gradient(145deg, #064E3B 0%, #047857 100%);
-      --clock-text: #FFFFFF;
-      --clock-accent: #FCD34D;
+      --icon-bg: rgba(5, 150, 105, 0.11);
+      --icon-color: #059669;
+      --personal-zone-bg: #EAE6D8;
+      --personal-zone-border: rgba(6, 95, 70, 0.2);
     }
 
     * {
       box-sizing: border-box;
+      letter-spacing: normal;
+      word-spacing: normal;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
@@ -124,64 +116,72 @@
       margin: 0;
       background: var(--bg-app);
       color: var(--text-main);
-      font-family: "Plus Jakarta Sans", "Noto Sans Devanagari", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: "Noto Sans Devanagari", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 78px;
+      padding-bottom: 108px;
       transition: background 0.25s ease, color 0.25s ease;
     }
 
-    .themed-header {
-      background: var(--bg-surface);
-      border-bottom: 1px solid var(--border-subtle);
+    /* Fixed Brand Header */
+    .fixed-brand-header {
+      background: #071B36;
+      color: #FFFFFF;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .clean-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.035);
-      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.25s ease;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.25s ease;
     }
     .clean-card:hover {
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.055);
     }
     .clean-card:active {
       transform: scale(0.985);
     }
 
-    .highlighted-profile-card {
-      background: var(--profile-card-bg);
-      border: 1px solid var(--profile-card-border);
-      border-radius: 18px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.045);
+    /* Symmetrical Raised Vector Icon Box */
+    .vector-icon-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--icon-bg);
+      color: var(--icon-color);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
     /* PRO vs TRIAL Visual Distinction */
     body.tier-pro .tier-badge {
-      background: #111827;
-      color: #FCD34D;
-      border: 1px solid rgba(252, 211, 77, 0.5);
+      background: #FCD34D;
+      color: #111827;
     }
     body.tier-trial .tier-badge {
-      background: #ECFDF5;
-      color: #067A5C;
-      border: 1px solid #A7F3D0;
+      background: #10B981;
+      color: #FFFFFF;
     }
     body.tier-blocked .tier-badge {
-      background: #FEF2F2;
-      color: #B91C1C;
-      border: 1px solid #FECACA;
+      background: #EF4444;
+      color: #FFFFFF;
     }
 
-    /* Nature Auto-Rotating Hero Banner (70%) + Digital Clock (30%) */
-    .nature-banner-card {
+    /* Full-Width Nature Hero Banner with Embedded Right-Side Digital Clock */
+    .nature-hero-full {
       position: relative;
-      border-radius: 20px;
+      width: 100%;
+      border-radius: 18px;
       overflow: hidden;
-      min-height: 112px;
-      background: linear-gradient(135deg, #065F46 0%, #0EA5E9 55%, #10B981 100%);
+      min-height: 104px;
+      background: linear-gradient(135deg, #064E3B 0%, #0F766E 52%, #071B36 100%);
       border: 1px solid var(--border-subtle);
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
     }
     .nature-banner-img {
       position: absolute;
@@ -191,58 +191,112 @@
       object-fit: cover;
       transition: opacity 0.6s ease;
     }
-    .nature-banner-overlay {
+    .nature-hero-content {
       position: relative;
       z-index: 2;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(7, 27, 54, 0.72) 0%, rgba(7, 27, 54, 0.28) 65%, rgba(7, 27, 54, 0.15) 100%);
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      min-height: 104px;
+      background: linear-gradient(90deg, rgba(7, 27, 54, 0.76) 0%, rgba(7, 27, 54, 0.42) 64%, rgba(7, 27, 54, 0.68) 100%);
+      color: #FFFFFF;
+    }
+    .nature-left-info {
+      flex: 1;
       padding: 12px 14px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      color: #FFFFFF;
+      justify-content: center;
+      min-width: 0;
+    }
+    .nature-right-clock {
+      width: 31%;
+      max-width: 155px;
+      min-width: 104px;
+      background: rgba(7, 27, 54, 0.58);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-left: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-shrink: 0;
     }
 
-    .digital-clock-card {
-      background: var(--clock-bg);
-      color: var(--clock-text);
+    /* Separate Tinted Personal Section */
+    .personal-separate-zone {
+      background: var(--personal-zone-bg);
+      border: 1px solid var(--personal-zone-border);
       border-radius: 20px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-      min-height: 112px;
+      padding: 12px;
     }
 
     /* Always-Visible Theme Button & Palette Drawer */
     .theme-fab-btn {
       position: fixed;
       right: 12px;
-      bottom: 84px;
+      bottom: 108px;
       z-index: 65;
       background: var(--brand-primary);
       color: #FFFFFF;
       border: 1.5px solid rgba(255, 255, 255, 0.25);
       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
       border-radius: 9999px;
-      padding: 8px 13px;
-      font-size: 11.5px;
+      padding: 7px 12px;
+      font-size: 11px;
       font-weight: 800;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       cursor: pointer;
     }
     .theme-drawer-panel {
       position: fixed;
       right: 12px;
-      bottom: 128px;
+      bottom: 148px;
       z-index: 66;
-      width: 245px;
+      width: 240px;
       background: var(--bg-surface);
       color: var(--text-main);
       border: 1px solid var(--border-subtle);
-      border-radius: 20px;
+      border-radius: 18px;
       box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
       padding: 12px;
+    }
+
+    /* Bottom Scrolling Customization Ticker */
+    .mj-scroll-ticker {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 62px;
+      z-index: 68;
+      background: #0F294A;
+      color: #F8FAFC;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      height: 30px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .mj-ticker-track {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: mjMarquee 26s linear infinite;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding-left: 100%;
+    }
+    .mj-scroll-ticker:hover .mj-ticker-track {
+      animation-play-state: paused;
+    }
+    @keyframes mjMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
     }
 
     /* Voice Mic & Wave Animation */
@@ -303,7 +357,7 @@
       box-shadow: 0 12px 30px rgba(15, 41, 74, 0.08);
       overflow: hidden;
       color: #1E293B;
-      font-family: "Plus Jakarta Sans", "Noto Sans Devanagari", sans-serif;
+      font-family: "Noto Sans Devanagari", "Plus Jakarta Sans", sans-serif;
     }
     .mj-parchi-top {
       background: linear-gradient(135deg, #071B36 0%, #0F2E54 100%);
@@ -426,7 +480,6 @@
       color: #F8FAFC;
       font-size: 9.5px;
       font-weight: 600;
-      letter-spacing: 0.01em;
       text-align: center;
       padding: 5px 10px;
       line-height: 1.35;
@@ -439,22 +492,24 @@
       left: 0;
       right: 0;
       z-index: 70;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: saturate(180%) blur(18px);
-      -webkit-backdrop-filter: saturate(180%) blur(18px);
+      background: rgba(255, 255, 255, 0.97);
       border-top: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.04);
-      padding: 6px 18px 5px;
+      padding: 6px 18px 4px;
       color: #334155;
-      font-size: 11.5px;
+      font-size: 11px;
+      height: 62px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .mj-ff-inner {
       max-width: 1240px;
+      width: 100%;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 14px;
     }
     .mj-ff-left {
       display: flex;
@@ -463,7 +518,7 @@
       flex-wrap: wrap;
     }
     .mj-ff-coolart-img { height: 15px; width: auto; object-fit: contain; display: block; }
-    .mj-ff-mj-img { height: 17px; width: auto; object-fit: contain; display: inline-block; }
+    .mj-ff-mj-img { height: 16px; width: auto; object-fit: contain; display: inline-block; }
     .mj-ff-sep { color: #CBD5E1; }
     .mj-ff-phone {
       color: #0F294A;
@@ -478,60 +533,58 @@
       align-items: center;
       gap: 6px;
       color: #64748B;
-      font-size: 11.5px;
+      font-size: 11px;
       white-space: nowrap;
     }
     .mj-ff-right strong { color: #0F294A; font-weight: 800; }
     .mj-build-version {
       max-width: 1240px;
+      width: 100%;
       margin: 2px auto 0;
       text-align: center;
       font-size: 9.5px;
       font-weight: 500;
       color: #9CA3AF;
-      letter-spacing: 0.02em;
     }
 
     @media (max-width: 768px) {
-      body { padding-bottom: 80px; }
-      .mj-fixed-footer { padding: 6px 10px 4px; }
       .mj-ff-inner {
         flex-direction: column;
         justify-content: center;
-        gap: 2px;
+        gap: 1px;
         text-align: center;
       }
       .mj-ff-left { justify-content: center; gap: 0; }
       .mj-ff-coolart-img, .mj-ff-sep, .mj-ff-phone { display: none; }
-      .mj-ff-copy { font-size: 10.5px; color: #475569; }
+      .mj-ff-copy { font-size: 10px; color: #475569; }
       .mj-ff-right {
-        font-size: 10.5px;
+        font-size: 10px;
         flex-wrap: wrap;
         justify-content: center;
         gap: 4px;
       }
       .mj-ff-mj-img { height: 14px; }
-      .mj-build-version { font-size: 9px; }
+      .mj-build-version { font-size: 8.5px; margin-top: 1px; }
     }
   </style>
 </head>
 <body data-theme="munimji" class="tier-trial min-h-screen flex flex-col">
 
-  <!-- Top Header -->
-  <header class="themed-header sticky top-0 z-40">
-    <div class="max-w-6xl mx-auto px-3.5 sm:px-6 h-13 py-2 flex items-center justify-between gap-2">
-      <div class="flex items-center gap-2 min-w-0">
-        <a href="index.html" class="flex-shrink-0 bg-white px-2 py-1 rounded-xl border border-black/[0.06]">
-          <img src="logo.png" alt="MunimJi Logo" class="h-6 sm:h-7 w-auto object-contain" />
+  <!-- Fixed Brand Header with Larger MunimJi Logo -->
+  <header class="fixed-brand-header sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-3.5 sm:px-6 h-14 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <a href="index.html" class="flex-shrink-0 bg-white px-2.5 py-1 rounded-xl shadow-sm">
+          <img src="logo.png" alt="MunimJi Logo" class="h-7 sm:h-8 w-auto object-contain" />
         </a>
-        <span id="headerTierBadge" class="tier-badge text-[10px] font-extrabold px-2 py-0.5 rounded-full tracking-wide">TRIAL</span>
+        <span id="headerTierBadge" class="tier-badge text-[10px] font-extrabold px-2 py-0.5 rounded-full">TRIAL</span>
       </div>
 
       <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-        <button type="button" id="openProfileBtn" class="text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-full border border-current/15 bg-black/[0.04] hover:bg-black/[0.08] transition">
-          प्रोफाइल
+        <button type="button" id="openProfileBtn" class="text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 text-white transition">
+          प्रोफ़ाइल
         </button>
-        <button type="button" id="logoutBtn" class="text-[11px] sm:text-xs font-bold text-red-600 bg-red-500/10 border border-red-500/20 px-2.5 sm:px-3 py-1.5 rounded-full transition">
+        <button type="button" id="logoutBtn" class="text-[11px] sm:text-xs font-bold bg-red-500/20 hover:bg-red-500/30 text-red-200 border border-red-400/30 px-2.5 sm:px-3 py-1.5 rounded-full transition">
           लॉग आउट
         </button>
       </div>
@@ -539,7 +592,7 @@
   </header>
 
   <!-- Main Workspace -->
-  <main class="max-w-6xl mx-auto px-3.5 sm:px-6 pt-2 pb-5 flex-grow w-full space-y-3 sm:space-y-4">
+  <main class="max-w-6xl mx-auto px-3.5 sm:px-6 pt-2.5 pb-4 flex-grow w-full space-y-3 sm:space-y-4">
 
     <!-- Voice Status Toast -->
     <div id="voiceStatusToast" class="hidden clean-card border-red-300 bg-red-50 px-3.5 py-2 flex items-center justify-between gap-2 text-xs font-bold text-red-800">
@@ -560,99 +613,88 @@
       </a>
     </div>
 
-    <!-- 1. Highlighted Shop/User Name Card Attached Close to Header -->
-    <section class="highlighted-profile-card px-3.5 py-3 sm:px-5 sm:py-4 flex items-center justify-between gap-3">
-      <div class="flex items-center gap-3 min-w-0">
-        <img id="cardAvatarImg" src="favicon.png" alt="Avatar" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl object-cover border border-amber-400/50 bg-white hidden flex-shrink-0" />
-        <div id="cardAvatarInitial" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl text-white text-xl font-extrabold flex items-center justify-center flex-shrink-0 shadow-sm" style="background: var(--brand-primary);">M</div>
+    <!-- 1. Compact User / Shop Identity Strip (Small Avatar + Name + Category + Shop Name) -->
+    <section class="clean-card px-3 py-2 sm:px-4 sm:py-2.5 flex items-center justify-between gap-2.5">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <img id="cardAvatarImg" src="favicon.png" alt="Avatar" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-black/10 bg-white hidden flex-shrink-0" />
+        <div id="cardAvatarInitial" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full text-white text-xs font-extrabold flex items-center justify-center flex-shrink-0" style="background: var(--brand-primary);">M</div>
         <div class="min-w-0">
-          <div class="flex items-center gap-2 flex-wrap">
-            <h1 id="cardUserName" class="text-lg sm:text-2xl font-extrabold tracking-tight truncate">नमस्ते, MunimJi</h1>
-            <span id="heroTierBadge" class="tier-badge text-[10px] font-extrabold px-2 py-0.5 rounded-full">TRIAL</span>
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <span id="cardUserName" class="text-xs sm:text-sm font-extrabold truncate">मेरा खाता</span>
+            <span id="cardCategoryBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-black/[0.06]">दुकानदार</span>
           </div>
-          <p id="cardUserMeta" class="text-[11px] sm:text-xs opacity-75 truncate mt-0.5">आपका डिजिटल मुनीम खाता</p>
+          <div id="cardShopSubline" class="text-[10.5px] sm:text-xs opacity-75 truncate">दुकान का नाम सेट करने के लिए प्रोफ़ाइल खोलें</div>
         </div>
       </div>
 
-      <span class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-700 border border-emerald-500/20">
-        <span>●</span> लाइव खाता
-      </span>
+      <span class="text-[10.5px] font-bold text-emerald-600 flex-shrink-0">● सक्रिय</span>
     </section>
 
-    <!-- 2. Horizontal Row: ~70% Auto-Rotating Nature Hero Banner + ~30% Live Digital Clock -->
-    <section class="grid grid-cols-12 gap-2.5 sm:gap-4 items-stretch">
-      <!-- ~70% Nature Banner (Auto-rotates nature scenes + user can also test/change image) -->
-      <div class="col-span-8 sm:col-span-9 nature-banner-card">
-        <img id="natureBannerImg" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" alt="Nature View" class="nature-banner-img" />
-        <div class="nature-banner-overlay">
-          <div class="flex items-center justify-between gap-2">
-            <span class="bg-black/35 backdrop-blur-sm text-[9.5px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-white/20">
-              🌿 शुभ दिन · MunimJi
-            </span>
-            <div class="flex items-center gap-1">
-              <button type="button" id="nextNatureImgBtn" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-0.5 rounded-full transition" title="अगली नेचर फोटो">
-                अगली फोटो ↻
-              </button>
-              <button type="button" id="customNatureImgBtn" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-0.5 rounded-full transition" title="अपना फोटो लिंक लगाएं">
-                बदलें
-              </button>
-            </div>
+    <!-- 2. Full-Width Nature Hero Banner with Embedded Right-Side Digital Clock (No Change Buttons) -->
+    <section class="nature-hero-full">
+      <img id="natureBannerImg" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80" alt="Nature Scenery" class="nature-banner-img" />
+      <div class="nature-hero-content">
+        <div class="nature-left-info">
+          <div id="heroGreetingTitle" class="text-sm sm:text-lg font-extrabold leading-snug drop-shadow">
+            शुभ दिन, मित्र
           </div>
-          <div class="mt-2">
-            <div id="natureQuoteText" class="text-xs sm:text-base font-extrabold leading-snug drop-shadow">
-              साफ़ हिसाब, सुकून भरा व्यापार।
-            </div>
-            <div class="text-[10px] sm:text-xs text-white/85 mt-0.5">
-              हर बिल, उधार और ज़रूरी सामान की पर्ची अब एक क्लिक में।
-            </div>
+          <p id="natureQuoteText" class="text-[11px] sm:text-xs text-white/90 mt-1 line-clamp-2">
+            साफ़ हिसाब, सुकून भरा व्यापार। हर बिल और उधार खाता एक क्लिक में।
+          </p>
+        </div>
+
+        <div class="nature-right-clock">
+          <div id="liveClockDay" class="text-[10px] sm:text-xs font-bold text-amber-300">शुक्रवार</div>
+          <div class="flex items-baseline justify-center gap-1 mt-0.5">
+            <span id="liveClockTime" class="text-base sm:text-2xl font-extrabold text-white">10:22</span>
+            <span id="liveClockAmPm" class="text-[9.5px] sm:text-[11px] font-bold text-amber-200">PM</span>
           </div>
+          <div id="liveClockDate" class="text-[9.5px] sm:text-xs text-white/85 mt-1 pt-1 border-t border-white/20 w-full">20/11/2026</div>
         </div>
       </div>
-
-      <!-- ~30% Apple-Style Live Digital Clock -->
-      <div class="col-span-4 sm:col-span-3 digital-clock-card p-2.5 sm:p-4 flex flex-col items-center justify-center text-center">
-        <div id="liveClockDay" class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider opacity-85">शुक्रवार</div>
-        <div id="liveClockTime" class="text-lg sm:text-2xl font-extrabold tracking-tight mt-0.5" style="color: var(--clock-accent);">09:46</div>
-        <div id="liveClockAmPm" class="text-[9.5px] sm:text-[11px] font-bold opacity-80">PM</div>
-        <div id="liveClockDate" class="text-[9.5px] sm:text-xs font-semibold opacity-80 mt-1 pt-1 border-t border-current/15 w-full">20/11/2026</div>
-      </div>
     </section>
 
-    <!-- 3. Shop / Business Section Heading + Clean Outlined Icon Cards (No heavy bottom bar) -->
+    <!-- 3. Symmetrical Vector Icon Action Grid (Shop / Daily Work) -->
     <div class="flex items-center justify-between pt-0.5">
-      <span class="text-[11px] font-extrabold uppercase tracking-wider opacity-70">दुकान व व्यापार के मुख्य कार्य</span>
-      <span class="text-[10.5px] opacity-60">एक टैप में खोलें</span>
+      <span class="text-[11.5px] font-extrabold opacity-75">दुकान व दैनिक हिसाब</span>
+      <span class="text-[10.5px] opacity-60">एक क्लिक में खोलें</span>
     </div>
 
     <section class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
       <!-- Card 1: New Bill -->
-      <button type="button" id="openBillingCardBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between group">
+      <button type="button" id="openBillingCardBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
         <div class="flex items-center justify-between w-full">
-          <span class="w-10 h-10 rounded-full bg-emerald-500/15 text-emerald-600 flex items-center justify-center text-lg group-hover:scale-105 transition">🧾</span>
-          <span class="text-[10px] font-bold opacity-60">बिल</span>
+          <span class="vector-icon-box">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16l3-2 3 2 3-2 3 2 3-2V8z"/><path d="M14 2v6h6"/><path d="M8 12h8"/><path d="M8 16h5"/></svg>
+          </span>
+          <span class="text-[10px] font-bold opacity-60">पर्ची</span>
         </div>
         <div class="mt-2.5">
           <div class="text-sm font-extrabold leading-tight">नया बिल बनाएं</div>
-          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">मॉडर्न पर्ची व शेयर</div>
+          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">डिजिटल पर्ची व शेयर</div>
         </div>
       </button>
 
       <!-- Card 2: Add Customer -->
-      <button type="button" id="openCustomerBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between group">
+      <button type="button" id="openCustomerBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
         <div class="flex items-center justify-between w-full">
-          <span class="w-10 h-10 rounded-full bg-amber-500/15 text-amber-600 flex items-center justify-center text-lg font-extrabold group-hover:scale-105 transition">➕</span>
+          <span class="vector-icon-box">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          </span>
           <span class="text-[10px] font-bold opacity-60">ग्राहक</span>
         </div>
         <div class="mt-2.5">
           <div class="text-sm font-extrabold leading-tight">नया ग्राहक जोड़ें</div>
-          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">नाम, मोबाइल व उधार</div>
+          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">नाम, मोबाइल व बकाया</div>
         </div>
       </button>
 
       <!-- Card 3: Khata Ledger -->
-      <button type="button" id="openKhataBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between group">
+      <button type="button" id="openKhataBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
         <div class="flex items-center justify-between w-full">
-          <span class="w-10 h-10 rounded-full bg-blue-500/15 text-blue-600 flex items-center justify-center text-lg group-hover:scale-105 transition">📒</span>
+          <span class="vector-icon-box">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="16" y2="7"/><line x1="9" y1="11" x2="14" y2="11"/></svg>
+          </span>
           <span class="text-[10px] font-bold opacity-60">खाता</span>
         </div>
         <div class="mt-2.5">
@@ -661,10 +703,10 @@
         </div>
       </button>
 
-      <!-- Card 4: Dedicated UPI Payment Card with ₹ Symbol -->
-      <button type="button" id="upiSetupCardBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between group">
+      <!-- Card 4: UPI Payment QR Card -->
+      <button type="button" id="upiSetupCardBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
         <div class="flex items-center justify-between w-full">
-          <span class="w-10 h-10 rounded-full bg-indigo-500/15 text-indigo-600 flex items-center justify-center text-lg font-extrabold group-hover:scale-105 transition">₹</span>
+          <span class="vector-icon-box font-extrabold text-base">₹</span>
           <span id="upiStatusPill" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-700">UPI सेट करें</span>
         </div>
         <div class="mt-2.5">
@@ -674,84 +716,87 @@
       </button>
     </section>
 
-    <!-- 4. Shop Live Metrics Row (Udhar, Galla, Need List) -->
-    <section class="grid grid-cols-3 gap-2.5 sm:gap-3.5">
+    <!-- 4. Live Udhar, Galla (Absence/Staff Tracking) & Always-Visible Vendor Stock Shortage Card -->
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3.5">
       <!-- Total Udhar -->
-      <button type="button" id="udharMetricCardBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
-        <div class="flex items-center justify-between">
-          <span class="text-[10.5px] sm:text-xs font-bold opacity-70">बाकी उधार</span>
-          <span class="text-xs">💰</span>
+      <button type="button" id="udharMetricCardBtn" class="clean-card p-3.5 text-left flex items-center justify-between sm:block">
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-xs font-bold opacity-75">बाकी कुल उधार</span>
+          </div>
+          <div id="totalUdharDisplay" class="text-lg sm:text-xl font-extrabold text-rose-600 mt-1">₹0.00</div>
+          <div class="text-[10.5px] opacity-65 mt-0.5">ग्राहकों पर कुल बकाया</div>
         </div>
-        <div id="totalUdharDisplay" class="text-sm sm:text-xl font-extrabold text-rose-600 mt-1.5 truncate">₹0.00</div>
-        <div class="text-[10px] opacity-60 mt-0.5 truncate">कुल बकाया</div>
+        <span class="sm:hidden text-xs font-bold opacity-60">देखें →</span>
       </button>
 
-      <!-- Galla Entry -->
-      <button type="button" id="openCashbookBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
-        <div class="flex items-center justify-between">
-          <span class="text-[10.5px] sm:text-xs font-bold opacity-70">गल्ला रिपोर्ट</span>
-          <span class="text-xs">📊</span>
+      <!-- Galla Report (Cash, UPI & Expense for Owner/Staff Clarity) -->
+      <button type="button" id="openCashbookBtn" class="clean-card p-3.5 text-left flex items-center justify-between sm:block">
+        <div class="min-w-0">
+          <div class="flex items-center justify-between gap-1">
+            <span class="text-xs font-bold opacity-75">गल्ला रिपोर्ट (कैश · UPI · खर्च)</span>
+          </div>
+          <div id="totalSalesDisplay" class="text-lg sm:text-xl font-extrabold mt-1">₹0.00</div>
+          <div id="gallaBreakdownLine" class="text-[10.5px] opacity-75 mt-0.5 truncate">कैश ₹0 · UPI ₹0 · खर्च ₹0</div>
         </div>
-        <div id="totalSalesDisplay" class="text-sm sm:text-xl font-extrabold mt-1.5 truncate">₹0.00</div>
-        <div class="text-[10px] opacity-70 mt-0.5 truncate">शुद्ध: <strong id="drawerCashDisplay" class="text-emerald-600">₹0.00</strong></div>
+        <span class="sm:hidden text-xs font-bold opacity-60">लिखें →</span>
       </button>
 
-      <!-- Need List (Ruled Hindi Copy) -->
-      <button type="button" id="openStockBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
-        <div class="flex items-center justify-between gap-1">
-          <span id="needListCardTag" class="text-[10.5px] sm:text-xs font-bold opacity-70 truncate">ज़रूरी सूची</span>
-          <span id="savedParchiCountBadge" class="text-[9.5px] font-extrabold bg-emerald-500/15 text-emerald-700 px-1.5 py-0.5 rounded-full flex-shrink-0">0</span>
+      <!-- Vendor Stock Shortage Card (Always shows low/pending stock items on every open) -->
+      <button type="button" id="openStockBtn" class="clean-card p-3.5 text-left flex items-center justify-between sm:block border-amber-400/40">
+        <div class="min-w-0">
+          <div class="flex items-center justify-between gap-1.5">
+            <span id="needListCardTag" class="text-xs font-extrabold text-amber-700 truncate">स्टॉक भरें / वेंडर सूची</span>
+            <span id="shortageItemsCountBadge" class="text-[10px] font-extrabold bg-amber-500/15 text-amber-800 px-2 py-0.5 rounded-full flex-shrink-0">0 सामान बाकी</span>
+          </div>
+          <div id="topShortagePreview" class="text-xs font-bold mt-1.5 truncate">अभी सभी स्टॉक पूरा है · लिस्ट खोलें</div>
+          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">खत्म सामान लिखें और वेंडर को भेजें</div>
         </div>
-        <div id="topShortagePreview" class="text-xs sm:text-sm font-extrabold mt-1.5 truncate">कॉपी खोलें</div>
-        <div class="text-[10px] opacity-60 mt-0.5 truncate">सामान लिखें व भेजें</div>
       </button>
     </section>
 
-    <!-- 5. Divider + Personal / Private "Lena Hai / Dena Hai" Ledger Section -->
-    <div class="pt-2">
-      <div class="border-t border-slate-300/70 my-2"></div>
-      <div class="flex flex-wrap items-center justify-between gap-2 bg-black/[0.03] px-3.5 py-2 rounded-2xl border border-current/10">
+    <!-- 5. Distinct Tinted Zone: Personal / Private "Lena Hai / Dena Hai" Ledger -->
+    <section class="personal-separate-zone space-y-2.5">
+      <div class="flex flex-wrap items-center justify-between gap-2">
         <div class="text-[11px] sm:text-xs font-bold leading-snug">
           🔒 <strong>यह आपका पर्सनल (निजी) हिसाब है</strong> — इसका ऊपर के दुकान के हिसाब से कोई संबंध नहीं है।
         </div>
-        <button type="button" id="openPersonalLedgerBtn" class="text-[11px] font-extrabold px-3 py-1 rounded-full text-white flex-shrink-0" style="background: var(--brand-primary);">
-          + नया लेन-देन जोड़ें
-        </button>
       </div>
-    </div>
 
-    <section class="space-y-2.5">
       <div class="grid grid-cols-2 gap-2.5 sm:gap-3.5">
-        <!-- Card A: Lene Hain (To Receive) -->
-        <button type="button" id="openReceiveLedgerBtn" class="clean-card p-3.5 sm:p-4 text-left flex flex-col justify-between">
+        <!-- Card A: Lene Hain (Opens directly in 'receive' mode) -->
+        <button type="button" id="openReceiveLedgerBtn" class="clean-card p-3.5 text-left flex flex-col justify-between">
           <div class="flex items-center justify-between w-full">
-            <span class="w-9 h-9 rounded-full bg-emerald-500/15 text-emerald-600 flex items-center justify-center text-base font-extrabold">↓₹</span>
+            <span class="vector-icon-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            </span>
             <span id="receivePeopleCountBadge" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700">0 लोग</span>
           </div>
           <div class="mt-2">
             <div class="text-xs sm:text-sm font-extrabold">रुपये लेने हैं</div>
             <div id="personalReceiveTotalDisplay" class="text-base sm:text-xl font-extrabold text-emerald-600 mt-0.5">₹0.00</div>
-            <div class="text-[10px] opacity-65 mt-0.5">रिकॉर्ड व पर्ची देखें →</div>
+            <div class="text-[10px] opacity-65 mt-0.5">लिखें व पर्ची देखें →</div>
           </div>
         </button>
 
-        <!-- Card B: Dene Hain (To Pay) -->
-        <button type="button" id="openPayLedgerBtn" class="clean-card p-3.5 sm:p-4 text-left flex flex-col justify-between">
+        <!-- Card B: Dene Hain (Opens directly in 'pay' mode) -->
+        <button type="button" id="openPayLedgerBtn" class="clean-card p-3.5 text-left flex flex-col justify-between">
           <div class="flex items-center justify-between w-full">
-            <span class="w-9 h-9 rounded-full bg-rose-500/15 text-rose-600 flex items-center justify-center text-base font-extrabold">↑₹</span>
+            <span class="vector-icon-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+            </span>
             <span id="payPeopleCountBadge" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-700">0 लोग</span>
           </div>
           <div class="mt-2">
             <div class="text-xs sm:text-sm font-extrabold">रुपये देने हैं</div>
             <div id="personalPayTotalDisplay" class="text-base sm:text-xl font-extrabold text-rose-600 mt-0.5">₹0.00</div>
-            <div class="text-[10px] opacity-65 mt-0.5">रिकॉर्ड व पर्ची देखें →</div>
+            <div class="text-[10px] opacity-65 mt-0.5">लिखें व पर्ची देखें →</div>
           </div>
         </button>
       </div>
 
-      <!-- Smart Net Calculation Insight Sentence Below Lena / Dena Cards -->
-      <div id="personalNetInsightBox" class="clean-card px-3.5 py-2.5 text-xs font-semibold leading-relaxed flex items-center gap-2">
-        <span class="text-base">💡</span>
+      <!-- Smart Net Calculation Insight Line -->
+      <div class="clean-card px-3.5 py-2.5 text-xs font-semibold leading-relaxed">
         <span id="personalNetInsightText">आज की तारीख में अपना निजी लेने-देने का हिसाब जोड़ें, यहाँ अपने आप बचत या ज़रूरत का हिसाब दिखेगा।</span>
       </div>
     </section>
@@ -807,30 +852,40 @@
     </div>
   </div>
 
-  <!-- MODAL: Personal Lena / Dena Ledger & Parchi Record -->
+  <!-- Clean Bottom Scrolling Customization Strip with Direct Pre-Filled WhatsApp Link -->
+  <a
+    href="https://wa.me/919458614610?text=Namaste%20Cool%20Art%20Team%2C%20mujhe%20MunimJi%20software%20apne%20hisab%20se%20customize%20karwana%20hai%20aur%20ismein%20kuch%20naye%20features%20badhwane%20hain.%20Kripya%20jaldi%20sampark%20karen."
+    target="_blank"
+    rel="noopener"
+    class="mj-scroll-ticker"
+    title="WhatsApp पर कस्टम सॉफ्टवेयर के लिए बात करें"
+  >
+    <div class="mj-ticker-track">
+      ✨ यदि यह सॉफ्टवेयर आपके अनुकूल है और आप इसमें कोई नया फीचर बढ़वाना या अपने हिसाब से कस्टमाइज़ करवाना चाहते हैं, तो बहुत ही कम / ना के बराबर शुल्क में बनवा सकते हैं — संपर्क करें Helpline: +91 9458614610 (सीधा WhatsApp करने के लिए यहाँ क्लिक करें) &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+    </div>
+  </a>
+
+  <!-- MODAL: Personal Lena / Dena Ledger (Fixed Direction per Card) -->
   <div id="personalLedgerModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
     <div class="bg-white text-slate-900 w-full max-w-4xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[92vh] overflow-y-auto space-y-4">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200">
         <div>
-          <h3 class="text-lg font-bold">पर्सनल (निजी) लेन-देन हिसाब व पर्ची</h3>
+          <h3 id="personalModalMainHeading" class="text-lg font-bold">निजी हिसाब — रुपये लेने हैं</h3>
           <p class="text-xs text-slate-500">यह आपका निजी हिसाब है — इसका दुकान के खाते से कोई संबंध नहीं है।</p>
         </div>
         <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-        <!-- Left: Add New Personal Entry -->
+        <!-- Left: Add Entry (Locked to Selected Card Category) -->
         <div class="lg:col-span-5 bg-slate-50 p-4 rounded-2xl space-y-3 border border-slate-200">
-          <div class="text-xs font-extrabold text-slate-800 uppercase">नई निजी एंट्री जोड़ें</div>
-          <div>
-            <label class="block text-xs font-semibold mb-1">प्रकार चुनें</label>
-            <select id="personalDirectionInput" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm bg-white font-semibold">
-              <option value="receive">रुपये लेने हैं (किससे लेने हैं)</option>
-              <option value="pay">रुपये देने हैं (किसको देने हैं)</option>
-            </select>
+          <div class="flex items-center justify-between">
+            <span id="personalFormBadge" class="text-xs font-extrabold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">श्रेणी: रुपये लेने हैं</span>
           </div>
+          <input type="hidden" id="personalDirectionInput" value="receive" />
+
           <div>
-            <label class="block text-xs font-semibold mb-1">व्यक्ति का नाम</label>
+            <label id="personalPersonLabel" class="block text-xs font-semibold mb-1">किससे लेने हैं (व्यक्ति का नाम)</label>
             <div class="voice-wrap">
               <input type="text" id="personalPersonName" placeholder="जैसे: राजेश शर्मा" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
               <button type="button" data-voice-target="personalPersonName" class="mic-btn" title="बोलकर लिखें">🎤</button>
@@ -858,25 +913,22 @@
           </div>
           <div>
             <label class="block text-xs font-semibold mb-1">विवरण / नोट</label>
-            <input type="text" id="personalNoteInput" placeholder="जैसे: निजी व्यवहार / उधार" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
+            <input type="text" id="personalNoteInput" placeholder="जैसे: निजी व्यवहार" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
           </div>
           <button type="button" id="savePersonalLedgerBtn" class="w-full bg-[#071B36] text-white font-bold py-2.5 rounded-full hover:bg-black transition text-sm">
             रिकॉर्ड सुरक्षित करें
           </button>
         </div>
 
-        <!-- Right: All Records List -->
+        <!-- Right: Filtered Records for this Category -->
         <div class="lg:col-span-7 space-y-3">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-extrabold text-slate-700">सभी निजी लेन-देन रिकॉर्ड</span>
-            <div class="flex gap-1.5 text-[11px]">
-              <span class="bg-emerald-50 text-emerald-700 font-bold px-2.5 py-0.5 rounded-full">लेने हैं: <strong id="modalReceiveSum">₹0</strong></span>
-              <span class="bg-rose-50 text-rose-700 font-bold px-2.5 py-0.5 rounded-full">देने हैं: <strong id="modalPaySum">₹0</strong></span>
-            </div>
+            <span id="personalRecordsListTitle" class="text-xs font-extrabold text-slate-700">जिनसे रुपये लेने हैं उनकी सूची</span>
+            <span id="personalCategoryTotalPill" class="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700">कुल: ₹0</span>
           </div>
 
           <div id="personalLedgerRecordsList" class="space-y-2 max-h-[380px] overflow-y-auto pr-1">
-            <p class="text-xs text-slate-400 italic py-6 text-center">अभी कोई निजी लेन-देन दर्ज नहीं है।</p>
+            <p class="text-xs text-slate-400 italic py-6 text-center">अभी कोई रिकॉर्ड दर्ज नहीं है।</p>
           </div>
         </div>
       </div>
@@ -957,11 +1009,11 @@
     </div>
   </div>
 
-  <!-- MODAL: Profile Edit (with UPI ID & Parchi Header) -->
+  <!-- MODAL: Profile Edit (Category + Shop Name + UPI ID) -->
   <div id="profileModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white text-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
-        <h3 class="text-lg font-bold">प्रोफाइल, UPI और पर्ची विवरण</h3>
+        <h3 class="text-lg font-bold">प्रोफाइल, दुकान का नाम और UPI</h3>
         <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
       </div>
       <div class="space-y-3.5">
@@ -975,34 +1027,39 @@
         </div>
 
         <div>
-          <label class="block text-xs font-semibold mb-1">आपका नाम / व्यापार या घर का नाम</label>
-          <input type="text" id="profileNameInput" placeholder="जैसे: जय महाकाल ट्रेडर्स / शर्मा किराना" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-semibold mb-1">मोबाइल नंबर (पर्ची के लिए)</label>
-            <input type="tel" id="profilePhoneInput" maxlength="15" placeholder="9458614610" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold mb-1">UPI ID (पेमेंट QR के लिए)</label>
-            <input type="text" id="profileUpiInput" placeholder="shop@upi" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
-          </div>
+          <label class="block text-xs font-semibold mb-1">आपका पूरा नाम</label>
+          <input type="text" id="profileNameInput" placeholder="जैसे: कृष्णकांत भारद्वाज" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
         </div>
 
         <div>
-          <label class="block text-xs font-semibold mb-1">पर्ची शीर्ष / पता (वैकल्पिक)</label>
-          <input type="text" id="profileTaglineInput" placeholder="जैसे: जय महाकाल · मेन बाजार, अतरौली" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold mb-1">उपयोग श्रेणी</label>
+          <label class="block text-xs font-semibold mb-1">उपयोग श्रेणी चुनें</label>
           <select id="profileCategoryInput" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm bg-white">
             <option value="shop">दुकानदार / किराना / रिटेल</option>
             <option value="mandi">मंडी, बीज व थोक व्यापार</option>
             <option value="school">स्कूल, कोचिंग व टीचर</option>
             <option value="household">गृहणी / स्टूडेंट / पर्सनल हिसाब</option>
           </select>
+        </div>
+
+        <div id="shopNameFieldGroup">
+          <label class="block text-xs font-semibold mb-1">दुकान / व्यापार का नाम (पर्ची पर छपेगा)</label>
+          <input type="text" id="profileShopNameInput" placeholder="जैसे: जय महाकाल ट्रेडर्स / शर्मा किराना स्टोर" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold mb-1">मोबाइल नंबर</label>
+            <input type="tel" id="profilePhoneInput" maxlength="15" placeholder="9458614610" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold mb-1">UPI ID (QR के लिए)</label>
+            <input type="text" id="profileUpiInput" placeholder="shop@upi" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold mb-1">पता / पट्टी (वैकल्पिक)</label>
+          <input type="text" id="profileTaglineInput" placeholder="जैसे: मेन बाजार, अतरौली" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
         </div>
 
         <div>
@@ -1295,17 +1352,20 @@
     </div>
   </div>
 
-  <!-- MODAL 4: Galla Entry -->
+  <!-- MODAL 4: Galla Entry (Absence & Staff Sales/Expense Tracking) -->
   <div id="cashbookModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white text-slate-900 w-full max-w-xl rounded-3xl shadow-2xl border border-black/[0.08] p-6 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
-        <h3 class="text-lg font-bold">गल्ला एंट्री और रिपोर्ट</h3>
+      <div class="flex justify-between items-center mb-3 pb-3 border-b border-slate-200">
+        <div>
+          <h3 class="text-lg font-bold">गल्ला रिपोर्ट (कैश · UPI · खर्च)</h3>
+          <p class="text-xs text-slate-500">मालिक की अनुपस्थिति में भी स्टाफ़ या परिवार द्वारा की गई नकद, UPI बिक्री और खर्च का साफ़ रिकॉर्ड।</p>
+        </div>
         <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
       </div>
       <div class="space-y-4">
         <div class="grid grid-cols-3 gap-3 text-center">
           <div class="bg-emerald-50 p-3 rounded-2xl border border-emerald-200">
-            <span class="text-[10px] text-emerald-700 font-bold uppercase">नकद बिक्री</span>
+            <span class="text-[10px] text-emerald-700 font-bold uppercase">नकद बिक्री (Cash)</span>
             <h4 id="modalCashVal" class="text-base font-bold text-emerald-950 mt-0.5">₹0.00</h4>
           </div>
           <div class="bg-blue-50 p-3 rounded-2xl border border-blue-200">
@@ -1313,21 +1373,21 @@
             <h4 id="modalUpiVal" class="text-base font-bold text-blue-950 mt-0.5">₹0.00</h4>
           </div>
           <div class="bg-amber-50 p-3 rounded-2xl border border-amber-200">
-            <span class="text-[10px] text-amber-800 font-bold uppercase">खर्च</span>
+            <span class="text-[10px] text-amber-800 font-bold uppercase">खर्च (Expense)</span>
             <h4 id="modalExpenseVal" class="text-base font-bold text-amber-950 mt-0.5">₹0.00</h4>
           </div>
         </div>
 
         <div class="bg-slate-50 p-4 rounded-2xl space-y-3">
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <select id="entryType" class="px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white">
+            <select id="entryType" class="px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white font-semibold">
               <option value="cash">नकद बिक्री (Cash)</option>
-              <option value="upi">ऑनलाइन / UPI</option>
+              <option value="upi">ऑनलाइन / UPI बिक्री</option>
               <option value="expense">दुकान / घर का खर्च</option>
             </select>
             <input type="number" id="entryAmount" min="0.01" step="any" placeholder="रुपये (₹)" class="px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white" />
             <div class="voice-wrap">
-              <input type="text" id="entryDesc" placeholder="विवरण" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white" />
+              <input type="text" id="entryDesc" placeholder="विवरण (जैसे: शाम की बिक्री)" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white" />
               <button type="button" data-voice-target="entryDesc" class="mic-btn" title="बोलकर लिखें">🎤</button>
             </div>
           </div>
@@ -1337,24 +1397,24 @@
         </div>
 
         <div class="bg-[#071B36] text-white p-3.5 rounded-2xl flex justify-between items-center text-sm">
-          <span>शुद्ध गल्ला:</span>
+          <span>शुद्ध गल्ला (कैश + UPI - खर्च):</span>
           <strong id="modalDrawerVal" class="text-amber-300 text-base">₹0.00</strong>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 5: Persistent Editable Need List + Day-by-Day Saved Parchis -->
+  <!-- MODAL 5: Vendor Stock Replenishment / Low Stock List (Ruled Hindi Copy) -->
   <div id="stockModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
     <div class="bg-white text-slate-900 w-full max-w-5xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[93vh] overflow-y-auto">
       <div class="flex flex-wrap justify-between items-center gap-2 mb-4 pb-3 border-b border-slate-200">
         <div>
-          <h3 id="needListModalHeading" class="text-lg font-bold">दुकान के लिए ज़रूरी सामान की सूची</h3>
-          <p id="activeParchiStatusLabel" class="text-xs text-[#079D76] font-semibold">नई या वर्तमान पर्ची (क्लाउड पर सुरक्षित)</p>
+          <h3 id="needListModalHeading" class="text-lg font-bold">स्टॉक भरने / वेंडर से मंगाने वाले सामान की सूची</h3>
+          <p id="activeParchiStatusLabel" class="text-xs text-[#079D76] font-semibold">दुकान में खत्म या कम पड़ रहे सामान का लाइव रिकॉर्ड</p>
         </div>
         <div class="flex items-center gap-2">
           <button type="button" id="newBlankNeedParchiBtn" class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold px-3.5 py-1.5 rounded-full transition">
-            + नई पर्ची शुरू करें
+            + नई वेंडर लिस्ट शुरू करें
           </button>
           <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none px-1">&times;</button>
         </div>
@@ -1364,7 +1424,7 @@
         <div class="lg:col-span-5 space-y-3.5">
           <div class="bg-slate-50 p-3.5 rounded-2xl space-y-2.5">
             <div>
-              <label class="block text-xs font-semibold mb-1">सामान का नाम</label>
+              <label class="block text-xs font-semibold mb-1">खत्म / कम सामान का नाम</label>
               <div class="voice-wrap">
                 <input type="text" id="shortageItem" placeholder="जैसे: सरसों तेल / चाय पत्ती" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white" />
                 <button type="button" data-voice-target="shortageItem" class="mic-btn" title="बोलकर लिखें">🎤</button>
@@ -1372,7 +1432,7 @@
             </div>
             <div class="grid grid-cols-2 gap-2">
               <div>
-                <label class="block text-xs font-semibold mb-1">मात्रा / संख्या</label>
+                <label class="block text-xs font-semibold mb-1">कितना मंगाना है</label>
                 <input type="text" id="shortageQty" placeholder="जैसे: 5 टिन / 10 kg" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
               </div>
               <div>
@@ -1381,23 +1441,23 @@
               </div>
             </div>
             <button type="button" id="addShortageBtn" class="w-full bg-[#079D76] text-white font-semibold py-2.5 rounded-full hover:bg-[#068664] transition text-sm">
-              + सूची में जोड़ें और सेव करें
+              + वेंडर सूची में जोड़ें और सेव करें
             </button>
           </div>
 
           <div class="border border-slate-200 rounded-2xl p-3">
             <div class="flex justify-between items-center mb-2">
-              <span class="text-xs font-bold">इस पर्ची के आइटम (एडिट या हटाएं)</span>
+              <span class="text-xs font-bold">मंगाने वाले सामान (एडिट या हटाएं)</span>
               <span id="needItemCountText" class="text-[11px] font-semibold text-slate-500">0 आइटम</span>
             </div>
             <div id="editableNeedItemsList" class="space-y-1.5 max-h-36 overflow-y-auto text-xs">
-              <p class="text-slate-400 italic">अभी कोई आइटम नहीं जुड़ा है।</p>
+              <p class="text-slate-400 italic">अभी कोई सामान नहीं जुड़ा है।</p>
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <button type="button" id="sendNeedListWhatsappBtn" class="bg-[#079D76] text-white font-semibold py-2.5 px-3 rounded-full hover:bg-[#068664] transition text-xs">
-              💬 सीधा WhatsApp भेजें
+              💬 वेंडर को WhatsApp भेजें
             </button>
             <button type="button" id="shareThermalBtn" class="bg-[#071B36] text-amber-300 font-semibold py-2.5 px-3 rounded-full hover:bg-slate-900 transition text-xs">
               🖼️ पर्ची इमेज भेजें / डाउनलोड
@@ -1405,7 +1465,7 @@
           </div>
 
           <div class="border border-slate-200 rounded-2xl p-3 bg-slate-50">
-            <div class="text-xs font-bold mb-2">📅 तारीख-वार सेव की गई पर्चियाँ (क्लिक करके खोलें/एडिट करें)</div>
+            <div class="text-xs font-bold mb-2">📅 तारीख-वार पुरानी स्टॉक पर्चियाँ (क्लिक करके खोलें/एडिट करें)</div>
             <div id="savedNeedParchisHistory" class="space-y-1.5 max-h-40 overflow-y-auto text-xs">
               <p class="text-slate-400 italic">सेव की गई पर्चियाँ लोड हो रही हैं...</p>
             </div>
@@ -1419,13 +1479,13 @@
                 <div class="flex items-center gap-2 mb-1.5">
                   <img src="logo.png" alt="MunimJi" class="h-5 w-auto object-contain" />
                 </div>
-                <div id="needListSheetTitle" class="font-extrabold text-[#071B36] text-lg leading-snug">दुकान के लिए ज़रूरी सामान की सूची</div>
+                <div id="needListSheetTitle" class="font-extrabold text-[#071B36] text-lg leading-snug">स्टॉक भरने / वेंडर से मंगाने वाले सामान की सूची</div>
                 <div id="hindiCopyShopLabel" class="text-xs font-semibold text-[#475569] mt-0.5">MunimJi खाता</div>
               </div>
               <div class="ruled-date-card">
                 <div id="hindiCopyDayLabel" class="text-[11px] font-bold text-[#0F294A]">शुक्रवार</div>
                 <div id="hindiCopyDate" class="text-xs font-extrabold text-[#DC2626]">20/11/2026</div>
-                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">09:46 PM</div>
+                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">10:22 PM</div>
               </div>
             </div>
 
@@ -1470,7 +1530,7 @@
         <span>• Developed by <strong>Cool Art®</strong></span>
       </div>
     </div>
-    <div class="mj-build-version">Build v1.6 · Updated 20 Nov 2026</div>
+    <div class="mj-build-version">Build v1.7 · Updated 20 Nov 2026</div>
   </footer>
 
   <script type="module">
@@ -1490,7 +1550,7 @@
       serverTimestamp
     } from "./firebase-config.js";
 
-    // Basic Frontend Deterrence (Right-Click, Copy & DevTools Shortcut Protection without blocking inputs)
+    // Frontend Deterrence (Blocks right-click & DevTools shortcuts while keeping inputs & buttons usable)
     document.addEventListener("contextmenu", (e) => {
       if (!["INPUT", "TEXTAREA"].includes(e.target.tagName)) e.preventDefault();
     });
@@ -1518,11 +1578,11 @@
 
     let personalLedgerEntries = [];
 
-    const categoryLabels = {
-      shop: "दुकानदार / किराना / रिटेल",
-      mandi: "मंडी, बीज व थोक व्यापार",
-      school: "स्कूल, कोचिंग व टीचर",
-      household: "गृहणी / स्टूडेंट / पर्सनल हिसाब",
+    const categoryShortLabels = {
+      shop: "दुकानदार",
+      mandi: "मंडी व्यापार",
+      school: "स्कूल / टीचर",
+      household: "गृहणी / पर्सनल",
       general: "सामान्य खाता"
     };
 
@@ -1530,19 +1590,19 @@
       const cat = currentProfile?.businessType || "shop";
       if (cat === "household") {
         return {
-          cardTag: "घर-रसोई सूची",
-          sheetTitle: "घर व रसोई के लिए ज़रूरी सामान की सूची"
+          cardTag: "घर-रसोई सामान सूची",
+          sheetTitle: "घर व रसोई के लिए मंगाने वाले सामान की सूची"
         };
       }
       if (cat === "school" || cat === "general") {
         return {
-          cardTag: "ज़रूरी सूची",
+          cardTag: "मंगाने वाले सामान सूची",
           sheetTitle: "ज़रूरी सामान की सूची"
         };
       }
       return {
-        cardTag: "ज़रूरी सूची",
-        sheetTitle: "दुकान के लिए ज़रूरी सामान की सूची"
+        cardTag: "स्टॉक भरें / वेंडर सूची",
+        sheetTitle: "स्टॉक भरने / वेंडर से मंगाने वाले सामान की सूची"
       };
     }
 
@@ -1571,22 +1631,22 @@
     updateDigitalClock();
     setInterval(updateDigitalClock, 15000);
 
-    // Nature Auto-Rotating Hero Banner (with safe fallback & user preview option)
+    // Auto-Rotating Nature Hero Banner (with safe gradient fallback, no user edit buttons)
     const natureSlides = [
       {
-        url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80",
-        quote: "साफ़ हिसाब, सुकून भरा व्यापार।"
+        url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80",
+        quote: "साफ़ हिसाब, सुकून भरा व्यापार। हर बिल और उधार खाता एक क्लिक में।"
       },
       {
-        url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=900&q=80",
+        url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=80",
         quote: "हर सुबह नई शुरुआत, हर हिसाब बिल्कुल साफ़।"
       },
       {
-        url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
+        url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80",
         quote: "प्रकृति जैसी ताज़गी, मुनीम जैसा भरोसा।"
       },
       {
-        url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80",
+        url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1000&q=80",
         quote: "बिना कागज़ की उलझन के डिजिटल बही-खाता।"
       }
     ];
@@ -1598,31 +1658,13 @@
       natureImgEl.style.display = "none";
     };
 
-    function showNatureSlide(idx) {
-      const item = natureSlides[idx % natureSlides.length];
+    setInterval(() => {
+      natureIdx = (natureIdx + 1) % natureSlides.length;
+      const item = natureSlides[natureIdx];
       natureImgEl.style.display = "block";
       natureImgEl.src = item.url;
       natureQuoteEl.textContent = item.quote;
-    }
-
-    let natureTimer = setInterval(() => {
-      natureIdx = (natureIdx + 1) % natureSlides.length;
-      showNatureSlide(natureIdx);
     }, 10000);
-
-    document.getElementById("nextNatureImgBtn").addEventListener("click", () => {
-      natureIdx = (natureIdx + 1) % natureSlides.length;
-      showNatureSlide(natureIdx);
-    });
-
-    document.getElementById("customNatureImgBtn").addEventListener("click", () => {
-      const customUrl = prompt("अपनी पसंद की नेचर इमेज का लिंक (URL) यहाँ पेस्ट करें:");
-      if (customUrl && customUrl.trim().startsWith("http")) {
-        clearInterval(natureTimer);
-        natureImgEl.style.display = "block";
-        natureImgEl.src = customUrl.trim();
-      }
-    });
 
     // Theme Switcher
     function applyTheme(themeKey, persistToCloud = false) {
@@ -1858,16 +1900,29 @@
       }
     });
 
+    function toggleShopNameInputVisibility() {
+      const cat = document.getElementById("profileCategoryInput").value;
+      const shopGroup = document.getElementById("shopNameFieldGroup");
+      if (cat === "household") {
+        shopGroup.classList.add("hidden");
+      } else {
+        shopGroup.classList.remove("hidden");
+      }
+    }
+    document.getElementById("profileCategoryInput").addEventListener("change", toggleShopNameInputVisibility);
+
     function openProfileEditor(focusUpi = false) {
       if (!currentUser) return;
       const p = currentProfile || {};
       document.getElementById("modalEmailText").textContent = currentUser.email || "";
       document.getElementById("profileNameInput").value = p.displayName || currentUser.displayName || "";
+      document.getElementById("profileCategoryInput").value = p.businessType || "shop";
+      document.getElementById("profileShopNameInput").value = p.shopName || "";
       document.getElementById("profilePhoneInput").value = p.phone || "";
       document.getElementById("profileUpiInput").value = p.upiId || "";
       document.getElementById("profileTaglineInput").value = p.tagline || "";
-      document.getElementById("profileCategoryInput").value = p.businessType || "shop";
       document.getElementById("profilePhotoInput").value = p.photoURL || currentUser.photoURL || "";
+      toggleShopNameInputVisibility();
       openModal("profileModal");
       if (focusUpi) setTimeout(() => document.getElementById("profileUpiInput").focus(), 120);
     }
@@ -1878,10 +1933,11 @@
     document.getElementById("saveProfileBtn").addEventListener("click", async () => {
       if (!currentUser) return;
       const displayName = document.getElementById("profileNameInput").value.trim() || "MunimJi User";
+      const businessType = document.getElementById("profileCategoryInput").value;
+      const shopName = document.getElementById("profileShopNameInput").value.trim();
       const phone = document.getElementById("profilePhoneInput").value.trim();
       const upiId = document.getElementById("profileUpiInput").value.trim();
       const tagline = document.getElementById("profileTaglineInput").value.trim();
-      const businessType = document.getElementById("profileCategoryInput").value;
       const photoURL = document.getElementById("profilePhotoInput").value.trim();
       const saveBtn = document.getElementById("saveProfileBtn");
       saveBtn.disabled = true;
@@ -1890,14 +1946,15 @@
       try {
         await updateDoc(doc(db, "users", currentUser.uid), {
           displayName,
+          businessType,
+          shopName,
           phone,
           upiId,
           tagline,
-          businessType,
           photoURL,
           updatedAt: serverTimestamp()
         });
-        currentProfile = { ...(currentProfile || {}), displayName, phone, upiId, tagline, businessType, photoURL };
+        currentProfile = { ...(currentProfile || {}), displayName, businessType, shopName, phone, upiId, tagline, photoURL };
         renderUserIdentity(currentUser, currentProfile);
         renderLiveBillParchi();
         renderRuledNeedList();
@@ -1931,35 +1988,50 @@
       const status = (planStatus || "trial").toLowerCase();
       document.body.classList.remove("tier-pro", "tier-trial", "tier-blocked");
       const headerBadge = document.getElementById("headerTierBadge");
-      const heroBadge = document.getElementById("heroTierBadge");
       const blockedBanner = document.getElementById("blockedBanner");
 
       if (status === "active") {
         document.body.classList.add("tier-pro");
         headerBadge.textContent = "PRO";
-        heroBadge.textContent = "PRO";
         blockedBanner.classList.add("hidden");
       } else if (status === "blocked") {
         document.body.classList.add("tier-blocked");
         headerBadge.textContent = "BLOCKED";
-        heroBadge.textContent = "BLOCKED";
         blockedBanner.classList.remove("hidden");
       } else {
         document.body.classList.add("tier-trial");
         headerBadge.textContent = "TRIAL";
-        heroBadge.textContent = "TRIAL";
         blockedBanner.classList.add("hidden");
       }
     }
 
+    function getEffectiveBusinessTitle() {
+      if (currentProfile?.shopName && currentProfile.shopName.trim()) {
+        return currentProfile.shopName.trim();
+      }
+      return currentProfile?.displayName || currentUser?.displayName || "MunimJi खाता";
+    }
+
     function renderUserIdentity(user, profile) {
-      const name = profile?.displayName || user.displayName || (user.email ? user.email.split("@")[0] : "मेरा खाता");
+      const fullName = profile?.displayName || user.displayName || (user.email ? user.email.split("@")[0] : "मेरा खाता");
+      const firstName = fullName.split(" ")[0] || fullName;
       const photo = profile?.photoURL || user.photoURL || "";
-      const catText = categoryLabels[profile?.businessType || "general"] || categoryLabels.general;
+      const catKey = profile?.businessType || "shop";
+      const catShort = categoryShortLabels[catKey] || categoryShortLabels.general;
       const listTitles = getPositiveListTitles();
 
-      document.getElementById("cardUserName").textContent = name;
-      document.getElementById("cardUserMeta").textContent = `${catText}${profile?.phone ? ` · ${profile.phone}` : ""}`;
+      document.getElementById("cardUserName").textContent = fullName;
+      document.getElementById("cardCategoryBadge").textContent = catShort;
+      document.getElementById("heroGreetingTitle").textContent = `शुभ दिन, ${firstName}`;
+
+      if (catKey !== "household") {
+        document.getElementById("cardShopSubline").textContent = profile?.shopName
+          ? `दुकान: ${profile.shopName}`
+          : "दुकान का नाम जोड़ने के लिए प्रोफ़ाइल खोलें";
+      } else {
+        document.getElementById("cardShopSubline").textContent = profile?.phone ? `मोबाइल: ${profile.phone}` : "घर व व्यक्तिगत डिजिटल खाता";
+      }
+
       document.getElementById("needListCardTag").textContent = listTitles.cardTag;
       document.getElementById("needListModalHeading").textContent = listTitles.sheetTitle;
       document.getElementById("needListSheetTitle").textContent = listTitles.sheetTitle;
@@ -1976,8 +2048,8 @@
         upiSub.textContent = "जल्दी पेमेंट हेतु UPI जोड़ें";
       }
 
-      setAvatar(document.getElementById("cardAvatarImg"), document.getElementById("cardAvatarInitial"), photo, name);
-      setAvatar(document.getElementById("modalAvatarPreview"), document.getElementById("modalAvatarInitial"), photo, name);
+      setAvatar(document.getElementById("cardAvatarImg"), document.getElementById("cardAvatarInitial"), photo, fullName);
+      setAvatar(document.getElementById("modalAvatarPreview"), document.getElementById("modalAvatarInitial"), photo, fullName);
       applyTierStyle(profile?.planStatus || "trial");
       if (profile?.uiTheme) applyTheme(profile.uiTheme, false);
     }
@@ -1987,18 +2059,26 @@
       window.location.replace("login.html");
     });
 
-    // Personal (Private) Lena Hai / Dena Hai Ledger
+    // Personal (Private) Lena Hai / Dena Hai Ledger (Strictly separated per card)
     document.getElementById("personalDateInput").value = new Date().toISOString().split("T")[0];
 
-    function openPersonalLedgerWithDirection(dir) {
+    function openPersonalLedgerForMode(mode) {
       if (guardBlockedAction()) return;
-      if (dir) document.getElementById("personalDirectionInput").value = dir;
+      const isRec = mode === "receive";
+      document.getElementById("personalDirectionInput").value = mode;
+      document.getElementById("personalModalMainHeading").textContent = isRec ? "निजी हिसाब — रुपये लेने हैं" : "निजी हिसाब — रुपये देने हैं";
+      document.getElementById("personalFormBadge").textContent = isRec ? "श्रेणी: रुपये लेने हैं" : "श्रेणी: रुपये देने हैं";
+      document.getElementById("personalFormBadge").className = `text-xs font-extrabold px-2.5 py-1 rounded-full ${
+        isRec ? "bg-emerald-100 text-emerald-800" : "bg-rose-100 text-rose-800"
+      }`;
+      document.getElementById("personalPersonLabel").textContent = isRec ? "किससे लेने हैं (व्यक्ति का नाम)" : "किसको देने हैं (व्यक्ति का नाम)";
+      document.getElementById("personalRecordsListTitle").textContent = isRec ? "जिनसे रुपये लेने हैं उनकी सूची" : "जिनको रुपये देने हैं उनकी सूची";
+      renderPersonalLedgerUI();
       openModal("personalLedgerModal");
     }
 
-    document.getElementById("openPersonalLedgerBtn").addEventListener("click", () => openPersonalLedgerWithDirection("receive"));
-    document.getElementById("openReceiveLedgerBtn").addEventListener("click", () => openPersonalLedgerWithDirection("receive"));
-    document.getElementById("openPayLedgerBtn").addEventListener("click", () => openPersonalLedgerWithDirection("pay"));
+    document.getElementById("openReceiveLedgerBtn").addEventListener("click", () => openPersonalLedgerForMode("receive"));
+    document.getElementById("openPayLedgerBtn").addEventListener("click", () => openPersonalLedgerForMode("pay"));
 
     document.getElementById("savePersonalLedgerBtn").addEventListener("click", async () => {
       if (!currentUser || guardBlockedAction()) return;
@@ -2089,37 +2169,37 @@
       document.getElementById("personalPayTotalDisplay").textContent = `₹${payTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
       document.getElementById("receivePeopleCountBadge").textContent = `${recCount} लोग`;
       document.getElementById("payPeopleCountBadge").textContent = `${payCount} लोग`;
-      document.getElementById("modalReceiveSum").textContent = `₹${recTotal.toFixed(0)}`;
-      document.getElementById("modalPaySum").textContent = `₹${payTotal.toFixed(0)}`;
 
       const todayStr = new Date().toLocaleDateString("en-GB");
       const insightEl = document.getElementById("personalNetInsightText");
       if (recTotal === 0 && payTotal === 0) {
-        insightEl.innerHTML = `आज की तारीख (<strong>${todayStr}</strong>) में अपना निजी लेने-देने का हिसाब जोड़ें, यहाँ अपने आप बचत या ज़रूरत का हिसाब दिखेगा।`;
+        insightEl.innerHTML = `💡 आज की तारीख (<strong>${todayStr}</strong>) में अपना निजी लेने-देने का हिसाब जोड़ें, यहाँ अपने आप बचत या ज़रूरत का हिसाब दिखेगा।`;
       } else if (payTotal > recTotal) {
         const needed = payTotal - recTotal;
-        insightEl.innerHTML = `आज (<strong>${todayStr}</strong>) यदि आप <strong>₹${recTotal.toFixed(0)}</strong> ले लेते हैं, तो <strong>₹${payTotal.toFixed(0)}</strong> देने के लिए आपको केवल <strong class="text-rose-600">₹${needed.toFixed(0)}</strong> और जुटाने की ज़रूरत होगी।`;
+        insightEl.innerHTML = `💡 आज (<strong>${todayStr}</strong>) यदि आप <strong>₹${recTotal.toFixed(0)}</strong> ले लेते हैं, तो <strong>₹${payTotal.toFixed(0)}</strong> देने के लिए आपको केवल <strong class="text-rose-600">₹${needed.toFixed(0)}</strong> और जुटाने की ज़रूरत होगी।`;
       } else {
         const leftOver = recTotal - payTotal;
-        insightEl.innerHTML = `आज (<strong>${todayStr}</strong>) यदि आप <strong>₹${recTotal.toFixed(0)}</strong> ले लेते हैं, तो <strong>₹${payTotal.toFixed(0)}</strong> देने के बाद भी आपके पास <strong class="text-emerald-600">₹${leftOver.toFixed(0)}</strong> बचेंगे।`;
+        insightEl.innerHTML = `💡 आज (<strong>${todayStr}</strong>) यदि आप <strong>₹${recTotal.toFixed(0)}</strong> ले लेते हैं, तो <strong>₹${payTotal.toFixed(0)}</strong> देने के बाद भी आपके पास <strong class="text-emerald-600">₹${leftOver.toFixed(0)}</strong> बचेंगे।`;
       }
 
+      const activeDir = document.getElementById("personalDirectionInput").value || "receive";
+      const filtered = personalLedgerEntries.filter((e) => e.direction === activeDir);
+      const catSum = filtered.reduce((acc, x) => acc + Number(x.amount || 0), 0);
+      document.getElementById("personalCategoryTotalPill").textContent = `कुल: ₹${catSum.toFixed(0)}`;
+
       const listBox = document.getElementById("personalLedgerRecordsList");
-      if (!personalLedgerEntries.length) {
-        listBox.innerHTML = '<p class="text-xs text-slate-400 italic py-6 text-center">अभी कोई निजी लेन-देन दर्ज नहीं है।</p>';
+      if (!filtered.length) {
+        listBox.innerHTML = '<p class="text-xs text-slate-400 italic py-6 text-center">इस श्रेणी में अभी कोई रिकॉर्ड दर्ज नहीं है।</p>';
         return;
       }
 
-      listBox.innerHTML = personalLedgerEntries
+      listBox.innerHTML = filtered
         .map((e) => {
           const isRec = e.direction === "receive";
           return `
             <div class="p-3 rounded-2xl border border-slate-200 bg-white flex items-center justify-between gap-2">
               <div class="min-w-0">
                 <div class="flex items-center gap-1.5 flex-wrap">
-                  <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full ${isRec ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700"}">
-                    ${isRec ? "लेने हैं" : "देने हैं"}
-                  </span>
                   <strong class="text-sm text-slate-900 truncate">${e.personName}</strong>
                   ${e.place ? `<span class="text-[11px] text-slate-500">(${e.place})</span>` : ""}
                 </div>
@@ -2206,14 +2286,14 @@
     }
 
     function renderLiveBillParchi() {
-      const shopName = currentProfile?.displayName || currentUser?.displayName || "MunimJi Shop";
+      const businessTitle = getEffectiveBusinessTitle();
       const phone = currentProfile?.phone || "9458614610";
       const tagline = currentProfile?.tagline || "";
       const custName = document.getElementById("billCustomerName").value.trim() || "सामान्य";
       const billNo = document.getElementById("billNumberInput").value.trim() || "Nov'26/001";
       const { itemsSum, extra, grandTotal } = getBillTotals();
 
-      document.getElementById("parchiShopTitle").textContent = shopName;
+      document.getElementById("parchiShopTitle").textContent = businessTitle;
       document.getElementById("parchiShopSub").textContent = tagline ? `${tagline} · Ph: ${phone}` : `Phone: ${phone}`;
       document.getElementById("parchiBillNo").textContent = billNo;
       document.getElementById("parchiDateTime").textContent = formatNowLabel();
@@ -2247,7 +2327,7 @@
         "parchiQrBox",
         "parchiUpiIdLabel",
         currentProfile?.upiId || "",
-        shopName,
+        businessTitle,
         grandTotal
       );
     }
@@ -2309,14 +2389,14 @@
       const { itemsSum, extra, grandTotal } = getBillTotals();
       await maybeSyncBillToKhata(grandTotal);
 
-      const shopName = currentProfile?.displayName || "MunimJi";
+      const businessTitle = getEffectiveBusinessTitle();
       const custName = document.getElementById("billCustomerName").value.trim() || "ग्राहक";
       const custMobile = document.getElementById("billCustomerMobile").value.replace(/\D/g, "");
       const billNo = document.getElementById("billNumberInput").value.trim() || "Nov'26/001";
       const upiLine = currentProfile?.upiId ? `\nUPI: ${currentProfile.upiId}` : "";
       const nowStamp = formatNowLabel();
 
-      let msg = `*${shopName}*\nBill No: ${billNo} (${nowStamp})\nग्राहक: ${custName}\n------------------\n`;
+      let msg = `*${businessTitle}*\nBill No: ${billNo} (${nowStamp})\nग्राहक: ${custName}\n------------------\n`;
       currentBillItems.forEach((i, idx) => {
         msg += `${idx + 1}. ${i.name}${i.qty ? ` (${i.qty})` : ""} : ₹${i.price}\n`;
       });
@@ -2330,20 +2410,20 @@
 
     // Reminder Parchi Handler
     window.openReminderParchi = function (name, mobile, balance) {
-      const shopName = currentProfile?.displayName || "MunimJi Shop";
+      const businessTitle = getEffectiveBusinessTitle();
       const phone = currentProfile?.phone || "9458614610";
       const numBal = Number(balance || 0);
 
-      document.getElementById("remShopName").textContent = shopName;
+      document.getElementById("remShopName").textContent = businessTitle;
       document.getElementById("remShopPhone").textContent = `Phone: ${phone}`;
       document.getElementById("remDateLabel").textContent = formatNowLabel();
       document.getElementById("remCustName").textContent = name;
       document.getElementById("remCustMobile").textContent = mobile;
       document.getElementById("remBalanceAmount").textContent = `₹${numBal.toFixed(2)}`;
 
-      renderQrInto("remQrCanvas", "remQrBox", "remUpiLabel", currentProfile?.upiId || "", shopName, numBal);
+      renderQrInto("remQrCanvas", "remQrBox", "remUpiLabel", currentProfile?.upiId || "", businessTitle, numBal);
 
-      const waText = `*${shopName} — बकाया उधार रिमाइंडर*\nनमस्ते ${name} जी,\nआपका कुल बकाया *₹${numBal.toFixed(2)}* है।${
+      const waText = `*${businessTitle} — बकाया उधार रिमाइंडर*\nनमस्ते ${name} जी,\nआपका कुल बकाया *₹${numBal.toFixed(2)}* है।${
         currentProfile?.upiId ? `\nUPI ID: ${currentProfile.upiId}` : ""
       }\nकृपया भुगतान करें। धन्यवाद!\n_Powered by MunimJi • Developed by Cool Art®_`;
       const cleanMob = String(mobile || "").replace(/\D/g, "");
@@ -2380,7 +2460,7 @@
       document.getElementById("entryDesc").value = "";
     });
 
-    // Persistent Editable Need List + Day-by-Day Saved Parchis
+    // Persistent Editable Vendor Stock / Need List + Always-Visible Shortage Preview
     async function persistCurrentNeedList() {
       if (!currentUser) return;
       const now = new Date();
@@ -2415,8 +2495,8 @@
       editingNeedIndex = -1;
       document.getElementById("shortageItem").value = "";
       document.getElementById("shortageQty").value = "";
-      document.getElementById("addShortageBtn").textContent = "+ सूची में जोड़ें और सेव करें";
-      document.getElementById("activeParchiStatusLabel").textContent = "नई पर्ची शुरू की गई (आइटम जोड़ते ही सेव होगी)";
+      document.getElementById("addShortageBtn").textContent = "+ वेंडर सूची में जोड़ें और सेव करें";
+      document.getElementById("activeParchiStatusLabel").textContent = "नई वेंडर लिस्ट शुरू की गई (आइटम जोड़ते ही सेव होगी)";
       renderRuledNeedList();
     });
 
@@ -2436,7 +2516,7 @@
         editingNeedIndex = -1;
         document.getElementById("shortageItem").value = "";
         document.getElementById("shortageQty").value = "";
-        document.getElementById("addShortageBtn").textContent = "+ सूची में जोड़ें और सेव करें";
+        document.getElementById("addShortageBtn").textContent = "+ वेंडर सूची में जोड़ें और सेव करें";
       }
       renderRuledNeedList();
       await persistCurrentNeedList();
@@ -2451,8 +2531,8 @@
       document.getElementById("vendorWhatsappInput").value = found.vendorPhone || "";
       document.getElementById("shortageItem").value = "";
       document.getElementById("shortageQty").value = "";
-      document.getElementById("addShortageBtn").textContent = "+ सूची में जोड़ें और सेव करें";
-      document.getElementById("activeParchiStatusLabel").textContent = `खोली गई पर्ची: ${found.dayName || ""} ${found.dateStr || ""} (${found.timeStr || ""})`;
+      document.getElementById("addShortageBtn").textContent = "+ वेंडर सूची में जोड़ें और सेव करें";
+      document.getElementById("activeParchiStatusLabel").textContent = `खोली गई वेंडर पर्ची: ${found.dayName || ""} ${found.dateStr || ""} (${found.timeStr || ""})`;
       renderRuledNeedList(found);
     };
 
@@ -2468,7 +2548,7 @@
       if (editingNeedIndex >= 0 && editingNeedIndex < needItemsList.length) {
         needItemsList[editingNeedIndex] = { item, qty };
         editingNeedIndex = -1;
-        document.getElementById("addShortageBtn").textContent = "+ सूची में जोड़ें और सेव करें";
+        document.getElementById("addShortageBtn").textContent = "+ वेंडर सूची में जोड़ें और सेव करें";
       } else {
         needItemsList.push({ item, qty });
       }
@@ -2482,6 +2562,7 @@
     function renderRuledNeedList(metaOverride = null) {
       const linesBox = document.getElementById("hindiCopyLinesBox");
       const previewEl = document.getElementById("topShortagePreview");
+      const shortageBadge = document.getElementById("shortageItemsCountBadge");
       const shopLabel = document.getElementById("hindiCopyShopLabel");
       const dayLabel = document.getElementById("hindiCopyDayLabel");
       const dateLabel = document.getElementById("hindiCopyDate");
@@ -2495,7 +2576,7 @@
       document.getElementById("needListSheetTitle").textContent = listTitles.sheetTitle;
 
       const phonePart = currentProfile?.phone ? ` · Ph: ${currentProfile.phone}` : "";
-      shopLabel.textContent = `${currentProfile?.displayName || "MunimJi खाता"}${phonePart}`;
+      shopLabel.textContent = `${getEffectiveBusinessTitle()}${phonePart}`;
 
       const nowInfo = getHindiDayDateTime(new Date());
       dayLabel.textContent = metaOverride?.dayName || nowInfo.dayName;
@@ -2521,7 +2602,7 @@
             <div class="ruled-line-item">
               <div class="ruled-margin-col">${idx === 0 && !needItemsList.length ? "1." : ""}</div>
               <div class="ruled-text-col text-[#94A3B8] text-xs font-normal">
-                <span>${idx === 0 && !needItemsList.length ? "यहाँ ज़रूरी सामान जोड़ें..." : ""}</span>
+                <span>${idx === 0 && !needItemsList.length ? "यहाँ खत्म / कम सामान जोड़ें..." : ""}</span>
                 <span></span>
               </div>
             </div>
@@ -2531,9 +2612,11 @@
       linesBox.innerHTML = rowsHtml.join("");
 
       countText.textContent = `${needItemsList.length} आइटम`;
+      shortageBadge.textContent = `${needItemsList.length} सामान बाकी`;
+
       if (!needItemsList.length) {
-        editableBox.innerHTML = '<p class="text-slate-400 italic">अभी कोई आइटम नहीं जुड़ा है।</p>';
-        previewEl.textContent = "कॉपी खोलें";
+        editableBox.innerHTML = '<p class="text-slate-400 italic">अभी कोई सामान नहीं जुड़ा है।</p>';
+        previewEl.textContent = "अभी सभी स्टॉक पूरा है · लिस्ट खोलें";
       } else {
         editableBox.innerHTML = needItemsList
           .map(
@@ -2548,16 +2631,13 @@
           `
           )
           .join("");
-        const last = needItemsList[needItemsList.length - 1];
-        previewEl.textContent = `${last.item} (${last.qty})`;
+        const summaryNames = needItemsList.slice(0, 3).map((x) => `${x.item} (${x.qty})`).join(", ");
+        previewEl.textContent = summaryNames;
       }
     }
 
     function renderSavedNeedHistory() {
       const box = document.getElementById("savedNeedParchisHistory");
-      const badge = document.getElementById("savedParchiCountBadge");
-      badge.textContent = `${savedNeedParchis.length}`;
-
       if (!savedNeedParchis.length) {
         box.innerHTML = '<p class="text-slate-400 italic">अभी कोई पुरानी पर्ची सेव नहीं है।</p>';
         return;
@@ -2594,11 +2674,11 @@
       document.getElementById("hindiCopyDate").textContent = nowInfo.dateStr;
       document.getElementById("hindiCopyTimeLabel").textContent = nowInfo.timeStr;
 
-      const shopName = currentProfile?.displayName || "MunimJi खाता";
+      const businessTitle = getEffectiveBusinessTitle();
       const listTitles = getPositiveListTitles();
       const vendorPhone = document.getElementById("vendorWhatsappInput").value.replace(/\D/g, "");
 
-      let msg = `*${listTitles.sheetTitle}*\n*${shopName}*\nदिन व तारीख: ${nowInfo.dayName}, ${nowInfo.dateStr} (${nowInfo.timeStr})\n------------------\n`;
+      let msg = `*${listTitles.sheetTitle}*\n*${businessTitle}*\nदिन व तारीख: ${nowInfo.dayName}, ${nowInfo.dateStr} (${nowInfo.timeStr})\n------------------\n`;
       needItemsList.forEach((s, idx) => {
         msg += `${idx + 1}. ${s.item} — *${s.qty}*\n`;
       });
@@ -2620,7 +2700,7 @@
       document.getElementById("hindiCopyDayLabel").textContent = nowInfo.dayName;
       document.getElementById("hindiCopyDate").textContent = nowInfo.dateStr;
       document.getElementById("hindiCopyTimeLabel").textContent = nowInfo.timeStr;
-      await shareOrDownloadElementAsImage("hindiCopyCapture", "MunimJi_Jaruri_List");
+      await shareOrDownloadElementAsImage("hindiCopyCapture", "MunimJi_Vendor_Stock_List");
     });
 
     function subscribeUserData(uid) {
@@ -2666,7 +2746,7 @@
         const totalSales = cash + upi;
         const netDrawer = cash + upi - expense;
         document.getElementById("totalSalesDisplay").textContent = `₹${totalSales.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
-        document.getElementById("drawerCashDisplay").textContent = `₹${netDrawer.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
+        document.getElementById("gallaBreakdownLine").textContent = `कैश ₹${cash.toFixed(0)} · UPI ₹${upi.toFixed(0)} · खर्च ₹${expense.toFixed(0)}`;
         document.getElementById("modalCashVal").textContent = `₹${cash.toFixed(2)}`;
         document.getElementById("modalUpiVal").textContent = `₹${upi.toFixed(2)}`;
         document.getElementById("modalExpenseVal").textContent = `₹${expense.toFixed(2)}`;
@@ -2684,7 +2764,7 @@
           activeNeedParchiId = latest.id;
           needItemsList = Array.isArray(latest.items) ? latest.items.map((x) => ({ ...x })) : [];
           document.getElementById("vendorWhatsappInput").value = latest.vendorPhone || "";
-          document.getElementById("activeParchiStatusLabel").textContent = `सेव की गई पर्ची: ${latest.dayName || ""} ${latest.dateStr || ""} (${latest.timeStr || ""})`;
+          document.getElementById("activeParchiStatusLabel").textContent = `सेव की गई वेंडर सूची: ${latest.dayName || ""} ${latest.dateStr || ""} (${latest.timeStr || ""})`;
           renderRuledNeedList(latest);
         } else {
           renderRuledNeedList();
@@ -2692,7 +2772,6 @@
         renderSavedNeedHistory();
       });
 
-      // Live listener for Private / Personal Lena-Dena Ledger
       onSnapshot(query(collection(db, "personal_ledger"), where("ownerUid", "==", uid)), (snap) => {
         const items = [];
         snap.forEach((d) => items.push({ id: d.id, ...d.data() }));
