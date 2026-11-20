@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>लॉगिन / शुरू करें — MunimJi by Cool Art®</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navyPrimary: "#071b36",
+            emeraldAccent: "#079d76"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      padding-bottom: 64px;
+    }
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: 70px;
+      }
+    }
+    .google-gsi-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #ffffff;
+      color: #1f1f1f;
+      border: 1px solid #dadce0;
+      border-radius: 9999px;
+      padding: 11px 20px;
+      font-family: "Roboto", "Segoe UI", Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.25px;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(60, 64, 67, 0.12);
+      transition: background-color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+    .google-gsi-btn:hover:not(:disabled) {
+      background: #f8faff;
+      border-color: #c6dafc;
+      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.22);
+    }
+    .google-gsi-btn:active:not(:disabled) {
+      background: #eef3fe;
+    }
+    .google-gsi-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    /* Fixed Footer */
+    .mj-fixed-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 70;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid #e2e8f0;
+      box-shadow: 0 -6px 24px rgba(7, 27, 54, 0.06);
+      padding: 8px 20px;
+      color: #334155;
+      font-size: 12px;
+    }
+    .mj-ff-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .mj-ff-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .mj-ff-coolart-img {
+      height: 16px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+    .mj-ff-mj-img {
+      height: 18px;
+      width: auto;
+      object-fit: contain;
+      display: inline-block;
+    }
+    .mj-ff-sep {
+      color: #cbd5e1;
+    }
+    .mj-ff-phone {
+      color: #0f294a;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .mj-ff-phone:hover {
+      color: #079d76;
+    }
+    .mj-ff-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #64748b;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .mj-ff-right strong {
+      color: #0f294a;
+      font-weight: 800;
+    }
+    @media (max-width: 768px) {
+      .mj-fixed-footer {
+        padding: 8px 12px;
+      }
+      .mj-ff-inner {
+        flex-direction: column;
+        justify-content: center;
+        gap: 3px;
+        text-align: center;
+      }
+      .mj-ff-left {
+        justify-content: center;
+        gap: 0;
+      }
+      .mj-ff-coolart-img,
+      .mj-ff-sep,
+      .mj-ff-phone {
+        display: none;
+      }
+      .mj-ff-copy {
+        font-size: 11px;
+        color: #475569;
+      }
+      .mj-ff-right {
+        font-size: 11px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+      }
+      .mj-ff-mj-img {
+        height: 16px;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 flex flex-col justify-between">
+
+  <!-- Top Banner -->
+  <div class="bg-gradient-to-r from-[#067a5c] to-[#0aa67d] text-white text-xs py-2.5 px-4 text-center font-semibold">
+    MunimJi by Cool Art® — 7 दिन का फ्री डेमो व आसान क्लाउड लॉगिन ·
+    <a href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20MunimJi%20ka%20demo%20chahiye" target="_blank" rel="noopener" class="underline font-bold">WhatsApp सहायता: 9458614610</a>
+  </div>
+
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo.png" alt="MunimJi by Cool Art®" class="h-10 w-auto object-contain" />
+      </a>
+      <a href="index.html" class="text-sm font-bold text-slate-600 hover:text-navyPrimary">← मुख्य वेबसाइट पर जाएं</a>
+    </div>
+  </header>
+
+  <!-- Auth Card -->
+  <main class="flex-grow flex items-center justify-center px-4 py-10 relative z-10">
+    <div class="w-full max-w-md bg-white rounded-3xl shadow-xl border border-slate-200 p-7 relative z-20">
+      <div class="text-center mb-6">
+        <span class="inline-block bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-extrabold px-3 py-1 rounded-full mb-2">
+          डिजिटल मुनीम · क्लाउड एक्सेस
+        </span>
+        <h1 class="text-2xl font-extrabold text-navyPrimary">अपने खाते में प्रवेश करें</h1>
+        <p class="text-xs text-slate-500 mt-1">नए यूज़र्स को स्वतः 7 दिन का फ्री डेमो मिलता है</p>
+      </div>
+
+      <!-- Mode Switch -->
+      <div class="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-2xl mb-5 text-xs font-extrabold">
+        <button type="button" id="tabLogin" class="py-2.5 rounded-xl bg-white text-navyPrimary shadow-sm">लॉगिन करें</button>
+        <button type="button" id="tabSignup" class="py-2.5 rounded-xl text-slate-600">नया खाता बनाएं</button>
+      </div>
+
+      <!-- Alert Box -->
+      <div id="authMessage" class="hidden mb-4 p-3 rounded-xl text-xs font-bold"></div>
+
+      <!-- Original Style Google Button -->
+      <button type="button" id="googleLoginBtn" class="google-gsi-btn mb-5" aria-label="Google से जारी रखें">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.54-1.14 2.85-2.4 3.72v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.72z"/>
+          <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24z"/>
+          <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14z"/>
+          <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96z"/>
+        </svg>
+        <span>Google से जारी रखें</span>
+      </button>
+
+      <div class="relative flex items-center my-4">
+        <div class="flex-grow border-t border-slate-200"></div>
+        <span class="px-3 text-[11px] font-bold text-slate-400 uppercase">या ईमेल व पासवर्ड/PIN से</span>
+        <div class="flex-grow border-t border-slate-200"></div>
+      </div>
+
+      <!-- Email / Password Form -->
+      <form id="authForm" class="space-y-4">
+        <div id="signupExtraFields" class="hidden space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">आपका नाम / व्यापार या घर का नाम</label>
+            <input type="text" id="fullNameInput" placeholder="जैसे: शर्मा किराना / घरेलू बजट" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emeraldAccent focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">मोबाइल नंबर (वैकल्पिक)</label>
+            <input type="tel" id="phoneInput" maxlength="10" placeholder="9458614610" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emeraldAccent focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">उपयोग श्रेणी</label>
+            <select id="businessTypeInput" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:ring-2 focus:ring-emeraldAccent focus:outline-none">
+              <option value="shop">दुकानदार / किराना / रिटेल</option>
+              <option value="mandi">मंडी, बीज व थोक व्यापार</option>
+              <option value="school">स्कूल, कोचिंग व टीचर</option>
+              <option value="household">गृहणी / स्टूडेंट / पर्सनल हिसाब</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">ईमेल पता</label>
+          <input type="email" id="emailInput" required placeholder="name@example.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emeraldAccent focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">पासवर्ड या PIN (कम से कम 6 अक्षर)</label>
+          <input type="password" id="passwordInput" required minlength="6" placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emeraldAccent focus:outline-none" />
+        </div>
+
+        <button type="submit" id="submitAuthBtn" class="w-full py-3.5 rounded-2xl bg-emeraldAccent hover:bg-[#068664] text-white font-extrabold text-sm shadow-md transition">
+          लॉगिन करें 🚀
+        </button>
+      </form>
+
+      <div class="mt-5 pt-4 border-t border-slate-100 text-center">
+        <a href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20MunimJi%20login%20ya%20demo%20mein%20sahayata%20chahiye" target="_blank" rel="noopener" class="text-xs font-bold text-emerald-700 hover:underline">
+          लॉगिन या डेमो में मदद चाहिए? WhatsApp करें →
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Fixed Footer -->
+  <footer class="mj-fixed-footer" role="contentinfo">
+    <div class="mj-ff-inner">
+      <div class="mj-ff-left">
+        <img src="cool art logo.png" alt="Cool Art" class="mj-ff-coolart-img" />
+        <span class="mj-ff-copy">© 2026 <strong>Cool Art®</strong>. All Rights Reserved.</span>
+        <span class="mj-ff-sep">|</span>
+        <a href="tel:+919458614610" class="mj-ff-phone">📞 Helpline: +91 9458614610</a>
+      </div>
+      <div class="mj-ff-right">
+        <span>Powered by</span>
+        <img src="logo.png" alt="MunimJi by Cool Art®" class="mj-ff-mj-img" />
+        <span>• Developed by <strong>Cool Art®</strong></span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import {
+      auth,
+      googleProvider,
+      signInWithPopup,
+      signInWithRedirect,
+      getRedirectResult,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      onAuthStateChanged,
+      ensureUserProfile,
+      SUPER_ADMIN_EMAIL
+    } from "./firebase-config.js";
+
+    let isSignup = false;
+    let isRedirecting = false;
+    const tabLogin = document.getElementById("tabLogin");
+    const tabSignup = document.getElementById("tabSignup");
+    const signupExtra = document.getElementById("signupExtraFields");
+    const submitBtn = document.getElementById("submitAuthBtn");
+    const msgBox = document.getElementById("authMessage");
+    const authForm = document.getElementById("authForm");
+    const googleBtn = document.getElementById("googleLoginBtn");
+
+    function showMessage(text, isError = true) {
+      msgBox.textContent = text;
+      msgBox.className = `mb-4 p-3 rounded-xl text-xs font-bold ${
+        isError
+          ? "bg-red-50 text-red-700 border border-red-200"
+          : "bg-emerald-50 text-emerald-700 border border-emerald-200"
+      }`;
+      msgBox.classList.remove("hidden");
+    }
+
+    function redirectByRole(user) {
+      if (isRedirecting) return;
+      isRedirecting = true;
+      if ((user.email || "").toLowerCase() === SUPER_ADMIN_EMAIL.toLowerCase()) {
+        window.location.replace("admin.html");
+      } else {
+        window.location.replace("dashboard.html");
+      }
+    }
+
+    function friendlyAuthError(err) {
+      const code = err?.code || "";
+      if (code === "auth/unauthorized-domain") {
+        return "डोमेन की अनुमति नहीं मिली है। Firebase Console > Authentication > Settings > Authorized domains में coolarttech.github.io जोड़ें।";
+      }
+      if (code === "auth/popup-closed-by-user") {
+        return "Google लॉगिन विंडो बंद कर दी गई थी। दोबारा कोशिश करें।";
+      }
+      if (code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found") {
+        return "ईमेल या पासवर्ड/PIN सही नहीं है।";
+      }
+      if (code === "auth/email-already-in-use") {
+        return "यह ईमेल पहले से पंजीकृत है। कृपया 'लॉगिन करें' टैब से लॉगिन करें।";
+      }
+      return err?.message || "लॉगिन में समस्या आई है।";
+    }
+
+    tabLogin.addEventListener("click", () => {
+      isSignup = false;
+      tabLogin.className = "py-2.5 rounded-xl bg-white text-navyPrimary shadow-sm";
+      tabSignup.className = "py-2.5 rounded-xl text-slate-600";
+      signupExtra.classList.add("hidden");
+      submitBtn.textContent = "लॉगिन करें 🚀";
+      msgBox.classList.add("hidden");
+    });
+
+    tabSignup.addEventListener("click", () => {
+      isSignup = true;
+      tabSignup.className = "py-2.5 rounded-xl bg-white text-navyPrimary shadow-sm";
+      tabLogin.className = "py-2.5 rounded-xl text-slate-600";
+      signupExtra.classList.remove("hidden");
+      submitBtn.textContent = "7-दिन फ्री डेमो के साथ खाता बनाएं ✨";
+      msgBox.classList.add("hidden");
+    });
+
+    // Handle redirect result if browser fell back to redirect
+    getRedirectResult(auth)
+      .then(async (result) => {
+        if (result?.user) {
+          await ensureUserProfile(result.user);
+          redirectByRole(result.user);
+        }
+      })
+      .catch((err) => {
+        if (err?.code) {
+          showMessage(friendlyAuthError(err), true);
+        }
+      });
+
+    googleBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
+      if (googleBtn.disabled) return;
+      googleBtn.disabled = true;
+      showMessage("Google लॉगिन विंडो खुल रही है...", false);
+
+      try {
+        const result = await signInWithPopup(auth, googleProvider);
+        await ensureUserProfile(result.user);
+        redirectByRole(result.user);
+      } catch (err) {
+        if (err?.code === "auth/popup-blocked") {
+          showMessage("ब्राउज़र ने पॉपअप रोका है, रीडायरेक्ट से Google लॉगिन खोला जा रहा है...", false);
+          try {
+            await signInWithRedirect(auth, googleProvider);
+            return;
+          } catch (redirErr) {
+            googleBtn.disabled = false;
+            showMessage(friendlyAuthError(redirErr), true);
+          }
+        } else {
+          googleBtn.disabled = false;
+          showMessage(friendlyAuthError(err), true);
+        }
+      }
+    });
+
+    authForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("emailInput").value.trim();
+      const password = document.getElementById("passwordInput").value;
+      submitBtn.disabled = true;
+
+      try {
+        if (isSignup) {
+          const displayName = document.getElementById("fullNameInput").value.trim() || "MunimJi User";
+          const phone = document.getElementById("phoneInput").value.trim();
+          const businessType = document.getElementById("businessTypeInput").value;
+          showMessage("नया खाता बनाया जा रहा है...", false);
+          const cred = await createUserWithEmailAndPassword(auth, email, password);
+          await ensureUserProfile(cred.user, { displayName, phone, businessType });
+          redirectByRole(cred.user);
+        } else {
+          showMessage("लॉगिन किया जा रहा है...", false);
+          const cred = await signInWithEmailAndPassword(auth, email, password);
+          await ensureUserProfile(cred.user);
+          redirectByRole(cred.user);
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        showMessage(friendlyAuthError(err), true);
+      }
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user && !isRedirecting) {
+        try {
+          await ensureUserProfile(user);
+        } catch (_) {}
+        redirectByRole(user);
+      }
+    });
+  </script>
+</body>
+</html>

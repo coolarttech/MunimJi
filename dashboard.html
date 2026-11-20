@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MunimJi Dashboard — Digital Billing & Khata</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navyPrimary: "#0F294A",
+            emeraldAccent: "#10B981"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      padding-bottom: 64px;
+    }
+    .mj-fixed-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 70;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid #e2e8f0;
+      box-shadow: 0 -6px 24px rgba(7, 27, 54, 0.06);
+      padding: 8px 20px;
+      color: #334155;
+      font-size: 12px;
+    }
+    .mj-ff-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .mj-ff-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .mj-ff-coolart-img {
+      height: 16px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+    .mj-ff-mj-img {
+      height: 18px;
+      width: auto;
+      object-fit: contain;
+      display: inline-block;
+    }
+    .mj-ff-sep {
+      color: #cbd5e1;
+    }
+    .mj-ff-phone {
+      color: #0f294a;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .mj-ff-phone:hover {
+      color: #079d76;
+    }
+    .mj-ff-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #64748b;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .mj-ff-right strong {
+      color: #0f294a;
+      font-weight: 800;
+    }
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: 70px;
+      }
+      .mj-fixed-footer {
+        padding: 8px 12px;
+      }
+      .mj-ff-inner {
+        flex-direction: column;
+        justify-content: center;
+        gap: 3px;
+        text-align: center;
+      }
+      .mj-ff-left {
+        justify-content: center;
+        gap: 0;
+      }
+      .mj-ff-coolart-img,
+      .mj-ff-sep,
+      .mj-ff-phone {
+        display: none;
+      }
+      .mj-ff-copy {
+        font-size: 11px;
+        color: #475569;
+      }
+      .mj-ff-right {
+        font-size: 11px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+      }
+      .mj-ff-mj-img {
+        height: 16px;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-white/90 backdrop-blur-md text-slate-800 shadow-sm sticky top-0 z-40 border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <a href="index.html">
+          <img src="logo.png" alt="MunimJi Logo" class="h-9 w-auto object-contain" />
+        </a>
+        <span id="userBadge" class="hidden sm:inline-block text-xs font-bold bg-slate-100 text-navyPrimary px-3 py-1 rounded-full">
+          लोड हो रहा है...
+        </span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <a href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20MunimJi%20dashboard%20mein%20sahayata%20chahiye" target="_blank" rel="noopener" class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold px-3.5 py-2 rounded-xl hover:bg-emerald-100 transition">
+          💬 WhatsApp हेल्पलाइन
+        </a>
+        <button type="button" id="logoutBtn" class="bg-red-50 text-red-600 border border-red-200 text-xs font-bold px-3 py-2 rounded-xl hover:bg-red-100 transition">
+          लॉग आउट
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full">
+
+    <!-- Top 3 Action Buttons -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <button type="button" id="openBillingBtn" class="bg-emerald-500 text-white p-4 rounded-2xl shadow-sm font-bold flex items-center justify-center gap-2 hover:bg-emerald-600 transition text-base">
+        <span>🧾 नया बिल बनाएं</span>
+      </button>
+      <button type="button" id="openCustomerBtn" class="bg-navyPrimary text-white p-4 rounded-2xl shadow-sm font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition text-base">
+        <span>➕ नया ग्राहक जोड़ें</span>
+      </button>
+      <button type="button" id="openKhataBtn" class="bg-blue-600 text-white p-4 rounded-2xl shadow-sm font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition text-base">
+        <span>📒 उधार खाता देखें</span>
+      </button>
+    </div>
+
+    <!-- 3 Highlight Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div class="bg-red-50/70 border border-red-200 p-6 rounded-3xl shadow-sm flex flex-col justify-between">
+        <div>
+          <span class="bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full uppercase border border-red-200">बाकी कुल उधार</span>
+          <h2 class="text-3xl font-extrabold mt-3 text-red-700" id="totalUdharDisplay">₹0.00</h2>
+        </div>
+        <p class="text-xs text-red-600 mt-4">सभी ग्राहकों के बकाया का लाइव योग</p>
+      </div>
+
+      <div class="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm flex flex-col justify-between relative">
+        <span class="absolute top-4 right-4 bg-purple-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">⭐ NEW</span>
+        <div>
+          <span class="text-xs font-bold text-purple-700 bg-purple-50 px-3 py-1 rounded-full uppercase border border-purple-100">गल्ला एंट्री & रिपोर्ट</span>
+          <h2 class="text-3xl font-extrabold text-navyPrimary mt-3" id="totalSalesDisplay">₹0.00</h2>
+          <p class="text-xs text-slate-500 mt-1">शुद्ध गल्ला: <strong id="drawerCashDisplay" class="text-emerald-700">₹0.00</strong></p>
+        </div>
+        <button type="button" id="openCashbookBtn" class="text-xs text-purple-700 font-bold hover:underline mt-4 text-left">
+          गल्ला एंट्री खोलें व हिसाब जोड़ें →
+        </button>
+      </div>
+
+      <div class="bg-amber-50/70 border border-amber-200 p-6 rounded-3xl shadow-sm flex flex-col justify-between relative">
+        <span class="absolute top-4 right-4 bg-emerald-500 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">⭐ NEW</span>
+        <div>
+          <span class="text-xs font-bold text-amber-800 bg-amber-100 px-3 py-1 rounded-full uppercase border border-amber-200">🚨 अर्जेंट मंगाना है</span>
+          <div id="topShortagePreview" class="mt-3 text-sm text-slate-600 italic">कोई शॉर्टेज सामान नहीं है।</div>
+        </div>
+        <button type="button" id="openStockBtn" class="text-xs text-amber-800 font-bold hover:underline mt-4 text-left">
+          थर्मल पर्ची बनाएं व वेंडर को भेजें →
+        </button>
+      </div>
+    </div>
+
+    <!-- Workspace Info Card -->
+    <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 text-center">
+      <div class="max-w-lg mx-auto">
+        <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3">☁️</div>
+        <h3 class="text-lg font-extrabold text-navyPrimary">क्लाउड खाता सक्रिय है</h3>
+        <p id="planInfoText" class="text-xs text-slate-500 mt-1 mb-5">आपका सारा हिसाब Firebase क्लाउड पर सुरक्षित सेव हो रहा है।</p>
+        <button type="button" id="quickBillCta" class="bg-navyPrimary text-white font-bold px-6 py-3 rounded-xl hover:bg-slate-800 transition text-sm">
+          तुरंत नया बिल बनाएं 🚀
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL 1: Billing -->
+  <div id="billingModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-xl rounded-3xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4 border-b pb-3">
+        <h3 class="text-lg font-bold text-navyPrimary">🧾 नया बिल बनाएं</h3>
+        <button type="button" class="close-modal text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
+      </div>
+      <div class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">ग्राहक का नाम</label>
+            <input type="text" id="billCustomerName" placeholder="जैसे: अमित कुमार" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">मोबाइल नंबर</label>
+            <input type="tel" id="billCustomerMobile" maxlength="10" placeholder="9458600000" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <div class="col-span-2">
+            <label class="block text-xs font-bold text-slate-700 mb-1">सामान का नाम</label>
+            <input type="text" id="itemName" placeholder="जैसे: चीनी / रिफाइंड तेल" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">रेट (₹)</label>
+            <input type="number" id="itemPrice" placeholder="0" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+          </div>
+        </div>
+        <button type="button" id="addBillLineBtn" class="w-full bg-emerald-500 text-white font-bold py-2.5 rounded-xl hover:bg-emerald-600 transition text-sm">
+          + लाइन जोड़ें
+        </button>
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <h4 class="font-bold text-navyPrimary mb-2 text-xs uppercase">बिल सारांश</h4>
+          <div id="billItemsList" class="space-y-1.5 text-sm text-slate-600 mb-3 min-h-[70px]">
+            <p class="text-slate-400 text-xs italic">कोई लाइन नहीं जुड़ी है।</p>
+          </div>
+          <div class="border-t pt-2 flex justify-between font-extrabold text-navyPrimary text-base">
+            <span>कुल योग:</span>
+            <span id="billTotal" class="text-emerald-600">₹0.00</span>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button type="button" class="close-modal w-1/2 bg-slate-200 text-slate-700 font-bold py-3 rounded-xl text-sm">बंद करें</button>
+          <button type="button" id="sendWaBillBtn" class="w-1/2 bg-navyPrimary text-white font-bold py-3 rounded-xl text-sm">💬 WhatsApp पर्ची भेजें</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Add Customer -->
+  <div id="customerModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl p-6">
+      <div class="flex justify-between items-center mb-4 border-b pb-3">
+        <h3 class="text-lg font-bold text-navyPrimary">➕ नया ग्राहक जोड़ें</h3>
+        <button type="button" class="close-modal text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">ग्राहक का नाम</label>
+          <input type="text" id="modalCustomerName" placeholder="जैसे: सोहन लाल शर्मा" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">मोबाइल नंबर</label>
+          <input type="tel" id="modalCustomerMobile" maxlength="10" placeholder="9458600000" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">बकाया उधार (₹)</label>
+          <input type="number" id="modalCustomerAmount" placeholder="0" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm" />
+        </div>
+        <div class="flex gap-3 pt-2">
+          <button type="button" class="close-modal w-1/2 bg-slate-200 text-slate-700 font-bold py-3 rounded-xl text-sm">रद्द करें</button>
+          <button type="button" id="saveCustomerBtn" class="w-1/2 bg-emeraldAccent text-white font-bold py-3 rounded-xl text-sm">सुरक्षित करें ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: Khata List -->
+  <div id="khataModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4 border-b pb-3">
+        <h3 class="text-lg font-bold text-navyPrimary">📒 डिजिटल उधार खाता</h3>
+        <button type="button" class="close-modal text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-100 text-navyPrimary text-xs uppercase">
+              <th class="p-3 rounded-l-xl">ग्राहक</th>
+              <th class="p-3">मोबाइल</th>
+              <th class="p-3">बकाया</th>
+              <th class="p-3 rounded-r-xl text-right">रिमाइंडर</th>
+            </tr>
+          </thead>
+          <tbody id="customerTableBody" class="text-sm divide-y divide-slate-100">
+            <tr><td colspan="4" class="p-5 text-center text-slate-400 italic">अभी कोई ग्राहक नहीं जोड़ा गया है।</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 4: Galla Entry -->
+  <div id="cashbookModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-xl rounded-3xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4 border-b pb-3">
+        <h3 class="text-lg font-bold text-navyPrimary">💰 गल्ला एंट्री और रिपोर्ट</h3>
+        <button type="button" class="close-modal text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
+      </div>
+      <div class="space-y-4">
+        <div class="grid grid-cols-3 gap-3 text-center">
+          <div class="bg-emerald-50 p-3 rounded-2xl border border-emerald-200">
+            <span class="text-[10px] text-emerald-700 font-bold uppercase">नकद बिक्री</span>
+            <h4 id="modalCashVal" class="text-base font-extrabold text-emerald-900">₹0.00</h4>
+          </div>
+          <div class="bg-blue-50 p-3 rounded-2xl border border-blue-200">
+            <span class="text-[10px] text-blue-700 font-bold uppercase">UPI बिक्री</span>
+            <h4 id="modalUpiVal" class="text-base font-extrabold text-blue-900">₹0.00</h4>
+          </div>
+          <div class="bg-amber-50 p-3 rounded-2xl border border-amber-200">
+            <span class="text-[10px] text-amber-700 font-bold uppercase">खर्च</span>
+            <h4 id="modalExpenseVal" class="text-base font-extrabold text-amber-900">₹0.00</h4>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <select id="entryType" class="px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white">
+              <option value="cash">नकद बिक्री (Cash)</option>
+              <option value="upi">ऑनलाइन / UPI</option>
+              <option value="expense">दुकान / घर का खर्च</option>
+            </select>
+            <input type="number" id="entryAmount" placeholder="रुपये (₹)" class="px-3 py-2 rounded-xl border border-slate-300 text-xs" />
+            <input type="text" id="entryDesc" placeholder="विवरण" class="px-3 py-2 rounded-xl border border-slate-300 text-xs" />
+          </div>
+          <button type="button" id="saveEntryBtn" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-xl hover:bg-purple-700 text-xs">
+            एंट्री सुरक्षित करें ✓
+          </button>
+        </div>
+
+        <div class="bg-navyPrimary text-white p-3.5 rounded-xl flex justify-between items-center text-sm">
+          <span>शुद्ध गल्ला (Cash in Drawer):</span>
+          <strong id="modalDrawerVal" class="text-emerald-300 text-base">₹0.00</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 5: Shortage & Thermal Receipt -->
+  <div id="stockModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4 border-b pb-3">
+        <h3 class="text-lg font-bold text-navyPrimary">🚨 शॉर्टेज लिस्ट & थर्मल पर्ची</h3>
+        <button type="button" class="close-modal text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
+      </div>
+      <div class="space-y-4">
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="shortageItem" placeholder="सामान का नाम" class="px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+          <input type="text" id="shortageQty" placeholder="मात्रा (जैसे: 2 कार्टन)" class="px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+        </div>
+        <button type="button" id="addShortageBtn" class="w-full bg-red-600 text-white font-bold py-2.5 rounded-xl hover:bg-red-700 text-sm">
+          ⚠️ शॉर्टेज लिस्ट में जोड़ें
+        </button>
+        <div class="bg-amber-50/60 border-2 border-dashed border-amber-300 p-4 rounded-2xl font-mono text-xs">
+          <div class="text-center font-bold border-b border-dashed border-amber-300 pb-2 mb-2 text-navyPrimary">
+            *** अर्जेंट शॉर्टेज आर्डर पर्ची ***<br>
+            <span class="text-[10px] text-slate-500">MunimJi by Cool Art®</span>
+          </div>
+          <div id="thermalReceiptList" class="space-y-1 min-h-[55px] text-slate-700">
+            <p class="text-slate-400 italic text-center">कोई सामान नहीं जोड़ा गया है।</p>
+          </div>
+        </div>
+        <button type="button" id="shareThermalBtn" class="w-full bg-emerald-500 text-white font-bold py-3 rounded-xl hover:bg-emerald-600 text-sm">
+          💬 थर्मल पर्ची वेंडर को WhatsApp करें
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed Footer -->
+  <footer class="mj-fixed-footer" role="contentinfo">
+    <div class="mj-ff-inner">
+      <div class="mj-ff-left">
+        <img src="cool art logo.png" alt="Cool Art" class="mj-ff-coolart-img" />
+        <span class="mj-ff-copy">© 2026 <strong>Cool Art®</strong>. All Rights Reserved.</span>
+        <span class="mj-ff-sep">|</span>
+        <a href="tel:+919458614610" class="mj-ff-phone">📞 Helpline: +91 9458614610</a>
+      </div>
+      <div class="mj-ff-right">
+        <span>Powered by</span>
+        <img src="logo.png" alt="MunimJi by Cool Art®" class="mj-ff-mj-img" />
+        <span>• Developed by <strong>Cool Art®</strong></span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import {
+      auth,
+      db,
+      signOut,
+      onAuthStateChanged,
+      ensureUserProfile,
+      collection,
+      addDoc,
+      query,
+      where,
+      onSnapshot,
+      serverTimestamp
+    } from "./firebase-config.js";
+
+    let currentUser = null;
+    let currentBillItems = [];
+    let billGrandTotal = 0;
+    let shortageList = [];
+
+    const openModal = (id) => document.getElementById(id).classList.remove("hidden");
+    const closeAllModals = () => {
+      document.querySelectorAll('[id$="Modal"]').forEach((m) => m.classList.add("hidden"));
+    };
+
+    document.querySelectorAll(".close-modal").forEach((btn) => btn.addEventListener("click", closeAllModals));
+    document.getElementById("openBillingBtn").addEventListener("click", () => openModal("billingModal"));
+    document.getElementById("quickBillCta").addEventListener("click", () => openModal("billingModal"));
+    document.getElementById("openCustomerBtn").addEventListener("click", () => openModal("customerModal"));
+    document.getElementById("openKhataBtn").addEventListener("click", () => openModal("khataModal"));
+    document.getElementById("openCashbookBtn").addEventListener("click", () => openModal("cashbookModal"));
+    document.getElementById("openStockBtn").addEventListener("click", () => openModal("stockModal"));
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.replace("login.html");
+    });
+
+    document.getElementById("addBillLineBtn").addEventListener("click", () => {
+      const name = document.getElementById("itemName").value.trim();
+      const price = parseFloat(document.getElementById("itemPrice").value);
+      if (!name || isNaN(price) || price <= 0) {
+        alert("कृपया सामान का नाम और सही रेट भरें।");
+        return;
+      }
+      currentBillItems.push({ name, price });
+      billGrandTotal += price;
+      renderBillLines();
+      document.getElementById("itemName").value = "";
+      document.getElementById("itemPrice").value = "";
+    });
+
+    function renderBillLines() {
+      const box = document.getElementById("billItemsList");
+      if (!currentBillItems.length) {
+        box.innerHTML = '<p class="text-slate-400 text-xs italic">कोई लाइन नहीं जुड़ी है।</p>';
+      } else {
+        box.innerHTML = currentBillItems
+          .map((i) => `<div class="flex justify-between border-b border-slate-100 pb-1"><span>${i.name}</span><strong>₹${i.price.toFixed(2)}</strong></div>`)
+          .join("");
+      }
+      document.getElementById("billTotal").textContent = `₹${billGrandTotal.toFixed(2)}`;
+    }
+
+    document.getElementById("sendWaBillBtn").addEventListener("click", () => {
+      if (!currentBillItems.length) {
+        alert("कृपया कम से कम एक लाइन जोड़ें।");
+        return;
+      }
+      const custName = document.getElementById("billCustomerName").value.trim() || "ग्राहक";
+      const custMobile = document.getElementById("billCustomerMobile").value.trim();
+      let msg = `*MunimJi - डिजिटल बिल*\nग्राहक: ${custName}\n------------------\n`;
+      currentBillItems.forEach((i) => { msg += `${i.name} : ₹${i.price.toFixed(2)}\n`; });
+      msg += `------------------\n*कुल योग: ₹${billGrandTotal.toFixed(2)}*\nधन्यवाद!`;
+      const url = custMobile
+        ? `https://wa.me/91${custMobile}?text=${encodeURIComponent(msg)}`
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank");
+    });
+
+    document.getElementById("saveCustomerBtn").addEventListener("click", async () => {
+      if (!currentUser) return;
+      const name = document.getElementById("modalCustomerName").value.trim();
+      const mobile = document.getElementById("modalCustomerMobile").value.trim();
+      const amount = parseFloat(document.getElementById("modalCustomerAmount").value) || 0;
+      if (!name || mobile.length < 10) {
+        alert("कृपया ग्राहक का नाम और 10 अंकों का मोबाइल नंबर दर्ज करें।");
+        return;
+      }
+      await addDoc(collection(db, "customers"), {
+        ownerUid: currentUser.uid,
+        name,
+        mobile,
+        balance: amount,
+        createdAt: serverTimestamp()
+      });
+      document.getElementById("modalCustomerName").value = "";
+      document.getElementById("modalCustomerMobile").value = "";
+      document.getElementById("modalCustomerAmount").value = "";
+      closeAllModals();
+    });
+
+    document.getElementById("saveEntryBtn").addEventListener("click", async () => {
+      if (!currentUser) return;
+      const type = document.getElementById("entryType").value;
+      const amount = parseFloat(document.getElementById("entryAmount").value);
+      const desc = document.getElementById("entryDesc").value.trim();
+      if (isNaN(amount) || amount <= 0) {
+        alert("कृपया सही रुपये दर्ज करें।");
+        return;
+      }
+      await addDoc(collection(db, "cashbook"), {
+        ownerUid: currentUser.uid,
+        type,
+        amount,
+        desc,
+        createdAt: serverTimestamp()
+      });
+      document.getElementById("entryAmount").value = "";
+      document.getElementById("entryDesc").value = "";
+    });
+
+    document.getElementById("addShortageBtn").addEventListener("click", () => {
+      const item = document.getElementById("shortageItem").value.trim();
+      const qty = document.getElementById("shortageQty").value.trim() || "जरूरी";
+      if (!item) {
+        alert("सामान का नाम लिखें।");
+        return;
+      }
+      shortageList.push({ item, qty });
+      renderShortage();
+      document.getElementById("shortageItem").value = "";
+      document.getElementById("shortageQty").value = "";
+    });
+
+    function renderShortage() {
+      const receiptEl = document.getElementById("thermalReceiptList");
+      const previewEl = document.getElementById("topShortagePreview");
+      if (!shortageList.length) {
+        receiptEl.innerHTML = '<p class="text-slate-400 italic text-center">कोई सामान नहीं जोड़ा गया है।</p>';
+        previewEl.innerHTML = "कोई शॉर्टेज सामान नहीं है।";
+        return;
+      }
+      receiptEl.innerHTML = shortageList
+        .map((s, idx) => `<div class="flex justify-between"><span>${idx + 1}. ${s.item}</span><strong>${s.qty}</strong></div>`)
+        .join("");
+      const last = shortageList[shortageList.length - 1];
+      previewEl.innerHTML = `• <strong>${last.item}</strong> (${last.qty})`;
+    }
+
+    document.getElementById("shareThermalBtn").addEventListener("click", () => {
+      if (!shortageList.length) {
+        alert("पहले शॉर्टेज लिस्ट में सामान जोड़ें।");
+        return;
+      }
+      let txt = `*--- अर्जेंट शॉर्टेज आर्डर पर्ची ---*\n*MunimJi by Cool Art®*\n----------------------------------\n`;
+      shortageList.forEach((s, idx) => { txt += `${idx + 1}. ${s.item} - ${s.qty}\n`; });
+      txt += `----------------------------------\nकृपया यह सामान जल्द भेजें।`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(txt)}`, "_blank");
+    });
+
+    function subscribeUserData(uid) {
+      onSnapshot(query(collection(db, "customers"), where("ownerUid", "==", uid)), (snap) => {
+        let totalUdhar = 0;
+        const rows = [];
+        snap.forEach((d) => {
+          const data = d.data();
+          const bal = Number(data.balance || 0);
+          totalUdhar += bal;
+          const safeName = String(data.name || "").replace(/'/g, "");
+          const safeMobile = String(data.mobile || "").replace(/\D/g, "");
+          rows.push(`
+            <tr>
+              <td class="p-3 font-semibold">${data.name}</td>
+              <td class="p-3 text-slate-500">${data.mobile}</td>
+              <td class="p-3 font-bold text-red-600">₹${bal.toFixed(2)}</td>
+              <td class="p-3 text-right">
+                <a target="_blank" rel="noopener" href="https://wa.me/91${safeMobile}?text=${encodeURIComponent(`नमस्ते ${safeName} जी, आपका MunimJi खाता बकाया ₹${bal.toFixed(2)} है।`)}" class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-lg text-xs font-bold">💬 रिमाइंडर</a>
+              </td>
+            </tr>
+          `);
+        });
+        document.getElementById("totalUdharDisplay").textContent = `₹${totalUdhar.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
+        document.getElementById("customerTableBody").innerHTML = rows.length
+          ? rows.join("")
+          : '<tr><td colspan="4" class="p-5 text-center text-slate-400 italic">अभी कोई ग्राहक नहीं जोड़ा गया है।</td></tr>';
+      });
+
+      onSnapshot(query(collection(db, "cashbook"), where("ownerUid", "==", uid)), (snap) => {
+        let cash = 0, upi = 0, expense = 0;
+        snap.forEach((d) => {
+          const data = d.data();
+          const amt = Number(data.amount || 0);
+          if (data.type === "cash") cash += amt;
+          else if (data.type === "upi") upi += amt;
+          else if (data.type === "expense") expense += amt;
+        });
+        const totalSales = cash + upi;
+        const netDrawer = cash + upi - expense;
+        document.getElementById("totalSalesDisplay").textContent = `₹${totalSales.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
+        document.getElementById("drawerCashDisplay").textContent = `₹${netDrawer.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
+        document.getElementById("modalCashVal").textContent = `₹${cash.toFixed(2)}`;
+        document.getElementById("modalUpiVal").textContent = `₹${upi.toFixed(2)}`;
+        document.getElementById("modalExpenseVal").textContent = `₹${expense.toFixed(2)}`;
+        document.getElementById("modalDrawerVal").textContent = `₹${netDrawer.toFixed(2)}`;
+      });
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.replace("login.html");
+        return;
+      }
+      currentUser = user;
+      const profile = await ensureUserProfile(user);
+      const badge = document.getElementById("userBadge");
+      badge.textContent = `${profile.displayName} · ${profile.planName || "Active"}`;
+      badge.classList.remove("hidden");
+      document.getElementById("planInfoText").textContent =
+        `खाता: ${user.email} | प्लान स्थिति: ${profile.planStatus === "trial" ? "7-दिन फ्री डेमो" : profile.planStatus}`;
+      subscribeUserData(user.uid);
+    });
+  </script>
+</body>
+</html>
