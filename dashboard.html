@@ -14,17 +14,18 @@
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
     :root {
-      --bg-app: #F4F6F9;
+      --bg-app: #F3F5F9;
       --bg-surface: #FFFFFF;
       --bg-surface-soft: #F8FAFC;
       --text-main: #0F172A;
       --text-muted: #64748B;
-      --border-subtle: rgba(15, 23, 42, 0.08);
+      --border-subtle: rgba(15, 23, 42, 0.09);
       --brand-primary: #071B36;
       --brand-accent: #079D76;
       --brand-highlight: #F59E0B;
-      --hero-grad: linear-gradient(135deg, #071B36 0%, #0F2E54 58%, #067A5C 100%);
-      --clock-bg: linear-gradient(145deg, #0B2240 0%, #163A63 100%);
+      --profile-card-bg: linear-gradient(135deg, #FFFDF5 0%, #FFFBEB 60%, #ECFDF5 100%);
+      --profile-card-border: rgba(245, 158, 11, 0.35);
+      --clock-bg: linear-gradient(145deg, #071B36 0%, #102D54 100%);
       --clock-text: #FFFFFF;
       --clock-accent: #FCD34D;
     }
@@ -36,45 +37,48 @@
       --bg-surface-soft: #F5EDE2;
       --text-main: #2A121B;
       --text-muted: #6E5660;
-      --border-subtle: rgba(91, 24, 48, 0.12);
+      --border-subtle: rgba(91, 24, 48, 0.13);
       --brand-primary: #5B1830;
       --brand-accent: #7A2040;
       --brand-highlight: #D97706;
-      --hero-grad: linear-gradient(135deg, #4A1125 0%, #7A2040 60%, #B45309 100%);
-      --clock-bg: linear-gradient(145deg, #3D0E1F 0%, #6B1B38 100%);
+      --profile-card-bg: linear-gradient(135deg, #FFFDF9 0%, #F9EFE6 100%);
+      --profile-card-border: rgba(122, 32, 64, 0.28);
+      --clock-bg: linear-gradient(145deg, #420F21 0%, #6E1C39 100%);
       --clock-text: #FFFDF9;
       --clock-accent: #FBBF24;
     }
 
-    /* Theme 3: Dark 60-30-10 (60% Deep Charcoal, 30% Soft Lavender, 10% Mint) */
+    /* Theme 3: Dark 60-30-10 */
     body[data-theme="dark-603010"] {
       --bg-app: #14141F;
       --bg-surface: #1F1F2E;
-      --bg-surface-soft: #2A293E;
+      --bg-surface-soft: #29283D;
       --text-main: #F8FAFC;
       --text-muted: #A5A4C4;
-      --border-subtle: rgba(167, 139, 250, 0.22);
+      --border-subtle: rgba(167, 139, 250, 0.24);
       --brand-primary: #7C3AED;
       --brand-accent: #34D399;
       --brand-highlight: #A78BFA;
-      --hero-grad: linear-gradient(135deg, #252238 0%, #4C3D8F 65%, #10B981 100%);
-      --clock-bg: linear-gradient(145deg, #2A2640 0%, #3E356B 100%);
+      --profile-card-bg: linear-gradient(135deg, #252438 0%, #312B4F 100%);
+      --profile-card-border: rgba(167, 139, 250, 0.38);
+      --clock-bg: linear-gradient(145deg, #28243E 0%, #3B3266 100%);
       --clock-text: #F8FAFC;
       --clock-accent: #34D399;
     }
 
-    /* Theme 4: Light Minimal (Chatify Clean Style) */
+    /* Theme 4: Light Minimal */
     body[data-theme="light-minimal"] {
       --bg-app: #F8F9FB;
       --bg-surface: #FFFFFF;
       --bg-surface-soft: #F3F4F8;
       --text-main: #18181B;
       --text-muted: #71717A;
-      --border-subtle: rgba(24, 24, 27, 0.07);
+      --border-subtle: rgba(24, 24, 27, 0.08);
       --brand-primary: #5B4FE9;
       --brand-accent: #5B4FE9;
       --brand-highlight: #818CF8;
-      --hero-grad: linear-gradient(135deg, #4F46E5 0%, #6D5DF6 100%);
+      --profile-card-bg: linear-gradient(135deg, #FFFFFF 0%, #F4F3FF 100%);
+      --profile-card-border: rgba(91, 79, 233, 0.22);
       --clock-bg: linear-gradient(145deg, #EEF2FF 0%, #E0E7FF 100%);
       --clock-text: #1E1B4B;
       --clock-accent: #4F46E5;
@@ -87,24 +91,42 @@
       --bg-surface-soft: #EFECE1;
       --text-main: #16241D;
       --text-muted: #586960;
-      --border-subtle: rgba(5, 150, 105, 0.14);
+      --border-subtle: rgba(5, 150, 105, 0.16);
       --brand-primary: #065F46;
       --brand-accent: #059669;
       --brand-highlight: #F59E0B;
-      --hero-grad: linear-gradient(135deg, #064E3B 0%, #059669 65%, #D97706 100%);
+      --profile-card-bg: linear-gradient(135deg, #FFFDF8 0%, #ECFDF5 100%);
+      --profile-card-border: rgba(5, 150, 105, 0.28);
       --clock-bg: linear-gradient(145deg, #064E3B 0%, #047857 100%);
       --clock-text: #FFFFFF;
       --clock-accent: #FCD34D;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    input, textarea, select {
+      -webkit-user-select: text !important;
+      -moz-user-select: text !important;
+      -ms-user-select: text !important;
+      user-select: text !important;
+    }
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
     body {
       margin: 0;
       background: var(--bg-app);
       color: var(--text-main);
       font-family: "Plus Jakarta Sans", "Noto Sans Devanagari", -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 66px;
+      padding-bottom: 78px;
       transition: background 0.25s ease, color 0.25s ease;
     }
 
@@ -113,15 +135,25 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    .themed-card {
+    .clean-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: 20px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.25s ease;
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.035);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.25s ease;
     }
-    .themed-card:active {
+    .clean-card:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+    .clean-card:active {
       transform: scale(0.985);
+    }
+
+    .highlighted-profile-card {
+      background: var(--profile-card-bg);
+      border: 1px solid var(--profile-card-border);
+      border-radius: 18px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.045);
     }
 
     /* PRO vs TRIAL Visual Distinction */
@@ -141,44 +173,55 @@
       border: 1px solid #FECACA;
     }
 
-    /* Hero Banner (70%) + Digital Clock (30%) */
-    .hero-promo-box {
-      background: var(--hero-grad);
-      border-radius: 20px;
-      color: #FFFFFF;
+    /* Nature Auto-Rotating Hero Banner (70%) + Digital Clock (30%) */
+    .nature-banner-card {
       position: relative;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 8px 22px rgba(7, 27, 54, 0.14);
+      min-height: 112px;
+      background: linear-gradient(135deg, #065F46 0%, #0EA5E9 55%, #10B981 100%);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
     }
-    .hero-promo-box::after {
-      content: "";
+    .nature-banner-img {
       position: absolute;
-      right: -28px;
-      bottom: -28px;
-      width: 110px;
-      height: 110px;
-      border-radius: 9999px;
-      background: rgba(255, 255, 255, 0.08);
-      pointer-events: none;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.6s ease;
     }
+    .nature-banner-overlay {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(7, 27, 54, 0.72) 0%, rgba(7, 27, 54, 0.28) 65%, rgba(7, 27, 54, 0.15) 100%);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #FFFFFF;
+    }
+
     .digital-clock-card {
       background: var(--clock-bg);
       color: var(--clock-text);
       border-radius: 20px;
       border: 1px solid var(--border-subtle);
-      box-shadow: 0 8px 22px rgba(7, 27, 54, 0.12);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+      min-height: 112px;
     }
 
-    /* Floating Always-Visible Theme Drawer Trigger */
+    /* Always-Visible Theme Button & Palette Drawer */
     .theme-fab-btn {
       position: fixed;
       right: 12px;
-      bottom: 74px;
+      bottom: 84px;
       z-index: 65;
       background: var(--brand-primary);
       color: #FFFFFF;
       border: 1.5px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
       border-radius: 9999px;
       padding: 8px 13px;
       font-size: 11.5px;
@@ -191,14 +234,14 @@
     .theme-drawer-panel {
       position: fixed;
       right: 12px;
-      bottom: 118px;
+      bottom: 128px;
       z-index: 66;
       width: 245px;
       background: var(--bg-surface);
       color: var(--text-main);
       border: 1px solid var(--border-subtle);
       border-radius: 20px;
-      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
       padding: 12px;
     }
 
@@ -208,9 +251,7 @@
       display: flex;
       align-items: center;
     }
-    .voice-wrap input {
-      padding-right: 36px;
-    }
+    .voice-wrap input { padding-right: 36px; }
     .mic-btn {
       position: absolute;
       right: 7px;
@@ -254,7 +295,7 @@
       50% { height: 12px; }
     }
 
-    /* Modern Parchi Sheet (Always crisp white receipt for printing/sharing) */
+    /* Modern Parchi Sheet */
     .mj-parchi-sheet {
       background: #FFFFFF;
       border: 1px solid #CBD5E1;
@@ -391,21 +432,21 @@
       line-height: 1.35;
     }
 
-    /* Fixed Bottom App Footer */
+    /* Fixed Bottom App Footer + Subtle Light Gray Version Note */
     .mj-fixed-footer {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       z-index: 70;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: saturate(180%) blur(18px);
       -webkit-backdrop-filter: saturate(180%) blur(18px);
       border-top: 1px solid rgba(0, 0, 0, 0.08);
       box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.04);
-      padding: 8px 20px;
+      padding: 6px 18px 5px;
       color: #334155;
-      font-size: 12px;
+      font-size: 11.5px;
     }
     .mj-ff-inner {
       max-width: 1240px;
@@ -421,8 +462,8 @@
       gap: 10px;
       flex-wrap: wrap;
     }
-    .mj-ff-coolart-img { height: 16px; width: auto; object-fit: contain; display: block; }
-    .mj-ff-mj-img { height: 18px; width: auto; object-fit: contain; display: inline-block; }
+    .mj-ff-coolart-img { height: 15px; width: auto; object-fit: contain; display: block; }
+    .mj-ff-mj-img { height: 17px; width: auto; object-fit: contain; display: inline-block; }
     .mj-ff-sep { color: #CBD5E1; }
     .mj-ff-phone {
       color: #0F294A;
@@ -437,14 +478,23 @@
       align-items: center;
       gap: 6px;
       color: #64748B;
-      font-size: 12px;
+      font-size: 11.5px;
       white-space: nowrap;
     }
     .mj-ff-right strong { color: #0F294A; font-weight: 800; }
+    .mj-build-version {
+      max-width: 1240px;
+      margin: 2px auto 0;
+      text-align: center;
+      font-size: 9.5px;
+      font-weight: 500;
+      color: #9CA3AF;
+      letter-spacing: 0.02em;
+    }
 
     @media (max-width: 768px) {
-      body { padding-bottom: 70px; }
-      .mj-fixed-footer { padding: 7px 10px; }
+      body { padding-bottom: 80px; }
+      .mj-fixed-footer { padding: 6px 10px 4px; }
       .mj-ff-inner {
         flex-direction: column;
         justify-content: center;
@@ -460,7 +510,8 @@
         justify-content: center;
         gap: 4px;
       }
-      .mj-ff-mj-img { height: 15px; }
+      .mj-ff-mj-img { height: 14px; }
+      .mj-build-version { font-size: 9px; }
     }
   </style>
 </head>
@@ -468,7 +519,7 @@
 
   <!-- Top Header -->
   <header class="themed-header sticky top-0 z-40">
-    <div class="max-w-6xl mx-auto px-3.5 sm:px-6 h-14 flex items-center justify-between gap-2">
+    <div class="max-w-6xl mx-auto px-3.5 sm:px-6 h-13 py-2 flex items-center justify-between gap-2">
       <div class="flex items-center gap-2 min-w-0">
         <a href="index.html" class="flex-shrink-0 bg-white px-2 py-1 rounded-xl border border-black/[0.06]">
           <img src="logo.png" alt="MunimJi Logo" class="h-6 sm:h-7 w-auto object-contain" />
@@ -478,7 +529,7 @@
 
       <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
         <button type="button" id="openProfileBtn" class="text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-full border border-current/15 bg-black/[0.04] hover:bg-black/[0.08] transition">
-          प्रोफाइल / UPI
+          प्रोफाइल
         </button>
         <button type="button" id="logoutBtn" class="text-[11px] sm:text-xs font-bold text-red-600 bg-red-500/10 border border-red-500/20 px-2.5 sm:px-3 py-1.5 rounded-full transition">
           लॉग आउट
@@ -487,20 +538,20 @@
     </div>
   </header>
 
-  <!-- Main Single-Screen Mobile App Grid + Clean Desktop Layout -->
-  <main class="max-w-6xl mx-auto px-3.5 sm:px-6 py-3 sm:py-5 flex-grow w-full space-y-3 sm:space-y-4">
+  <!-- Main Workspace -->
+  <main class="max-w-6xl mx-auto px-3.5 sm:px-6 pt-2 pb-5 flex-grow w-full space-y-3 sm:space-y-4">
 
     <!-- Voice Status Toast -->
-    <div id="voiceStatusToast" class="hidden themed-card border-red-300 bg-red-50 px-3.5 py-2 flex items-center justify-between gap-2 text-xs font-bold text-red-800">
+    <div id="voiceStatusToast" class="hidden clean-card border-red-300 bg-red-50 px-3.5 py-2 flex items-center justify-between gap-2 text-xs font-bold text-red-800">
       <div class="flex items-center gap-2">
-        <span class="wave-bars"><span></span><span></span><span></span><span></span></span>
+        <span class="wave-bars"><span></span><span></span><span></span></span>
         <span>माइक चालू है... आराम से बोलें</span>
       </div>
       <button type="button" id="stopVoiceToastBtn" class="bg-red-600 text-white px-2.5 py-0.5 rounded-full text-[11px]">रोकें</button>
     </div>
 
     <!-- Blocked Notice Banner -->
-    <div id="blockedBanner" class="hidden themed-card border-red-300 bg-red-50 p-3 flex flex-wrap items-center justify-between gap-2 text-red-900">
+    <div id="blockedBanner" class="hidden clean-card border-red-300 bg-red-50 p-3 flex flex-wrap items-center justify-between gap-2 text-red-900">
       <div class="text-xs font-bold">
         ⚠️ आपका खाता फिलहाल <strong>BLOCKED</strong> है। सहायता: <strong>+91 9458614610</strong>
       </div>
@@ -509,130 +560,200 @@
       </a>
     </div>
 
-    <!-- 1. User Identity Header Card (User's Big Name + Photo just like before) -->
-    <section class="themed-card p-3.5 sm:p-5 flex items-center justify-between gap-3">
+    <!-- 1. Highlighted Shop/User Name Card Attached Close to Header -->
+    <section class="highlighted-profile-card px-3.5 py-3 sm:px-5 sm:py-4 flex items-center justify-between gap-3">
       <div class="flex items-center gap-3 min-w-0">
-        <img id="cardAvatarImg" src="favicon.png" alt="Avatar" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl object-cover border border-black/10 bg-white hidden flex-shrink-0" />
-        <div id="cardAvatarInitial" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl text-white text-xl font-extrabold flex items-center justify-center flex-shrink-0" style="background: var(--brand-primary);">M</div>
+        <img id="cardAvatarImg" src="favicon.png" alt="Avatar" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl object-cover border border-amber-400/50 bg-white hidden flex-shrink-0" />
+        <div id="cardAvatarInitial" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl text-white text-xl font-extrabold flex items-center justify-center flex-shrink-0 shadow-sm" style="background: var(--brand-primary);">M</div>
         <div class="min-w-0">
           <div class="flex items-center gap-2 flex-wrap">
             <h1 id="cardUserName" class="text-lg sm:text-2xl font-extrabold tracking-tight truncate">नमस्ते, MunimJi</h1>
             <span id="heroTierBadge" class="tier-badge text-[10px] font-extrabold px-2 py-0.5 rounded-full">TRIAL</span>
           </div>
-          <p id="cardUserMeta" class="text-[11px] sm:text-xs opacity-75 truncate mt-0.5">UPI सेट करने पर हर पर्ची में QR कोड बनेगा</p>
+          <p id="cardUserMeta" class="text-[11px] sm:text-xs opacity-75 truncate mt-0.5">आपका डिजिटल मुनीम खाता</p>
         </div>
       </div>
 
-      <button type="button" id="editProfileSecondaryBtn" class="flex-shrink-0 text-[11px] sm:text-xs font-bold px-3 py-2 rounded-full border border-current/15 bg-black/[0.04] hover:bg-black/[0.08] transition">
-        UPI सेट करें
-      </button>
+      <span class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-700 border border-emerald-500/20">
+        <span>●</span> लाइव खाता
+      </span>
     </section>
 
-    <!-- 2. Horizontal Row: ~70% Fixed Cool Art® Hero Ad Banner + ~30% Live Digital Clock -->
+    <!-- 2. Horizontal Row: ~70% Auto-Rotating Nature Hero Banner + ~30% Live Digital Clock -->
     <section class="grid grid-cols-12 gap-2.5 sm:gap-4 items-stretch">
-      <!-- 70% (8 of 12 cols on mobile, 9 of 12 on desktop): Fixed Cool Art® Promotional Banner -->
-      <div class="col-span-8 sm:col-span-9 hero-promo-box p-3 sm:p-5 flex flex-col justify-between">
-        <div>
-          <div class="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm px-2 py-0.5 rounded-full text-[9.5px] sm:text-[11px] font-extrabold tracking-wide">
-            <span>✨ Cool Art® Digital</span>
+      <!-- ~70% Nature Banner (Auto-rotates nature scenes + user can also test/change image) -->
+      <div class="col-span-8 sm:col-span-9 nature-banner-card">
+        <img id="natureBannerImg" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" alt="Nature View" class="nature-banner-img" />
+        <div class="nature-banner-overlay">
+          <div class="flex items-center justify-between gap-2">
+            <span class="bg-black/35 backdrop-blur-sm text-[9.5px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-white/20">
+              🌿 शुभ दिन · MunimJi
+            </span>
+            <div class="flex items-center gap-1">
+              <button type="button" id="nextNatureImgBtn" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-0.5 rounded-full transition" title="अगली नेचर फोटो">
+                अगली फोटो ↻
+              </button>
+              <button type="button" id="customNatureImgBtn" class="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-0.5 rounded-full transition" title="अपना फोटो लिंक लगाएं">
+                बदलें
+              </button>
+            </div>
           </div>
-          <h2 class="text-xs sm:text-lg font-extrabold leading-snug mt-1.5">
-            अपनी दुकान, स्कूल या व्यापार के लिए सॉफ्टवेयर व वेबसाइट बनवाएं
-          </h2>
-          <p class="hidden sm:block text-xs text-white/85 mt-1">
-            MunimJi — आसान डिजिटल बिल बुक, उधार खाता और WhatsApp पर्ची समाधान।
-          </p>
-        </div>
-        <div class="mt-2 flex items-center justify-between gap-2">
-          <span class="text-[10.5px] sm:text-xs font-bold text-amber-300">📞 +91 9458614610</span>
-          <a href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20software%20ya%20website%20banwane%20ke%20baare%20mein%20baat%20karni%20hai" target="_blank" rel="noopener" class="bg-amber-400 text-[#111827] font-extrabold text-[10px] sm:text-xs px-2.5 py-1 rounded-full shadow-sm hover:bg-amber-300 transition">
-            संपर्क करें
-          </a>
+          <div class="mt-2">
+            <div id="natureQuoteText" class="text-xs sm:text-base font-extrabold leading-snug drop-shadow">
+              साफ़ हिसाब, सुकून भरा व्यापार।
+            </div>
+            <div class="text-[10px] sm:text-xs text-white/85 mt-0.5">
+              हर बिल, उधार और ज़रूरी सामान की पर्ची अब एक क्लिक में।
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- 30% (4 of 12 cols on mobile, 3 of 12 on desktop): Live Digital Clock Widget -->
+      <!-- ~30% Apple-Style Live Digital Clock -->
       <div class="col-span-4 sm:col-span-3 digital-clock-card p-2.5 sm:p-4 flex flex-col items-center justify-center text-center">
         <div id="liveClockDay" class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider opacity-85">शुक्रवार</div>
-        <div id="liveClockTime" class="text-base sm:text-2xl font-extrabold tracking-tight mt-0.5" style="color: var(--clock-accent);">09:11</div>
+        <div id="liveClockTime" class="text-lg sm:text-2xl font-extrabold tracking-tight mt-0.5" style="color: var(--clock-accent);">09:46</div>
         <div id="liveClockAmPm" class="text-[9.5px] sm:text-[11px] font-bold opacity-80">PM</div>
         <div id="liveClockDate" class="text-[9.5px] sm:text-xs font-semibold opacity-80 mt-1 pt-1 border-t border-current/15 w-full">20/11/2026</div>
       </div>
     </section>
 
-    <!-- 3. iPhone-Style Compact All-in-One App Cards Grid (Fits on Single Screen without Scrolling) -->
-    <section class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4">
-      <!-- App Card 1: New Bill -->
-      <button type="button" id="openBillingCardBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-emerald-500">
+    <!-- 3. Shop / Business Section Heading + Clean Outlined Icon Cards (No heavy bottom bar) -->
+    <div class="flex items-center justify-between pt-0.5">
+      <span class="text-[11px] font-extrabold uppercase tracking-wider opacity-70">दुकान व व्यापार के मुख्य कार्य</span>
+      <span class="text-[10.5px] opacity-60">एक टैप में खोलें</span>
+    </div>
+
+    <section class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
+      <!-- Card 1: New Bill -->
+      <button type="button" id="openBillingCardBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between group">
         <div class="flex items-center justify-between w-full">
-          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center text-lg sm:text-xl shadow-sm group-hover:scale-105 transition">🧾</span>
-          <span class="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">पर्ची</span>
+          <span class="w-10 h-10 rounded-full bg-emerald-500/15 text-emerald-600 flex items-center justify-center text-lg group-hover:scale-105 transition">🧾</span>
+          <span class="text-[10px] font-bold opacity-60">बिल</span>
         </div>
         <div class="mt-2.5">
-          <div class="text-sm sm:text-base font-extrabold leading-tight">नया बिल बनाएं</div>
-          <div class="text-[10.5px] sm:text-xs opacity-70 mt-0.5 truncate">मॉडर्न पर्ची व UPI QR</div>
+          <div class="text-sm font-extrabold leading-tight">नया बिल बनाएं</div>
+          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">मॉडर्न पर्ची व शेयर</div>
         </div>
       </button>
 
-      <!-- App Card 2: Add Customer -->
-      <button type="button" id="openCustomerBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-amber-500">
+      <!-- Card 2: Add Customer -->
+      <button type="button" id="openCustomerBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between group">
         <div class="flex items-center justify-between w-full">
-          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-amber-400 text-[#111827] flex items-center justify-center text-lg sm:text-xl font-extrabold shadow-sm group-hover:scale-105 transition">➕</span>
-          <span class="text-[10px] font-extrabold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">ग्राहक</span>
+          <span class="w-10 h-10 rounded-full bg-amber-500/15 text-amber-600 flex items-center justify-center text-lg font-extrabold group-hover:scale-105 transition">➕</span>
+          <span class="text-[10px] font-bold opacity-60">ग्राहक</span>
         </div>
         <div class="mt-2.5">
-          <div class="text-sm sm:text-base font-extrabold leading-tight">नया ग्राहक जोड़ें</div>
-          <div class="text-[10.5px] sm:text-xs opacity-70 mt-0.5 truncate">नाम, मोबाइल व बकाया</div>
+          <div class="text-sm font-extrabold leading-tight">नया ग्राहक जोड़ें</div>
+          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">नाम, मोबाइल व उधार</div>
         </div>
       </button>
 
-      <!-- App Card 3: Khata Ledger -->
-      <button type="button" id="openKhataBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-blue-600">
+      <!-- Card 3: Khata Ledger -->
+      <button type="button" id="openKhataBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between group">
         <div class="flex items-center justify-between w-full">
-          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-lg sm:text-xl shadow-sm group-hover:scale-105 transition">📒</span>
-          <span class="text-[10px] font-extrabold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">खाता</span>
+          <span class="w-10 h-10 rounded-full bg-blue-500/15 text-blue-600 flex items-center justify-center text-lg group-hover:scale-105 transition">📒</span>
+          <span class="text-[10px] font-bold opacity-60">खाता</span>
         </div>
         <div class="mt-2.5">
-          <div class="text-sm sm:text-base font-extrabold leading-tight">उधार खाता देखें</div>
-          <div class="text-[10.5px] sm:text-xs opacity-70 mt-0.5 truncate">WhatsApp रिमाइंडर पर्ची</div>
+          <div class="text-sm font-extrabold leading-tight">उधार खाता देखें</div>
+          <div class="text-[10.5px] opacity-65 mt-0.5 truncate">रिमाइंडर पर्ची भेजें</div>
         </div>
       </button>
 
-      <!-- App Card 4: Total Udhar Metric -->
-      <button type="button" id="udharMetricCardBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-rose-500">
+      <!-- Card 4: Dedicated UPI Payment Card with ₹ Symbol -->
+      <button type="button" id="upiSetupCardBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between group">
         <div class="flex items-center justify-between w-full">
-          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-rose-500 text-white flex items-center justify-center text-lg sm:text-xl shadow-sm group-hover:scale-105 transition">💰</span>
-          <span class="text-[10px] font-extrabold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full">बाकी उधार</span>
+          <span class="w-10 h-10 rounded-full bg-indigo-500/15 text-indigo-600 flex items-center justify-center text-lg font-extrabold group-hover:scale-105 transition">₹</span>
+          <span id="upiStatusPill" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-700">UPI सेट करें</span>
         </div>
         <div class="mt-2.5">
-          <div id="totalUdharDisplay" class="text-base sm:text-xl font-extrabold text-rose-600 leading-tight">₹0.00</div>
-          <div class="text-[10.5px] sm:text-xs opacity-70 mt-0.5 truncate">कुल बकाया हिसाब</div>
+          <div class="text-sm font-extrabold leading-tight">UPI पेमेंट QR</div>
+          <div id="upiCardSubtext" class="text-[10.5px] opacity-65 mt-0.5 truncate">जल्दी पेमेंट हेतु UPI जोड़ें</div>
         </div>
+      </button>
+    </section>
+
+    <!-- 4. Shop Live Metrics Row (Udhar, Galla, Need List) -->
+    <section class="grid grid-cols-3 gap-2.5 sm:gap-3.5">
+      <!-- Total Udhar -->
+      <button type="button" id="udharMetricCardBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-[10.5px] sm:text-xs font-bold opacity-70">बाकी उधार</span>
+          <span class="text-xs">💰</span>
+        </div>
+        <div id="totalUdharDisplay" class="text-sm sm:text-xl font-extrabold text-rose-600 mt-1.5 truncate">₹0.00</div>
+        <div class="text-[10px] opacity-60 mt-0.5 truncate">कुल बकाया</div>
       </button>
 
-      <!-- App Card 5: Galla Entry & Report -->
-      <button type="button" id="openCashbookBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-purple-600">
-        <div class="flex items-center justify-between w-full">
-          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center text-lg sm:text-xl shadow-sm group-hover:scale-105 transition">📊</span>
-          <span class="text-[10px] font-extrabold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full">गल्ला</span>
+      <!-- Galla Entry -->
+      <button type="button" id="openCashbookBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-[10.5px] sm:text-xs font-bold opacity-70">गल्ला रिपोर्ट</span>
+          <span class="text-xs">📊</span>
         </div>
-        <div class="mt-2.5">
-          <div id="totalSalesDisplay" class="text-base sm:text-xl font-extrabold leading-tight">₹0.00</div>
-          <div class="text-[10.5px] sm:text-xs opacity-75 mt-0.5 truncate">गल्ला: <strong id="drawerCashDisplay" class="text-emerald-600">₹0.00</strong></div>
-        </div>
+        <div id="totalSalesDisplay" class="text-sm sm:text-xl font-extrabold mt-1.5 truncate">₹0.00</div>
+        <div class="text-[10px] opacity-70 mt-0.5 truncate">शुद्ध: <strong id="drawerCashDisplay" class="text-emerald-600">₹0.00</strong></div>
       </button>
 
-      <!-- App Card 6: Need List (Ruled Hindi Copy) -->
-      <button type="button" id="openStockBtn" class="themed-card p-3 sm:p-5 text-left flex flex-col justify-between group border-b-4 border-b-teal-600">
-        <div class="flex items-center justify-between w-full">
-          <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center text-lg sm:text-xl shadow-sm group-hover:scale-105 transition">📝</span>
-          <span id="savedParchiCountBadge" class="text-[10px] font-extrabold text-teal-800 bg-teal-50 px-2 py-0.5 rounded-full">0 पर्ची</span>
+      <!-- Need List (Ruled Hindi Copy) -->
+      <button type="button" id="openStockBtn" class="clean-card p-3 sm:p-4 text-left flex flex-col justify-between">
+        <div class="flex items-center justify-between gap-1">
+          <span id="needListCardTag" class="text-[10.5px] sm:text-xs font-bold opacity-70 truncate">ज़रूरी सूची</span>
+          <span id="savedParchiCountBadge" class="text-[9.5px] font-extrabold bg-emerald-500/15 text-emerald-700 px-1.5 py-0.5 rounded-full flex-shrink-0">0</span>
         </div>
-        <div class="mt-2.5">
-          <div id="needListCardTag" class="text-sm sm:text-base font-extrabold leading-tight truncate">ज़रूरी सामान सूची</div>
-          <div id="topShortagePreview" class="text-[10.5px] sm:text-xs opacity-70 mt-0.5 truncate">कॉपी जैसी पर्ची बनाएं</div>
-        </div>
+        <div id="topShortagePreview" class="text-xs sm:text-sm font-extrabold mt-1.5 truncate">कॉपी खोलें</div>
+        <div class="text-[10px] opacity-60 mt-0.5 truncate">सामान लिखें व भेजें</div>
       </button>
+    </section>
+
+    <!-- 5. Divider + Personal / Private "Lena Hai / Dena Hai" Ledger Section -->
+    <div class="pt-2">
+      <div class="border-t border-slate-300/70 my-2"></div>
+      <div class="flex flex-wrap items-center justify-between gap-2 bg-black/[0.03] px-3.5 py-2 rounded-2xl border border-current/10">
+        <div class="text-[11px] sm:text-xs font-bold leading-snug">
+          🔒 <strong>यह आपका पर्सनल (निजी) हिसाब है</strong> — इसका ऊपर के दुकान के हिसाब से कोई संबंध नहीं है।
+        </div>
+        <button type="button" id="openPersonalLedgerBtn" class="text-[11px] font-extrabold px-3 py-1 rounded-full text-white flex-shrink-0" style="background: var(--brand-primary);">
+          + नया लेन-देन जोड़ें
+        </button>
+      </div>
+    </div>
+
+    <section class="space-y-2.5">
+      <div class="grid grid-cols-2 gap-2.5 sm:gap-3.5">
+        <!-- Card A: Lene Hain (To Receive) -->
+        <button type="button" id="openReceiveLedgerBtn" class="clean-card p-3.5 sm:p-4 text-left flex flex-col justify-between">
+          <div class="flex items-center justify-between w-full">
+            <span class="w-9 h-9 rounded-full bg-emerald-500/15 text-emerald-600 flex items-center justify-center text-base font-extrabold">↓₹</span>
+            <span id="receivePeopleCountBadge" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700">0 लोग</span>
+          </div>
+          <div class="mt-2">
+            <div class="text-xs sm:text-sm font-extrabold">रुपये लेने हैं</div>
+            <div id="personalReceiveTotalDisplay" class="text-base sm:text-xl font-extrabold text-emerald-600 mt-0.5">₹0.00</div>
+            <div class="text-[10px] opacity-65 mt-0.5">रिकॉर्ड व पर्ची देखें →</div>
+          </div>
+        </button>
+
+        <!-- Card B: Dene Hain (To Pay) -->
+        <button type="button" id="openPayLedgerBtn" class="clean-card p-3.5 sm:p-4 text-left flex flex-col justify-between">
+          <div class="flex items-center justify-between w-full">
+            <span class="w-9 h-9 rounded-full bg-rose-500/15 text-rose-600 flex items-center justify-center text-base font-extrabold">↑₹</span>
+            <span id="payPeopleCountBadge" class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-700">0 लोग</span>
+          </div>
+          <div class="mt-2">
+            <div class="text-xs sm:text-sm font-extrabold">रुपये देने हैं</div>
+            <div id="personalPayTotalDisplay" class="text-base sm:text-xl font-extrabold text-rose-600 mt-0.5">₹0.00</div>
+            <div class="text-[10px] opacity-65 mt-0.5">रिकॉर्ड व पर्ची देखें →</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Smart Net Calculation Insight Sentence Below Lena / Dena Cards -->
+      <div id="personalNetInsightBox" class="clean-card px-3.5 py-2.5 text-xs font-semibold leading-relaxed flex items-center gap-2">
+        <span class="text-base">💡</span>
+        <span id="personalNetInsightText">आज की तारीख में अपना निजी लेने-देने का हिसाब जोड़ें, यहाँ अपने आप बचत या ज़रूरत का हिसाब दिखेगा।</span>
+      </div>
     </section>
   </main>
 
@@ -683,6 +804,156 @@
           <span>वार्म क्रीम व हरा</span>
         </span>
       </button>
+    </div>
+  </div>
+
+  <!-- MODAL: Personal Lena / Dena Ledger & Parchi Record -->
+  <div id="personalLedgerModal" class="fixed inset-0 bg-black/45 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white text-slate-900 w-full max-w-4xl rounded-3xl shadow-2xl border border-black/[0.08] p-5 sm:p-6 max-h-[92vh] overflow-y-auto space-y-4">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+        <div>
+          <h3 class="text-lg font-bold">पर्सनल (निजी) लेन-देन हिसाब व पर्ची</h3>
+          <p class="text-xs text-slate-500">यह आपका निजी हिसाब है — इसका दुकान के खाते से कोई संबंध नहीं है।</p>
+        </div>
+        <button type="button" class="close-modal text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        <!-- Left: Add New Personal Entry -->
+        <div class="lg:col-span-5 bg-slate-50 p-4 rounded-2xl space-y-3 border border-slate-200">
+          <div class="text-xs font-extrabold text-slate-800 uppercase">नई निजी एंट्री जोड़ें</div>
+          <div>
+            <label class="block text-xs font-semibold mb-1">प्रकार चुनें</label>
+            <select id="personalDirectionInput" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm bg-white font-semibold">
+              <option value="receive">रुपये लेने हैं (किससे लेने हैं)</option>
+              <option value="pay">रुपये देने हैं (किसको देने हैं)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold mb-1">व्यक्ति का नाम</label>
+            <div class="voice-wrap">
+              <input type="text" id="personalPersonName" placeholder="जैसे: राजेश शर्मा" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
+              <button type="button" data-voice-target="personalPersonName" class="mic-btn" title="बोलकर लिखें">🎤</button>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-semibold mb-1">कहाँ के रहने वाले हैं</label>
+              <input type="text" id="personalPlaceInput" placeholder="गाँव / शहर" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">फ़ोन नंबर</label>
+              <input type="tel" id="personalPhoneInput" maxlength="15" placeholder="9458600000" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-semibold mb-1">रुपये (₹)</label>
+              <input type="number" id="personalAmountInput" min="1" step="any" placeholder="100" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">कब लिए / दिए (तारीख)</label>
+              <input type="date" id="personalDateInput" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold mb-1">विवरण / नोट</label>
+            <input type="text" id="personalNoteInput" placeholder="जैसे: निजी व्यवहार / उधार" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white" />
+          </div>
+          <button type="button" id="savePersonalLedgerBtn" class="w-full bg-[#071B36] text-white font-bold py-2.5 rounded-full hover:bg-black transition text-sm">
+            रिकॉर्ड सुरक्षित करें
+          </button>
+        </div>
+
+        <!-- Right: All Records List -->
+        <div class="lg:col-span-7 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-extrabold text-slate-700">सभी निजी लेन-देन रिकॉर्ड</span>
+            <div class="flex gap-1.5 text-[11px]">
+              <span class="bg-emerald-50 text-emerald-700 font-bold px-2.5 py-0.5 rounded-full">लेने हैं: <strong id="modalReceiveSum">₹0</strong></span>
+              <span class="bg-rose-50 text-rose-700 font-bold px-2.5 py-0.5 rounded-full">देने हैं: <strong id="modalPaySum">₹0</strong></span>
+            </div>
+          </div>
+
+          <div id="personalLedgerRecordsList" class="space-y-2 max-h-[380px] overflow-y-auto pr-1">
+            <p class="text-xs text-slate-400 italic py-6 text-center">अभी कोई निजी लेन-देन दर्ज नहीं है।</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Personal Entry Parchi Preview & Share -->
+  <div id="personalParchiPreviewModal" class="fixed inset-0 bg-black/50 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white text-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-black/[0.08] p-5 max-h-[92vh] overflow-y-auto space-y-4">
+      <div class="flex justify-between items-center pb-2 border-b border-slate-200">
+        <h3 class="text-base font-bold">निजी लेन-देन पर्ची</h3>
+        <button type="button" id="closePersonalParchiBtn" class="text-slate-500 hover:text-slate-900 text-2xl leading-none">&times;</button>
+      </div>
+
+      <div id="personalParchiCapture" class="mj-parchi-sheet">
+        <div class="mj-parchi-top flex justify-between items-start gap-2">
+          <div>
+            <div class="inline-flex items-center gap-1.5 bg-white px-2 py-0.5 rounded-md mb-1.5">
+              <img src="logo.png" alt="MunimJi" class="h-4 w-auto object-contain" />
+            </div>
+            <div id="ppOwnerName" class="text-base font-extrabold">मेरा खाता</div>
+            <div class="text-[11px] text-slate-300">निजी लेन-देन विवरण पर्ची</div>
+          </div>
+          <div class="text-right text-[11px]">
+            <div id="ppDateLabel" class="text-slate-200 font-semibold"></div>
+            <div id="ppTypeBadge" class="text-amber-300 font-bold mt-0.5">विवरण</div>
+          </div>
+        </div>
+        <div class="mj-parchi-zigzag"></div>
+
+        <div class="p-4 space-y-2.5 text-xs">
+          <div class="flex justify-between py-1 border-b border-slate-100">
+            <span class="text-slate-500">नाम:</span>
+            <strong id="ppPersonName">-</strong>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-100">
+            <span class="text-slate-500">पता / स्थान:</span>
+            <span id="ppPlace" class="font-semibold">-</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-100">
+            <span class="text-slate-500">फ़ोन नंबर:</span>
+            <span id="ppPhone" class="font-semibold">-</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-100">
+            <span class="text-slate-500">लेन-देन तारीख:</span>
+            <span id="ppTxDate" class="font-semibold">-</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-100">
+            <span class="text-slate-500">विवरण:</span>
+            <span id="ppNote" class="font-semibold">-</span>
+          </div>
+          <div class="flex justify-between items-center py-2 px-3 rounded-xl bg-slate-100">
+            <span id="ppAmountLabel" class="font-bold">राशि:</span>
+            <strong id="ppAmountVal" class="text-lg font-extrabold">₹0.00</strong>
+          </div>
+        </div>
+
+        <div class="mj-parchi-footer-wrap">
+          <div class="mj-parchi-powered">
+            <span>Powered by</span>
+            <img src="logo.png" alt="MunimJi" />
+            <span>• Developed by <strong>Cool Art®</strong></span>
+          </div>
+          <div class="mj-parchi-black-strip">
+            हर तरह के सॉफ्टवेयर व वेबसाइट बनवाने के लिए संपर्क करें: Cool Art® · +91 9458614610
+          </div>
+        </div>
+      </div>
+
+      <div class="flex gap-2.5">
+        <a id="ppWhatsappLink" href="#" target="_blank" rel="noopener" class="flex-1 bg-[#079D76] text-white font-semibold py-2.5 rounded-full text-xs text-center">
+          💬 सीधा WhatsApp भेजें
+        </a>
+        <button type="button" id="ppDownloadImgBtn" class="flex-1 bg-[#071B36] text-amber-300 font-semibold py-2.5 rounded-full text-xs">
+          🖼️ पर्ची इमेज भेजें
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1154,7 +1425,7 @@
               <div class="ruled-date-card">
                 <div id="hindiCopyDayLabel" class="text-[11px] font-bold text-[#0F294A]">शुक्रवार</div>
                 <div id="hindiCopyDate" class="text-xs font-extrabold text-[#DC2626]">20/11/2026</div>
-                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">09:11 PM</div>
+                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">09:46 PM</div>
               </div>
             </div>
 
@@ -1184,7 +1455,7 @@
     </div>
   </div>
 
-  <!-- Fixed Bottom App Footer -->
+  <!-- Fixed Bottom App Footer + Light Gray Build/Version Line -->
   <footer class="mj-fixed-footer" role="contentinfo">
     <div class="mj-ff-inner">
       <div class="mj-ff-left">
@@ -1199,6 +1470,7 @@
         <span>• Developed by <strong>Cool Art®</strong></span>
       </div>
     </div>
+    <div class="mj-build-version">Build v1.6 · Updated 20 Nov 2026</div>
   </footer>
 
   <script type="module">
@@ -1218,6 +1490,21 @@
       serverTimestamp
     } from "./firebase-config.js";
 
+    // Basic Frontend Deterrence (Right-Click, Copy & DevTools Shortcut Protection without blocking inputs)
+    document.addEventListener("contextmenu", (e) => {
+      if (!["INPUT", "TEXTAREA"].includes(e.target.tagName)) e.preventDefault();
+    });
+    document.addEventListener("keydown", (e) => {
+      const k = e.key.toLowerCase();
+      if (
+        e.key === "F12" ||
+        ((e.ctrlKey || e.metaKey) && ["u", "s"].includes(k)) ||
+        ((e.ctrlKey || e.metaKey) && e.shiftKey && ["i", "j", "c"].includes(k))
+      ) {
+        e.preventDefault();
+      }
+    });
+
     let currentUser = null;
     let currentProfile = null;
     let existingCustomers = [];
@@ -1228,6 +1515,8 @@
     let activeNeedParchiId = null;
     let savedNeedParchis = [];
     let editingNeedIndex = -1;
+
+    let personalLedgerEntries = [];
 
     const categoryLabels = {
       shop: "दुकानदार / किराना / रिटेल",
@@ -1241,18 +1530,18 @@
       const cat = currentProfile?.businessType || "shop";
       if (cat === "household") {
         return {
-          cardTag: "घर-रसोई ज़रूरत सूची",
+          cardTag: "घर-रसोई सूची",
           sheetTitle: "घर व रसोई के लिए ज़रूरी सामान की सूची"
         };
       }
       if (cat === "school" || cat === "general") {
         return {
-          cardTag: "ज़रूरी सामान सूची",
+          cardTag: "ज़रूरी सूची",
           sheetTitle: "ज़रूरी सामान की सूची"
         };
       }
       return {
-        cardTag: "ज़रूरी सामान सूची",
+        cardTag: "ज़रूरी सूची",
         sheetTitle: "दुकान के लिए ज़रूरी सामान की सूची"
       };
     }
@@ -1282,7 +1571,60 @@
     updateDigitalClock();
     setInterval(updateDigitalClock, 15000);
 
-    // Theme Switcher (MunimJi Brand Theme default + 4 instant palettes)
+    // Nature Auto-Rotating Hero Banner (with safe fallback & user preview option)
+    const natureSlides = [
+      {
+        url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80",
+        quote: "साफ़ हिसाब, सुकून भरा व्यापार।"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=900&q=80",
+        quote: "हर सुबह नई शुरुआत, हर हिसाब बिल्कुल साफ़।"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80",
+        quote: "प्रकृति जैसी ताज़गी, मुनीम जैसा भरोसा।"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80",
+        quote: "बिना कागज़ की उलझन के डिजिटल बही-खाता।"
+      }
+    ];
+    let natureIdx = 0;
+    const natureImgEl = document.getElementById("natureBannerImg");
+    const natureQuoteEl = document.getElementById("natureQuoteText");
+
+    natureImgEl.onerror = () => {
+      natureImgEl.style.display = "none";
+    };
+
+    function showNatureSlide(idx) {
+      const item = natureSlides[idx % natureSlides.length];
+      natureImgEl.style.display = "block";
+      natureImgEl.src = item.url;
+      natureQuoteEl.textContent = item.quote;
+    }
+
+    let natureTimer = setInterval(() => {
+      natureIdx = (natureIdx + 1) % natureSlides.length;
+      showNatureSlide(natureIdx);
+    }, 10000);
+
+    document.getElementById("nextNatureImgBtn").addEventListener("click", () => {
+      natureIdx = (natureIdx + 1) % natureSlides.length;
+      showNatureSlide(natureIdx);
+    });
+
+    document.getElementById("customNatureImgBtn").addEventListener("click", () => {
+      const customUrl = prompt("अपनी पसंद की नेचर इमेज का लिंक (URL) यहाँ पेस्ट करें:");
+      if (customUrl && customUrl.trim().startsWith("http")) {
+        clearInterval(natureTimer);
+        natureImgEl.style.display = "block";
+        natureImgEl.src = customUrl.trim();
+      }
+    });
+
+    // Theme Switcher
     function applyTheme(themeKey, persistToCloud = false) {
       const validThemes = ["munimji", "cream-wine", "dark-603010", "light-minimal", "warm-emerald"];
       const chosen = validThemes.includes(themeKey) ? themeKey : "munimji";
@@ -1488,6 +1830,9 @@
     document.getElementById("closeReminderParchiBtn").addEventListener("click", () => {
       document.getElementById("reminderParchiModal").classList.add("hidden");
     });
+    document.getElementById("closePersonalParchiBtn").addEventListener("click", () => {
+      document.getElementById("personalParchiPreviewModal").classList.add("hidden");
+    });
 
     function openBillingWithRefresh() {
       if (guardBlockedAction()) return;
@@ -1513,7 +1858,7 @@
       }
     });
 
-    function openProfileEditor() {
+    function openProfileEditor(focusUpi = false) {
       if (!currentUser) return;
       const p = currentProfile || {};
       document.getElementById("modalEmailText").textContent = currentUser.email || "";
@@ -1524,10 +1869,11 @@
       document.getElementById("profileCategoryInput").value = p.businessType || "shop";
       document.getElementById("profilePhotoInput").value = p.photoURL || currentUser.photoURL || "";
       openModal("profileModal");
+      if (focusUpi) setTimeout(() => document.getElementById("profileUpiInput").focus(), 120);
     }
 
-    document.getElementById("openProfileBtn").addEventListener("click", openProfileEditor);
-    document.getElementById("editProfileSecondaryBtn").addEventListener("click", openProfileEditor);
+    document.getElementById("openProfileBtn").addEventListener("click", () => openProfileEditor(false));
+    document.getElementById("upiSetupCardBtn").addEventListener("click", () => openProfileEditor(true));
 
     document.getElementById("saveProfileBtn").addEventListener("click", async () => {
       if (!currentUser) return;
@@ -1611,13 +1957,24 @@
       const photo = profile?.photoURL || user.photoURL || "";
       const catText = categoryLabels[profile?.businessType || "general"] || categoryLabels.general;
       const listTitles = getPositiveListTitles();
-      const upiInfo = profile?.upiId ? `UPI: ${profile.upiId}` : "UPI सेट करें → पर्ची पर QR बनेगा";
 
       document.getElementById("cardUserName").textContent = name;
-      document.getElementById("cardUserMeta").textContent = `${catText} · ${upiInfo}`;
+      document.getElementById("cardUserMeta").textContent = `${catText}${profile?.phone ? ` · ${profile.phone}` : ""}`;
       document.getElementById("needListCardTag").textContent = listTitles.cardTag;
       document.getElementById("needListModalHeading").textContent = listTitles.sheetTitle;
       document.getElementById("needListSheetTitle").textContent = listTitles.sheetTitle;
+
+      const upiPill = document.getElementById("upiStatusPill");
+      const upiSub = document.getElementById("upiCardSubtext");
+      if (profile?.upiId) {
+        upiPill.textContent = "सक्रिय ✓";
+        upiPill.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700";
+        upiSub.textContent = profile.upiId;
+      } else {
+        upiPill.textContent = "UPI सेट करें";
+        upiPill.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-700";
+        upiSub.textContent = "जल्दी पेमेंट हेतु UPI जोड़ें";
+      }
 
       setAvatar(document.getElementById("cardAvatarImg"), document.getElementById("cardAvatarInitial"), photo, name);
       setAvatar(document.getElementById("modalAvatarPreview"), document.getElementById("modalAvatarInitial"), photo, name);
@@ -1629,6 +1986,158 @@
       await signOut(auth);
       window.location.replace("login.html");
     });
+
+    // Personal (Private) Lena Hai / Dena Hai Ledger
+    document.getElementById("personalDateInput").value = new Date().toISOString().split("T")[0];
+
+    function openPersonalLedgerWithDirection(dir) {
+      if (guardBlockedAction()) return;
+      if (dir) document.getElementById("personalDirectionInput").value = dir;
+      openModal("personalLedgerModal");
+    }
+
+    document.getElementById("openPersonalLedgerBtn").addEventListener("click", () => openPersonalLedgerWithDirection("receive"));
+    document.getElementById("openReceiveLedgerBtn").addEventListener("click", () => openPersonalLedgerWithDirection("receive"));
+    document.getElementById("openPayLedgerBtn").addEventListener("click", () => openPersonalLedgerWithDirection("pay"));
+
+    document.getElementById("savePersonalLedgerBtn").addEventListener("click", async () => {
+      if (!currentUser || guardBlockedAction()) return;
+      const direction = document.getElementById("personalDirectionInput").value;
+      const personName = document.getElementById("personalPersonName").value.trim();
+      const place = document.getElementById("personalPlaceInput").value.trim();
+      const phone = document.getElementById("personalPhoneInput").value.replace(/\D/g, "");
+      const amount = parseFloat(document.getElementById("personalAmountInput").value);
+      const txDate = document.getElementById("personalDateInput").value || new Date().toISOString().split("T")[0];
+      const note = document.getElementById("personalNoteInput").value.trim();
+
+      if (!personName || isNaN(amount) || amount <= 0) {
+        alert("कृपया व्यक्ति का नाम और सही रुपये दर्ज करें।");
+        return;
+      }
+
+      await addDoc(collection(db, "personal_ledger"), {
+        ownerUid: currentUser.uid,
+        direction,
+        personName,
+        place,
+        phone,
+        amount,
+        txDate,
+        note,
+        createdAt: serverTimestamp(),
+        createdAtMs: Date.now()
+      });
+
+      document.getElementById("personalPersonName").value = "";
+      document.getElementById("personalPlaceInput").value = "";
+      document.getElementById("personalPhoneInput").value = "";
+      document.getElementById("personalAmountInput").value = "";
+      document.getElementById("personalNoteInput").value = "";
+    });
+
+    window.openPersonalEntryParchi = function (entryId) {
+      const item = personalLedgerEntries.find((e) => e.id === entryId);
+      if (!item) return;
+      const ownerName = currentProfile?.displayName || "MunimJi खाता";
+      const isRec = item.direction === "receive";
+
+      document.getElementById("ppOwnerName").textContent = ownerName;
+      document.getElementById("ppDateLabel").textContent = formatNowLabel();
+      document.getElementById("ppTypeBadge").textContent = isRec ? "रुपये लेने हैं" : "रुपये देने हैं";
+      document.getElementById("ppPersonName").textContent = item.personName || "-";
+      document.getElementById("ppPlace").textContent = item.place || "-";
+      document.getElementById("ppPhone").textContent = item.phone || "-";
+      document.getElementById("ppTxDate").textContent = item.txDate || "-";
+      document.getElementById("ppNote").textContent = item.note || "-";
+      document.getElementById("ppAmountLabel").textContent = isRec ? "कुल लेने वाली राशि:" : "कुल देने वाली राशि:";
+      document.getElementById("ppAmountVal").textContent = `₹${Number(item.amount || 0).toFixed(2)}`;
+      document.getElementById("ppAmountVal").className = `text-lg font-extrabold ${isRec ? "text-emerald-700" : "text-rose-700"}`;
+
+      const waMsg = `*${ownerName} — निजी लेन-देन विवरण*\nनाम: ${item.personName}${item.place ? ` (${item.place})` : ""}\nप्रकार: ${
+        isRec ? "रुपये लेने हैं" : "रुपये देने हैं"
+      }\nराशि: *₹${Number(item.amount || 0).toFixed(2)}*\nतारीख: ${item.txDate || "-"}${item.note ? `\nविवरण: ${item.note}` : ""}\n_Powered by MunimJi • Developed by Cool Art®_`;
+      const cleanPhone = String(item.phone || "").replace(/\D/g, "");
+      document.getElementById("ppWhatsappLink").href = cleanPhone.length >= 10
+        ? `https://wa.me/91${cleanPhone}?text=${encodeURIComponent(waMsg)}`
+        : `https://api.whatsapp.com/send?text=${encodeURIComponent(waMsg)}`;
+
+      document.getElementById("personalParchiPreviewModal").classList.remove("hidden");
+    };
+
+    document.getElementById("ppDownloadImgBtn").addEventListener("click", async () => {
+      await shareOrDownloadElementAsImage("personalParchiCapture", "MunimJi_Personal_Parchi");
+    });
+
+    function renderPersonalLedgerUI() {
+      let recTotal = 0;
+      let payTotal = 0;
+      let recCount = 0;
+      let payCount = 0;
+
+      personalLedgerEntries.forEach((e) => {
+        const amt = Number(e.amount || 0);
+        if (e.direction === "receive") {
+          recTotal += amt;
+          recCount++;
+        } else {
+          payTotal += amt;
+          payCount++;
+        }
+      });
+
+      document.getElementById("personalReceiveTotalDisplay").textContent = `₹${recTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
+      document.getElementById("personalPayTotalDisplay").textContent = `₹${payTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
+      document.getElementById("receivePeopleCountBadge").textContent = `${recCount} लोग`;
+      document.getElementById("payPeopleCountBadge").textContent = `${payCount} लोग`;
+      document.getElementById("modalReceiveSum").textContent = `₹${recTotal.toFixed(0)}`;
+      document.getElementById("modalPaySum").textContent = `₹${payTotal.toFixed(0)}`;
+
+      const todayStr = new Date().toLocaleDateString("en-GB");
+      const insightEl = document.getElementById("personalNetInsightText");
+      if (recTotal === 0 && payTotal === 0) {
+        insightEl.innerHTML = `आज की तारीख (<strong>${todayStr}</strong>) में अपना निजी लेने-देने का हिसाब जोड़ें, यहाँ अपने आप बचत या ज़रूरत का हिसाब दिखेगा।`;
+      } else if (payTotal > recTotal) {
+        const needed = payTotal - recTotal;
+        insightEl.innerHTML = `आज (<strong>${todayStr}</strong>) यदि आप <strong>₹${recTotal.toFixed(0)}</strong> ले लेते हैं, तो <strong>₹${payTotal.toFixed(0)}</strong> देने के लिए आपको केवल <strong class="text-rose-600">₹${needed.toFixed(0)}</strong> और जुटाने की ज़रूरत होगी।`;
+      } else {
+        const leftOver = recTotal - payTotal;
+        insightEl.innerHTML = `आज (<strong>${todayStr}</strong>) यदि आप <strong>₹${recTotal.toFixed(0)}</strong> ले लेते हैं, तो <strong>₹${payTotal.toFixed(0)}</strong> देने के बाद भी आपके पास <strong class="text-emerald-600">₹${leftOver.toFixed(0)}</strong> बचेंगे।`;
+      }
+
+      const listBox = document.getElementById("personalLedgerRecordsList");
+      if (!personalLedgerEntries.length) {
+        listBox.innerHTML = '<p class="text-xs text-slate-400 italic py-6 text-center">अभी कोई निजी लेन-देन दर्ज नहीं है।</p>';
+        return;
+      }
+
+      listBox.innerHTML = personalLedgerEntries
+        .map((e) => {
+          const isRec = e.direction === "receive";
+          return `
+            <div class="p-3 rounded-2xl border border-slate-200 bg-white flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full ${isRec ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700"}">
+                    ${isRec ? "लेने हैं" : "देने हैं"}
+                  </span>
+                  <strong class="text-sm text-slate-900 truncate">${e.personName}</strong>
+                  ${e.place ? `<span class="text-[11px] text-slate-500">(${e.place})</span>` : ""}
+                </div>
+                <div class="text-[11px] text-slate-500 mt-0.5">
+                  ${e.phone ? `📞 ${e.phone} · ` : ""}तारीख: ${e.txDate || "-"}${e.note ? ` · ${e.note}` : ""}
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <div class="text-sm font-extrabold ${isRec ? "text-emerald-600" : "text-rose-600"}">₹${Number(e.amount || 0).toFixed(0)}</div>
+                <button type="button" onclick="window.openPersonalEntryParchi('${e.id}')" class="mt-1 text-[10.5px] font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-2.5 py-0.5 rounded-full">
+                  पर्ची देखें
+                </button>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
 
     // Duplicate mobile check
     function checkDuplicateMobile() {
@@ -2024,7 +2533,7 @@
       countText.textContent = `${needItemsList.length} आइटम`;
       if (!needItemsList.length) {
         editableBox.innerHTML = '<p class="text-slate-400 italic">अभी कोई आइटम नहीं जुड़ा है।</p>';
-        previewEl.textContent = "कॉपी जैसी पर्ची बनाएं";
+        previewEl.textContent = "कॉपी खोलें";
       } else {
         editableBox.innerHTML = needItemsList
           .map(
@@ -2047,7 +2556,7 @@
     function renderSavedNeedHistory() {
       const box = document.getElementById("savedNeedParchisHistory");
       const badge = document.getElementById("savedParchiCountBadge");
-      badge.textContent = `${savedNeedParchis.length} पर्ची`;
+      badge.textContent = `${savedNeedParchis.length}`;
 
       if (!savedNeedParchis.length) {
         box.innerHTML = '<p class="text-slate-400 italic">अभी कोई पुरानी पर्ची सेव नहीं है।</p>';
@@ -2182,6 +2691,15 @@
         }
         renderSavedNeedHistory();
       });
+
+      // Live listener for Private / Personal Lena-Dena Ledger
+      onSnapshot(query(collection(db, "personal_ledger"), where("ownerUid", "==", uid)), (snap) => {
+        const items = [];
+        snap.forEach((d) => items.push({ id: d.id, ...d.data() }));
+        items.sort((a, b) => (b.createdAtMs || 0) - (a.createdAtMs || 0));
+        personalLedgerEntries = items;
+        renderPersonalLedgerUI();
+      });
     }
 
     onAuthStateChanged(auth, async (user) => {
@@ -2193,6 +2711,7 @@
       renderUserIdentity(user, { displayName: user.displayName, photoURL: user.photoURL, planStatus: "trial" });
       renderLiveBillParchi();
       renderRuledNeedList();
+      renderPersonalLedgerUI();
       subscribeUserData(user.uid);
 
       try {
