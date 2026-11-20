@@ -7,293 +7,554 @@
 <meta name="description" content="MunimJi by Cool Art® — गृहणी, स्टूडेंट, टीचर, आम आदमी से लेकर दुकानदार, मंडी, थोक व्यापार और स्कूल-कोचिंग तक हर किसी के हिसाब-किताब का डिजिटल साथी।">
 <title>MunimJi by Cool Art® — हर इंसान का डिजिटल मुनीम</title>
 
-<!-- Original Favicon Link -->
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <style>
 :root{
   --navy:#071b36;
-  --navy2:#102b4d;
+  --navy-mid:#0f2e54;
   --green:#079d76;
-  --green2:#12b889;
-  --ink:#14243a;
-  --muted:#5c6b82;
-  --line:#e2e8f0;
-  --paper:#f8fafc;
-  --white:#ffffff;
-  --shadow:0 20px 50px rgba(7,27,54,.08);
-  --shadow-lg:0 28px 70px rgba(7,27,54,.14);
+  --green-bright:#10b981;
+  --green-soft:#ecfdf5;
+  --bg-page:#f1f5f9;
+  --card-bg:#ffffff;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --border:#e2e8f0;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:115px}
-body{margin:0;background:var(--white);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:64px}
+
+*{box-sizing:border-box;letter-spacing:normal;word-spacing:normal}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{
+  margin:0;
+  background:var(--bg-page);
+  color:var(--ink);
+  font-family:"Noto Sans Devanagari","Plus Jakarta Sans",system-ui,-apple-system,sans-serif;
+  line-height:1.58;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:94px;
+}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer}
-.container{width:min(1180px,calc(100% - 40px));margin:auto}
+.wrap{width:min(1140px,calc(100% - 32px));margin:0 auto}
 
-/* Top Green Banner */
-.topline{background:linear-gradient(90deg,#067a5c,#0aa67d);color:#fff;text-align:center;padding:10px 14px;font-size:13px;font-weight:700;position:sticky;top:0;z-index:60;letter-spacing:.01em}
-.topline a{text-decoration:underline;text-underline-offset:3px;font-weight:800}
+/* Top Strip */
+.top-strip{
+  background:linear-gradient(90deg,#071b36 0%,#065f46 100%);
+  color:#fff;
+  text-align:center;
+  padding:8px 14px;
+  font-size:12px;
+  font-weight:700;
+  position:sticky;
+  top:0;
+  z-index:60;
+}
+.top-strip a{color:#6ee7b7;font-weight:800;text-decoration:underline;text-underline-offset:3px}
 
-/* Navigation */
-.nav{position:sticky;top:40px;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.navin{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:flex;align-items:center}
-.brand img{height:44px;width:auto;object-fit:contain;display:block}
-.links{display:flex;gap:28px;align-items:center;font-size:14px;font-weight:700;color:#475569}
-.links a:hover{color:var(--green)}
-.navactions{display:flex;gap:12px;align-items:center}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:14px;font-size:14px;font-weight:800;border:1px solid transparent;transition:all .22s ease}
-.btn:hover{transform:translateY(-2px)}
-.btn.primary{background:var(--green);color:#fff;box-shadow:0 10px 24px rgba(7,157,118,.25)}
-.btn.primary:hover{background:#068664}
-.btn.ghost{border-color:#cbd5e1;background:#fff;color:var(--navy)}
-.btn.ghost:hover{border-color:var(--navy);background:#f8fafc}
-.btn.white{background:#fff;color:var(--navy);box-shadow:0 10px 25px rgba(0,0,0,.15)}
-.btn.darkghost{border-color:rgba(255,255,255,.25);color:#fff;background:rgba(255,255,255,.08)}
-.btn.darkghost:hover{background:rgba(255,255,255,.15)}
-.navactions .btn{padding:10px 18px;font-size:13px}
-.hamb{display:none;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 12px;color:var(--navy);font-size:20px}
+/* Sticky Navbar */
+.topbar{
+  position:sticky;
+  top:34px;
+  z-index:50;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.topbar-in{
+  height:66px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.logo-link img{height:38px;width:auto;object-fit:contain;display:block}
+.nav-links{display:flex;gap:20px;align-items:center;font-size:13px;font-weight:700;color:#334155}
+.nav-links a:hover{color:var(--green)}
+.nav-btns{display:flex;gap:8px;align-items:center}
 
-/* Badges & Section Headers */
-.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid #cceee3;background:#effaf6;color:#067a5c;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--green2);box-shadow:0 0 0 4px #d1f5e8}
-.section{padding:96px 0}
-.section.soft{background:var(--paper);border-top:1px solid #eef2f6;border-bottom:1px solid #eef2f6}
-.section.dark{background:var(--navy);color:#fff}
-.section-head{max-width:740px;margin:0 auto 52px;text-align:center}
-.section-head h2{font-size:clamp(30px,4vw,46px);line-height:1.15;letter-spacing:-.035em;color:var(--navy);margin:16px 0}
-.section-head p{color:var(--muted);font-size:16px;margin:0}
-.dark .section-head h2{color:#fff}
-.dark .section-head p{color:#94a3b8}
+.ui-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:10px 18px;
+  border-radius:999px;
+  font-size:12.5px;
+  font-weight:800;
+  border:1px solid transparent;
+  transition:all .18s ease;
+}
+.ui-btn:hover{transform:translateY(-1px)}
+.ui-btn.green{background:var(--green);color:#fff;box-shadow:0 6px 18px rgba(7,157,118,.24)}
+.ui-btn.green:hover{background:#068564}
+.ui-btn.navy{background:var(--navy);color:#fcd34d}
+.ui-btn.navy:hover{background:var(--navy-mid)}
+.ui-btn.outline{background:#fff;color:var(--navy);border-color:#cbd5e1}
+.ui-btn.outline:hover{border-color:var(--navy)}
+.ui-btn.light{background:#fff;color:var(--navy);box-shadow:0 8px 20px rgba(0,0,0,.14)}
 
-/* Hero Section */
-.hero{position:relative;overflow:hidden;background:radial-gradient(circle at 85% 15%,#16426e 0,transparent 40%),linear-gradient(135deg,#071b36 0%,#0b284c 60%,#09383f 100%);color:#fff;padding:84px 0 92px}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:48px}
-.hero h1{font-size:clamp(40px,5.2vw,64px);line-height:1.08;letter-spacing:-.045em;margin:20px 0;font-weight:900}
-.hero h1 span{color:#34d399}
-.hero p{font-size:17px;line-height:1.75;color:#cbd5e1;max-width:580px;margin:0}
-.hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.hero-pills span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;color:#e2e8f0}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
-.hero-note{display:flex;align-items:center;gap:12px;margin-top:28px;color:#94a3b8;font-size:13px}
-.hero-note b{color:#fff}
+.burger{
+  display:none;
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:6px 11px;
+  font-size:18px;
+  color:var(--navy);
+}
+.drawer-nav{display:none}
 
-/* Hero Interactive Mockup */
-.hero-visual{position:relative;display:grid;place-items:center}
-.dash{width:100%;max-width:520px;border:1px solid rgba(255,255,255,.2);background:#f1f5f9;border-radius:24px;padding:12px;box-shadow:0 35px 80px rgba(0,0,0,.45);transform:perspective(1100px) rotateY(-6deg) rotateX(2deg)}
-.dashbar{height:32px;display:flex;align-items:center;gap:6px;padding:0 10px;color:#64748b;font-size:11px;font-weight:700}
-.circle{width:8px;height:8px;border-radius:50%;background:#f87171}
-.dashbody{display:grid;grid-template-columns:105px 1fr;min-height:290px;background:#fff;border-radius:16px;overflow:hidden;color:var(--ink)}
-.sidebar{background:#0f294a;padding:16px 10px;color:#94a3b8;font-size:10px;font-weight:700}
-.sidebrand{font-weight:900;color:#fff;font-size:15px;margin-bottom:20px;padding-left:6px}
-.sideitem{padding:8px 10px;border-radius:8px;margin:4px 0}
-.sideitem.active{background:var(--green);color:#fff}
-.dashmain{padding:18px}
-.dashmain h3{font-size:14px;margin:0 0 14px;color:var(--navy)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stat{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px}
-.stat small{display:block;color:#64748b;font-size:9px;font-weight:700}
-.stat b{font-size:13px;color:var(--navy)}
-.chart{margin-top:14px;border:1px solid #e2e8f0;border-radius:12px;padding:12px;height:130px;display:flex;align-items:end;gap:10px;background:linear-gradient(#fff,#f8fafc)}
-.bar{flex:1;background:linear-gradient(#10b981,#059669);border-radius:6px 6px 0 0}
-.bar:nth-child(2n){background:linear-gradient(#60a5fa,#2563eb)}
-.float-card{position:absolute;right:-10px;bottom:-14px;background:#fff;color:var(--navy);border-radius:18px;padding:14px 18px;box-shadow:0 20px 45px rgba(0,0,0,.22);display:flex;align-items:center;gap:12px;border:1px solid #e2e8f0}
-.float-icon{width:42px;height:42px;border-radius:12px;background:#ecfdf5;color:var(--green);display:grid;place-items:center;font-size:20px;font-weight:900}
-.float-card small{display:block;color:#64748b;font-size:11px;font-weight:600}
-.float-card b{font-size:14px}
+/* Section Spacing & Headers */
+.sec{padding:52px 0}
+.sec-title{text-align:center;max-width:700px;margin:0 auto 30px}
+.tag-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--green-soft);
+  color:#067a5c;
+  border:1px solid #a7f3d0;
+  padding:4px 12px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+}
+.sec-title h2{
+  font-size:clamp(24px,3.4vw,36px);
+  line-height:1.2;
+  color:var(--navy);
+  margin:10px 0 6px;
+  font-weight:900;
+}
+.sec-title p{margin:0;color:var(--muted);font-size:14px}
 
-/* Trust Strip */
-.trust{border-bottom:1px solid var(--line);background:#fff}
-.trustin{display:grid;grid-template-columns:repeat(6,1fr);padding:20px 0;gap:12px}
-.trustitem{display:flex;align-items:center;justify-content:center;gap:8px;color:#334155;font-size:12px;font-weight:800}
-.trustitem i{font-style:normal;width:28px;height:28px;border-radius:8px;background:#effaf6;color:var(--green);display:grid;place-items:center;font-size:14px}
+/* Modern Hero Card */
+.hero-box{
+  margin-top:18px;
+  background:linear-gradient(135deg,#071b36 0%,#0f2e54 58%,#064e3b 100%);
+  color:#fff;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 18px 42px rgba(7,27,54,.16);
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:28px;
+  align-items:center;
+}
+.hero-box h1{
+  font-size:clamp(28px,4.2vw,46px);
+  line-height:1.15;
+  margin:12px 0 10px;
+  font-weight:900;
+}
+.hero-box h1 span{color:#34d399}
+.hero-box p{margin:0;color:#cbd5e1;font-size:14.5px;line-height:1.65}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.chip-row span{
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.16);
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+  color:#f1f5f9;
+}
+.hero-cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
 
-/* Interactive Persona Tabs */
-.persona-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:36px}
-.ptab{padding:11px 20px;border-radius:999px;border:1px solid #cbd5e1;background:#fff;color:#475569;font-size:13px;font-weight:800;transition:.2s}
-.ptab:hover{border-color:var(--green);color:var(--navy)}
-.ptab.active{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 8px 20px rgba(7,27,54,.18)}
-.persona-box{background:#fff;border:1px solid var(--line);border-radius:28px;padding:36px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-.p-badge{display:inline-block;background:#effaf6;color:var(--green);font-size:12px;font-weight:800;padding:6px 12px;border-radius:999px;margin-bottom:14px}
-.persona-box h3{font-size:clamp(24px,3vw,34px);color:var(--navy);margin:0 0 12px;line-height:1.2;letter-spacing:-.03em}
-.persona-box p{color:var(--muted);font-size:15px;margin:0 0 20px}
-.plist{list-style:none;padding:0;margin:0 0 26px;display:grid;gap:12px}
-.plist li{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:#1e293b}
-.plist li span{width:22px;height:22px;border-radius:50%;background:#d1fae5;color:var(--green);display:grid;place-items:center;font-size:12px;font-weight:900;flex-shrink:0}
-.p-card-preview{background:linear-gradient(145deg,#f8fafc,#eef2f6);border:1px solid #cbd5e1;border-radius:22px;padding:24px}
-.p-ledger{background:#fff;border-radius:16px;padding:18px;box-shadow:0 10px 25px rgba(0,0,0,.05)}
-.p-ledger-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px dashed #cbd5e1;padding-bottom:12px;margin-bottom:12px}
-.p-ledger-row{display:flex;justify-content:space-between;padding:8px 0;font-size:13px;border-bottom:1px solid #f1f5f9}
-.p-ledger-row:last-child{border-bottom:none}
+/* Live Preview Card inside Hero */
+.preview-card{
+  background:#ffffff;
+  color:var(--ink);
+  border-radius:18px;
+  padding:14px;
+  box-shadow:0 16px 36px rgba(0,0,0,.25);
+}
+.preview-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#071b36;
+  color:#fff;
+  padding:9px 12px;
+  border-radius:12px;
+  font-size:11.5px;
+  font-weight:800;
+}
+.preview-metrics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+.p-stat{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:8px;
+}
+.p-stat small{display:block;font-size:10px;color:var(--muted);font-weight:700}
+.p-stat b{font-size:13px;color:var(--navy)}
+.p-bars{
+  margin-top:10px;
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:10px;
+  height:92px;
+  display:flex;
+  align-items:flex-end;
+  gap:7px;
+}
+.p-bar{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#10b981,#059669)}
+.p-bar:nth-child(even){background:linear-gradient(180deg,#0f2e54,#1e40af)}
+.preview-foot{
+  margin-top:10px;
+  display:flex;
+  justify-content:space-between;
+  font-size:10.5px;
+  font-weight:700;
+  color:#475569;
+}
 
-/* Feature Grid */
-.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.feature{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;transition:.25s}
-.feature:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:#a7f3d0}
-.ficon{width:50px;height:50px;border-radius:16px;background:#effaf6;color:var(--green);display:grid;place-items:center;font-size:22px;margin-bottom:18px}
-.feature h3{font-size:18px;color:var(--navy);margin:0 0 8px;font-weight:800}
-.feature p{font-size:14px;line-height:1.7;color:var(--muted);margin:0}
+/* Compact 6-Item Strip */
+.mini-strip{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:10px;
+}
+.mini-pill{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:10px 12px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  font-weight:800;
+  color:var(--navy);
+  box-shadow:0 2px 8px rgba(7,27,54,.03);
+}
+.mini-pill span{
+  width:26px;height:26px;border-radius:8px;
+  background:var(--green-soft);color:var(--green);
+  display:inline-flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;
+}
 
-/* Plans Grid */
-.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:stretch}
-.plan{position:relative;background:#fff;border:1px solid var(--line);border-radius:26px;padding:28px 24px;box-shadow:0 10px 30px rgba(7,27,54,.04);display:flex;flex-direction:column;transition:.25s}
-.plan:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-.plan.popular{border:2px solid var(--green);box-shadow:0 22px 50px rgba(7,157,118,.14)}
-.popular-label{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:5px 14px;border-radius:999px;font-size:11px;font-weight:900;white-space:nowrap;letter-spacing:.03em}
-.plan .picon{width:48px;height:48px;border-radius:14px;background:#effaf6;display:grid;place-items:center;font-size:22px}
-.plan h3{font-size:20px;color:var(--navy);margin:16px 0 6px;font-weight:800}
-.plan .desc{font-size:13px;color:var(--muted);min-height:42px;margin:0}
-.price{font-size:34px;font-weight:900;letter-spacing:-1px;color:var(--navy);margin:18px 0 4px}
-.price small{font-size:12px;letter-spacing:0;color:#64748b;font-weight:600}
-.plan ul{padding:0;list-style:none;margin:18px 0 24px;display:grid;gap:11px;flex:1;border-top:1px solid #f1f5f9;padding-top:16px}
-.plan li{font-size:13px;color:#475569;display:flex;gap:8px;align-items:flex-start}
-.plan li:before{content:'✓';color:var(--green);font-weight:900}
-.plan .btn{width:100%}
-.plan-note{text-align:center;color:#64748b;font-size:12px;margin-top:24px}
+/* Persona Switcher Card */
+.tab-bar{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:22px}
+.p-btn{
+  padding:8px 15px;
+  border-radius:999px;
+  border:1px solid #cbd5e1;
+  background:#fff;
+  color:#334155;
+  font-size:12px;
+  font-weight:800;
+  transition:.16s;
+}
+.p-btn:hover{border-color:var(--green);color:var(--navy)}
+.p-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 
-/* Process Steps */
-.process{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:steps}
-.step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:24px}
-.step:before{counter-increment:steps;content:"0" counter(steps);display:inline-block;background:rgba(52,211,153,.15);color:#34d399;padding:4px 10px;border-radius:8px;font-size:12px;font-weight:900;margin-bottom:16px}
-.step h3{font-size:17px;margin:0 0 8px;color:#fff}
-.step p{font-size:13px;line-height:1.7;color:#cbd5e1;margin:0}
+.persona-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 8px 24px rgba(7,27,54,.04);
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:24px;
+  align-items:center;
+}
+.persona-card h3{font-size:clamp(20px,2.5vw,28px);color:var(--navy);margin:8px 0 8px;font-weight:900;line-height:1.22}
+.persona-card p{margin:0 0 14px;color:var(--muted);font-size:13.5px}
+.check-list{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:8px}
+.check-list li{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#1e293b}
+.check-list li i{
+  font-style:normal;width:20px;height:20px;border-radius:999px;
+  background:#d1fae5;color:#067a5c;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;
+}
 
-/* FAQ */
-.faq{max-width:820px;margin:auto;display:grid;gap:12px}
-.faq details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:0 22px;transition:.2s}
-.faq details[open]{border-color:#a7f3d0;box-shadow:0 10px 25px rgba(7,27,54,.04)}
-.faq summary{list-style:none;cursor:pointer;padding:20px 30px 20px 0;font-size:15px;font-weight:800;color:var(--navy);position:relative}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary:after{content:'+';position:absolute;right:0;top:14px;font-size:24px;color:var(--green);font-weight:700}
-.faq details[open] summary:after{content:'−'}
-.faq details p{font-size:14px;color:var(--muted);line-height:1.75;margin:0;padding:0 0 20px}
+.sample-sheet{
+  background:#f8fafc;
+  border:1px solid #cbd5e1;
+  border-radius:18px;
+  padding:14px;
+}
+.sample-inner{
+  background:#fff;
+  border-radius:14px;
+  padding:14px;
+  border:1px solid #e2e8f0;
+}
+.sample-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-bottom:8px;margin-bottom:8px;border-bottom:1px dashed #cbd5e1;
+}
+.sample-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:7px 0;font-size:12.5px;border-bottom:1px solid #f1f5f9;
+}
+.sample-row:last-child{border-bottom:none}
 
-/* CTA Banner */
-.cta{background:linear-gradient(120deg,#067a5c,#0aa67d);border-radius:30px;padding:52px;display:flex;justify-content:space-between;align-items:center;gap:28px;color:#fff;box-shadow:0 25px 55px rgba(7,157,118,.25)}
-.cta h2{font-size:clamp(26px,3.8vw,40px);line-height:1.15;letter-spacing:-.035em;margin:0 0 10px}
-.cta p{margin:0;color:#d1fae5;font-size:15px}
+/* 3-Column Feature Grid */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.feat-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 3px 12px rgba(7,27,54,.03);
+  transition:.18s;
+}
+.feat-card:hover{transform:translateY(-2px);border-color:#6ee7b7}
+.feat-icon{
+  width:38px;height:38px;border-radius:11px;
+  background:var(--green-soft);color:var(--green);
+  display:inline-flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px;
+}
+.feat-card h3{margin:0 0 4px;font-size:15px;font-weight:800;color:var(--navy)}
+.feat-card p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.55}
 
-/* Main Footer */
-.footer{background:#051326;color:#cbd5e1;padding:68px 0 28px}
-.footgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:36px}
-.footer .brand img{height:42px;background:#fff;padding:6px 10px;border-radius:12px;margin-bottom:16px}
-.footer p,.footer a{font-size:13px;color:#94a3b8;line-height:1.8}
-.footer h4{font-size:14px;color:#fff;margin:0 0 16px;font-weight:800}
-.footlinks{display:grid;gap:8px}
-.footer a:hover{color:#34d399}
-.copyright{border-top:1px solid rgba(255,255,255,.1);margin-top:42px;padding-top:22px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#64748b}
+/* 4-Column Plans Grid */
+.plan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:stretch}
+.plan-card{
+  position:relative;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px 18px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 4px 14px rgba(7,27,54,.03);
+}
+.plan-card.best{border:2px solid var(--green);box-shadow:0 12px 28px rgba(7,157,118,.12)}
+.best-badge{
+  position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  background:var(--green);color:#fff;padding:3px 11px;border-radius:999px;
+  font-size:10px;font-weight:900;white-space:nowrap;
+}
+.plan-card h3{margin:10px 0 4px;font-size:16px;font-weight:800;color:var(--navy)}
+.plan-card .p-sub{margin:0;font-size:12px;color:var(--muted);min-height:36px}
+.plan-amt{font-size:26px;font-weight:900;color:var(--navy);margin:12px 0 2px}
+.plan-amt small{font-size:11px;color:var(--muted);font-weight:600}
+.plan-card ul{
+  list-style:none;padding:12px 0 0;margin:12px 0 18px;
+  border-top:1px solid #f1f5f9;display:grid;gap:7px;flex:1;
+}
+.plan-card li{font-size:12px;color:#334155;display:flex;gap:6px;align-items:flex-start}
+.plan-card li:before{content:'✓';color:var(--green);font-weight:900}
+.plan-card .ui-btn{width:100%}
 
-/* Floating WhatsApp */
-.whatsapp{position:fixed;right:22px;bottom:74px;z-index:60;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#10b981;color:#fff;box-shadow:0 12px 30px rgba(16,185,129,.4);font-size:24px;border:3px solid #fff;transition:.2s}
-.whatsapp:hover{transform:scale(1.08)}
-.mobilemenu{display:none}
+/* Dark 4-Step Onboarding */
+.dark-band{background:var(--navy);color:#fff;padding:52px 0}
+.step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:st}
+.step-box{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  padding:18px;
+}
+.step-box:before{
+  counter-increment:st;
+  content:"STEP 0" counter(st);
+  display:inline-block;
+  background:rgba(52,211,153,.16);
+  color:#34d399;
+  padding:3px 9px;
+  border-radius:8px;
+  font-size:10.5px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+.step-box h3{margin:0 0 5px;font-size:15px;font-weight:800;color:#fff}
+.step-box p{margin:0;font-size:12.5px;color:#cbd5e1;line-height:1.58}
 
-/* Fixed Bottom Footer */
-.mj-fixed-footer{position:fixed;bottom:0;left:0;right:0;z-index:70;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid #e2e8f0;box-shadow:0 -6px 24px rgba(7,27,54,.06);padding:8px 20px;color:#334155;font-size:12px}
-.mj-ff-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+/* FAQ Accordion */
+.faq-wrap{max-width:780px;margin:0 auto;display:grid;gap:10px}
+.faq-wrap details{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:0 18px;
+}
+.faq-wrap details[open]{border-color:#6ee7b7}
+.faq-wrap summary{
+  list-style:none;
+  cursor:pointer;
+  padding:15px 24px 15px 0;
+  font-size:13.5px;
+  font-weight:800;
+  color:var(--navy);
+  position:relative;
+}
+.faq-wrap summary::-webkit-details-marker{display:none}
+.faq-wrap summary:after{content:'+';position:absolute;right:0;top:11px;font-size:20px;color:var(--green);font-weight:800}
+.faq-wrap details[open] summary:after{content:'−'}
+.faq-wrap details p{margin:0;padding:0 0 15px;font-size:13px;color:var(--muted);line-height:1.65}
+
+/* Bottom CTA Card */
+.cta-strip{
+  background:linear-gradient(120deg,#067a5c 0%,#079d76 55%,#071b36 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:28px 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  box-shadow:0 14px 32px rgba(7,157,118,.2);
+}
+.cta-strip h2{margin:0 0 4px;font-size:clamp(20px,2.8vw,28px);font-weight:900;line-height:1.22}
+.cta-strip p{margin:0;color:#d1fae5;font-size:13.5px}
+
+/* Site Footer */
+.site-footer{background:#051326;color:#cbd5e1;padding:44px 0 22px}
+.foot-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:24px}
+.foot-logo img{height:34px;background:#fff;padding:5px 9px;border-radius:10px;margin-bottom:10px}
+.site-footer p,.site-footer a{font-size:12.5px;color:#94a3b8;line-height:1.7}
+.site-footer h4{margin:0 0 10px;font-size:13px;font-weight:800;color:#fff}
+.foot-list{display:grid;gap:5px}
+.site-footer a:hover{color:#34d399}
+.foot-base{
+  border-top:1px solid rgba(255,255,255,.1);
+  margin-top:28px;
+  padding-top:16px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  font-size:11.5px;
+  color:#64748b;
+}
+
+/* Soft Scrolling Customization Ticker */
+.mj-scroll-ticker{
+  position:fixed;left:0;right:0;bottom:56px;z-index:68;
+  background:#E2E8F0;color:#1E293B;
+  border-top:1px solid rgba(15,23,42,.08);
+  height:28px;display:flex;align-items:center;overflow:hidden;
+}
+.mj-ticker-track{
+  display:inline-flex;white-space:nowrap;
+  animation:mjMarquee 26s linear infinite;
+  font-size:11px;font-weight:600;padding-left:100%;
+}
+.mj-scroll-ticker:hover .mj-ticker-track{animation-play-state:paused}
+@keyframes mjMarquee{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+
+/* Fixed Bottom Bar + Light Gray Version Note */
+.mj-fixed-footer{
+  position:fixed;bottom:0;left:0;right:0;z-index:70;
+  background:rgba(255,255,255,.97);border-top:1px solid #e2e8f0;
+  padding:5px 18px 4px;color:#334155;font-size:11px;height:56px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.mj-ff-inner{max-width:1280px;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px}
 .mj-ff-left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.mj-ff-coolart-img{height:16px;width:auto;object-fit:contain;display:block}
-.mj-ff-mj-img{height:18px;width:auto;object-fit:contain;display:inline-block}
+.mj-ff-coolart-img{height:14px;width:auto;object-fit:contain;display:block}
+.mj-ff-mj-img{height:15px;width:auto;object-fit:contain;display:inline-block}
 .mj-ff-sep{color:#cbd5e1}
 .mj-ff-phone{color:#0f294a;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
-.mj-ff-phone:hover{color:#079d76}
-.mj-ff-right{display:inline-flex;align-items:center;gap:6px;color:#64748b;font-size:12px;white-space:nowrap}
+.mj-ff-right{display:inline-flex;align-items:center;gap:6px;color:#64748b;font-size:11px;white-space:nowrap}
 .mj-ff-right strong{color:#0f294a;font-weight:800}
+.mj-build-version{max-width:1280px;width:100%;margin:1px auto 0;text-align:center;font-size:9px;font-weight:500;color:#9CA3AF}
 
 @media(max-width:1024px){
-  .plans{grid-template-columns:repeat(2,1fr)}
-  .trustin{grid-template-columns:repeat(3,1fr)}
+  .plan-grid{grid-template-columns:repeat(2,1fr)}
+  .mini-strip{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:860px){
-  .hero-grid,.persona-box{grid-template-columns:1fr;gap:32px}
-  .feature-grid{grid-template-columns:repeat(2,1fr)}
-  .process{grid-template-columns:repeat(2,1fr)}
-  .footgrid{grid-template-columns:repeat(2,1fr)}
+  .hero-box,.persona-card{grid-template-columns:1fr}
+  .feat-grid,.step-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-cols{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:768px){
-  body{padding-bottom:70px}
-  .whatsapp{bottom:78px;right:16px}
-  .mj-fixed-footer{padding:8px 12px}
-  .mj-ff-inner{flex-direction:column;justify-content:center;gap:3px;text-align:center}
+  body{padding-bottom:88px}
+  .mj-ff-inner{flex-direction:column;justify-content:center;gap:1px;text-align:center}
   .mj-ff-left{justify-content:center;gap:0}
   .mj-ff-coolart-img,.mj-ff-sep,.mj-ff-phone{display:none}
-  .mj-ff-copy{font-size:11px;color:#475569}
-  .mj-ff-right{font-size:11px;flex-wrap:wrap;justify-content:center;gap:4px}
-  .mj-ff-mj-img{height:16px}
+  .mj-ff-copy{font-size:10px;color:#475569}
+  .mj-ff-right{font-size:10px;flex-wrap:wrap;justify-content:center;gap:4px}
+  .mj-ff-mj-img{height:13px}
+  .mj-build-version{font-size:8.5px}
 }
 @media(max-width:680px){
-  .container{width:min(100% - 30px,540px)}
-  .section{padding:68px 0}
-  .topline{font-size:11px;padding:9px 10px}
-  .nav{top:36px}
-  .navin{height:66px}
-  .links,.navactions .login{display:none}
-  .hamb{display:block}
-  .mobilemenu{position:absolute;top:66px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);padding:16px 20px 24px;box-shadow:0 20px 30px rgba(0,0,0,.1)}
-  .mobilemenu.open{display:grid;gap:12px}
-  .mobilemenu a{padding:8px 0;font-size:15px;font-weight:700;color:var(--navy)}
-  .mobilemenu .btn{color:#fff;margin-top:6px}
-  .hero{padding:56px 0 64px}
-  .dash{transform:none}
-  .dashbody{grid-template-columns:80px 1fr}
-  .trustin{grid-template-columns:repeat(2,1fr)}
-  .feature-grid,.plans,.process,.footgrid{grid-template-columns:1fr}
-  .cta{padding:32px 24px;display:block}
-  .cta .btn{margin-top:20px;width:100%}
-  .persona-box{padding:24px}
+  .wrap{width:min(100% - 24px,540px)}
+  .sec,.dark-band{padding:40px 0}
+  .top-strip{font-size:10.5px;padding:7px 10px}
+  .topbar{top:31px}
+  .topbar-in{height:60px}
+  .nav-links,.nav-btns .login-hide{display:none}
+  .burger{display:block}
+  .drawer-nav.open{
+    display:grid;gap:8px;position:absolute;top:60px;left:0;right:0;
+    background:#fff;border-bottom:1px solid var(--border);padding:14px 18px 20px;
+    box-shadow:0 16px 28px rgba(0,0,0,.1);
+  }
+  .drawer-nav a{font-size:14px;font-weight:700;color:var(--navy);padding:5px 0}
+  .hero-box{padding:20px;border-radius:20px;margin-top:12px}
+  .mini-strip{grid-template-columns:repeat(2,1fr)}
+  .feat-grid,.plan-grid,.step-grid,.foot-cols{grid-template-columns:1fr}
+  .cta-strip{padding:22px 20px;display:block}
+  .cta-strip .ui-btn{margin-top:14px;width:100%}
+  .persona-card{padding:18px}
 }
 </style>
 </head>
 <body>
 
-<!-- Top Green WhatsApp Banner -->
-<div class="topline">
-  हर इंसान और हर व्यापार के हिसाब से डिजिटल समाधान · 
+<div class="top-strip">
+  हर इंसान और हर व्यापार के हिसाब से डिजिटल समाधान ·
   <a href="https://wa.me/919458614610?text=Namaste%2C%20MunimJi%20ka%20free%20demo%20chahiye" target="_blank" rel="noopener">WhatsApp पर फ्री डेमो बुक करें — 9458614610 ↗</a>
 </div>
 
-<!-- Header -->
-<header class="nav">
-  <div class="container navin">
-    <a class="brand" href="#home" aria-label="MunimJi Home">
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="logo-link" href="#home" aria-label="MunimJi Home">
       <img src="logo.png" alt="MunimJi by Cool Art®">
     </a>
-    <nav class="links" aria-label="मुख्य नेविगेशन">
+    <nav class="nav-links" aria-label="मुख्य नेविगेशन">
       <a href="#everyone">हर किसी के लिए</a>
       <a href="#features">स्मार्ट फीचर्स</a>
       <a href="#pricing">प्लान व कीमतें</a>
       <a href="#how">कैसे काम करता है</a>
       <a href="#faq">सवाल-जवाब</a>
     </nav>
-    <div class="navactions">
-      <a id="navAuthBtn" class="btn ghost login" href="login.html">लॉगिन करें</a>
-      <a class="btn primary" href="login.html" id="navCtaBtn">फ्री शुरू करें 🚀</a>
-      <button class="hamb" id="hamb" aria-label="मेन्यू खोलें" aria-expanded="false">☰</button>
+    <div class="nav-btns">
+      <a id="navAuthBtn" class="ui-btn outline login-hide" href="login.html">लॉगिन करें</a>
+      <a id="navCtaBtn" class="ui-btn green" href="login.html">फ्री शुरू करें 🚀</a>
+      <button class="burger" id="hamb" aria-label="मेन्यू खोलें" aria-expanded="false">☰</button>
     </div>
   </div>
-  <nav class="mobilemenu" id="mobilemenu">
+  <nav class="drawer-nav" id="mobilemenu">
     <a href="#everyone">हर किसी के लिए</a>
     <a href="#features">स्मार्ट फीचर्स</a>
     <a href="#pricing">प्लान व कीमतें</a>
     <a href="#how">कैसे काम करता है</a>
     <a href="#faq">सवाल-जवाब</a>
     <a id="mobileAuthLink" href="login.html">लॉगिन करें</a>
-    <a class="btn primary" href="https://wa.me/919458614610?text=Namaste%2C%20MunimJi%20ka%20demo%20chahiye" target="_blank" rel="noopener">WhatsApp पर डेमो लें ↗</a>
+    <a class="ui-btn green" href="https://wa.me/919458614610?text=Namaste%2C%20MunimJi%20ka%20demo%20chahiye" target="_blank" rel="noopener">WhatsApp पर डेमो लें ↗</a>
   </nav>
 </header>
 
 <main>
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="container hero-grid">
+  <!-- Hero -->
+  <section class="wrap" id="home">
+    <div class="hero-box">
       <div>
-        <span class="eyebrow"><i class="dot"></i> भारत का अपना डिजिटल मुनीम</span>
+        <span class="tag-pill" style="background:rgba(255,255,255,.12);color:#6ee7b7;border-color:rgba(255,255,255,.2)">भारत का अपना डिजिटल मुनीम</span>
         <h1>हिसाब हर किसी का,<br>तरीका <span>एकदम नया!</span></h1>
         <p>चाहे गृहणी का रसोई बजट हो, बच्चों की पॉकेट मनी, टीचर की ट्यूशन फीस, रोजमर्रा का आम आदमी या फिर दुकान, मंडी और स्कूल — MunimJi हर इंसान की जरूरत के हिसाब से ढल जाता है।</p>
-        
-        <div class="hero-pills">
+
+        <div class="chip-row">
           <span>🏠 गृहणी & परिवार</span>
           <span>🎒 बच्चे & स्टूडेंट्स</span>
           <span>👨‍🏫 टीचर & जॉब</span>
@@ -302,240 +563,211 @@ button{font:inherit;cursor:pointer}
           <span>🎓 स्कूल & कोचिंग</span>
         </div>
 
-        <div class="hero-actions">
-          <a id="heroPrimaryBtn" class="btn primary" href="login.html">7-दिन फ्री डेमो शुरू करें ⚡</a>
-          <a class="btn darkghost" href="#everyone">अपने हिसाब का मोड देखें ↓</a>
+        <div class="hero-cta-row">
+          <a id="heroPrimaryBtn" class="ui-btn green" href="login.html">7-दिन फ्री डेमो शुरू करें ⚡</a>
+          <a class="ui-btn light" href="#everyone">अपने हिसाब का मोड देखें ↓</a>
         </div>
-        <div class="hero-note">
-          <span>✦</span>
-          <span><b>100% कस्टम & आसान इंटरफेस</b> — बिना किसी कंप्यूटर ज्ञान के मोबाइल से चलाएं</span>
-        </div>
+        <p style="margin-top:14px;font-size:12px;color:#a7f3d0">✦ <strong>100% कस्टम & आसान इंटरफेस</strong> — बिना किसी कंप्यूटर ज्ञान के मोबाइल से चलाएं</p>
       </div>
 
-      <!-- Visual Preview -->
-      <div class="hero-visual">
-        <div class="dash">
-          <div class="dashbar">
-            <i class="circle"></i><i class="circle" style="background:#fbbf24"></i><i class="circle" style="background:#34d399"></i>
-            <span style="margin-left:8px">MunimJi · Universal Hisab App</span>
-          </div>
-          <div class="dashbody">
-            <aside class="sidebar">
-              <div class="sidebrand">Munim<span style="color:#34d399">Ji</span></div>
-              <div class="sideitem active">▦ डैशबोर्ड</div>
-              <div class="sideitem">🧾 बिल / रसीद</div>
-              <div class="sideitem">📒 उधार खाता</div>
-              <div class="sideitem">🏠 घर का बजट</div>
-              <div class="sideitem">🚨 शॉर्टेज लिस्ट</div>
-            </aside>
-            <div class="dashmain">
-              <h3>आज का पूरा हिसाब-किताब</h3>
-              <div class="stats">
-                <div class="stat"><small>बिक्री / आय</small><b>₹14,500</b></div>
-                <div class="stat"><small>बाकी उधार</small><b style="color:#e11d48">₹2,150</b></div>
-                <div class="stat"><small>घर / दुकान खर्च</small><b>₹850</b></div>
-              </div>
-              <div class="chart">
-                <div class="bar" style="height:40%"></div>
-                <div class="bar" style="height:65%"></div>
-                <div class="bar" style="height:50%"></div>
-                <div class="bar" style="height:85%"></div>
-                <div class="bar" style="height:68%"></div>
-                <div class="bar" style="height:95%"></div>
-              </div>
-              <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:10px;color:#64748b;font-weight:700">
-                <span>100% सुरक्षित क्लाउड डेटा</span>
-                <span style="color:var(--green)">by Cool Art®</span>
-              </div>
-            </div>
-          </div>
+      <div class="preview-card">
+        <div class="preview-top">
+          <span>MunimJi · Universal Hisab</span>
+          <span style="color:#34d399">● लाइव</span>
         </div>
-        <div class="float-card">
-          <span class="float-icon">✓</span>
-          <span><small>हर उम्र और हर वर्ग के लिए</small><b>2 सेकंड में पूरा हिसाब</b></span>
+        <div class="preview-metrics">
+          <div class="p-stat"><small>बिक्री / आय</small><b>₹14,500</b></div>
+          <div class="p-stat"><small>बाकी उधार</small><b style="color:#e11d48">₹2,150</b></div>
+          <div class="p-stat"><small>घर / दुकान खर्च</small><b>₹850</b></div>
+        </div>
+        <div class="p-bars">
+          <div class="p-bar" style="height:42%"></div>
+          <div class="p-bar" style="height:68%"></div>
+          <div class="p-bar" style="height:52%"></div>
+          <div class="p-bar" style="height:86%"></div>
+          <div class="p-bar" style="height:65%"></div>
+          <div class="p-bar" style="height:96%"></div>
+        </div>
+        <div class="preview-foot">
+          <span>2 सेकंड में पूरा हिसाब</span>
+          <span style="color:var(--green)">by Cool Art®</span>
         </div>
       </div>
+    </div>
+
+    <!-- 6 Quick Highlights -->
+    <div class="mini-strip">
+      <div class="mini-pill"><span>🏠</span>घरेलू बजट</div>
+      <div class="mini-pill"><span>🎒</span>पॉकेट मनी</div>
+      <div class="mini-pill"><span>🧾</span>1-क्लिक बिलिंग</div>
+      <div class="mini-pill"><span>📒</span>डिजिटल उधार</div>
+      <div class="mini-pill"><span>⚖️</span>मंडी व बारदाना</div>
+      <div class="mini-pill"><span>📲</span>WhatsApp पर्ची</div>
     </div>
   </section>
 
-  <!-- Trust Strip -->
-  <div class="trust">
-    <div class="container trustin">
-      <div class="trustitem"><i>🏠</i> घरेलू बजट</div>
-      <div class="trustitem"><i>🎒</i> पॉकेट मनी</div>
-      <div class="trustitem"><i>🧾</i> 1-क्लिक बिलिंग</div>
-      <div class="trustitem"><i>📒</i> डिजिटल उधार</div>
-      <div class="trustitem"><i>⚖️</i> मंडी व बारदाना</div>
-      <div class="trustitem"><i>📲</i> WhatsApp पर्ची</div>
-    </div>
-  </div>
-
   <!-- Interactive Persona Section -->
-  <section class="section soft" id="everyone">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow"><i class="dot"></i> FOR EVERY HUMAN BEING</span>
-        <h2>दुनिया के हर इंसान के हिसाब से<br>अलग-अलग डिजाइन किया गया</h2>
+  <section class="sec" id="everyone">
+    <div class="wrap">
+      <div class="sec-title">
+        <span class="tag-pill">FOR EVERY HUMAN BEING</span>
+        <h2>दुनिया के हर इंसान के हिसाब से अलग-अलग डिजाइन किया गया</h2>
         <p>नीचे अपनी श्रेणी चुनें और देखें कि MunimJi आपकी रोज़मर्रा की ज़िंदगी को कितना आसान बनाता है:</p>
       </div>
 
-      <div class="persona-tabs" role="tablist">
-        <button class="ptab active" onclick="showPersona('housewife', this)">🏠 गृहणी व परिवार</button>
-        <button class="ptab" onclick="showPersona('student', this)">🎒 बच्चे व स्टूडेंट्स</button>
-        <button class="ptab" onclick="showPersona('teacher', this)">👨‍🏫 टीचर व प्रोफेशनल्स</button>
-        <button class="ptab" onclick="showPersona('shop', this)">🏪 दुकानदार & किराना</button>
-        <button class="ptab" onclick="showPersona('mandi', this)">🌾 मंडी, बीज व थोक</button>
-        <button class="ptab" onclick="showPersona('school', this)">🎓 स्कूल व कोचिंग</button>
+      <div class="tab-bar" role="tablist">
+        <button class="p-btn active" onclick="showPersona('housewife', this)">🏠 गृहणी व परिवार</button>
+        <button class="p-btn" onclick="showPersona('student', this)">🎒 बच्चे व स्टूडेंट्स</button>
+        <button class="p-btn" onclick="showPersona('teacher', this)">👨‍🏫 टीचर व प्रोफेशनल्स</button>
+        <button class="p-btn" onclick="showPersona('shop', this)">🏪 दुकानदार & किराना</button>
+        <button class="p-btn" onclick="showPersona('mandi', this)">🌾 मंडी, बीज व थोक</button>
+        <button class="p-btn" onclick="showPersona('school', this)">🎓 स्कूल व कोचिंग</button>
       </div>
 
-      <div class="persona-box" id="personaContent">
+      <div class="persona-card" id="personaContent">
         <div>
-          <span class="p-badge">🏠 गृहणी (Housewife) और घरेलू बजट मोड</span>
+          <span class="tag-pill">🏠 गृहणी (Housewife) और घरेलू बजट मोड</span>
           <h3>रसोई से लेकर महीने के राशन तक, हर रुपये का हिसाब</h3>
           <p>अब डायरी या कागज की पर्चियां संभालने की जरूरत नहीं। दूध वाले, सब्जी, राशन और कामवाली बाई की छुट्टियों व पैसों का हिसाब मोबाइल पर रखें।</p>
-          <ul class="plist">
-            <li><span>✓</span> मासिक घरेलू बजट तय करें और फालतू खर्च रोकें</li>
-            <li><span>✓</span> दूध, अखबार और मेड (कामवाली) की हाजिरी व हिसाब</li>
-            <li><span>✓</span> घर में खत्म होने वाले राशन की WhatsApp लिस्ट बनाएं</li>
+          <ul class="check-list">
+            <li><i>✓</i> मासिक घरेलू बजट तय करें और फालतू खर्च रोकें</li>
+            <li><i>✓</i> दूध, अखबार और मेड (कामवाली) की हाजिरी व हिसाब</li>
+            <li><i>✓</i> घर में खत्म होने वाले राशन की WhatsApp लिस्ट बनाएं</li>
           </ul>
-          <a href="login.html" class="btn primary">घरेलू हिसाब शुरू करें →</a>
+          <a href="login.html" class="ui-btn green">घरेलू हिसाब शुरू करें →</a>
         </div>
-        <div class="p-card-preview">
-          <div class="p-ledger">
-            <div class="p-ledger-head">
-              <strong style="color:var(--navy);font-size:14px">🏠 घरेलू मासिक डायरी</strong>
-              <span style="background:#dcfce7;color:#15803d;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px">बजट कंट्रोल में</span>
+        <div class="sample-sheet">
+          <div class="sample-inner">
+            <div class="sample-head">
+              <strong style="color:var(--navy);font-size:13.5px">🏠 घरेलू मासिक डायरी</strong>
+              <span style="background:#dcfce7;color:#15803d;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:999px">बजट कंट्रोल में</span>
             </div>
-            <div class="p-ledger-row"><span>🥛 दूध का हिसाब (30 दिन)</span><strong>₹1,800</strong></div>
-            <div class="p-ledger-row"><span>🛒 महीने का किराना राशन</span><strong>₹4,250</strong></div>
-            <div class="p-ledger-row"><span>🥬 फल और हरी सब्जी</span><strong>₹1,120</strong></div>
-            <div class="p-ledger-row" style="color:var(--green);font-weight:800"><span>💰 इस महीने की कुल बचत</span><strong>₹2,830</strong></div>
+            <div class="sample-row"><span>🥛 दूध का हिसाब (30 दिन)</span><strong>₹1,800</strong></div>
+            <div class="sample-row"><span>🛒 महीने का किराना राशन</span><strong>₹4,250</strong></div>
+            <div class="sample-row"><span>🥬 फल और हरी सब्जी</span><strong>₹1,120</strong></div>
+            <div class="sample-row" style="color:var(--green);font-weight:800"><span>💰 इस महीने की कुल बचत</span><strong>₹2,830</strong></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Core Features Section -->
-  <section class="section" id="features">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow"><i class="dot"></i> SMART FEATURES</span>
-        <h2>रोज़ के काम आसान,<br>हर हिसाब एकदम साफ</h2>
+  <!-- 6 Features -->
+  <section class="sec" style="padding-top:12px" id="features">
+    <div class="wrap">
+      <div class="sec-title">
+        <span class="tag-pill">SMART FEATURES</span>
+        <h2>रोज़ के काम आसान, हर हिसाब एकदम साफ</h2>
         <p>चाहे व्यक्तिगत खर्च हो या बड़ा व्यापार, हर जरूरत के लिए पावरफुल टूल्स।</p>
       </div>
-      <div class="feature-grid">
-        <article class="feature"><div class="ficon">🧾</div><h3>1-क्लिक हिंदी / अंग्रेजी बिलिंग</h3><p>अपनी भाषा में आसानी से बिल या रसीद बनाएं और सीधे WhatsApp पर डिजिटल पर्ची भेजें।</p></article>
-        <article class="feature"><div class="ficon">📲</div><h3>WhatsApp पर ऑटो रिमाइंडर</h3><p>उधार मांगने में संकोच कैसा? आपका डिजिटल मुनीम खुद बकाया पर्ची और रिमाइंडर भेजेगा।</p></article>
-        <article class="feature"><div class="ficon">🚨</div><h3>थर्मल शॉर्टेज पर्ची (Vendor Order)</h3><p>घर या दुकान में खत्म हुए सामान की लिस्ट थर्मल पर्ची फॉर्मेट में बनाकर सीधे WhatsApp पर भेजें।</p></article>
-        <article class="feature"><div class="ficon">💰</div><h3>गल्ला और पर्सनल वॉलेट</h3><p>नकद, UPI और रोजमर्रा के खर्चों की एंट्री करके शाम का शुद्ध बैलेंस एक क्लिक में जानें।</p></article>
-        <article class="feature"><div class="ficon">⚖️</div><h3>मंडी तोल, बारदाना व कद्दा</h3><p>मंडी और थोक व्यापारियों के लिए वजन, बारदाना और कद्दा कटौती के साथ सटीक किसान लेजर।</p></article>
-        <article class="feature"><div class="ficon">🛠️</div><h3>100% कस्टम नियम व सपोर्ट</h3><p>आपके काम करने के तरीके और खास रसीद फॉर्मेट के अनुसार सॉफ्टवेयर को कस्टमाइज किया जाता है।</p></article>
+      <div class="feat-grid">
+        <article class="feat-card"><div class="feat-icon">🧾</div><h3>1-क्लिक हिंदी / अंग्रेजी बिलिंग</h3><p>अपनी भाषा में आसानी से बिल या रसीद बनाएं और सीधे WhatsApp पर डिजिटल पर्ची भेजें।</p></article>
+        <article class="feat-card"><div class="feat-icon">📲</div><h3>WhatsApp पर ऑटो रिमाइंडर</h3><p>उधार मांगने में संकोच कैसा? आपका डिजिटल मुनीम खुद बकाया पर्ची और रिमाइंडर भेजेगा।</p></article>
+        <article class="feat-card"><div class="feat-icon">🚨</div><h3>थर्मल शॉर्टेज पर्ची (Vendor Order)</h3><p>घर या दुकान में खत्म हुए सामान की लिस्ट थर्मल पर्ची फॉर्मेट में बनाकर सीधे WhatsApp पर भेजें।</p></article>
+        <article class="feat-card"><div class="feat-icon">💰</div><h3>गल्ला और पर्सनल वॉलेट</h3><p>नकद, UPI और रोजमर्रा के खर्चों की एंट्री करके शाम का शुद्ध बैलेंस एक क्लिक में जानें।</p></article>
+        <article class="feat-card"><div class="feat-icon">⚖️</div><h3>मंडी तोल, बारदाना व कद्दा</h3><p>मंडी और थोक व्यापारियों के लिए वजन, बारदाना और कद्दा कटौती के साथ सटीक किसान लेजर।</p></article>
+        <article class="feat-card"><div class="feat-icon">🛠️</div><h3>100% कस्टम नियम व सपोर्ट</h3><p>आपके काम करने के तरीके और खास रसीद फॉर्मेट के अनुसार सॉफ्टवेयर को कस्टमाइज किया जाता है।</p></article>
       </div>
     </div>
   </section>
 
-  <!-- Pricing Section -->
-  <section class="section soft" id="pricing">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow"><i class="dot"></i> TRANSPARENT PRICING</span>
-        <h2>हर वर्ग और हर व्यापार के लिए<br>बेहद किफायती प्लान्स</h2>
+  <!-- 4 Pricing Plans -->
+  <section class="sec" style="padding-top:12px" id="pricing">
+    <div class="wrap">
+      <div class="sec-title">
+        <span class="tag-pill">TRANSPARENT PRICING</span>
+        <h2>हर वर्ग और हर व्यापार के लिए बेहद किफायती प्लान्स</h2>
         <p>आम आदमी और छोटे दुकानदार से लेकर बड़े संस्थानों तक — अपनी जरूरत का प्लान चुनें।</p>
       </div>
-      
-      <div class="plans">
-        <!-- Plan 1: ₹1 Daily -->
-        <article class="plan popular">
-          <span class="popular-label">सबसे लोकप्रिय · ₹1 रोज़</span>
-          <div class="picon">⭐</div>
+
+      <div class="plan-grid">
+        <article class="plan-card best">
+          <span class="best-badge">सबसे लोकप्रिय · ₹1 रोज़</span>
+          <div style="font-size:22px">⭐</div>
           <h3>पर्सनल व दुकानदार पास</h3>
-          <p class="desc">गृहणी, स्टूडेंट, आम आदमी और छोटे दुकानदारों के लिए।</p>
-          <div class="price">₹365<small> / वर्ष (मात्र ₹1 रोज़)</small></div>
+          <p class="p-sub">गृहणी, स्टूडेंट, आम आदमी और छोटे दुकानदारों के लिए।</p>
+          <div class="plan-amt">₹365<small> / वर्ष (मात्र ₹1 रोज़)</small></div>
           <ul>
             <li>असीमित डिजिटल बिलिंग व रसीद</li>
             <li>डिजिटल उधार खाता व रिमाइंडर</li>
             <li>घरेलू बजट, गल्ला व शॉर्टेज पर्ची</li>
             <li>7 दिन का बिल्कुल फ्री डेमो</li>
           </ul>
-          <a class="btn primary" href="login.html">7-दिन फ्री डेमो शुरू करें ↗</a>
+          <a class="ui-btn green" href="login.html">7-दिन फ्री डेमो शुरू करें ↗</a>
         </article>
 
-        <!-- Plan 2: Standard Retail -->
-        <article class="plan">
-          <div class="picon">🏪</div>
+        <article class="plan-card">
+          <div style="font-size:22px">🏪</div>
           <h3>व्यापार व रिटेल प्रो</h3>
-          <p class="desc">जनरल स्टोर, मेडिकल और रिटेल शोरूम के लिए।</p>
-          <div class="price">₹6,999<small> / शुरुआती कीमत</small></div>
+          <p class="p-sub">जनरल स्टोर, मेडिकल और रिटेल शोरूम के लिए।</p>
+          <div class="plan-amt">₹6,999<small> / शुरुआती कीमत</small></div>
           <ul>
             <li>1-क्लिक हिंदी / अंग्रेजी बिलिंग</li>
             <li>कस्टमाइज्ड ब्रांड लोगो रसीद</li>
             <li>स्टाफ लॉगिन व स्टॉक मैनेजमेंट</li>
             <li>100% लोकल सेटअप व ट्रेनिंग</li>
           </ul>
-          <a class="btn ghost" href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20Vyapar%20aur%20Dukan%20Pro%20plan%20ki%20jankari%20chahiye" target="_blank" rel="noopener">जानकारी लें ↗</a>
+          <a class="ui-btn outline" href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20Vyapar%20aur%20Dukan%20Pro%20plan%20ki%20jankari%20chahiye" target="_blank" rel="noopener">जानकारी लें ↗</a>
         </article>
 
-        <!-- Plan 3: School & Coaching -->
-        <article class="plan">
-          <div class="picon">🎓</div>
+        <article class="plan-card">
+          <div style="font-size:22px">🎓</div>
           <h3>स्कूल, टीचर व संस्थान</h3>
-          <p class="desc">स्कूलों, कोचिंग सेंटर और ट्यूशन क्लासेस के लिए।</p>
-          <div class="price">₹9,999<small> / शुरुआती कीमत</small></div>
+          <p class="p-sub">स्कूलों, कोचिंग सेंटर और ट्यूशन क्लासेस के लिए।</p>
+          <div class="plan-amt">₹9,999<small> / शुरुआती कीमत</small></div>
           <ul>
             <li>ऑनलाइन एडमिशन व विद्यार्थी रिकॉर्ड</li>
             <li>WhatsApp पर डिजिटल फीस रसीद</li>
             <li>वेबसाइट + सॉफ्टवेयर कॉम्बो</li>
             <li>संस्थान के अनुसार कस्टम सेटअप</li>
           </ul>
-          <a class="btn ghost" href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20School%20Coaching%20plan%20ki%20jankari%20chahiye" target="_blank" rel="noopener">जानकारी लें ↗</a>
+          <a class="ui-btn outline" href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20School%20Coaching%20plan%20ki%20jankari%20chahiye" target="_blank" rel="noopener">जानकारी लें ↗</a>
         </article>
 
-        <!-- Plan 4: Mandi & Wholesale -->
-        <article class="plan">
-          <div class="picon">🌾</div>
+        <article class="plan-card">
+          <div style="font-size:22px">🌾</div>
           <h3>मंडी, बीज व थोक व्यापार</h3>
-          <p class="desc">आढ़तियों, गल्ला मंडी और बीज विक्रेताओं के लिए।</p>
-          <div class="price">₹12,999<small> / शुरुआती कीमत</small></div>
+          <p class="p-sub">आढ़तियों, गल्ला मंडी और बीज विक्रेताओं के लिए।</p>
+          <div class="plan-amt">₹12,999<small> / शुरुआती कीमत</small></div>
           <ul>
             <li>तोल, बारदाना और कद्दा कटौती</li>
             <li>किसान व पार्टी लेजर</li>
             <li>A4 / A5 प्रोफेशनल PDF रसीद</li>
             <li>खास मंडी नियम कस्टमाइजेशन</li>
           </ul>
-          <a class="btn ghost" href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20Mandi%20Beej%20Wholesale%20plan%20ki%20jankari%20chahiye" target="_blank" rel="noopener">जानकारी लें ↗</a>
+          <a class="ui-btn outline" href="https://wa.me/919458614610?text=Namaste%2C%20mujhe%20Mandi%20Beej%20Wholesale%20plan%20ki%20jankari%20chahiye" target="_blank" rel="noopener">जानकारी लें ↗</a>
         </article>
       </div>
-      <p class="plan-note">* सभी प्लान्स में आपकी जरूरत के अनुसार कस्टमाइजेशन उपलब्ध है। डेमो के समय पूरी जानकारी प्राप्त करें।</p>
+      <p style="text-align:center;color:var(--muted);font-size:12px;margin-top:16px">* सभी प्लान्स में आपकी जरूरत के अनुसार कस्टमाइजेशन उपलब्ध है। डेमो के समय पूरी जानकारी प्राप्त करें।</p>
     </div>
   </section>
 
-  <!-- How It Works -->
-  <section class="section dark" id="how">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#34d399"><i class="dot"></i> EASY ONBOARDING</span>
-        <h2>शुरुआत से इस्तेमाल तक,<br>हमेशा आपके साथ</h2>
-        <p>बिना किसी तकनीकी झंझट के 4 आसान चरणों में अपना डिजिटल मुनीम शुरू करें।</p>
+  <!-- 4 Steps -->
+  <section class="dark-band" id="how">
+    <div class="wrap">
+      <div class="sec-title">
+        <span class="tag-pill" style="background:rgba(255,255,255,.1);color:#34d399;border-color:rgba(255,255,255,.2)">EASY ONBOARDING</span>
+        <h2 style="color:#fff">शुरुआत से इस्तेमाल तक, हमेशा आपके साथ</h2>
+        <p style="color:#94a3b8">बिना किसी तकनीकी झंझट के 4 आसान चरणों में अपना डिजिटल मुनीम शुरू करें।</p>
       </div>
-      <div class="process">
-        <article class="step"><h3>अपनी जरूरत बताएं</h3><p>बताएं कि आप घर, पढ़ाई, दुकान, मंडी या संस्थान किसके लिए हिसाब रखना चाहते हैं।</p></article>
-        <article class="step"><h3>फ्री लाइव डेमो देखें</h3><p>अपने मोबाइल या कंप्यूटर पर 5 मिनट का लाइव डेमो देखकर सिस्टम को समझें।</p></article>
-        <article class="step"><h3>कस्टम सेटअप</h3><p>आपकी रसीद, लोगो और नियमों के अनुसार Cool Art® टीम आपका अकाउंट तैयार करेगी।</p></article>
-        <article class="step"><h3>बेफिक्र इस्तेमाल करें</h3><p>पूरी ट्रेनिंग और WhatsApp सपोर्ट के साथ रोजमर्रा का हिसाब शुरू करें।</p></article>
+      <div class="step-grid">
+        <article class="step-box"><h3>अपनी जरूरत बताएं</h3><p>बताएं कि आप घर, पढ़ाई, दुकान, मंडी या संस्थान किसके लिए हिसाब रखना चाहते हैं।</p></article>
+        <article class="step-box"><h3>फ्री लाइव डेमो देखें</h3><p>अपने मोबाइल या कंप्यूटर पर 5 मिनट का लाइव डेमो देखकर सिस्टम को समझें।</p></article>
+        <article class="step-box"><h3>कस्टम सेटअप</h3><p>आपकी रसीद, लोगो और नियमों के अनुसार Cool Art® टीम आपका अकाउंट तैयार करेगी।</p></article>
+        <article class="step-box"><h3>बेफिक्र इस्तेमाल करें</h3><p>पूरी ट्रेनिंग और WhatsApp सपोर्ट के साथ रोजमर्रा का हिसाब शुरू करें।</p></article>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="section" id="faq">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow"><i class="dot"></i> FAQ</span>
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="sec-title">
+        <span class="tag-pill">FAQ</span>
         <h2>आपके सवाल, हमारे जवाब</h2>
         <p>MunimJi के बारे में अक्सर पूछे जाने वाले प्रश्नों के उत्तर।</p>
       </div>
-      <div class="faq">
+      <div class="faq-wrap">
         <details><summary>क्या यह सॉफ्टवेयर आम आदमी, गृहणी और स्टूडेंट्स भी चला सकते हैं?</summary><p>जी हाँ! MunimJi को इतना सरल बनाया गया है कि घर का राशन बजट हो, बच्चों की पॉकेट मनी या टीचर की ट्यूशन फीस—कोई भी व्यक्ति इसे अपने मोबाइल पर आसानी से चला सकता है।</p></details>
         <details><summary>₹1 रोज़ (₹365/साल) वाले प्लान में क्या-क्या मिलता है?</summary><p>इस प्लान में आपको पूरे एक साल के लिए अनलिमिटेड डिजिटल बिलिंग, उधार खाता, WhatsApp रिमाइंडर, गल्ला एंट्री और वेंडर थर्मल पर्ची जैसे सभी जरूरी फीचर्स मिलते हैं।</p></details>
         <details><summary>क्या मंडी, बीज और थोक व्यापार के लिए अलग नियम सेट हो सकते हैं?</summary><p>बिल्कुल! मंडी और थोक व्यापार के लिए तोल, बारदाना, कद्दा कटौती, किसान लेजर और A4/A5 PDF रसीद वाला विशेष कस्टम समाधान उपलब्ध है।</p></details>
@@ -544,33 +776,29 @@ button{font:inherit;cursor:pointer}
     </div>
   </section>
 
-  <!-- CTA Banner -->
-  <section class="section" style="padding-top:20px">
-    <div class="container">
-      <div class="cta">
-        <div>
-          <h2>सिर्फ 5 मिनट दें और देखें कि आपका हिसाब कितना आसान हो सकता है!</h2>
-          <p>WhatsApp पर DEMO लिखकर भेजें: <strong>9458614610</strong></p>
-        </div>
-        <a class="btn white" href="https://wa.me/919458614610?text=Namaste%20Krishankant%20ji%2C%20mujhe%20MunimJi%20ka%20free%20demo%20chahiye." target="_blank" rel="noopener">WhatsApp पर जुड़ें ↗</a>
+  <!-- Bottom CTA -->
+  <section class="wrap" style="margin-bottom:24px">
+    <div class="cta-strip">
+      <div>
+        <h2>सिर्फ 5 मिनट दें और देखें कि आपका हिसाब कितना आसान हो सकता है!</h2>
+        <p>WhatsApp पर DEMO लिखकर भेजें: <strong>9458614610</strong></p>
       </div>
+      <a class="ui-btn light" href="https://wa.me/919458614610?text=Namaste%20Krishankant%20ji%2C%20mujhe%20MunimJi%20ka%20free%20demo%20chahiye." target="_blank" rel="noopener">WhatsApp पर जुड़ें ↗</a>
     </div>
   </section>
 </main>
 
 <!-- Footer -->
-<footer class="footer">
-  <div class="container">
-    <div class="footgrid">
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-cols">
       <div>
-        <a class="brand" href="#home">
-          <img src="logo.png" alt="MunimJi by Cool Art®">
-        </a>
+        <a class="logo-link foot-logo" href="#home"><img src="logo.png" alt="MunimJi by Cool Art®"></a>
         <p>भारत के हर इंसान — गृहणी, स्टूडेंट, टीचर, दुकानदार, मंडी व्यापारी और शिक्षा संस्थानों के लिए सरल और भरोसेमंद डिजिटल हिसाब समाधान।</p>
       </div>
       <div>
         <h4>त्वरित लिंक</h4>
-        <div class="footlinks">
+        <div class="foot-list">
           <a href="#everyone">हर किसी के लिए</a>
           <a href="#features">स्मार्ट फीचर्स</a>
           <a href="#pricing">प्लान व कीमतें</a>
@@ -579,7 +807,7 @@ button{font:inherit;cursor:pointer}
       </div>
       <div>
         <h4>संपर्क व सहायता</h4>
-        <div class="footlinks">
+        <div class="foot-list">
           <a href="https://wa.me/919458614610" target="_blank" rel="noopener">WhatsApp: +91 9458614610</a>
           <a href="mailto:krishankantbhardwaj1993@gmail.com">krishankantbhardwaj1993@gmail.com</a>
           <a href="login.html">सॉफ्टवेयर लॉगिन करें</a>
@@ -588,20 +816,30 @@ button{font:inherit;cursor:pointer}
       <div>
         <h4>Cool Art® Advertising</h4>
         <p>Village – Nahal, Tehsil – Atrauli,<br>District Aligarh, Uttar Pradesh, India 🇮🇳</p>
-        <p style="margin-top:10px">Designed & Produced by <b style="color:#fff">Cool Art®</b></p>
+        <p style="margin-top:8px">Designed & Produced by <strong style="color:#fff">Cool Art®</strong></p>
       </div>
     </div>
-    <div class="copyright">
+    <div class="foot-base">
       <span>© 2026 Cool Art® Advertising. All Rights Reserved.</span>
       <span>MunimJi — हिसाब वही, तरीका नया</span>
     </div>
   </div>
 </footer>
 
-<!-- Floating WhatsApp Button -->
-<a class="whatsapp" href="https://wa.me/919458614610?text=Namaste%2C%20MunimJi%20ke%20baare%20mein%20jankari%20chahiye" target="_blank" rel="noopener" aria-label="WhatsApp पर संपर्क करें">✆</a>
+<!-- Soft Scrolling Customization Strip -->
+<a
+  href="https://wa.me/919458614610?text=Namaste%20Cool%20Art%20Team%2C%20mujhe%20MunimJi%20software%20apne%20hisab%20se%20customize%20karwana%20hai%20aur%20ismein%20kuch%20naye%20features%20badhwane%20hain.%20Kripya%20jaldi%20sampark%20karen."
+  target="_blank"
+  rel="noopener"
+  class="mj-scroll-ticker"
+  title="WhatsApp पर कस्टम सॉफ्टवेयर के लिए बात करें"
+>
+  <div class="mj-ticker-track">
+    ✨ यदि यह सॉफ्टवेयर आपके अनुकूल है और आप इसमें कोई नया फीचर बढ़वाना, घटवाना या अपने हिसाब से कस्टमाइज़ करवाना चाहते हैं, तो संपर्क करें Helpline: +91 9458614610 (सीधा WhatsApp करने के लिए यहाँ क्लिक करें) &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+  </div>
+</a>
 
-<!-- Fixed Bottom Footer -->
+<!-- Fixed Bottom Footer + Subtle Gray Build/Version Line -->
 <footer class="mj-fixed-footer" role="contentinfo">
   <div class="mj-ff-inner">
     <div class="mj-ff-left">
@@ -616,6 +854,7 @@ button{font:inherit;cursor:pointer}
       <span>• Developed by <strong>Cool Art®</strong></span>
     </div>
   </div>
+  <div class="mj-build-version">Build v1.9 · Updated 21 Nov 2026</div>
 </footer>
 
 <script>
@@ -749,28 +988,28 @@ const personaData = {
 };
 
 function showPersona(key, btnEl) {
-  document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.p-btn').forEach(b => b.classList.remove('active'));
   btnEl.classList.add('active');
   const d = personaData[key];
   const container = document.getElementById('personaContent');
-  const listHtml = d.points.map(p => `<li><span>✓</span> ${p}</li>`).join('');
+  const listHtml = d.points.map(p => `<li><i>✓</i> ${p}</li>`).join('');
   const rowsHtml = d.rows.map(r => {
     const highlight = r[2] ? 'style="color:var(--green);font-weight:800"' : '';
-    return `<div class="p-ledger-row" ${highlight}><span>${r[0]}</span><strong>${r[1]}</strong></div>`;
+    return `<div class="sample-row" ${highlight}><span>${r[0]}</span><strong>${r[1]}</strong></div>`;
   }).join('');
   container.innerHTML = `
     <div>
-      <span class="p-badge">${d.badge}</span>
+      <span class="tag-pill">${d.badge}</span>
       <h3>${d.title}</h3>
       <p>${d.desc}</p>
-      <ul class="plist">${listHtml}</ul>
-      <a href="login.html" class="btn primary">${d.btnText}</a>
+      <ul class="check-list">${listHtml}</ul>
+      <a href="login.html" class="ui-btn green">${d.btnText}</a>
     </div>
-    <div class="p-card-preview">
-      <div class="p-ledger">
-        <div class="p-ledger-head">
-          <strong style="color:var(--navy);font-size:14px">${d.cardTitle}</strong>
-          <span style="background:#dcfce7;color:#15803d;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px">${d.cardStatus}</span>
+    <div class="sample-sheet">
+      <div class="sample-inner">
+        <div class="sample-head">
+          <strong style="color:var(--navy);font-size:13.5px">${d.cardTitle}</strong>
+          <span style="background:#dcfce7;color:#15803d;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:999px">${d.cardStatus}</span>
         </div>
         ${rowsHtml}
       </div>
