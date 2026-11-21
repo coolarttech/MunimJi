@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MunimJi — Digital Billing, Parchi & Khata</title>
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="apple-touch-icon" href="favicon.png" />
+  <link id="dynamicFavicon" rel="icon" type="image/png" href="favicon.png" />
+  <link id="dynamicAppleIcon" rel="apple-touch-icon" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -125,6 +125,72 @@
       -webkit-font-smoothing: antialiased;
       padding-bottom: 102px;
       transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    /* Dukandar Seamless White-Merged GIF Loader Splash */
+    .dukandar-splash-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+    }
+    .dukandar-splash-overlay.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .dukandar-gif-stage {
+      width: min(310px, 76vw);
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .dukandar-gif-stage img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      mix-blend-mode: multiply;
+      filter: contrast(1.04) brightness(1.03);
+    }
+    .dukandar-splash-brand {
+      position: fixed;
+      bottom: 24px;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      text-align: center;
+      color: #64748B;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .dukandar-splash-brand-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .dukandar-splash-brand img {
+      height: 18px;
+      width: auto;
+      object-fit: contain;
+    }
+    .dukandar-splash-brand strong {
+      color: #071B36;
+      font-weight: 800;
     }
 
     .fixed-brand-header {
@@ -576,6 +642,21 @@
 </head>
 <body data-theme="munimji" class="tier-trial min-h-screen flex flex-col">
 
+  <!-- Dukandar Welcome GIF Loader (Blends seamlessly into white background) -->
+  <div id="dukandarSplashOverlay" class="dukandar-splash-overlay hidden" role="status" aria-label="दुकानदार डैशबोर्ड लोड हो रहा है">
+    <div class="dukandar-gif-stage">
+      <img id="dukandarGifImg" src="gif dukandar.gif" alt="MunimJi Dukandar Edition" />
+    </div>
+    <div class="text-xs font-extrabold text-[#071B36] mt-2 tracking-wide">दुकानदार खाता खुल रहा है...</div>
+    <div class="dukandar-splash-brand">
+      <div class="dukandar-splash-brand-row">
+        <span>Powered by</span>
+        <img src="logo.png" alt="MunimJi" />
+        <span>• Developed by <strong>Cool Art®</strong></span>
+      </div>
+    </div>
+  </div>
+
   <!-- Fixed Brand Header with Person Profile Icon -->
   <header class="fixed-brand-header sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-3.5 sm:px-6 h-13 py-2 flex items-center justify-between gap-2">
@@ -649,12 +730,12 @@
         </div>
 
         <div class="nature-right-clock">
-          <div id="liveClockDay" class="text-[10px] font-bold text-amber-300">शुक्रवार</div>
+          <div id="liveClockDay" class="text-[10px] font-bold text-amber-300">शनिवार</div>
           <div class="flex items-baseline justify-center gap-1 mt-0.5">
-            <span id="liveClockTime" class="text-base sm:text-xl font-extrabold text-white">11:51</span>
-            <span id="liveClockAmPm" class="text-[9px] font-bold text-amber-200">PM</span>
+            <span id="liveClockTime" class="text-base sm:text-xl font-extrabold text-white">09:06</span>
+            <span id="liveClockAmPm" class="text-[9px] font-bold text-amber-200">AM</span>
           </div>
-          <div id="liveClockDate" class="text-[9.5px] text-white/85 mt-0.5 pt-0.5 border-t border-white/20 w-full">20/11/2026</div>
+          <div id="liveClockDate" class="text-[9.5px] text-white/85 mt-0.5 pt-0.5 border-t border-white/20 w-full">21/11/2026</div>
         </div>
       </div>
     </section>
@@ -703,7 +784,7 @@
       </button>
     </section>
 
-    <!-- 4. Compact Udhar Card + Galla Report Card (with Inline Cash / UPI / Expense) + Vendor Stock Card -->
+    <!-- 4. Compact Udhar Card + Galla Report Card + Vendor Stock Card -->
     <section class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
       <button type="button" id="udharMetricCardBtn" class="clean-card p-2.5 sm:p-3.5 text-left flex items-center justify-between sm:flex-col sm:items-start sm:justify-between">
         <div>
@@ -753,7 +834,6 @@
       </div>
 
       <div class="grid grid-cols-2 gap-2 sm:gap-3">
-        <!-- Card A: Lene Hain (B&W in TRIAL, Colored & Active in PRO) -->
         <button type="button" id="openReceiveLedgerBtn" class="clean-card pro-bw-card p-2.5 sm:p-3.5 text-left flex items-center justify-between gap-2">
           <div class="min-w-0">
             <div class="text-xs font-extrabold">रुपये लेने हैं</div>
@@ -765,7 +845,6 @@
           </span>
         </button>
 
-        <!-- Card B: Dene Hain (B&W in TRIAL, Colored & Active in PRO) -->
         <button type="button" id="openPayLedgerBtn" class="clean-card pro-bw-card p-2.5 sm:p-3.5 text-left flex items-center justify-between gap-2">
           <div class="min-w-0">
             <div class="text-xs font-extrabold">रुपये देने हैं</div>
@@ -778,7 +857,6 @@
         </button>
       </div>
 
-      <!-- Smart Net Calculation Line Below Lena / Dena Cards -->
       <div class="clean-card px-3 py-2 text-[11px] font-semibold leading-snug">
         <span id="personalNetInsightText">आज की तारीख में अपना निजी लेने-देने का हिसाब जोड़ें, यहाँ अपने आप बचत या ज़रूरत का हिसाब दिखेगा।</span>
       </div>
@@ -1077,7 +1155,7 @@
           <div id="modalAvatarInitial" class="w-11 h-11 rounded-full bg-[#071B36] text-amber-300 font-bold flex items-center justify-center text-sm">M</div>
           <div class="text-xs min-w-0">
             <div id="modalEmailText" class="font-bold truncate"></div>
-            <div class="text-amber-900 font-semibold mt-0.5">दुकान का नाम, पूरा पता और UPI QR सुविधा PRO में सक्रिय रहती है।</div>
+            <div class="text-amber-900 font-semibold mt-0.5">दुकानदार श्रेणी चुनने पर दुकानदार फेविकॉन और वेलकम एनिमेशन सक्रिय हो जाता है।</div>
           </div>
         </div>
 
@@ -1087,7 +1165,7 @@
         </div>
 
         <div>
-          <label class="block text-xs font-semibold mb-1">उपयोग श्रेणी चुनें</label>
+          <label class="block text-xs font-semibold mb-1">उपयोग श्रेणी चुनें व कन्फ़र्म करें</label>
           <select id="profileCategoryInput" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm bg-white">
             <option value="shop">दुकानदार / किराना / रिटेल</option>
             <option value="mandi">मंडी, बीज व थोक व्यापार</option>
@@ -1129,7 +1207,7 @@
 
         <div class="flex gap-3 pt-2">
           <button type="button" class="close-modal w-1/2 bg-slate-100 text-slate-800 font-semibold py-2.5 rounded-full text-sm">बंद करें</button>
-          <button type="button" id="saveProfileBtn" class="w-1/2 bg-[#079D76] text-white font-semibold py-2.5 rounded-full text-sm">सेव करें</button>
+          <button type="button" id="saveProfileBtn" class="w-1/2 bg-[#079D76] text-white font-semibold py-2.5 rounded-full text-sm">कन्फ़र्म व सेव करें</button>
         </div>
       </div>
     </div>
@@ -1543,9 +1621,9 @@
                 <div id="hindiCopyShopLabel" class="text-xs font-semibold text-[#475569] mt-0.5">MunimJi खाता</div>
               </div>
               <div id="ruledDateMetaBox" class="ruled-date-card">
-                <div id="hindiCopyDayLabel" class="text-[11px] font-bold text-[#0F294A]">शुक्रवार</div>
-                <div id="hindiCopyDate" class="text-xs font-extrabold text-[#DC2626]">20/11/2026</div>
-                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">11:51 PM</div>
+                <div id="hindiCopyDayLabel" class="text-[11px] font-bold text-[#0F294A]">शनिवार</div>
+                <div id="hindiCopyDate" class="text-xs font-extrabold text-[#DC2626]">21/11/2026</div>
+                <div id="hindiCopyTimeLabel" class="text-[10.5px] font-bold text-[#475569]">09:06 AM</div>
               </div>
             </div>
 
@@ -1590,7 +1668,7 @@
         <span>• Developed by <strong>Cool Art®</strong></span>
       </div>
     </div>
-    <div class="mj-build-version">Build v1.9 · Updated 20 Nov 2026</div>
+    <div class="mj-build-version">Build v1.9 · Updated 21 Nov 2026</div>
   </footer>
 
   <script type="module">
@@ -1637,6 +1715,7 @@
     let editingNeedIndex = -1;
 
     let personalLedgerEntries = [];
+    let dukandarSplashShown = false;
 
     const categoryShortLabels = {
       shop: "दुकानदार",
@@ -1645,6 +1724,54 @@
       household: "गृहणी / पर्सनल",
       general: "सामान्य खाता"
     };
+
+    // Dynamic Favicon & Dukandar Welcome GIF Splash Handler
+    function updateCategoryFaviconAndSplash(categoryKey, triggerSplash = false) {
+      const isDukandar = categoryKey === "shop";
+      const favLink = document.getElementById("dynamicFavicon");
+      const appleLink = document.getElementById("dynamicAppleIcon");
+
+      if (isDukandar) {
+        if (favLink) {
+          favLink.type = "image/jpeg";
+          favLink.href = "dukandar favicon.jpg";
+        }
+        if (appleLink) {
+          appleLink.href = "dukandar favicon.jpg";
+        }
+        try { localStorage.setItem("mj_last_category", "shop"); } catch (_) {}
+
+        if (triggerSplash && !dukandarSplashShown) {
+          dukandarSplashShown = true;
+          const splashEl = document.getElementById("dukandarSplashOverlay");
+          const gifEl = document.getElementById("dukandarGifImg");
+          if (splashEl && gifEl) {
+            gifEl.src = `gif dukandar.gif?v=${Date.now()}`;
+            splashEl.classList.remove("hidden", "fade-out");
+            setTimeout(() => {
+              splashEl.classList.add("fade-out");
+              setTimeout(() => splashEl.classList.add("hidden"), 480);
+            }, 2400);
+          }
+        }
+      } else {
+        if (favLink) {
+          favLink.type = "image/png";
+          favLink.href = "favicon.png";
+        }
+        if (appleLink) {
+          appleLink.href = "favicon.png";
+        }
+        try { localStorage.setItem("mj_last_category", categoryKey || "general"); } catch (_) {}
+      }
+    }
+
+    // Immediate startup check if cached category is shopkeeper
+    try {
+      if (localStorage.getItem("mj_last_category") === "shop") {
+        updateCategoryFaviconAndSplash("shop", true);
+      }
+    } catch (_) {}
 
     function isProAccount() {
       return (currentProfile?.planStatus || "").toLowerCase() === "active";
@@ -1730,7 +1857,7 @@
       natureQuoteEl.textContent = item.quote;
     }, 10000);
 
-    // Theme Switcher (PRO gets full palette, TRIAL stays on MunimJi default)
+    // Theme Switcher
     function syncThemeAvailabilityForTier() {
       const pro = isProAccount();
       document.getElementById("proThemeNotice").classList.toggle("hidden", pro);
@@ -1907,7 +2034,6 @@
       });
     }
 
-    // Ensure images in captured element are loaded before html2canvas renders
     async function waitForImagesLoaded(containerEl) {
       const imgs = Array.from(containerEl.querySelectorAll("img"));
       await Promise.all(
@@ -1984,7 +2110,7 @@
       document.getElementById("personalParchiPreviewModal").classList.add("hidden");
     });
 
-    // Info Modal Tabs (FAQ, Terms, License, Helpline)
+    // Info Modal Tabs
     function switchInfoTab(tabKey) {
       const titles = {
         faq: "अक्सर पूछे जाने वाले सवाल (FAQ)",
@@ -2070,6 +2196,7 @@
     document.getElementById("saveProfileBtn").addEventListener("click", async () => {
       if (!currentUser) return;
       const pro = isProAccount();
+      const prevCategory = currentProfile?.businessType || "";
       const displayName = document.getElementById("profileNameInput").value.trim() || "MunimJi User";
       const businessType = document.getElementById("profileCategoryInput").value;
       const shopName = pro ? document.getElementById("profileShopNameInput").value.trim() : "";
@@ -2093,7 +2220,10 @@
           updatedAt: serverTimestamp()
         });
         currentProfile = { ...(currentProfile || {}), displayName, businessType, shopName, shopAddress, phone, upiId, photoURL };
-        renderUserIdentity(currentUser, currentProfile);
+        if (businessType === "shop" && prevCategory !== "shop") {
+          dukandarSplashShown = false;
+        }
+        renderUserIdentity(currentUser, currentProfile, businessType === "shop");
         renderLiveBillParchi();
         renderRuledNeedList();
         closeAllModals();
@@ -2101,7 +2231,7 @@
         alert("प्रोफाइल सेव करने में त्रुटि: " + err.message);
       } finally {
         saveBtn.disabled = false;
-        saveBtn.textContent = "सेव करें";
+        saveBtn.textContent = "कन्फ़र्म व सेव करें";
       }
     });
 
@@ -2144,14 +2274,16 @@
       syncThemeAvailabilityForTier();
     }
 
-    function renderUserIdentity(user, profile) {
+    function renderUserIdentity(user, profile, allowSplash = false) {
       const fullName = profile?.displayName || user.displayName || (user.email ? user.email.split("@")[0] : "मेरा खाता");
       const firstName = fullName.split(" ")[0] || fullName;
-      const photo = profile?.photoURL || user.photoURL || "";
       const catKey = profile?.businessType || "shop";
+      const photo = profile?.photoURL || user.photoURL || (catKey === "shop" ? "dukandar favicon.jpg" : "");
       const catShort = categoryShortLabels[catKey] || categoryShortLabels.general;
       const listTitles = getPositiveListTitles();
       const pro = (profile?.planStatus || "").toLowerCase() === "active";
+
+      updateCategoryFaviconAndSplash(catKey, allowSplash);
 
       document.getElementById("cardUserName").textContent = fullName;
       document.getElementById("cardCategoryBadge").textContent = catShort;
@@ -2196,7 +2328,7 @@
       window.location.replace("login.html");
     });
 
-    // Personal (Private) Lena Hai / Dena Hai Ledger (PRO feature)
+    // Personal Lena Hai / Dena Hai Ledger
     document.getElementById("personalDateInput").value = new Date().toISOString().split("T")[0];
 
     function openPersonalLedgerForMode(mode) {
@@ -2418,7 +2550,7 @@
       closeAllModals();
     });
 
-    // Live Modern Bill Parchi Builder (PRO shows shop name + full address + customer name + date; TRIAL hides shop branding, customer name & date)
+    // Live Modern Bill Parchi Builder
     function getBillTotals() {
       const itemsSum = currentBillItems.reduce((acc, item) => acc + item.price, 0);
       const extra = Math.max(0, parseFloat(document.getElementById("billExtraCharges").value) || 0);
@@ -2969,7 +3101,7 @@
         return;
       }
       currentUser = user;
-      renderUserIdentity(user, { displayName: user.displayName, photoURL: user.photoURL, planStatus: "trial" });
+      renderUserIdentity(user, { displayName: user.displayName, photoURL: user.photoURL, planStatus: "trial" }, false);
       renderLiveBillParchi();
       renderRuledNeedList();
       renderPersonalLedgerUI();
@@ -2977,7 +3109,7 @@
 
       try {
         currentProfile = await ensureUserProfile(user);
-        renderUserIdentity(user, currentProfile);
+        renderUserIdentity(user, currentProfile, (currentProfile?.businessType || "") === "shop");
         renderLiveBillParchi();
         renderRuledNeedList();
       } catch (_) {}
@@ -2985,7 +3117,7 @@
       onSnapshot(doc(db, "users", user.uid), (snap) => {
         if (snap.exists()) {
           currentProfile = snap.data();
-          renderUserIdentity(user, currentProfile);
+          renderUserIdentity(user, currentProfile, (currentProfile?.businessType || "") === "shop");
           renderLiveBillParchi();
           renderRuledNeedList();
         }
